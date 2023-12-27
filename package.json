@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
-    "@tanstack/eslint-plugin-query": "^5.14.6"
+    "@tanstack/eslint-plugin-query": "^5.14.6",
+    "prettier-eslint": "^16.2.0"
   }
 }

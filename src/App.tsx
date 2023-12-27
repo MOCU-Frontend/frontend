@@ -1,8 +1,13 @@
 import React from 'react';
 import './App.css';
+import Router from './pages';
 
 function App() {
-  return <div>Lets start!!</div>;
+  return (
+    <>
+      <Router />
+    </>
+  );
 }
 
 export default App;

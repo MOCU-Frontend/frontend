@@ -1,8 +1,8 @@
 import React from 'react';
 import styles from './Root.module.css';
 
-const Root = () => {
-  return <div className={styles.wrapper}>root</div>;
+const Root = ({ text }: { text: string }) => {
+  return <div className={styles.wrapper}>{text}</div>;
 };
 
 export default Root;

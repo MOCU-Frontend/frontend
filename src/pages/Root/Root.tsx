@@ -1,7 +1,17 @@
 import React from 'react';
 import styles from './Root.module.css';
 
-const Root = ({ text }: { text: string }) => {
+interface Props {
+  /**
+   * content text
+   */
+  text: string;
+}
+
+/**
+ * Primary UI component for user interaction
+ */
+const Root = ({ text }: Props) => {
   return <div className={styles.wrapper}>{text}</div>;
 };
 

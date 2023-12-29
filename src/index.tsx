@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './styles/miniReset.css';
 import './index.css';
 import App from './App';
 import './fonts/font.css';

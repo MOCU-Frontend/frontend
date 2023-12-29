@@ -1,8 +1,11 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from '@storybook/react';
+import '../src/styles/miniReset.css';
+import '../src/fonts/font.css';
+import '../src/index.css';
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: "^on[A-Z].*" },
+    actions: { argTypesRegex: '^on[A-Z].*' },
     controls: {
       matchers: {
         color: /(background|color)$/i,

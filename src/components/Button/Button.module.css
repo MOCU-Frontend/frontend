@@ -1,0 +1,16 @@
+.btn {
+  text-align: center;
+  background-color: white;
+}
+.btnFull {
+  color: black;
+  border-radius: 10px;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+}
+.btnMedium {
+  color: red;
+}

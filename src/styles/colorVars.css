@@ -1,0 +1,20 @@
+:root {
+  --color-bg-purple-light: #f6f7ff;
+  --color-sub-purple-light: #c9ceff;
+  --color-main-purple: #6e75e8;
+  --color-sub-gradation: linear-gradient(119deg, #525de1 11.37%, #cac5ff 97.3%);
+  --color-sub-purplelight: #b0b7ff;
+  --color-point-yellow: #f6b552;
+  --color-map-red: #e16352;
+  --color-map-purple: #515bff;
+  --color-map-gradation: linear-gradient(119deg, #2d3dff 11.37%, #b8b0ff 97.3%);
+  --color-white: #ffffff;
+  --color-grey-light-00: #efefef;
+  --color-grey-light-01: #e5e5e5;
+  --color-grey-light-02: #cacaca;
+  --color-grey: #b4b4b4;
+  --color-grey-dark-00: #8a8a8a;
+  --color-grey-dark-01: #636363;
+  --color-navy: #0f112d;
+  --color-black: #000000;
+}

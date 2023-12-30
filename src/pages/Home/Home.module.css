@@ -1,0 +1,112 @@
+/* Home.module.css */
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  height: 800px;
+  background: linear-gradient(79deg, #636363 5.97%, #E8E8E8 96.63%);
+}
+
+.appbar_header_home {
+  position: absolute;
+  width: 100%;
+  height: 56px;
+  top: 24px;
+}
+
+.appbar_title {
+  position: absolute;
+  top : 18.5px;
+  left: 20px;
+  color: var(--UI-grey_light_00, #EFEFEF);
+  text-align: center;
+  font-family: Raleway;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.016px;
+
+}
+
+.appbar_alarm {
+  position: absolute;
+  top: 16px;
+  right: 62px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.appbar_setting {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.title_top_home {
+  position: absolute;
+  width: 100%;
+  height: 48px;
+  top: 86px;
+}
+
+.title_top_ellipse {
+  position: absolute;
+  left: 20px;
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+}
+
+.title_top_profile {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  left: 25.5px;
+  top: 5px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.title_wrap {
+  display: flex;
+  position: absolute;
+  left: 80px;
+  flex-direction: column;
+  color: var(--UI-white, #FFF);
+  /* kr/title_bold_18 */
+  font-family: Noto Sans KR;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 24px; /* 133.333% */
+  letter-spacing: -0.054px;
+}
+
+.content_home_mainmenu {
+  position: fixed;
+  bottom: 0px;
+  display: flex;
+  width: 100%;
+  height: 654px;
+  padding: 20px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 20px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  border-radius: 40px;
+  background: var(--UI-grey_light_00, #EFEFEF);
+  /* box effect */
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.10);
+
+}

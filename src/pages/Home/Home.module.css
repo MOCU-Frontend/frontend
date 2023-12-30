@@ -6,7 +6,7 @@
   flex-direction: column;
   max-width: 100%;
   height: 800px;
-  background: linear-gradient(79deg, #636363 5.97%, #E8E8E8 96.63%);
+  background: var(--UI-sub_gradation, linear-gradient(119deg, #525DE1 11.37%, #CAC5FF 97.3%));
 }
 
 .appbar_header_home {

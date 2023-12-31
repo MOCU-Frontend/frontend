@@ -6,6 +6,12 @@ import alarmImage from '../../assets/icon/alarm.svg';
 import settingImage from '../../assets/icon/setting.svg';
 import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
+import mapImage from '../../assets/icon/map.svg';
+
+import {
+  Menudata
+} from './Homedata';
+
 
 const Home = () => {
   return (
@@ -27,8 +33,36 @@ const Home = () => {
       </div>
 
       
-      <div className = {styles.content_home_mainmenu}></div>
+      <div className = {styles.content_home_mainmenu}>
+
+        <div className = {styles.content_map}>
+          <div className = {styles.menu_txt}>
+            <div className = {styles.menu_title}>지도</div>
+            <div className = {styles.menu_sub_title}>내 근처에 있는 맛집 찾고 혜택도 얻을 수 있다?</div>
+          </div>
+          <div className = {styles.map_location}>현위치 : 성북구 정릉로 77</div>
+          <img src = {mapImage} className = {styles.menu_icon} alt = ""/>
+        </div>
+
+        
+
+        <div className = {styles.menu_grid_container}>
+          {Menudata.map((value) => {
+            return (
+              <div className = {styles.menu_grid_item}>
+                <div className = {styles.menu_txt}>
+                  <div className = {styles.menu_title}>{value.Title}</div>
+                  <div className = {styles.menu_sub_title}>{value.Sub}</div>
+                </div>
+                <img src = {value.Image} className = {styles.menu_icon} alt= ""/> 
+              </div>
+            );
+          })}
+        </div>
+      
+      </div>
     </div>
+      
 
 
   );

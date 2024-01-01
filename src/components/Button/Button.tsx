@@ -105,7 +105,7 @@ const Button: React.FC<Props> = ({
   return (
     <button
       style={{
-        backgroundColor: `var(--color-${
+        background: `var(--color-${
           disabled ? disabledBackgroundColor : backgroundColor
         })`,
         color: `var(--color-${disabled ? disabledTextColor : textColor})`,

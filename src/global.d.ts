@@ -10,3 +10,8 @@ declare module '*.svg' {
     const src: string;
     export default src;
   }
+
+  declare module '*.tsx' {
+    const content: React.FC<any>;
+    export default content;
+  }

@@ -7,6 +7,7 @@ import settingImage from '../../assets/icon/setting.svg';
 import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
 import mapImage from '../../assets/icon/map.svg';
+import BottomNavigation from '../../components/BottomNavigation.tsx';
 
 import {
   Menudata
@@ -61,6 +62,8 @@ const Home = () => {
         </div>
 
         <div className = {styles.content_event}></div>
+
+        <BottomNavigation />
       
       </div>
     </div>

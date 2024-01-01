@@ -9,6 +9,7 @@ interface Props {
   backBtnSize?: number;
   backBtnColor?: string;
   headerTitleColor?: string;
+  onClickBackBtn?: () => void;
 }
 
 const HeaderBackBtn: React.FC<Props> = ({
@@ -18,6 +19,7 @@ const HeaderBackBtn: React.FC<Props> = ({
   backBtnColor = colors.greyDark01,
   backBtnSize = 24,
   headerTitleColor = colors.greyDark01,
+  onClickBackBtn = () => {},
 }: Props) => {
   let headerClassNames = `${styles.header}`;
   switch (headerPaddingSize) {
@@ -35,7 +37,7 @@ const HeaderBackBtn: React.FC<Props> = ({
   }
   return (
     <header className={headerClassNames}>
-      <button className={styles.backBtn}>
+      <button className={styles.backBtn} onClick={onClickBackBtn}>
         <LeftArrow
           width={backBtnSize}
           height={backBtnSize}

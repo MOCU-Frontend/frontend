@@ -19,7 +19,7 @@
 }
 
 .backBtn {
-  background-color: white;
+  background-color: var(--color-white);
   border: none;
 }
 

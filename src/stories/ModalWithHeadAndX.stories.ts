@@ -27,3 +27,8 @@ export const BasicModalWithTitleAndX: Story = {
     title: 'basic title',
   },
 };
+export const Stamp: Story = {
+  args: {
+    title: '스탬프 적립',
+  },
+};

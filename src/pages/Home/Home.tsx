@@ -40,7 +40,6 @@ const Home = () => {
           <div className={styles.map_location}>현위치 : 성북구 정릉로 77</div>
           <img src={mapImage} className={styles.menu_icon} alt='' />
         </div>
-
         <div className={styles.menu_grid_container}>
           {Menudata.map((value) => {
             return (

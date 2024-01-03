@@ -7,11 +7,11 @@ import settingImage from '../../assets/icon/setting.svg';
 import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
 import mapImage from '../../assets/icon/map.svg';
-import BottomNavigation from '../../components/BottomNavigation.tsx';
 
 import {
   Menudata
 } from './Homedata';
+import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
 
 
 const Home = () => {

@@ -1,5 +1,8 @@
 
 .container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 60px;
 }
@@ -10,10 +13,62 @@
     padding: 4px 59px 0px 59px;
     justify-content: center;
     align-items: center;
-    gap: 143px;
+    gap: 16vw;
     border-radius: 20px 20px 0px 0px;
     background: var(--UI-white, #FFF);
 
     /* box effect */
     box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.10);
+}
+
+.navibar_leftright {
+    display: flex;
+    padding: 4px 10px;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.navibar_home_text {
+    color: var(--UI-main_purple, #6E75E8);
+    text-align: center;
+    
+    /* kr/regular_10 */
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -0.03px;
+}
+
+.navibar_button {
+    position: relative;
+    bottom: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    background-color: #6E75E8;
+    border-radius: 300px;
+}
+
+.navibar_button_text {
+    color: #FFF;
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.navibar_my_text {
+    color: var(--UI-grey_light_02, #CACACA);
+    text-align: center;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
 }

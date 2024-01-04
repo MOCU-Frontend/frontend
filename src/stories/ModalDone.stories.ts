@@ -24,13 +24,22 @@ type Story = StoryObj<typeof meta>;
 
 export const ExampleModalConfirm: Story = {
   args: {
-    bodyText: '스탬프 적립 대기 중',
-    bodySubText: '가게에서 요청을 확인하고 있어요.',
+    bodyText: '스탬프 적립 완료!',
+    bodySubText: '가게에서 적립 요청을 수락했습니다.',
     subText: '크림베이글 건대점',
-    informText: '적립 10/10 예정',
+    informText: '적립 10/10',
     leftBtnLabel: '닫기',
     rightBtnLabel: '리뷰 남기러 가기',
     onClickLeftBtn: () => {},
     onClickRightBtn: () => {},
+  },
+};
+
+export const NoBtns: Story = {
+  args: {
+    bodyText: '쿠폰 사용 완료!',
+    bodySubText: '가게에서 받을 보상을 확인해주세요.',
+    subText: '크림베이글 건대점',
+    informText: '아이스 아메리카노 1잔',
   },
 };

@@ -14,8 +14,9 @@
 }
 .btnMedium {
   padding: 12px 16px;
-  width: 142px;
+  min-width: 124px;
 }
+/* 148 이게 지금 "리뷰 남기러 가기" 기준 한줄로 되는 거의 최소 너비 */
 /* 128 vs 124 vs 142 (글자 길이에 따른 문제) */
 .btnSmall {
   padding: 8px 16px;

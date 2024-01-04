@@ -39,6 +39,23 @@ export const Medium: Story = {
   },
 };
 
+export const MediumTest: Story = {
+  args: {
+    size: 'medium',
+    label: '리뷰 남기러 가기',
+    backgroundColor: 'main-purple',
+    textColor: 'white',
+    borderRadius: 'medium',
+    border: undefined,
+    borderColor: undefined,
+    disabled: false,
+    disabledBackgroundColor: 'grey',
+    disabledTextColor: 'white',
+    disabledBorderColor: 'grey',
+    onClick: () => {},
+  },
+};
+
 export const Full: Story = {
   args: {
     size: 'full',

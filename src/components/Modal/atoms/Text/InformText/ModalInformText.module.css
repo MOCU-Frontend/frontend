@@ -1,0 +1,12 @@
+@import '../../../../../styles/colorVars.css';
+
+.informText {
+  color: var(--color-main-purple);
+  font-weight: 500;
+}
+.informTextMedium {
+  font-size: 18px;
+}
+.informTextSmall {
+  font-size: 14px;
+}

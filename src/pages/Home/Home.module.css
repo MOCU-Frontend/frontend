@@ -7,7 +7,10 @@
   flex-direction: column;
   max-width: 100%;
   height: 800px;
-  background: var(--UI-sub_gradation, linear-gradient(119deg, #525DE1 11.37%, #CAC5FF 97.3%));
+  background: var(
+    --UI-sub_gradation,
+    linear-gradient(119deg, #525de1 11.37%, #cac5ff 97.3%)
+  );
 }
 
 .appbar_header_home {
@@ -20,9 +23,9 @@
 
 .appbar_title {
   position: absolute;
-  top : 18.5px;
+  top: 18.5px;
   left: 20px;
-  color: var(--UI-grey_light_00, #EFEFEF);
+  color: var(--UI-grey_light_00, #efefef);
   text-align: center;
   font-family: Raleway;
   font-size: 16px;
@@ -30,7 +33,6 @@
   font-weight: 700;
   line-height: normal;
   letter-spacing: 0.016px;
-
 }
 
 .appbar_alarm {
@@ -85,7 +87,7 @@
   position: absolute;
   left: 80px;
   flex-direction: column;
-  color: var(--UI-white, #FFF);
+  color: var(--UI-white, #fff);
   /* kr/title_bold_18 */
   font-family: Noto Sans KR;
   font-size: 18px;
@@ -107,10 +109,9 @@
   flex-shrink: 0;
   flex-wrap: wrap;
   border-radius: 40px;
-  background: var(--UI-bg_purple_light, #F6F7FF);
-  
+  background: var(--UI-bg_purple_light, #f6f7ff);
   /* box effect */
-  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.10);  
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
 .content_map {
@@ -123,8 +124,8 @@
   gap: 40px 141px;
   flex-wrap: wrap;
   border-radius: 20px;
-  border: 2px solid var(--UI-sub_purple_light, #C9CEFF);
-  background: #FFF;
+  border: 2px solid var(--UI-sub_purple_light, #c9ceff);
+  background: #fff;
   box-shadow: 0px 0px 7.6px 0px rgba(99, 94, 157, 0.13);
 }
 
@@ -136,7 +137,6 @@
   gap: 20px;
   height: 34.5vh;
   width: 34.5vh;
-   
 }
 
 .menu_grid_item {
@@ -145,7 +145,7 @@
   height: 16vh;
   padding: 16px 12px;
   border-radius: 20px;
-  background: #FFF;
+  background: #fff;
   box-shadow: 0px 0px 7.6px 0px rgba(99, 94, 157, 0.13);
 }
 
@@ -153,9 +153,11 @@
   width: 88vw;
   height: 7vh;
   border-radius: 20px;
-  background: lightgray 0px -164.809px / 100% 761.905% no-repeat, #EBEBEB;
+  background:
+    lightgray 0px -164.809px / 100% 761.905% no-repeat,
+    #ebebeb;
   /* box effect */
-  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
 }
 
 .menu_txt {
@@ -166,7 +168,7 @@
 }
 
 .menu_title {
-  color: var(--UI-navy, #0F112D);
+  color: var(--UI-navy, #0f112d);
   font-family: Noto Sans KR;
   font-size: 20px;
   font-style: normal;
@@ -176,7 +178,7 @@
 }
 
 .menu_sub_title {
-  color: var(--UI-grey_dark_00, #8A8A8A);
+  color: var(--UI-grey_dark_00, #8a8a8a);
   /* kr/regular_10 */
   font-family: Noto Sans KR;
   font-size: 10px;
@@ -187,7 +189,7 @@
 }
 
 .map_location {
-  color: var(--UI-grey_light_02, #CACACA);
+  color: var(--UI-grey_light_02, #cacaca);
   /* kr/regular_10 */
   font-family: Noto Sans KR;
   font-size: 10px;
@@ -204,4 +206,3 @@
   width: 32px;
   height: 32px;
 }
-

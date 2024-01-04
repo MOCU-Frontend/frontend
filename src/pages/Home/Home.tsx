@@ -11,7 +11,6 @@ import { ReactComponent as MapImage } from '../../assets/icon/map.svg';
 import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
 import { menuData } from '../../store/data/homeData';
 import MenuGridItem from '../../components/MenuGridItem/MenuGridItem'; // MenuGridItem 컴포넌트를 import합니다.
-import CheckSnackBarWithBtn from '../../components/SnackBar/CheckSnackBarWithBtn/CheckSnackBarWithBtn';
 
 const Home = () => {
   return (
@@ -51,11 +50,7 @@ const Home = () => {
         </div>
 
         <div className={styles.content_event}></div>
-        <CheckSnackBarWithBtn
-          bodyText='마이에서 단골 설정을 변경할 수 있어요.'
-          btnLabel='마이에서 확인'
-          onClickBtn={() => {}}
-        />
+
         <BottomNavigation />
       </div>
     </div>

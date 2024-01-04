@@ -32,3 +32,12 @@ export const ExampleModalConfirm: Story = {
     onClickYes: () => {},
   },
 };
+export const NoInformText: Story = {
+  args: {
+    headerTitle: '단골 설정',
+    bodyText: '이 가게를 단골로 설정할까요?',
+    subText: '단골 설정 시, 새로운 이벤트를 푸시로 알려드려요!',
+    onClickNo: () => {},
+    onClickYes: () => {},
+  },
+};

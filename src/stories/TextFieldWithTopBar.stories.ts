@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import TextFieldNoTopBar from '../components/TextField/TextFieldNoTopBar/TextFieldNoTopBar';
+import TextFieldWithTopBar from '../components/TextField/TextFieldWithTopBar/TextFieldWithTopBar';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
-const meta: Meta<typeof TextFieldNoTopBar> = {
-  title: 'Example/TextFieldNoTopBar',
-  component: TextFieldNoTopBar,
+const meta: Meta<typeof TextFieldWithTopBar> = {
+  title: 'Example/TextFieldWithTopBar',
+  component: TextFieldWithTopBar,
   parameters: {
     // Optional parameter to center the component in the Canvas. More info: https://storybook.js.org/docs/configure/story-layout
     layout: 'centered',

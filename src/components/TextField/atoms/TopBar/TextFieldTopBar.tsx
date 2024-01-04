@@ -16,10 +16,10 @@ const TextFieldTopBar: React.FC<Props> = ({
   return (
     <div className={styles.wrapper}>
       <button onClick={onClickXBtn} className={styles.btn}>
-        <UndoIcon width={48} height={48} stroke={colors.greyDark00} />
+        <UndoIcon width={24} height={24} stroke={colors.greyDark00} />
       </button>
       <button onClick={onClickCheckBtn} className={styles.btn}>
-        <CheckIcon width={48} height={48} stroke={colors.greyDark00} />
+        <CheckIcon width={24} height={24} stroke={colors.greyDark00} />
       </button>
     </div>
   );

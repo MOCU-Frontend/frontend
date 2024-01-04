@@ -12,6 +12,7 @@
   border: none;
   color: var(--color-black);
   resize: none;
+  height: 38px;
 }
 .textarea::-webkit-scrollbar {
   display: none;

@@ -1,0 +1,32 @@
+@import '../../../../styles/colorVars.css';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.textarea {
+  width: 100%;
+  font-size: 13px;
+  font-weight: 400;
+  border: none;
+  color: var(--color-black);
+  resize: none;
+}
+.textarea::-webkit-scrollbar {
+  display: none;
+}
+.input::placeholder {
+  color: var(--color-grey-light-02);
+}
+.counterWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+}
+.counterText {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-grey-light-02);
+}

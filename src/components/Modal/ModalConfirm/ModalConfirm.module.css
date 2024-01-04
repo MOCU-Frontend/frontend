@@ -1,0 +1,14 @@
+@import '../../../styles/colorVars.css';
+
+.bodySect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 26.66px;
+  margin-bottom: 56px;
+}
+
+.modalTwoBtnsWrapper {
+  margin-bottom: 29px;
+}

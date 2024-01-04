@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ModalConfirm from '../components/ModalConfirm/ModalConfirm';
+import ModalConfirm from '../components/Modal/ModalConfirm/ModalConfirm';
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
 const meta: Meta<typeof ModalConfirm> = {

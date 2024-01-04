@@ -1,9 +1,9 @@
 import React from 'react';
-import ModalBasic from '../Modal/atoms/Basic/ModalBasic';
-import ModalTwoBtns from '../Modal/atoms/Btn/TwoBtns/ModalTwoBtns';
-import ModalHeader from '../Modal/atoms/Header/ModalHeader';
-import ModalBodyText from '../Modal/atoms/Text/BodyText/ModalBodyText';
-import ModalInformDiv from '../Modal/atoms/Text/InformDiv/ModalInformDiv';
+import ModalBasic from '../atoms/Basic/ModalBasic';
+import ModalTwoBtns from '../atoms/Btn/TwoBtns/ModalTwoBtns';
+import ModalHeader from '../atoms/Header/ModalHeader';
+import ModalBodyText from '../atoms/Text/BodyText/ModalBodyText';
+import ModalInformDiv from '../atoms/Text/InformDiv/ModalInformDiv';
 import styles from './ModalConfirm.module.css';
 interface Props {
   headerTitle: string;

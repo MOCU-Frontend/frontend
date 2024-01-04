@@ -1,6 +1,9 @@
 import React from 'react';
-import Button from '../Button/Button';
-import ModalWithHeadAndX from '../ModalWithHeadAndX/ModalWithHeadAndX';
+import ModalBasic from '../Modal/atoms/Basic/ModalBasic';
+import ModalTwoBtns from '../Modal/atoms/Btn/TwoBtns/ModalTwoBtns';
+import ModalHeader from '../Modal/atoms/Header/ModalHeader';
+import ModalBodyText from '../Modal/atoms/Text/BodyText/ModalBodyText';
+import ModalInformDiv from '../Modal/atoms/Text/InformDiv/ModalInformDiv';
 import styles from './ModalConfirm.module.css';
 interface Props {
   headerTitle: string;
@@ -20,35 +23,27 @@ const ModalConfirm: React.FC<Props> = ({
   onClickNo = () => {},
 }: Props) => {
   return (
-    <ModalWithHeadAndX title={headerTitle}>
+    <ModalBasic>
+      <ModalHeader title={headerTitle} onClickXBtn={() => {}} />
       <section className={styles.bodySect}>
-        {bodyText && <h1 className={styles.bodyText}>{bodyText}</h1>}
-        <div className={styles.informDiv}>
-          {subText && <p className={styles.subText}>{subText}</p>}
-          {informText && <p className={styles.informText}>{informText}</p>}
-        </div>
+        {bodyText && <ModalBodyText text={bodyText} />}
+        {subText && informText && (
+          <ModalInformDiv
+            subText={subText}
+            informText={informText}
+            size={'medium'}
+          />
+        )}
       </section>
-      <div className={styles.btnDiv}>
-        <Button
-          label='아니요'
-          size='medium'
-          backgroundColor='white'
-          textColor='main-purple'
-          borderColor='main-purple'
-          borderRadius='medium'
-          border={1}
-          onClick={onClickNo}
-        />
-        <Button
-          label='예'
-          size='medium'
-          backgroundColor='main-purple'
-          textColor='white'
-          borderRadius='medium'
-          onClick={onClickYes}
+      <div className={styles.modalTwoBtnsWrapper}>
+        <ModalTwoBtns
+          leftBtnLabel='아니요'
+          onClickLeftBtn={onClickNo}
+          rightBtnLabel='예'
+          onClickRightBtn={onClickYes}
         />
       </div>
-    </ModalWithHeadAndX>
+    </ModalBasic>
   );
 };
 

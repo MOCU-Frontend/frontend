@@ -6,10 +6,11 @@ import alarmImage from '../../assets/icon/alarm.svg';
 import settingImage from '../../assets/icon/setting.svg';
 import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
-import mapImage from '../../assets/icon/map.svg';
+import { ReactComponent as MapImage } from '../../assets/icon/map.svg';
 
 import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
 import { menuData } from '../../store/data/homeData';
+import MenuGridItem from '../../components/MenuGridItem/MenuGridItem'; // MenuGridItem 컴포넌트를 import합니다.
 
 const Home = () => {
   return (
@@ -39,20 +40,13 @@ const Home = () => {
             </div>
           </div>
           <div className={styles.map_location}>현위치 : 성북구 정릉로 77</div>
-          <img src={mapImage} className={styles.menu_icon} alt='' />
+          <MapImage fill="none" stroke="#C9CEFF" className={styles.menu_icon} />
         </div>
         <div className={styles.menu_grid_container}>
-          {menuData.map((value) => {
-            return (
-              <div className={styles.menu_grid_item}>
-                <div className={styles.menu_txt}>
-                  <div className={styles.menu_title}>{value.Title}</div>
-                  <div className={styles.menu_sub_title}>{value.Sub}</div>
-                </div>
-                <img src={value.Image} className={styles.menu_icon} alt='' />
-              </div>
-            );
-          })}
+          <MenuGridItem value={menuData[0]} />
+          <MenuGridItem value={menuData[1]} />
+          <MenuGridItem value={menuData[2]} />
+          <MenuGridItem value={menuData[3]} />
         </div>
 
         <div className={styles.content_event}></div>

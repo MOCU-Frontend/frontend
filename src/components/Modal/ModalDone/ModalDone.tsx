@@ -13,10 +13,10 @@ interface Props {
   bodySubText: string;
   subText: string;
   informText: string;
-  leftBtnLabel: string;
-  rightBtnLabel: string;
-  onClickLeftBtn: () => void;
-  onClickRightBtn: () => void;
+  leftBtnLabel?: string;
+  rightBtnLabel?: string;
+  onClickLeftBtn?: () => void;
+  onClickRightBtn?: () => void;
 }
 
 const ModalDone: React.FC<Props> = ({
@@ -26,8 +26,8 @@ const ModalDone: React.FC<Props> = ({
   informText,
   leftBtnLabel,
   rightBtnLabel,
-  onClickLeftBtn,
-  onClickRightBtn,
+  onClickLeftBtn = () => {},
+  onClickRightBtn = () => {},
 }: Props) => {
   return (
     <ModalBasic>
@@ -40,12 +40,14 @@ const ModalDone: React.FC<Props> = ({
           informText={informText}
           size='small'
         />
-        <ModalTwoBtns
-          leftBtnLabel={leftBtnLabel}
-          onClickLeftBtn={onClickLeftBtn}
-          rightBtnLabel={rightBtnLabel}
-          onClickRightBtn={onClickRightBtn}
-        />
+        {leftBtnLabel && rightBtnLabel && (
+          <ModalTwoBtns
+            leftBtnLabel={leftBtnLabel}
+            onClickLeftBtn={onClickLeftBtn}
+            rightBtnLabel={rightBtnLabel}
+            onClickRightBtn={onClickRightBtn}
+          />
+        )}
       </div>
     </ModalBasic>
   );

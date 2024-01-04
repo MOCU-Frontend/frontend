@@ -40,7 +40,7 @@ const Home = () => {
             </div>
           </div>
           <div className={styles.map_location}>현위치 : 성북구 정릉로 77</div>
-          <MapImage fill="none" stroke="#C9CEFF" className={styles.menu_icon} />
+          <MapImage fill='none' stroke='#C9CEFF' className={styles.menu_icon} />
         </div>
         <div className={styles.menu_grid_container}>
           <MenuGridItem value={menuData[0]} />

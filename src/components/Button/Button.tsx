@@ -41,19 +41,19 @@ interface Props {
   /**
    * 클릭 가능한지 상태
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * 클릭 불가능시 배경 색깔
    */
-  disabledBackgroundColor: Color;
+  disabledBackgroundColor?: Color;
   /**
    * 클릭 불가능시 글자 색깔
    */
-  disabledTextColor: Color;
+  disabledTextColor?: Color;
   /**
    * 클릭 불가능시 border 색깔
    */
-  disabledBorderColor: Color;
+  disabledBorderColor?: Color;
   /**
    * 클릭 핸들러
    */

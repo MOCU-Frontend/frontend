@@ -3,7 +3,7 @@ import stampImage from '../../assets/icon/stamp.svg';
 import presentImage from '../../assets/icon/present.svg';
 import rocketImage from '../../assets/icon/rocket.svg';
 
-export const Menudata = [
+export const menuData = [
   {
     Title: '가게',
     Sub: '당신이 찾는 혜택 맛집은?',
@@ -24,5 +24,4 @@ export const Menudata = [
     Sub: '미션 완료하고 적립금 쌓기',
     Image: rocketImage,
   },
-
-]
+];

@@ -8,13 +8,8 @@ import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
 import mapImage from '../../assets/icon/map.svg';
 
-
-import {
-  Menudata
-} from './Homedata';
 import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
-
-
+import { menuData } from '../../store/data/homeData';
 
 const Home = () => {
   return (
@@ -47,7 +42,7 @@ const Home = () => {
           <img src={mapImage} className={styles.menu_icon} alt='' />
         </div>
         <div className={styles.menu_grid_container}>
-          {Menudata.map((value) => {
+          {menuData.map((value) => {
             return (
               <div className={styles.menu_grid_item}>
                 <div className={styles.menu_txt}>
@@ -60,12 +55,9 @@ const Home = () => {
           })}
         </div>
 
-
-        <div className = {styles.content_event}></div>
+        <div className={styles.content_event}></div>
 
         <BottomNavigation />
-
-
       </div>
     </div>
   );

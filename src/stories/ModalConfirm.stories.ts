@@ -28,5 +28,7 @@ export const ExampleModalConfirm: Story = {
     bodyText: '스탬프를 적립할까요?',
     subText: '크림베이글 건대점',
     informText: '현재 9/10',
+    onClickNo: () => {},
+    onClickYes: () => {},
   },
 };

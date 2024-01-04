@@ -7,11 +7,11 @@ import ModalInformDiv from '../atoms/Text/InformDiv/ModalInformDiv';
 import styles from './ModalConfirm.module.css';
 interface Props {
   headerTitle: string;
-  bodyText?: string;
-  subText?: string;
-  informText?: string;
-  onClickYes?: () => void;
-  onClickNo?: () => void;
+  bodyText: string;
+  subText: string;
+  informText: string;
+  onClickYes: () => void;
+  onClickNo: () => void;
 }
 
 const ModalConfirm: React.FC<Props> = ({
@@ -26,14 +26,12 @@ const ModalConfirm: React.FC<Props> = ({
     <ModalBasic>
       <ModalHeader title={headerTitle} onClickXBtn={() => {}} />
       <section className={styles.bodySect}>
-        {bodyText && <ModalBodyText text={bodyText} />}
-        {subText && informText && (
-          <ModalInformDiv
-            subText={subText}
-            informText={informText}
-            size={'medium'}
-          />
-        )}
+        <ModalBodyText text={bodyText} />
+        <ModalInformDiv
+          subText={subText}
+          informText={informText}
+          size={'medium'}
+        />
       </section>
       <div className={styles.modalTwoBtnsWrapper}>
         <ModalTwoBtns

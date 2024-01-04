@@ -30,7 +30,7 @@ const ModalConfirm: React.FC<Props> = ({
         <ModalInformDiv
           subText={subText}
           informText={informText}
-          size={'medium'}
+          size='medium'
         />
       </section>
       <div className={styles.modalTwoBtnsWrapper}>

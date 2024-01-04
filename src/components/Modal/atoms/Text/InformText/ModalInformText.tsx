@@ -13,10 +13,10 @@ const ModalInformText: React.FC<Props> = ({ size, text }: Props) => {
       textStyle += ` ${styles.informTextMedium}`;
       break;
     case 'small':
-      textStyle += ` ${styles.informTextMedium}`;
+      textStyle += ` ${styles.informTextSmall}`;
       break;
     default:
-      throw new Error('no size ModalSubText');
+      throw new Error('no size ModalInformText');
   }
   return <p className={textStyle}>{text}</p>;
 };

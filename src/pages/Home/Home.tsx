@@ -9,7 +9,7 @@ import ellipseImage from '../../assets/icon/ellipse.svg';
 import mapImage from '../../assets/icon/map.svg';
 
 import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
-import { menuData } from './homeData';
+import { menuData } from '../../store/data/homeData';
 
 const Home = () => {
   return (

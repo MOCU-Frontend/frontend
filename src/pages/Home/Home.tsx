@@ -8,7 +8,13 @@ import profileImage from '../../assets/icon/profile.svg';
 import ellipseImage from '../../assets/icon/ellipse.svg';
 import mapImage from '../../assets/icon/map.svg';
 
-import { Menudata } from './Homedata';
+
+import {
+  Menudata
+} from './Homedata';
+import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
+
+
 
 const Home = () => {
   return (
@@ -54,7 +60,12 @@ const Home = () => {
           })}
         </div>
 
-        <div className={styles.content_event}></div>
+
+        <div className = {styles.content_event}></div>
+
+        <BottomNavigation />
+
+
       </div>
     </div>
   );

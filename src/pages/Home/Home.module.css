@@ -1,4 +1,5 @@
 /* Home.module.css */
+@import url('../../styles/colorVars.css');
 
 .container {
   position: relative;

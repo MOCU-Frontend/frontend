@@ -30,6 +30,7 @@ export const ExampleModalConfirm: Story = {
     informText: '현재 9/10',
     onClickNo: () => {},
     onClickYes: () => {},
+    onClickX: () => {},
   },
 };
 export const NoInformText: Story = {
@@ -39,5 +40,6 @@ export const NoInformText: Story = {
     subText: '단골 설정 시, 새로운 이벤트를 푸시로 알려드려요!',
     onClickNo: () => {},
     onClickYes: () => {},
+    onClickX: () => {},
   },
 };

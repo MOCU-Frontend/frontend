@@ -13,6 +13,7 @@ interface Props {
   informText?: string;
   onClickYes: () => void;
   onClickNo: () => void;
+  onClickX: () => void;
 }
 
 const ModalConfirm: React.FC<Props> = ({
@@ -22,10 +23,11 @@ const ModalConfirm: React.FC<Props> = ({
   informText,
   onClickYes = () => {},
   onClickNo = () => {},
+  onClickX = () => {},
 }: Props) => {
   return (
     <ModalBasic>
-      <ModalHeader title={headerTitle} onClickXBtn={() => {}} />
+      <ModalHeader title={headerTitle} onClickXBtn={onClickX} />
       <section className={styles.bodySect}>
         <ModalBodyText text={bodyText} />
         {subText && !informText && <ModalSubText text={subText} size='small' />}

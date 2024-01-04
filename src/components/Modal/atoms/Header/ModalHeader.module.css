@@ -1,0 +1,23 @@
+@import '../../../../styles/colorVars.css';
+
+.header {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  color: var(--UI-navy);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 12px 0;
+}
+.undoBtn {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  background: none;
+  border: none;
+  padding: 0;
+}

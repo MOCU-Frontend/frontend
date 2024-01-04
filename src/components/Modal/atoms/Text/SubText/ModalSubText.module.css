@@ -1,0 +1,14 @@
+@import '../../../../../styles/colorVars.css';
+
+.subText {
+  color: var(--color-grey);
+}
+.subTextMedium {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.subTextSmall {
+  font-weight: 500;
+  font-size: 12px;
+}

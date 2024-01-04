@@ -7,6 +7,8 @@ interface Props {
   bodyText?: string;
   subText?: string;
   informText?: string;
+  onClickYes?: () => void;
+  onClickNo?: () => void;
 }
 
 const ModalConfirm: React.FC<Props> = ({
@@ -14,6 +16,8 @@ const ModalConfirm: React.FC<Props> = ({
   bodyText,
   subText,
   informText,
+  onClickYes = () => {},
+  onClickNo = () => {},
 }: Props) => {
   return (
     <ModalWithHeadAndX title={headerTitle}>
@@ -33,6 +37,7 @@ const ModalConfirm: React.FC<Props> = ({
           borderColor='main-purple'
           borderRadius='medium'
           border={1}
+          onClick={onClickNo}
         />
         <Button
           label='예'
@@ -40,6 +45,7 @@ const ModalConfirm: React.FC<Props> = ({
           backgroundColor='main-purple'
           textColor='white'
           borderRadius='medium'
+          onClick={onClickYes}
         />
       </div>
     </ModalWithHeadAndX>

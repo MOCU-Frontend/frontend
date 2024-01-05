@@ -4,7 +4,7 @@ import { ReactComponent as LeftArrow } from '../../assets/icon/arrowLeft.svg';
 import { colors } from '../../styles/colors';
 interface Props {
   children?: ReactNode;
-  headerPaddingSize?: 'small' | 'medium' | 'large';
+  headerPaddingSize?: 'small' | 'medium' | 'large' | 'search';
   headerTitle?: string;
   backBtnSize?: number;
   backBtnColor?: string;
@@ -31,6 +31,9 @@ const HeaderBackBtn: React.FC<Props> = ({
       break;
     case 'small':
       headerClassNames += ` ${styles.headerPaddingSmall}`;
+      break;
+    case 'search':
+      headerClassNames += ` ${styles.headerPaddingSearch}`;
       break;
     default:
       throw new Error('not valid header padding size!');

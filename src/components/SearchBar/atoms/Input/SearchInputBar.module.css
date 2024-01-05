@@ -1,0 +1,9 @@
+@import '../../../../styles/colorVars.css';
+.input {
+  background-color: var(--color-bg-purple-light);
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--color-navy);
+  flex-grow: 1;
+  border: none;
+}

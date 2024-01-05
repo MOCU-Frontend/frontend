@@ -1,0 +1,13 @@
+.wholeWrapper {
+  display: flex;
+  padding: 40px 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.timerWrapper {
+  position: absolute;
+  bottom: -30px;
+  right: 0;
+  transform: translate(0, 100%);
+}

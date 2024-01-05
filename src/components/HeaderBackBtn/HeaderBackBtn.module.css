@@ -2,10 +2,12 @@
 .header {
   display: flex;
   flex-direction: row;
-  position: relative;
+  position: absolute;
+  left: 0;
   justify-content: space-between;
   align-items: center;
   width: 100vw;
+  gap: 22.5px;
 }
 
 .headerPaddingLarge {
@@ -16,6 +18,9 @@
 }
 .headerPaddingSmall {
   padding: 8px 13.5px;
+}
+.headerPaddingSearch {
+  padding: 8px 20px 8px 13.5px;
 }
 
 .backBtn {

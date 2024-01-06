@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SlideMenuBodyTab from '../../components/SlideMenu/atoms/BodyTab/SlideMenuBodyTab';
+import SlideTabView from '../../components/SlideMenu/SlideTabView/SlideTabView';
 import styles from './Root.module.css';
 
 const Root = () => {
@@ -18,8 +18,8 @@ const Root = () => {
   return (
     <div className={styles.wrapper}>
       root
-      <SlideMenuBodyTab
-        tabDataArr={bodyTabDataArr}
+      <SlideTabView
+        menuItemDataArr={bodyTabDataArr}
         handleCheckedDataIndex={(prevIndex, newIndex) => {
           setBodyTabDataArr((prev) => {
             const arrCopy = [...prev];

@@ -24,6 +24,7 @@ const SlideMenuBodyTab: React.FC<Props> = ({
   const calculatedXLoc = window.innerWidth * (checkedDataIndex + 1) * -1;
   const tabStyle = {
     transform: `translate(${calculatedXLoc}px,0)`,
+    transition: 'all 0.5s ease-in',
   };
 
   useEffect(() => {

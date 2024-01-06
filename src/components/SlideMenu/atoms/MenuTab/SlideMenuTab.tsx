@@ -9,17 +9,25 @@ type MenuData = {
 
 interface Props {
   menuDataArr: MenuData[];
+  handleCheckedDataIndex: (prevIndex: number, newIndex: number) => void;
 }
 
-const SlideMenuTab: React.FC<Props> = ({ menuDataArr }: Props) => {
-  const handleClickMenu = () => {};
+const SlideMenuTab: React.FC<Props> = ({
+  menuDataArr,
+  handleCheckedDataIndex,
+}: Props) => {
+  const handleClickMenu = (clickedIndex: number) => {
+    const prevIndex = menuDataArr.findIndex((x) => x.isChecked);
+    if (prevIndex !== -1) handleCheckedDataIndex(prevIndex, clickedIndex);
+  };
   return (
     <div className={styles.wrapper}>
-      {menuDataArr.map((data) => (
+      {menuDataArr.map((data, index) => (
         <SlideMenu
+          key={data.title + index}
           text={data.title}
           isChecked={data.isChecked}
-          onClickMenu={handleClickMenu}
+          onClickMenu={() => handleClickMenu(index)}
         />
       ))}
     </div>

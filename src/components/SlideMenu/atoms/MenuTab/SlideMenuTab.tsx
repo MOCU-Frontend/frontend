@@ -12,10 +12,15 @@ interface Props {
 }
 
 const SlideMenuTab: React.FC<Props> = ({ menuDataArr }: Props) => {
+  const handleClickMenu = () => {};
   return (
     <div className={styles.wrapper}>
       {menuDataArr.map((data) => (
-        <SlideMenu text={data.title} isChecked={data.isChecked} />
+        <SlideMenu
+          text={data.title}
+          isChecked={data.isChecked}
+          onClickMenu={handleClickMenu}
+        />
       ))}
     </div>
   );

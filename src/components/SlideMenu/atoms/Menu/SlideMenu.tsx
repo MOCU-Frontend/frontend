@@ -6,9 +6,14 @@ import styles from './SlideMenu.module.css';
 interface Props {
   text: string;
   isChecked: boolean;
+  onClickMenu: () => void;
 }
 
-const SlideMenu: React.FC<Props> = ({ text, isChecked }: Props) => {
+const SlideMenu: React.FC<Props> = ({
+  text,
+  isChecked,
+  onClickMenu,
+}: Props) => {
   let wrapperStyles = '';
   if (isChecked) {
     wrapperStyles = `${styles.wrapper} ${styles.checked}`;
@@ -16,7 +21,7 @@ const SlideMenu: React.FC<Props> = ({ text, isChecked }: Props) => {
     wrapperStyles = `${styles.wrapper} ${styles.unChecked}`;
   }
   return (
-    <button className={wrapperStyles}>
+    <button className={wrapperStyles} onClick={onClickMenu}>
       <SlideMenuText
         text={text}
         color={isChecked ? colors.navy : colors.greyLight02}

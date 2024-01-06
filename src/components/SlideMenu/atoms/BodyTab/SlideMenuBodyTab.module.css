@@ -1,0 +1,16 @@
+.tabWrapper {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: black;
+}
+.wholeWrapper {
+  position: relative;
+  height: 100px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

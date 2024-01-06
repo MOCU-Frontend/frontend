@@ -1,0 +1,9 @@
+@import '../../../styles/colorVars.css';
+
+.menuWrapper {
+  padding: 8px 20px;
+}
+.wholeWrapper {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}

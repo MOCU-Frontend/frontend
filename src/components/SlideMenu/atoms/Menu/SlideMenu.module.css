@@ -1,0 +1,13 @@
+@import '../../../../styles/colorVars.css';
+.wrapper {
+  padding: 2px 0;
+  background: none;
+  border: none;
+}
+
+.checked {
+  border-bottom: 2px solid var(--color-black);
+}
+.unChcked {
+  border: none;
+}

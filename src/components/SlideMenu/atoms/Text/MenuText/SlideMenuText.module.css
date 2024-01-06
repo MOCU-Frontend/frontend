@@ -1,0 +1,6 @@
+@import '../../../../../styles/colorVars.css';
+
+.text {
+  font-size: 13px;
+  font-weight: 400;
+}

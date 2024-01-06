@@ -42,48 +42,56 @@ const SlideMenuBodyTab: React.FC<Props> = ({
         ref={tabRef}
         className={styles.tabWrapper}
         onTouchStart={(e) => {
-          const startMouseXLoc = e.touches[0].clientX;
-          let xDiff = 0;
-          tabRef.current && (tabRef.current.style.transition = 'none');
-          const moveEventCallback = (moveEv: TouchEvent) => {
-            // 다음페이지가 없다면 => xDiff > 0 => 흰화면 나오게
-            // 이전 페이지도 마찬가지
-            xDiff = moveEv.touches[0].clientX - startMouseXLoc;
-            tabRef.current &&
-              (tabRef.current.style.transform = `translate(${
-                calculatedXLoc + xDiff
-              }px,0)`);
-          };
-          document.addEventListener('touchmove', moveEventCallback);
-          document.addEventListener('touchend', function upEventCallback() {
-            // xDiff>0 => 다음페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff>0 => 다음페이지 존재 => xDiff > 요소 너비의 절반 => 다음페이지로 넘어가기 (애니메이션 주면서 전환)
-            // xDiff>0 => 다음페이지 존재 => xDiff < 요소 너비의 절반 => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff<0 => 이전페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff<0 => 이전페이지 존재 => xDiff < (요소 너비의 절반*-1) => 이전페이지로 넘어가기 (애니메이션 주면서 전환)
-            // xDiff<0 => 이전페이지 존재 => xDiff > (요소 너비의 절반*-1) => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            //mouseup 되면 그냥 checked 변경사항 있으면 변경해주고 => 그 checked에 맞게 위치 바꿔주면 됨 (애니메이션주며)
-            tabRef.current &&
-              (tabRef.current.style.transition = 'all 0.5s ease-in');
-            if (xDiff > 0) {
-              if (checkedDataIndex !== 0 && xDiff > window.innerWidth / 2) {
-                handleCheckedDataIndex(checkedDataIndex, checkedDataIndex - 1);
+          if (e.touches && e.touches[0]) {
+            const startMouseXLoc = e.touches[0].clientX;
+            let xDiff = 0;
+            tabRef.current && (tabRef.current.style.transition = 'none');
+            const moveEventCallback = (moveEv: TouchEvent) => {
+              // 다음페이지가 없다면 => xDiff > 0 => 흰화면 나오게
+              // 이전 페이지도 마찬가지
+              xDiff = moveEv.touches[0].clientX - startMouseXLoc;
+              tabRef.current &&
+                (tabRef.current.style.transform = `translate(${
+                  calculatedXLoc + xDiff
+                }px,0)`);
+            };
+            document.addEventListener('touchmove', moveEventCallback);
+            document.addEventListener('touchend', function upEventCallback() {
+              // xDiff>0 => 다음페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
+              // xDiff>0 => 다음페이지 존재 => xDiff > 요소 너비의 절반 => 다음페이지로 넘어가기 (애니메이션 주면서 전환)
+              // xDiff>0 => 다음페이지 존재 => xDiff < 요소 너비의 절반 => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
+              // xDiff<0 => 이전페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
+              // xDiff<0 => 이전페이지 존재 => xDiff < (요소 너비의 절반*-1) => 이전페이지로 넘어가기 (애니메이션 주면서 전환)
+              // xDiff<0 => 이전페이지 존재 => xDiff > (요소 너비의 절반*-1) => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
+              //mouseup 되면 그냥 checked 변경사항 있으면 변경해주고 => 그 checked에 맞게 위치 바꿔주면 됨 (애니메이션주며)
+              tabRef.current &&
+                (tabRef.current.style.transition = 'all 0.5s ease-in');
+              if (xDiff > 0) {
+                if (checkedDataIndex !== 0 && xDiff > window.innerWidth / 2) {
+                  handleCheckedDataIndex(
+                    checkedDataIndex,
+                    checkedDataIndex - 1
+                  );
+                } else {
+                  handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
+                }
               } else {
-                handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
+                if (
+                  checkedDataIndex + 1 !== tabDataArr.length &&
+                  xDiff * -1 > window.innerWidth / 2
+                ) {
+                  handleCheckedDataIndex(
+                    checkedDataIndex,
+                    checkedDataIndex + 1
+                  );
+                } else {
+                  handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
+                }
               }
-            } else {
-              if (
-                checkedDataIndex + 1 !== tabDataArr.length &&
-                xDiff * -1 > window.innerWidth / 2
-              ) {
-                handleCheckedDataIndex(checkedDataIndex, checkedDataIndex + 1);
-              } else {
-                handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
-              }
-            }
-            document.removeEventListener('touchmove', moveEventCallback);
-            document.removeEventListener('touchend', upEventCallback);
-          });
+              document.removeEventListener('touchmove', moveEventCallback);
+              document.removeEventListener('touchend', upEventCallback);
+            });
+          }
         }}
         onMouseDown={(e) => {
           const startMouseXLoc = e.clientX;

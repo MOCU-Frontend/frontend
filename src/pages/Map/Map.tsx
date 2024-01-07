@@ -129,6 +129,7 @@ const Map: React.FC<Props> = ({}: Props) => {
             borderColor='sub-purple-light'
             label='업종 전체'
             isChecked={false}
+            onClick={() => {}}
           />
           <CheckFilter
             border={1}

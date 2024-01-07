@@ -15,6 +15,12 @@ type Location = {
 
 interface Props {}
 
+// const storeMapData = [
+//   { title: '가게1', loc: { lat: 37.3595704, lng: 127.105399 } },
+//   { title: '가게2', loc: { lat: 37.3696705, lng: 127.1364 } },
+//   { title: '가게3', loc: { lat: 37.3696708, lng: 127.136404 } },
+// ];
+
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | undefined>();
@@ -46,9 +52,11 @@ const Map: React.FC<Props> = ({}: Props) => {
     }
   }, [error, loading]);
 
-  if (userLocation && map) {
-    map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
-  }
+  useEffect(() => {
+    if (userLocation && map) {
+      map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+    }
+  }, [userLocation, map]);
 
   if (error) return <p>Error!</p>;
   if (loading) return <div className={styles.wrapper}>map loading..</div>;

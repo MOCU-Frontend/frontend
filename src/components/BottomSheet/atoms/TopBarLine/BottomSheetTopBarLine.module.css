@@ -1,0 +1,14 @@
+@import '../../../../styles/colorVars.css';
+
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.line {
+  width: 18px;
+  height: 2px;
+  margin-top: 3.85px;
+  background-color: var(--color-grey-dark-00);
+}

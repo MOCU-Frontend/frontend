@@ -1,0 +1,16 @@
+@import '../../../../styles/colorVars.css';
+.sheetScreen {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(81, 81, 81, 0.4);
+  /* back ground blr */
+  backdrop-filter: blur(4px);
+}
+
+.sheet {
+  background-color: var(--color-white);
+  border-radius: 12px 12px 0px 0px;
+}

@@ -12,6 +12,7 @@ export function useScript(src: string) {
     if (!script) {
       script = document.createElement('script');
       script.src = src;
+      script.type = 'text/javascript';
       script.async = true;
     }
 

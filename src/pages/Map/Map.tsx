@@ -7,6 +7,9 @@ import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
 import locationImg from '../../assets/icon/location.svg';
+import pinMapNormalImg from '../../assets/icon/pinMapNormal.svg';
+import pinMapGiftImg from '../../assets/icon/pinMapGift.svg';
+import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
 
 type Location = {
@@ -88,6 +91,11 @@ const Map: React.FC<Props> = ({}: Props) => {
         );
       }
       storeMapData.forEach((storeData) => {
+        const imgUrl = storeData.isFire
+          ? pinMapFireImg
+          : storeData.isGift
+            ? pinMapGiftImg
+            : pinMapNormalImg;
         setStoreMarkerArr((prev) => [
           ...prev,
           new naver.maps.Marker({
@@ -96,6 +104,7 @@ const Map: React.FC<Props> = ({}: Props) => {
               storeData.loc.lng
             ),
             map: map,
+            icon: imgUrl,
           }),
         ]);
       });

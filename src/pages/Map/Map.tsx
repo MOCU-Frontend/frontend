@@ -20,13 +20,13 @@ const Map: React.FC<Props> = ({}: Props) => {
 
   useEffect(() => {
     if (!error && !loading && mapContainerRef && mapContainerRef.current) {
-      const center: naver.maps.LatLng = new naver.maps.LatLng(
+      const defaultCenter: naver.maps.LatLng = new naver.maps.LatLng(
         37.3595704,
         127.105399
       );
       setMap(
         new naver.maps.Map(mapContainerRef.current, {
-          center: center,
+          center: defaultCenter,
           zoom: 16,
         })
       );
@@ -41,7 +41,10 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
     <div className={styles.wrapper}>
-      loading end!<div className={styles.map} ref={mapContainerRef}></div>
+      loading end!
+      <div className={styles.mapWrapper}>
+        <div className={styles.map} ref={mapContainerRef}></div>
+      </div>
     </div>
   );
 };

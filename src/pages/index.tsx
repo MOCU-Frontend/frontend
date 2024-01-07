@@ -2,6 +2,7 @@ import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root/Root';
 import Home from './Home/Home';
+import Map from './Map/Map';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -12,6 +13,10 @@ const Router = () => {
     {
       path: '/home',
       element: <Home />,
+    },
+    {
+      path: '/map',
+      element: <Map />,
     },
   ]);
 

@@ -1,11 +1,18 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
 import styles from './Map.module.css';
+
+type Location = {
+  lat: number; // 위도
+  lng: number; // 경도
+};
 
 interface Props {}
 
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [userLocation, userLocationError] = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
@@ -26,7 +33,6 @@ const Map: React.FC<Props> = ({}: Props) => {
 
   if (error) return <p>Error!</p>;
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
-
   return (
     <div className={styles.wrapper}>
       loading end!<div className={styles.map} ref={mapContainerRef}></div>

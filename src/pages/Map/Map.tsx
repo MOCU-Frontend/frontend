@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import CheckFilter from '../../components/CheckFilter/CheckFilter';
+import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapHeaderSelect';
 import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
@@ -52,13 +54,32 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
     <div className={styles.wrapper}>
-      <HeaderBackBtn
-        headerPaddingSize='checkFilter'
-        onClickBackBtn={() => {}}
-        backBtnGap={11.5}
-      >
-        <MapHeaderSelect text='학교' />
-      </HeaderBackBtn>
+      <div className={styles.headerWrapper}>
+        <HeaderBackBtn
+          headerPaddingSize='checkFilter'
+          onClickBackBtn={() => {}}
+          backBtnGap={11.5}
+        >
+          <MapHeaderSelect text='학교' />
+        </HeaderBackBtn>
+        <div className={styles.filtersWrapper}>
+          <CheckFilterSelect
+            border={1}
+            borderColor='sub-purple-light'
+            label='업종 전체'
+            isChecked={false}
+          />
+          <CheckFilter
+            border={1}
+            borderColor='sub-purple-light'
+            label='이벤트 중'
+            isChecked={false}
+          />
+          <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+          <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+        </div>
+      </div>
+
       <div className={styles.mapWrapper}>
         <div className={styles.map} ref={mapContainerRef}></div>
         <div className={styles.targetBtnWrapper}>

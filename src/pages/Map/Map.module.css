@@ -1,9 +1,38 @@
+@import '../../styles/colorVars.css';
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+.headerWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-bottom: 20px;
+  background-color: var(--color-white);
+  border-radius: 0 0 20px 20px;
+}
+.filtersWrapper {
+  padding: 0 20px;
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  -ms-overflow-style: none;
+}
+.filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
 .map {
   width: 100vw;
-  height: 600px;
+  height: 100%;
 }
 .mapWrapper {
   position: relative;
+  flex-grow: 1;
 }
 .targetBtnWrapper {
   position: absolute;

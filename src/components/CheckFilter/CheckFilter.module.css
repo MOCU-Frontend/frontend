@@ -18,6 +18,11 @@
   padding: 8px 16px;
   font-size: 12px;
 }
+
+.btnSmall {
+  padding: 8px 12px;
+  font-size: 12px;
+}
 /* no width */
 
 .roundedMedium {

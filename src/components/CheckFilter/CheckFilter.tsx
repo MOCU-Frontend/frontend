@@ -65,7 +65,7 @@ const CheckFilter: React.FC<Props> = ({
   textColor = 'navy',
   checkedBackgroundColor = 'main-purple',
   checkedTextColor = 'white',
-  size,
+  size = 'small',
   borderRadius = 'large',
   borderColor,
   border,

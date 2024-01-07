@@ -16,11 +16,11 @@ type Location = {
 
 interface Props {}
 
-// const storeMapData = [
-//   { title: '가게1', loc: { lat: 37.3595704, lng: 127.105399 } },
-//   { title: '가게2', loc: { lat: 37.3696705, lng: 127.1364 } },
-//   { title: '가게3', loc: { lat: 37.3696708, lng: 127.136404 } },
-// ];
+const storeMapData = [
+  { title: '가게1', loc: { lat: 37.3595704, lng: 127.105399 } },
+  { title: '가게2', loc: { lat: 37.3696708, lng: 127.105405 } },
+  { title: '가게3', loc: { lat: 37.3696718, lng: 127.136404 } },
+];
 
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
@@ -28,6 +28,7 @@ const Map: React.FC<Props> = ({}: Props) => {
   const [userLocMarker, setUserLocMarker] = useState<
     naver.maps.Marker | undefined
   >();
+  const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
   const { userLocation, error: userLocationError } = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
@@ -58,7 +59,7 @@ const Map: React.FC<Props> = ({}: Props) => {
 
   useEffect(() => {
     if (userLocation && map) {
-      map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+      // map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
       if (!userLocMarker) {
         setUserLocMarker(
           new naver.maps.Marker({
@@ -68,6 +69,18 @@ const Map: React.FC<Props> = ({}: Props) => {
           })
         );
       }
+      storeMapData.forEach((storeData) => {
+        setStoreMarkerArr((prev) => [
+          ...prev,
+          new naver.maps.Marker({
+            position: new naver.maps.LatLng(
+              storeData.loc.lat,
+              storeData.loc.lng
+            ),
+            map: map,
+          }),
+        ]);
+      });
     }
   }, [userLocation, map]);
 

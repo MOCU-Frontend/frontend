@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
 import styles from './Map.module.css';
@@ -44,6 +45,9 @@ const Map: React.FC<Props> = ({}: Props) => {
       loading end!
       <div className={styles.mapWrapper}>
         <div className={styles.map} ref={mapContainerRef}></div>
+        <div className={styles.targetBtnWrapper}>
+          <MapTargetBtn onClick={() => {}} />
+        </div>
       </div>
     </div>
   );

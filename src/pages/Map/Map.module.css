@@ -2,3 +2,12 @@
   width: 100vw;
   height: 600px;
 }
+.mapWrapper {
+  position: relative;
+}
+.targetBtnWrapper {
+  position: absolute;
+  right: 19px;
+  bottom: 19px;
+  z-index: 1;
+}

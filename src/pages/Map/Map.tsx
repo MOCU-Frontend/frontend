@@ -17,9 +17,27 @@ type Location = {
 interface Props {}
 
 const storeMapData = [
-  { title: '가게1', loc: { lat: 37.3595704, lng: 127.105399 } },
-  { title: '가게2', loc: { lat: 37.3696708, lng: 127.105405 } },
-  { title: '가게3', loc: { lat: 37.3696718, lng: 127.136404 } },
+  {
+    title: '가게1',
+    loc: { lat: 37.3595704, lng: 127.105399 },
+    isFire: false,
+    isChecked: false,
+    isGift: false,
+  },
+  {
+    title: '가게2',
+    loc: { lat: 37.3696708, lng: 127.105405 },
+    isFire: true,
+    isChecked: false,
+    isGift: false,
+  },
+  {
+    title: '가게3',
+    loc: { lat: 37.3696718, lng: 127.136404 },
+    isFire: false,
+    isChecked: false,
+    isGift: true,
+  },
 ];
 
 const Map: React.FC<Props> = ({}: Props) => {

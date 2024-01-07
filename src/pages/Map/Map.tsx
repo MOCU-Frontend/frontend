@@ -12,7 +12,8 @@ interface Props {}
 
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [userLocation, userLocationError] = useLocation();
+  const [map, setMap] = useState<naver.maps.Map | undefined>();
+  const { userLocation, error: userLocationError } = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
@@ -23,13 +24,18 @@ const Map: React.FC<Props> = ({}: Props) => {
         37.3595704,
         127.105399
       );
-      let map: naver.maps.Map;
-      map = new naver.maps.Map(mapContainerRef.current, {
-        center: center,
-        zoom: 16,
-      });
+      setMap(
+        new naver.maps.Map(mapContainerRef.current, {
+          center: center,
+          zoom: 16,
+        })
+      );
     }
   }, [error, loading]);
+
+  if (userLocation && map) {
+    map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+  }
 
   if (error) return <p>Error!</p>;
   if (loading) return <div className={styles.wrapper}>map loading..</div>;

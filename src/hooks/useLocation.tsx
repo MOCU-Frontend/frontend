@@ -21,5 +21,5 @@ export const useLocation = () => {
       }
     );
   }, []);
-  return [userLocation, error];
+  return { userLocation, error };
 };

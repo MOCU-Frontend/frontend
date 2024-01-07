@@ -2,12 +2,8 @@
 .header {
   display: flex;
   flex-direction: row;
-  position: absolute;
-  left: 0;
-  justify-content: space-between;
   align-items: center;
   width: 100vw;
-  gap: 22.5px;
 }
 
 .headerPaddingLarge {
@@ -23,9 +19,14 @@
   padding: 8px 20px 8px 13.5px;
 }
 
+.headerPaddingCheckFilter {
+  padding: 11.5px 0px 11.5px 13.5px;
+}
+
 .backBtn {
   background-color: var(--color-white);
   border: none;
+  padding: 0;
 }
 
 .centerDiv {

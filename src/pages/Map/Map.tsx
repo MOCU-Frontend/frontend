@@ -1,4 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
+import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
+import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapHeaderSelect';
 import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
@@ -50,7 +52,13 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
     <div className={styles.wrapper}>
-      loading end!
+      <HeaderBackBtn
+        headerPaddingSize='checkFilter'
+        onClickBackBtn={() => {}}
+        backBtnGap={11.5}
+      >
+        <MapHeaderSelect text='학교' />
+      </HeaderBackBtn>
       <div className={styles.mapWrapper}>
         <div className={styles.map} ref={mapContainerRef}></div>
         <div className={styles.targetBtnWrapper}>

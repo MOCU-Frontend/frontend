@@ -19,6 +19,14 @@ const Map: React.FC<Props> = ({}: Props) => {
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
 
+  const handleClickTargetBtn = () => {
+    if (userLocation && map) {
+      map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+    } else {
+      throw new Error('no userLocation or Map!!');
+    }
+  };
+
   useEffect(() => {
     if (!error && !loading && mapContainerRef && mapContainerRef.current) {
       const defaultCenter: naver.maps.LatLng = new naver.maps.LatLng(
@@ -46,7 +54,7 @@ const Map: React.FC<Props> = ({}: Props) => {
       <div className={styles.mapWrapper}>
         <div className={styles.map} ref={mapContainerRef}></div>
         <div className={styles.targetBtnWrapper}>
-          <MapTargetBtn onClick={() => {}} />
+          <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
     </div>

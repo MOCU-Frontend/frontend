@@ -1,0 +1,23 @@
+@import '../../styles/colorVars.css';
+
+.wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-top: 30px;
+  background-color: var(--color-white);
+}
+
+.subText {
+  margin-top: 11.7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-main-purple);
+}

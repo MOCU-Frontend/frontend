@@ -24,6 +24,9 @@ interface Props {}
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | undefined>();
+  const [userLocMarker, setUserLocMarker] = useState<
+    naver.maps.Marker | undefined
+  >();
   const { userLocation, error: userLocationError } = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
@@ -55,6 +58,14 @@ const Map: React.FC<Props> = ({}: Props) => {
   useEffect(() => {
     if (userLocation && map) {
       map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+      if (!userLocMarker) {
+        setUserLocMarker(
+          new naver.maps.Marker({
+            position: new naver.maps.LatLng(userLocation.lat, userLocation.lng),
+            map: map,
+          })
+        );
+      }
     }
   }, [userLocation, map]);
 

@@ -6,6 +6,7 @@ import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapH
 import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
+import locationImg from '../../assets/icon/location.svg';
 import styles from './Map.module.css';
 
 type Location = {
@@ -63,6 +64,7 @@ const Map: React.FC<Props> = ({}: Props) => {
           new naver.maps.Marker({
             position: new naver.maps.LatLng(userLocation.lat, userLocation.lng),
             map: map,
+            icon: locationImg,
           })
         );
       }

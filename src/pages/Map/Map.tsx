@@ -161,7 +161,9 @@ const Map: React.FC<Props> = ({}: Props) => {
           <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
-      {isShowBottomSheet && <MapBottomSheet />}
+      {isShowBottomSheet && (
+        <MapBottomSheet onDragBottom={() => setIsShowBottomSheet(false)} />
+      )}
     </div>
   );
 };

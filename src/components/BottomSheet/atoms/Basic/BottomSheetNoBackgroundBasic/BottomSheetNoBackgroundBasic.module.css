@@ -1,7 +1,7 @@
 @import '../../../../../styles/colorVars.css';
 
 .sheet {
-  position: absolute;
+  position: fixed;
   background-color: var(--color-white);
   border-radius: 12px 12px 0px 0px;
   display: flex;

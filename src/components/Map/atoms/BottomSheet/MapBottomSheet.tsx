@@ -9,11 +9,13 @@ import MapRightContent from '../Content/RightContent/MapRightContent';
 import Button from '../../../Button/Button';
 import TextBadgeBtn from '../../../Button/TextBadgeBtn/TextBadgeBtn';
 import BottomSheetNoBackground from '../../../BottomSheet/BottomSheetNoBackground';
-interface Props {}
+interface Props {
+  onDragBottom: () => void;
+}
 
-const MapBottomSheet: React.FC<Props> = ({}: Props) => {
+const MapBottomSheet: React.FC<Props> = ({ onDragBottom }: Props) => {
   return (
-    <BottomSheetNoBackground>
+    <BottomSheetNoBackground onDragBottom={onDragBottom}>
       <div className={styles.wholeWrapper}>
         <div className={styles.textSec}>
           <BodyTitleText text='크림베이글 건대점' color={colors.navy} />

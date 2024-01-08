@@ -30,11 +30,9 @@
 
   .search_title {
     color: #666;
-
-  /* kr/medium_14 */
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 24px; /* 171.429% */
-  letter-spacing: -0.042px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: -0.042px;
   }

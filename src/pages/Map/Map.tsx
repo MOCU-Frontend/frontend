@@ -11,6 +11,7 @@ import pinMapNormalImg from '../../assets/icon/pinMapNormal.svg';
 import pinMapGiftImg from '../../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
+import MapBottomSheet from '../../components/Map/atoms/BottomSheet/MapBottomSheet';
 
 type Location = {
   lat: number; // 위도
@@ -21,21 +22,21 @@ interface Props {}
 
 const storeMapData = [
   {
-    title: '가게1',
+    title: '크림베이글 건대점1',
     loc: { lat: 37.3595704, lng: 127.105399 },
     isFire: false,
     isChecked: false,
     isGift: false,
   },
   {
-    title: '가게2',
+    title: '크림베이글 건대점2',
     loc: { lat: 37.3696708, lng: 127.105405 },
     isFire: true,
     isChecked: false,
     isGift: false,
   },
   {
-    title: '가게3',
+    title: '크림베이글 건대점3',
     loc: { lat: 37.3696718, lng: 127.136404 },
     isFire: false,
     isChecked: false,
@@ -46,6 +47,7 @@ const storeMapData = [
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | undefined>();
+  const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(true);
   const [userLocMarker, setUserLocMarker] = useState<
     naver.maps.Marker | undefined
   >();
@@ -148,6 +150,7 @@ const Map: React.FC<Props> = ({}: Props) => {
           <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
+      {isShowBottomSheet && <MapBottomSheet />}
     </div>
   );
 };

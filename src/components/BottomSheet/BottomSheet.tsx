@@ -4,11 +4,15 @@ import BottomSheetTopBarLine from './atoms/TopBarLine/BottomSheetTopBarLine';
 
 interface Props {
   children: ReactNode;
+  isBackgroundBlur?: boolean;
 }
 
-const BottomSheet: React.FC<Props> = ({ children }: Props) => {
+const BottomSheet: React.FC<Props> = ({
+  children,
+  isBackgroundBlur = true,
+}: Props) => {
   return (
-    <BottomSheetBasic>
+    <BottomSheetBasic isBackgroundBlur={isBackgroundBlur}>
       <BottomSheetTopBarLine />
       {children}
     </BottomSheetBasic>

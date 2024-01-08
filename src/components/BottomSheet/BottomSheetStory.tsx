@@ -3,11 +3,15 @@ import BottomSheetBasic from './atoms/Basic/BottomSheetBasic';
 import BottomSheetTopBarLine from './atoms/TopBarLine/BottomSheetTopBarLine';
 import styles from './BottomSheetStory.module.css';
 
-interface Props {}
+interface Props {
+  isBackgroundBlur?: boolean;
+}
 
-const BottomSheetStory: React.FC<Props> = ({}: Props) => {
+const BottomSheetStory: React.FC<Props> = ({
+  isBackgroundBlur = true,
+}: Props) => {
   return (
-    <BottomSheetBasic>
+    <BottomSheetBasic isBackgroundBlur={isBackgroundBlur}>
       <BottomSheetTopBarLine />
       <div className={styles.exDiv}>ex</div>
     </BottomSheetBasic>

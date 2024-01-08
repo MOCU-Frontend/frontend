@@ -1,0 +1,40 @@
+@import '../../styles/colorVars.css';
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.headerWrapper {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    width: 100vw;
+    background-color: var(--color-white);
+    padding: 5.5px 20px 6.5px 13.5px;
+    justify-content: center;
+  }
+
+  .content_search_recent {
+    display: flex;
+    width: 100vw;
+    padding: 12px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .search_title {
+    color: #666;
+
+  /* kr/medium_14 */
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.042px;
+  }

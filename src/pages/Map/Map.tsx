@@ -13,6 +13,8 @@ import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
 import MapBottomSheet from '../../components/Map/atoms/BottomSheet/MapBottomSheet';
 
+const BOTTOM_SHEET_HEIGHT = 371.78; // TODO: 바텀시트 height 재는 방법 생각해보기
+
 type Location = {
   lat: number; // 위도
   lng: number; // 경도
@@ -78,10 +80,15 @@ const Map: React.FC<Props> = ({}: Props) => {
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
     mapWrapperRef.current &&
-      (mapWrapperRef.current.style.height = `${window.innerHeight - 371.78}px`);
+      (mapWrapperRef.current.style.height = `${
+        window.innerHeight - BOTTOM_SHEET_HEIGHT
+      }px`);
     if (map) {
       map.setSize(
-        new naver.maps.Size(window.innerWidth, window.innerHeight - 371.78)
+        new naver.maps.Size(
+          window.innerWidth,
+          window.innerHeight - BOTTOM_SHEET_HEIGHT
+        )
       );
     }
   };

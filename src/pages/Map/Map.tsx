@@ -69,6 +69,8 @@ const Map: React.FC<Props> = ({}: Props) => {
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
     if (map) {
+      mapWrapperRef.current &&
+        (mapWrapperRef.current.style.height = `${window.innerHeight}px`);
       map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
     }
   };

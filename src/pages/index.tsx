@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
+import Search from './Search/Search';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -18,6 +19,10 @@ const Router = () => {
       path: '/map',
       element: <Map />,
     },
+    {
+      path: '/search',
+      element: <Search />,
+    }
   ]);
 
   return <RouterProvider router={router} />;

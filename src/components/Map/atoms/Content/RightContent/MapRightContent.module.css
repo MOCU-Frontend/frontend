@@ -1,0 +1,30 @@
+.rightContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.accumHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.informBtn {
+  width: 14px;
+  height: 14px;
+  border: none;
+  padding: none;
+  background: none;
+}
+.statusSec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 18.33px;
+}
+.nextGiftSec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

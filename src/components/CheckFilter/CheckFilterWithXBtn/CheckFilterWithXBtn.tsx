@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './CheckFilterSelect.module.css';
+import styles from './CheckFilterWithXBtn.module.css';
 import { ReactComponent as UndoCenterRegular } from '../../../assets/icon/undoCenterRegular.svg';
 import { colors } from '../../../styles/colors';
 type Color =
@@ -38,17 +38,9 @@ interface Props {
    */
   checkedTextColor?: Color;
   /**
-   * 사이즈 설정
-   */
-  size?: 'small' | 'medium' | 'full';
-  /**
    * arrow down icon 색깔
    */
   arrowColor?: string;
-  /**
-   * Border Radius 사이즈 설정
-   */
-  borderRadius?: 'medium' | 'large';
   /**
    * Border 색깔, 값 존재하지않을시 border none 처리됨
    */
@@ -69,66 +61,41 @@ interface Props {
   onClickXBtn: () => void;
 }
 
-const CheckFilterSelect: React.FC<Props> = ({
+const CheckFilterWithXBtn: React.FC<Props> = ({
   label,
   isChecked = false,
   backgroundColor = 'bg-purple-light',
   textColor = 'navy',
   checkedBackgroundColor = 'main-purple',
   checkedTextColor = 'white',
-  size = 'small',
   arrowColor = colors.subPurpleLight,
-  borderRadius = 'large',
   borderColor,
   border,
   onClickContent = () => {},
   onClickXBtn = () => {},
 }: Props) => {
-  let btnClassNames = `${styles.btn}`;
-  switch (size) {
-    case 'full':
-      btnClassNames += ` ${styles.btnFull}`;
-      break;
-    case 'medium':
-      btnClassNames += ` ${styles.btnMedium}`;
-      break;
-    case 'small':
-      btnClassNames += ` ${styles.btnSmall}`;
-      break;
-    default:
-      throw new Error('not valid btn size!');
-  }
-  switch (borderRadius) {
-    case 'medium':
-      btnClassNames += ` ${styles.roundedMedium}`;
-      break;
-    case 'large':
-      btnClassNames += ` ${styles.roundedLarge}`;
-      break;
-    default:
-      throw new Error('not valid borderRadius size!');
-  }
   return (
-    <div>
-        <button
-            className={btnClassNames}
-            style={{
-                backgroundColor: `var(--color-${
-                isChecked ? checkedBackgroundColor : backgroundColor
-                })`,
-                color: `var(--color-${isChecked ? checkedTextColor : textColor})`,
-                border:
-                borderColor && border
-                    ? `${border}px solid var(--color-${borderColor})`
-                    : 'none',
-            }}
-            >
-            {label}
-            <UndoCenterRegular width={24} height={24} stroke={arrowColor} />
-        </button>
+    <div
+      className={styles.wholeWrapper}
+      style={{
+        backgroundColor: `var(--color-${
+          isChecked ? checkedBackgroundColor : backgroundColor
+        })`,
+        color: `var(--color-${isChecked ? checkedTextColor : textColor})`,
+        border:
+          borderColor && border
+            ? `${border}px solid var(--color-${borderColor})`
+            : 'none',
+      }}
+    >
+      <button className={styles.btn} onClick={onClickContent}>
+        {label}
+      </button>
+      <div className={styles.iconWrapper} onClick={onClickXBtn}>
+        <UndoCenterRegular width={16} height={16} stroke={arrowColor} />
+      </div>
     </div>
-    
   );
 };
 
-export default CheckFilterSelect;
+export default CheckFilterWithXBtn;

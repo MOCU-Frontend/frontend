@@ -8,6 +8,7 @@ import MapLeftContent from '../Content/LeftContent/MapLeftContent';
 import storeImg from '../../../../assets/imgs/storeExample.png';
 import MapRightContent from '../Content/RightContent/MapRightContent';
 import Button from '../../../Button/Button';
+import TextBadgeBtn from '../../../Button/TextBadgeBtn/TextBadgeBtn';
 interface Props {}
 
 const MapBottomSheet: React.FC<Props> = ({}: Props) => {
@@ -35,11 +36,12 @@ const MapBottomSheet: React.FC<Props> = ({}: Props) => {
             backgroundColor='main-purple'
             onClick={() => {}}
           />
-          <Button
+          <TextBadgeBtn
             label='쿠폰 사용'
             backgroundColor='sub-gradation'
             onClick={() => {}}
             disabled={false}
+            badgeText={`${1}`}
           />
         </div>
       </div>

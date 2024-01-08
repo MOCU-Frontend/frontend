@@ -162,31 +162,56 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
     <div className={styles.wrapper}>
-      <div className={styles.headerWrapper}>
+      <div
+        className={
+          isShowBottomSheet ? styles.headerShortWrapper : styles.headerWrapper
+        }
+      >
         <HeaderBackBtn
           headerPaddingSize='checkFilter'
           onClickBackBtn={() => navigate(-1)}
-          backBtnGap={11.5}
+          backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
-          <MapHeaderSelect text='학교' />
+          {!isShowBottomSheet && <MapHeaderSelect text='학교' />}
+          {isShowBottomSheet && (
+            <div className={styles.filtersInHeaderWrapper}>
+              <CheckFilterSelect
+                border={1}
+                borderColor='sub-purple-light'
+                label='업종 전체'
+                isChecked={false}
+                onClick={() => {}}
+              />
+              <CheckFilter
+                border={1}
+                borderColor='sub-purple-light'
+                label='이벤트 중'
+                isChecked={false}
+              />
+              <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+              <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+            </div>
+          )}
         </HeaderBackBtn>
-        <div className={styles.filtersWrapper}>
-          <CheckFilterSelect
-            border={1}
-            borderColor='sub-purple-light'
-            label='업종 전체'
-            isChecked={false}
-            onClick={() => {}}
-          />
-          <CheckFilter
-            border={1}
-            borderColor='sub-purple-light'
-            label='이벤트 중'
-            isChecked={false}
-          />
-          <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
-          <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
-        </div>
+        {!isShowBottomSheet && (
+          <div className={styles.filtersWrapper}>
+            <CheckFilterSelect
+              border={1}
+              borderColor='sub-purple-light'
+              label='업종 전체'
+              isChecked={false}
+              onClick={() => {}}
+            />
+            <CheckFilter
+              border={1}
+              borderColor='sub-purple-light'
+              label='이벤트 중'
+              isChecked={false}
+            />
+            <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+            <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+          </div>
+        )}
       </div>
 
       <div className={styles.mapWrapper} ref={mapWrapperRef}>

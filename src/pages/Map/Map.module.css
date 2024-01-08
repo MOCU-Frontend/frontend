@@ -18,6 +18,19 @@
   background-color: var(--color-white);
   border-radius: 0 0 20px 20px;
 }
+.headerShortWrapper {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100vw;
+  gap: 4px;
+  padding-bottom: 8px;
+  background-color: var(--color-white);
+  border-radius: 0 0 20px 20px;
+}
 .filtersWrapper {
   padding: 0 20px;
   width: 100%;
@@ -29,7 +42,21 @@
   align-items: center;
   -ms-overflow-style: none;
 }
+.filtersInHeaderWrapper {
+  padding-right: 20px;
+  flex-grow: 1;
+  overflow-x: scroll;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: center;
+  -ms-overflow-style: none;
+}
 .filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
+.filtersInHeaderWrapper::-webkit-scrollbar {
   display: none;
 }
 .map {

@@ -4,10 +4,11 @@ import { ReactComponent as LeftArrow } from '../../assets/icon/arrowLeft.svg';
 import { colors } from '../../styles/colors';
 interface Props {
   children?: ReactNode;
-  headerPaddingSize?: 'small' | 'medium' | 'large' | 'search';
+  headerPaddingSize?: 'small' | 'medium' | 'large' | 'search' | 'checkFilter';
   headerTitle?: string;
   backBtnSize?: number;
   backBtnColor?: string;
+  backBtnGap?: number;
   headerTitleColor?: string;
   onClickBackBtn?: () => void;
 }
@@ -17,6 +18,7 @@ const HeaderBackBtn: React.FC<Props> = ({
   headerPaddingSize = 'large',
   headerTitle,
   backBtnColor = colors.greyDark01,
+  backBtnGap = 22.5,
   backBtnSize = 24,
   headerTitleColor = colors.greyDark01,
   onClickBackBtn = () => {},
@@ -35,12 +37,19 @@ const HeaderBackBtn: React.FC<Props> = ({
     case 'search':
       headerClassNames += ` ${styles.headerPaddingSearch}`;
       break;
+    case 'checkFilter':
+      headerClassNames += ` ${styles.headerPaddingCheckFilter}`;
+      break;
     default:
       throw new Error('not valid header padding size!');
   }
   return (
-    <header className={headerClassNames}>
-      <button className={styles.backBtn} onClick={onClickBackBtn}>
+    <header style={{ gap: `${backBtnGap}px` }} className={headerClassNames}>
+      <button
+        style={{ width: `${backBtnSize}px`, height: `${backBtnSize}px` }}
+        className={styles.backBtn}
+        onClick={onClickBackBtn}
+      >
         <LeftArrow
           width={backBtnSize}
           height={backBtnSize}

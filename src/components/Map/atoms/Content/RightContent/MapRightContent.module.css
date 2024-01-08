@@ -1,0 +1,46 @@
+.rightContentWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.accumHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.informBtn {
+  width: 14px;
+  height: 14px;
+  border: none;
+  padding: 0;
+  background: none;
+}
+.informBtnWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 14px;
+  height: 14px;
+}
+.tooltipWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  white-space: nowrap;
+  transform: translate(-45%, -115%);
+}
+.statusSec {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-bottom: 18.33px;
+}
+.nextGiftSec {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

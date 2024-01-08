@@ -1,0 +1,6 @@
+@import '../../../../../styles/colorVars.css';
+.text {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-grey-light-02);
+}

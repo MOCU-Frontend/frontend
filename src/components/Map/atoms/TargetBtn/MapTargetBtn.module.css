@@ -1,0 +1,8 @@
+@import '../../../../styles/colorVars.css';
+.btn {
+  border-radius: 100%;
+  background-color: var(--color-white);
+  height: 56px;
+  width: 56px;
+  border: none;
+}

@@ -5,6 +5,9 @@
   position: fixed;
   left: 0;
   top: 0;
+}
+
+.screenBlur {
   background: rgba(81, 81, 81, 0.4);
   /* back ground blr */
   backdrop-filter: blur(4px);
@@ -16,7 +19,6 @@
   border-radius: 12px 12px 0px 0px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: 100vw;
   bottom: 0;
 }

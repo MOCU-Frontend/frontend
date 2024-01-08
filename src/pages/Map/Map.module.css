@@ -1,5 +1,6 @@
 @import '../../styles/colorVars.css';
 .wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -37,8 +38,8 @@
 }
 .mapWrapper {
   position: relative;
-  height: 200px;
-  /* flex-grow: 1; */
+  /* height: 200px; */
+  flex-grow: 1;
 }
 .targetBtnWrapper {
   position: absolute;

@@ -46,8 +46,9 @@ const storeMapData = [
 
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | undefined>();
-  const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(true);
+  const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(false);
   const [userLocMarker, setUserLocMarker] = useState<
     naver.maps.Marker | undefined
   >();
@@ -62,6 +63,17 @@ const Map: React.FC<Props> = ({}: Props) => {
       map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
     } else {
       throw new Error('no userLocation or Map!!');
+    }
+  };
+
+  const handleShowBottomSheet = () => {
+    setIsShowBottomSheet(true);
+    wrapperRef.current &&
+      (wrapperRef.current.style.height = `${window.innerHeight - 371.78}px`);
+    if (map) {
+      map.setSize(
+        new naver.maps.Size(window.innerWidth, window.innerHeight - 371.78)
+      );
     }
   };
 
@@ -98,17 +110,16 @@ const Map: React.FC<Props> = ({}: Props) => {
           : storeData.isGift
             ? pinMapGiftImg
             : pinMapNormalImg;
-        setStoreMarkerArr((prev) => [
-          ...prev,
-          new naver.maps.Marker({
-            position: new naver.maps.LatLng(
-              storeData.loc.lat,
-              storeData.loc.lng
-            ),
-            map: map,
-            icon: imgUrl,
-          }),
-        ]);
+        const newMarker = new naver.maps.Marker({
+          position: new naver.maps.LatLng(storeData.loc.lat, storeData.loc.lng),
+          map: map,
+          icon: imgUrl,
+        });
+        setStoreMarkerArr((prev) => [...prev, newMarker]);
+        naver.maps.Event.addListener(newMarker, 'click', function (e) {
+          console.log(storeData.title);
+          handleShowBottomSheet();
+        });
       });
     }
   }, [userLocation, map]);
@@ -116,7 +127,7 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (error) return <p>Error!</p>;
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={wrapperRef}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
           headerPaddingSize='checkFilter'

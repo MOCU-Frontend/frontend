@@ -12,6 +12,7 @@ import pinMapGiftImg from '../../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
 import MapBottomSheet from '../../components/Map/atoms/BottomSheet/MapBottomSheet';
+import { useNavigate } from 'react-router-dom';
 
 const BOTTOM_SHEET_HEIGHT = 371.78; // TODO: 바텀시트 height 재는 방법 생각해보기
 
@@ -74,6 +75,7 @@ const Map: React.FC<Props> = ({}: Props) => {
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
+  const navigate = useNavigate();
 
   const handleClickTargetBtn = () => {
     if (userLocation && map) {
@@ -163,7 +165,7 @@ const Map: React.FC<Props> = ({}: Props) => {
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
           headerPaddingSize='checkFilter'
-          onClickBackBtn={() => {}}
+          onClickBackBtn={() => navigate(-1)}
           backBtnGap={11.5}
         >
           <MapHeaderSelect text='학교' />

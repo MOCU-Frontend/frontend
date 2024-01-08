@@ -43,6 +43,40 @@ const BottomSheetTopBarLine: React.FC<Props> = ({
           });
         }
       }}
+      onTouchStart={(e) => {
+        if (wrapperRef.current && e.touches && e.touches[0]) {
+          const startMouseYLoc = e.touches[0].clientY;
+          const bottomSheetHeight =
+            wrapperRef.current.getBoundingClientRect().height;
+          let yDiff = 0;
+          const moveEventCallback = (moveEv: TouchEvent) => {
+            yDiff = moveEv.touches[0].clientY - startMouseYLoc;
+            wrapperRef.current &&
+              (wrapperRef.current.style.transform = `translate(0,${yDiff}px)`);
+          };
+          document.addEventListener('touchmove', moveEventCallback);
+          document.addEventListener('touchend', function upEventCallback(upEv) {
+            if (
+              wrapperRef.current &&
+              upEv.changedTouches &&
+              upEv.changedTouches[0]
+            ) {
+              yDiff = upEv.changedTouches[0].clientY - startMouseYLoc;
+              if (yDiff > 0) {
+                if (yDiff > bottomSheetHeight / 2) {
+                  onDragBottom();
+                } else {
+                  wrapperRef.current.style.transform = 'translate(0,0)';
+                }
+              } else {
+                wrapperRef.current.style.transform = 'translate(0,0)';
+              }
+            }
+            document.removeEventListener('touchmove', moveEventCallback);
+            document.removeEventListener('touchend', upEventCallback);
+          });
+        }
+      }}
     >
       <div className={styles.line}></div>
     </div>

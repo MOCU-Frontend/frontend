@@ -20,6 +20,8 @@
   }
 
   .content_search_recent {
+    margin-top: 8vh;
+    margin-left: 5vw;
     display: flex;
     width: 100vw;
     padding: 12px 0px;
@@ -35,4 +37,17 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: -0.042px;
+  }
+
+  .filtersWrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    white-space: nowrap;
+    align-items: center;
+    -ms-overflow-style: none;
+  }
+  .filtersWrapper::-webkit-scrollbar {
+    display: none;
   }

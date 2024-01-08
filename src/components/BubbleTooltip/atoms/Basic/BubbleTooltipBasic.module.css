@@ -12,7 +12,7 @@
   position: absolute;
   top: 0;
   left: 50%;
-  transform: translate(-50%, -100%);
+  transform: translate(-50%, -95%);
 }
 .bubbleBottom:after {
   border-top: 10px solid var(--color-grey-dark-01);
@@ -23,7 +23,7 @@
   position: absolute;
   bottom: 0;
   left: 50%;
-  transform: translate(-50%, 100%);
+  transform: translate(-50%, 95%);
 }
 .bubbleLeft:after {
   border-top: 10px solid transparent;
@@ -34,7 +34,7 @@
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-100%, -50%);
+  transform: translate(-100%, -95%);
 }
 .bubbleRight:after {
   border-top: 10px solid transparent;
@@ -45,5 +45,5 @@
   position: absolute;
   top: 50%;
   right: 0;
-  transform: translate(100%, -50%);
+  transform: translate(100%, -95%);
 }

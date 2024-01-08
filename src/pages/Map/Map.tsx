@@ -12,17 +12,30 @@ import pinMapGiftImg from '../../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
 import MapBottomSheet from '../../components/Map/atoms/BottomSheet/MapBottomSheet';
+import { useNavigate } from 'react-router-dom';
+
+const BOTTOM_SHEET_HEIGHT = 371.78; // TODO: 바텀시트 height 재는 방법 생각해보기
 
 type Location = {
   lat: number; // 위도
   lng: number; // 경도
 };
 
+type StoreData = {
+  title: string;
+  category: string;
+  loc: { lat: number; lng: number };
+  isFire: boolean;
+  isChecked: boolean;
+  isGift: boolean;
+};
+
 interface Props {}
 
-const storeMapData = [
+const storeMapData: StoreData[] = [
   {
     title: '크림베이글 건대점1',
+    category: '베이커리1',
     loc: { lat: 37.3595704, lng: 127.105399 },
     isFire: false,
     isChecked: false,
@@ -30,6 +43,7 @@ const storeMapData = [
   },
   {
     title: '크림베이글 건대점2',
+    category: '베이커리2',
     loc: { lat: 37.3696708, lng: 127.105405 },
     isFire: true,
     isChecked: false,
@@ -37,6 +51,7 @@ const storeMapData = [
   },
   {
     title: '크림베이글 건대점3',
+    category: '베이커리3',
     loc: { lat: 37.3696718, lng: 127.136404 },
     isFire: false,
     isChecked: false,
@@ -53,10 +68,14 @@ const Map: React.FC<Props> = ({}: Props) => {
     naver.maps.Marker | undefined
   >();
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
+  const [selectedStoreInform, setSelectedStoreInform] = useState<
+    StoreData | undefined
+  >();
   const { userLocation, error: userLocationError } = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
+  const navigate = useNavigate();
 
   const handleClickTargetBtn = () => {
     if (userLocation && map) {
@@ -66,13 +85,27 @@ const Map: React.FC<Props> = ({}: Props) => {
     }
   };
 
+  const handleDragDownBottomSheet = () => {
+    setIsShowBottomSheet(false);
+    if (map) {
+      mapWrapperRef.current &&
+        (mapWrapperRef.current.style.height = `${window.innerHeight}px`);
+      map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
+    }
+  };
+
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
     mapWrapperRef.current &&
-      (mapWrapperRef.current.style.height = `${window.innerHeight - 371.78}px`);
+      (mapWrapperRef.current.style.height = `${
+        window.innerHeight - BOTTOM_SHEET_HEIGHT
+      }px`);
     if (map) {
       map.setSize(
-        new naver.maps.Size(window.innerWidth, window.innerHeight - 371.78)
+        new naver.maps.Size(
+          window.innerWidth,
+          window.innerHeight - BOTTOM_SHEET_HEIGHT
+        )
       );
     }
   };
@@ -104,7 +137,7 @@ const Map: React.FC<Props> = ({}: Props) => {
           })
         );
       }
-      storeMapData.forEach((storeData) => {
+      storeMapData.forEach((storeData, index) => {
         const imgUrl = storeData.isFire
           ? pinMapFireImg
           : storeData.isGift
@@ -118,6 +151,7 @@ const Map: React.FC<Props> = ({}: Props) => {
         setStoreMarkerArr((prev) => [...prev, newMarker]);
         naver.maps.Event.addListener(newMarker, 'click', function (e) {
           console.log(storeData.title);
+          setSelectedStoreInform(storeMapData[index]);
           handleShowBottomSheet();
         });
       });
@@ -131,7 +165,7 @@ const Map: React.FC<Props> = ({}: Props) => {
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
           headerPaddingSize='checkFilter'
-          onClickBackBtn={() => {}}
+          onClickBackBtn={() => navigate(-1)}
           backBtnGap={11.5}
         >
           <MapHeaderSelect text='학교' />
@@ -161,7 +195,12 @@ const Map: React.FC<Props> = ({}: Props) => {
           <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
-      {isShowBottomSheet && <MapBottomSheet />}
+      {isShowBottomSheet && selectedStoreInform && (
+        <MapBottomSheet
+          onDragBottom={handleDragDownBottomSheet}
+          storeInform={selectedStoreInform}
+        />
+      )}
     </div>
   );
 };

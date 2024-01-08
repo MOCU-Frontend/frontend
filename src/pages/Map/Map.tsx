@@ -20,11 +20,21 @@ type Location = {
   lng: number; // 경도
 };
 
+type StoreData = {
+  title: string;
+  category: string;
+  loc: { lat: number; lng: number };
+  isFire: boolean;
+  isChecked: boolean;
+  isGift: boolean;
+};
+
 interface Props {}
 
-const storeMapData = [
+const storeMapData: StoreData[] = [
   {
     title: '크림베이글 건대점1',
+    category: '베이커리1',
     loc: { lat: 37.3595704, lng: 127.105399 },
     isFire: false,
     isChecked: false,
@@ -32,6 +42,7 @@ const storeMapData = [
   },
   {
     title: '크림베이글 건대점2',
+    category: '베이커리2',
     loc: { lat: 37.3696708, lng: 127.105405 },
     isFire: true,
     isChecked: false,
@@ -39,6 +50,7 @@ const storeMapData = [
   },
   {
     title: '크림베이글 건대점3',
+    category: '베이커리3',
     loc: { lat: 37.3696718, lng: 127.136404 },
     isFire: false,
     isChecked: false,
@@ -55,6 +67,9 @@ const Map: React.FC<Props> = ({}: Props) => {
     naver.maps.Marker | undefined
   >();
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
+  const [selectedStoreInform, setSelectedStoreInform] = useState<
+    StoreData | undefined
+  >();
   const { userLocation, error: userLocationError } = useLocation();
   const [loading, error] = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
@@ -120,7 +135,7 @@ const Map: React.FC<Props> = ({}: Props) => {
           })
         );
       }
-      storeMapData.forEach((storeData) => {
+      storeMapData.forEach((storeData, index) => {
         const imgUrl = storeData.isFire
           ? pinMapFireImg
           : storeData.isGift
@@ -134,6 +149,7 @@ const Map: React.FC<Props> = ({}: Props) => {
         setStoreMarkerArr((prev) => [...prev, newMarker]);
         naver.maps.Event.addListener(newMarker, 'click', function (e) {
           console.log(storeData.title);
+          setSelectedStoreInform(storeMapData[index]);
           handleShowBottomSheet();
         });
       });
@@ -177,8 +193,11 @@ const Map: React.FC<Props> = ({}: Props) => {
           <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
-      {isShowBottomSheet && (
-        <MapBottomSheet onDragBottom={handleDragDownBottomSheet} />
+      {isShowBottomSheet && selectedStoreInform && (
+        <MapBottomSheet
+          onDragBottom={handleDragDownBottomSheet}
+          storeInform={selectedStoreInform}
+        />
       )}
     </div>
   );

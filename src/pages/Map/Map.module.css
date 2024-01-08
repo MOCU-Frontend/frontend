@@ -38,8 +38,8 @@
 }
 .mapWrapper {
   position: relative;
-  /* height: 200px; */
-  flex-grow: 1;
+  height: 100vh;
+  /* flex-grow: 1; */
 }
 .targetBtnWrapper {
   position: absolute;

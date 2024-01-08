@@ -1,6 +1,5 @@
 import React from 'react';
 import { colors } from '../../../../styles/colors';
-import BottomSheet from '../../../BottomSheet/BottomSheet';
 import BodyTitleText from '../../../Text/BodyTitleText/BodyTitleText';
 import MapBodySubText from '../Text/BodySub/MapBodySubText';
 import styles from './MapBottomSheet.module.css';
@@ -9,11 +8,12 @@ import storeImg from '../../../../assets/imgs/storeExample.png';
 import MapRightContent from '../Content/RightContent/MapRightContent';
 import Button from '../../../Button/Button';
 import TextBadgeBtn from '../../../Button/TextBadgeBtn/TextBadgeBtn';
+import BottomSheetNoBackground from '../../../BottomSheet/BottomSheetNoBackground';
 interface Props {}
 
 const MapBottomSheet: React.FC<Props> = ({}: Props) => {
   return (
-    <BottomSheet isBackgroundBlur={false}>
+    <BottomSheetNoBackground>
       <div className={styles.wholeWrapper}>
         <div className={styles.textSec}>
           <BodyTitleText text='크림베이글 건대점' color={colors.navy} />
@@ -45,7 +45,7 @@ const MapBottomSheet: React.FC<Props> = ({}: Props) => {
           />
         </div>
       </div>
-    </BottomSheet>
+    </BottomSheetNoBackground>
   );
 };
 

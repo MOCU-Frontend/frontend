@@ -46,7 +46,7 @@ const storeMapData = [
 
 const Map: React.FC<Props> = ({}: Props) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const mapWrapperRef = useRef<HTMLDivElement>(null);
   const [map, setMap] = useState<naver.maps.Map | undefined>();
   const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(false);
   const [userLocMarker, setUserLocMarker] = useState<
@@ -68,8 +68,8 @@ const Map: React.FC<Props> = ({}: Props) => {
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
-    wrapperRef.current &&
-      (wrapperRef.current.style.height = `${window.innerHeight - 371.78}px`);
+    mapWrapperRef.current &&
+      (mapWrapperRef.current.style.height = `${window.innerHeight - 371.78}px`);
     if (map) {
       map.setSize(
         new naver.maps.Size(window.innerWidth, window.innerHeight - 371.78)
@@ -127,7 +127,7 @@ const Map: React.FC<Props> = ({}: Props) => {
   if (error) return <p>Error!</p>;
   if (loading) return <div className={styles.wrapper}>map loading..</div>;
   return (
-    <div className={styles.wrapper} ref={wrapperRef}>
+    <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
           headerPaddingSize='checkFilter'
@@ -155,7 +155,7 @@ const Map: React.FC<Props> = ({}: Props) => {
         </div>
       </div>
 
-      <div className={styles.mapWrapper}>
+      <div className={styles.mapWrapper} ref={mapWrapperRef}>
         <div className={styles.map} ref={mapContainerRef}></div>
         <div className={styles.targetBtnWrapper}>
           <MapTargetBtn onClick={handleClickTargetBtn} />

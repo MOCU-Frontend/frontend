@@ -37,7 +37,8 @@
 }
 .mapWrapper {
   position: relative;
-  flex-grow: 1;
+  height: 200px;
+  /* flex-grow: 1; */
 }
 .targetBtnWrapper {
   position: absolute;

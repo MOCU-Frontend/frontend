@@ -19,7 +19,6 @@
   border-radius: 12px 12px 0px 0px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
   width: 100vw;
   bottom: 0;
 }

@@ -2,6 +2,7 @@
 .bubble {
   background-color: var(--color-grey-dark-01);
   position: relative;
+  border-radius: 8px;
 }
 .bubbleTop:after {
   border-top: 0px solid transparent;

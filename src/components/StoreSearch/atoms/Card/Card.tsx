@@ -41,8 +41,8 @@ const Card: React.FC<Props> = ({
         {couponMain && (
           <>
             <div className={styles.cardStoreInformation}>
-              <div className={styles.cardTitle}>{couponAvailable}/10</div>
-              <div className={styles.cardAvailableCoupon}>{title}</div>
+              <div className={styles.cardFirstInfo}>{couponAvailable}/10</div>
+              <div className={styles.cardSecondInfo}>{title}</div>
             </div>
 
             <div className={styles.cardFarFrom}>현 위치에서 {farFrom}M </div>
@@ -56,8 +56,8 @@ const Card: React.FC<Props> = ({
             )}
 
             <div className={styles.cardStoreInformation}>
-              <div className={styles.cardTitle}>{title}</div>
-              <div className={styles.cardAvailableCoupon}>
+              <div className={styles.cardFirstInfo}>{title}</div>
+              <div className={styles.cardSecondInfo}>
                 사용 가능 쿠폰: {couponAvailable}개{' '}
               </div>
             </div>

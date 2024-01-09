@@ -7,6 +7,36 @@ import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterWithXBtn from './../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
 import Card from '../../components/StoreSearch/atoms/Card/Card';
+
+type StoreData = {
+  title: string;
+  couponAvailable: number;
+  farFrom: number;
+};
+
+const storeSearchData: StoreData[] = [
+  {
+    title: '로보카페',
+    couponAvailable: 3,
+    farFrom: 83,
+  },
+  {
+    title: '크림베이글 건대점',
+    couponAvailable: 7,
+    farFrom: 105,
+  },
+  {
+    title: '롯데리아 건대점',
+    couponAvailable: 5,
+    farFrom: 67,
+  },
+  {
+    title: '가츠시',
+    couponAvailable: 8,
+    farFrom: 132,
+  },
+];
+
 const Search = () => {
   return (
     <div className={styles.wrapper}>
@@ -61,30 +91,30 @@ const Search = () => {
             <Card
               couponMain={false}
               eventOn={false}
-              title="로보카페"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[0].title}
+              couponAvailable={storeSearchData[0].couponAvailable}
+              farFrom={storeSearchData[0].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={true}
-              title="로보카페"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[1].title}
+              couponAvailable={storeSearchData[1].couponAvailable}
+              farFrom={storeSearchData[1].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={true}
-              title="크림베이글 건대점"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[2].title}
+              couponAvailable={storeSearchData[2].couponAvailable}
+              farFrom={storeSearchData[2].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={false}
-              title="버거킹 건대점"
-              couponAvailable={1}
-              farFrom={55}
+              title={storeSearchData[3].title}
+              couponAvailable={storeSearchData[3].couponAvailable}
+              farFrom={storeSearchData[3].farFrom}
             />
           </div>
         </div>
@@ -96,21 +126,21 @@ const Search = () => {
           <div className={styles.cardWrapper}>
             <Card
               couponMain={true}
-              title="석촌카페 아현점"
-              couponAvailable={9}
-              farFrom={83}
+              title={storeSearchData[3].title}
+              couponAvailable={storeSearchData[3].couponAvailable}
+              farFrom={storeSearchData[3].farFrom}
             />
             <Card
               couponMain={true}
-              title="크림베이글 건대점"
-              couponAvailable={8}
-              farFrom={87}
+              title={storeSearchData[1].title}
+              couponAvailable={storeSearchData[1].couponAvailable}
+              farFrom={storeSearchData[1].farFrom}
             />
             <Card
               couponMain={true}
-              title="롯데리아 건대점"
-              couponAvailable={7}
-              farFrom={55}
+              title={storeSearchData[2].title}
+              couponAvailable={storeSearchData[2].couponAvailable}
+              farFrom={storeSearchData[2].farFrom}
             />
           </div>
         </div>
@@ -123,30 +153,30 @@ const Search = () => {
             <Card
               couponMain={false}
               eventOn={false}
-              title="로보카페"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[0].title}
+              couponAvailable={storeSearchData[0].couponAvailable}
+              farFrom={storeSearchData[0].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={true}
-              title="로보카페"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[1].title}
+              couponAvailable={storeSearchData[1].couponAvailable}
+              farFrom={storeSearchData[1].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={true}
-              title="크림베이글 건대점"
-              couponAvailable={3}
-              farFrom={83}
+              title={storeSearchData[2].title}
+              couponAvailable={storeSearchData[2].couponAvailable}
+              farFrom={storeSearchData[2].farFrom}
             />
             <Card
               couponMain={false}
               eventOn={false}
-              title="버거킹 건대점"
-              couponAvailable={1}
-              farFrom={55}
+              title={storeSearchData[3].title}
+              couponAvailable={storeSearchData[3].couponAvailable}
+              farFrom={storeSearchData[3].farFrom}
             />
           </div>
         </div>

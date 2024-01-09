@@ -82,7 +82,7 @@ const My: React.FC = () => {
         />
         <div className={styles.eventBox}></div>
       </main>
-      <HomeBottomNavigation />
+      <HomeBottomNavigation nowPage='my' />
     </div>
   );
 };

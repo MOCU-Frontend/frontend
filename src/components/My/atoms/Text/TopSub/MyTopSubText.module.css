@@ -1,0 +1,8 @@
+@import '../../../../../styles/colorVars.css';
+
+.text {
+  font-size: 12px;
+  font-weight: 400;
+  text-decoration: underline;
+  color: var(--color-white);
+}

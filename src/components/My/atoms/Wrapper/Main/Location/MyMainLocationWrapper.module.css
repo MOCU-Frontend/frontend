@@ -1,0 +1,12 @@
+@import '../../../../../../styles/colorVars.css';
+.wrapper {
+  padding: 12px 16px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-white);
+  box-shadow: 0px 0px 7px 0px rgba(110, 117, 232, 0.1);
+}

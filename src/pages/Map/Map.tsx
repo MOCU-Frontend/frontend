@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import CheckFilter from '../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
@@ -6,15 +6,17 @@ import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapH
 import MapTargetBtn from '../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import { useLocation } from '../../hooks/useLocation';
 import { useScript } from '../../hooks/useScript';
-import pinMapNormalImg from '../../assets/icon/pinMapNormal.svg';
-import pinMapGiftImg from '../../assets/icon/pinMapGift.svg';
-import pinMapFireImg from '../../assets/icon/pinMapFire.svg';
 import styles from './Map.module.css';
 import MapBottomSheet from '../../components/Map/atoms/BottomSheet/MapBottomSheet';
 import { useNavigate } from 'react-router-dom';
 import { useMap } from '../../hooks/useMap';
 import { useUserLocationMap } from '../../hooks/useUserLocationMap';
 import { useStoreMapData } from '../../hooks/useStoreMapData';
+import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampModal';
+import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
+
+type ModalLevel = 'confirm' | 'waiting' | 'done';
+type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const BOTTOM_SHEET_HEIGHT = 371.78; // TODO: 바텀시트 height 재는 방법 생각해보기
 
@@ -29,6 +31,13 @@ const Map: React.FC = () => {
   );
   const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
   const { userLocMarker } = useUserLocationMap(map, userLocation);
+
+  const [stampModalLevel, setStampModalLevel] = useState<ModalLevel | null>(
+    null
+  );
+  const [couponModalLevel, setCouponModalLevel] =
+    useState<CouponModalLevel | null>(null);
+  const [isRegularCustomer, setIsRegularCustomer] = useState(false);
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
@@ -70,7 +79,7 @@ const Map: React.FC = () => {
     }
   };
 
-  if (scriptError) return <p>Error!</p>;
+  if (scriptError) return <p>Map Error!</p>;
   if (scriptLoading) return <div className={styles.wrapper}>map loading..</div>;
 
   return (
@@ -137,8 +146,50 @@ const Map: React.FC = () => {
         <MapBottomSheet
           onDragBottom={handleDragDownBottomSheet}
           storeInform={selectedStoreInform}
+          onClickStampBtn={() => {
+            setStampModalLevel('confirm');
+            if (map) map.setSize(new naver.maps.Size(0, 0));
+          }}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+            if (map) map.setSize(new naver.maps.Size(0, 0));
+          }}
         />
       )}
+      {
+        <MapStampModal
+          stampModalLevel={stampModalLevel}
+          setStampModalLevel={setStampModalLevel}
+          onCancelModal={() => {
+            if (map) {
+              map.setSize(
+                new naver.maps.Size(
+                  window.innerWidth,
+                  window.innerHeight - BOTTOM_SHEET_HEIGHT
+                )
+              );
+            }
+          }}
+        />
+      }
+      {
+        <MapCouponModal
+          couponModalLevel={couponModalLevel}
+          setCouponModalLevel={setCouponModalLevel}
+          onCancelModal={() => {
+            if (map) {
+              map.setSize(
+                new naver.maps.Size(
+                  window.innerWidth,
+                  window.innerHeight - BOTTOM_SHEET_HEIGHT
+                )
+              );
+            }
+          }}
+          isRegularCustomer={isRegularCustomer}
+          handleRegularCustomer={() => setIsRegularCustomer(true)}
+        />
+      }
     </div>
   );
 };

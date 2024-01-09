@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
 import ModalDone from '../../../../Modal/ModalDone/ModalDone';
 import ModalWaiting from '../../../../Modal/ModalWaiting/ModalWaiting';
@@ -19,6 +19,13 @@ const MapStampModal: React.FC<Props> = ({
     onCancelModal();
     setStampModalLevel(null);
   };
+  useEffect(() => {
+    if (stampModalLevel === 'waiting') {
+      setTimeout(() => {
+        setStampModalLevel('done');
+      }, 2000);
+    }
+  }, [stampModalLevel]);
   switch (stampModalLevel) {
     case 'confirm':
       return (

@@ -1,0 +1,57 @@
+import React, { useState } from 'react';
+import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
+import ModalDone from '../../../../Modal/ModalDone/ModalDone';
+import ModalWaiting from '../../../../Modal/ModalWaiting/ModalWaiting';
+import styles from './MapStampModal.module.css';
+
+interface Props {
+  stampModalLevel: ModalLevel | null;
+  setStampModalLevel: React.Dispatch<React.SetStateAction<ModalLevel | null>>;
+}
+type ModalLevel = 'confirm' | 'waiting' | 'done';
+
+const MapStampModal: React.FC<Props> = ({
+  stampModalLevel,
+  setStampModalLevel,
+}: Props) => {
+  switch (stampModalLevel) {
+    case 'confirm':
+      return (
+        <ModalConfirm
+          headerTitle='스탬프 적립'
+          bodyText='스탬프를 적립할까요?'
+          subText='크림베이글 건대점'
+          informText='현재 9/10'
+          onClickNo={() => setStampModalLevel(null)}
+          onClickYes={() => setStampModalLevel('waiting')}
+          onClickX={() => setStampModalLevel(null)}
+        />
+      );
+    case 'waiting':
+      return (
+        <ModalWaiting
+          bodyText='스탬프 적립 대기 중'
+          bodySubText='가게에서 요청을 확인하고 있어요.'
+          subText='크림베이글 건대점'
+          informText='적립 10/10 예정'
+        />
+      );
+    case 'done':
+      return (
+        <ModalDone
+          bodyText='스탬프 적립 완료!'
+          bodySubText='가게에서 적립 요청을 수락했습니다.'
+          subText='크림베이글 건대점'
+          informText='적립 10/10'
+          leftBtnLabel='닫기'
+          rightBtnLabel='리뷰 남기러 가기'
+          onClickLeftBtn={() => setStampModalLevel(null)}
+          onClickRightBtn={() => setStampModalLevel(null)}
+        />
+      );
+    default:
+      return <></>;
+  }
+};
+
+export default MapStampModal;

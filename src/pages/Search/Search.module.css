@@ -1,84 +1,84 @@
 @import '../../styles/colorVars.css';
 .wrapper {
+  overflow-x: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
-
 .headerWrapper {
-    display: flex;
-    flex-direction: row;
-    position: fixed;
-    left: 0;
-    top: 0;
-    z-index: 2;
-    width: 100vw;
-    background-color: var(--color-white);
-    padding: 5.5px 20px 6.5px 13.5px;
-    justify-content: center;
-  }
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100vw;
+  background-color: var(--color-white);
+  padding: 5.5px 20px 6.5px 13.5px;
+  justify-content: center;
+}
 
-  .contentWrapper {
-    position: relative;
-    top: 8vh;
-  }
+.contentWrapper {
+  position: relative;
+  top: 8vh;
+}
 
-  .contentRecent {
-    margin-left: 5vw;
-    display: flex;
-    width: 100%;
-    padding: 12px 0px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
+.contentRecent {
+  margin-left: 5vw;
+  display: flex;
+  width: 100%;
+  padding: 12px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
 
-  .searchTitle {
-    color: #666;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 24px;
-    letter-spacing: -0.042px;
-  }
+.searchTitle {
+  color: #666;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.042px;
+}
 
-  .filtersWrapper {
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    white-space: nowrap;
-    align-items: center;
-    -ms-overflow-style: none;
-    gap: 16px;
-  }
-  .filtersWrapper::-webkit-scrollbar {
-    display: none;
-  }
+.filtersWrapper {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  -ms-overflow-style: none;
+  gap: 16px;
+}
+.filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
 
-  .cardWrapper {
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    overflow-x: scroll;
-    white-space: nowrap;
-    align-items: center;
-    -ms-overflow-style: none;
-    gap: 12px;
-  }
-  .cardWrapper::-webkit-scrollbar {
-    display: none;
-  }
+.cardWrapper {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  -ms-overflow-style: none;
+  gap: 12px;
+}
+.cardWrapper::-webkit-scrollbar {
+  display: none;
+}
 
-  .searchCarousel {
-    display: flex;
-    width: 100%;
-    height: 8vh;
-    padding: 52px 0px 8px 0px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    background: linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), #FFF;
-  }
+.searchCarousel {
+  display: flex;
+  width: 100%;
+  height: 8vh;
+  padding: 52px 0px 8px 0px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(0deg, #e6e6e6 0%, #e6e6e6 100%), #fff;
+}

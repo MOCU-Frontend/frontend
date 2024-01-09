@@ -1,0 +1,7 @@
+@import '../../../../../styles/colorVars.css';
+
+.text {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-navy);
+}

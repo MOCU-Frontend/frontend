@@ -63,13 +63,10 @@
   gap: 20px;
 }
 
-.content_event {
-  width: 88vw;
-  height: 7vh;
+.eventBox {
+  width: 100%;
+  height: 56px;
   border-radius: 20px;
-  background:
-    lightgray 0px -164.809px / 100% 761.905% no-repeat,
-    #ebebeb;
-  /* box effect */
+  background-color: var(--color-white);
   box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
 }

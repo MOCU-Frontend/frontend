@@ -73,7 +73,7 @@ const Home = () => {
           />
         </div>
 
-        <div className={styles.content_event}></div>
+        <div className={styles.eventBox}></div>
       </div>
       <BottomNavigation />
     </div>

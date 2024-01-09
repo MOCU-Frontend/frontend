@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
-import Search from './Search/Search';
+import StoreSearch from './StoreSearch/StoreSearch';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -20,9 +20,9 @@ const Router = () => {
       element: <Map />,
     },
     {
-      path: '/search',
-      element: <Search />,
-    }
+      path: '/storesearch',
+      element: <StoreSearch />,
+    },
   ]);
 
   return <RouterProvider router={router} />;

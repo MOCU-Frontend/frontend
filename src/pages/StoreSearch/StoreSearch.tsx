@@ -1,11 +1,11 @@
-// Search.tsx
+// StoreSearch.tsx
 
 import React from 'react';
-import styles from './Search.module.css';
+import styles from './StoreSearch.module.css';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
-import CheckFilterWithXBtn from './../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
+import CheckFilterWithXBtn from '../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
 import Card from '../../components/StoreSearch/atoms/Card/Card';
 
 type StoreData = {
@@ -37,7 +37,7 @@ const storeSearchData: StoreData[] = [
   },
 ];
 
-const Search = () => {
+const StoreSearch = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
@@ -185,4 +185,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default StoreSearch;

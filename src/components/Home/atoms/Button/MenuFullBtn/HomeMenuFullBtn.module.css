@@ -1,0 +1,25 @@
+.menuMapBtn {
+  position: relative;
+  width: 100%;
+  padding: 16px 12px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  border: 2px solid var(--color-sub-purplelight);
+  background-color: var(--color-white);
+  border-radius: 20px;
+  box-shadow: 0px 0px 7.6px 0px rgba(99, 94, 157, 0.13);
+}
+
+.menuMapDescriptionSec {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mapIcon {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+}

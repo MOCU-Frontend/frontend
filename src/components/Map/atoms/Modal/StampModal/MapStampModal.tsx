@@ -2,18 +2,23 @@ import React, { useState } from 'react';
 import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
 import ModalDone from '../../../../Modal/ModalDone/ModalDone';
 import ModalWaiting from '../../../../Modal/ModalWaiting/ModalWaiting';
-import styles from './MapStampModal.module.css';
 
 interface Props {
   stampModalLevel: ModalLevel | null;
   setStampModalLevel: React.Dispatch<React.SetStateAction<ModalLevel | null>>;
+  onCancelModal: () => void;
 }
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 
 const MapStampModal: React.FC<Props> = ({
   stampModalLevel,
   setStampModalLevel,
+  onCancelModal,
 }: Props) => {
+  const handleCancelModal = () => {
+    onCancelModal();
+    setStampModalLevel(null);
+  };
   switch (stampModalLevel) {
     case 'confirm':
       return (
@@ -22,9 +27,9 @@ const MapStampModal: React.FC<Props> = ({
           bodyText='스탬프를 적립할까요?'
           subText='크림베이글 건대점'
           informText='현재 9/10'
-          onClickNo={() => setStampModalLevel(null)}
+          onClickNo={handleCancelModal}
           onClickYes={() => setStampModalLevel('waiting')}
-          onClickX={() => setStampModalLevel(null)}
+          onClickX={handleCancelModal}
         />
       );
     case 'waiting':
@@ -45,8 +50,8 @@ const MapStampModal: React.FC<Props> = ({
           informText='적립 10/10'
           leftBtnLabel='닫기'
           rightBtnLabel='리뷰 남기러 가기'
-          onClickLeftBtn={() => setStampModalLevel(null)}
-          onClickRightBtn={() => setStampModalLevel(null)}
+          onClickLeftBtn={handleCancelModal}
+          onClickRightBtn={handleCancelModal}
         />
       );
     default:

@@ -138,12 +138,27 @@ const Map: React.FC = () => {
         <MapBottomSheet
           onDragBottom={handleDragDownBottomSheet}
           storeInform={selectedStoreInform}
+          onClickStampBtn={() => {
+            setStampModalLevel('confirm');
+            if (map) map.setSize(new naver.maps.Size(0, 0));
+          }}
+          onClickCouponBtn={() => {}}
         />
       )}
       {
         <MapStampModal
           stampModalLevel={stampModalLevel}
           setStampModalLevel={setStampModalLevel}
+          onCancelModal={() => {
+            if (map) {
+              map.setSize(
+                new naver.maps.Size(
+                  window.innerWidth,
+                  window.innerHeight - BOTTOM_SHEET_HEIGHT
+                )
+              );
+            }
+          }}
         />
       }
     </div>

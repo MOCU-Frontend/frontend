@@ -7,16 +7,18 @@ import { ReactComponent as MyIcon } from '../../../../assets/icon/my.svg';
 import { ReactComponent as MyGradationIcon } from '../../../../assets/icon/myGradation.svg';
 import { colors } from '../../../../styles/colors';
 import HomeBottomNavigationText from '../Text/BottomNavigation/HomeBottomNavigationText';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   nowPage: 'home' | 'my';
 }
 
 const HomeBottomNavigation: React.FC<Props> = ({ nowPage }) => {
+  const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.btnSec}>
-        <div className={styles.normalBtn}>
+        <button className={styles.normalBtn} onClick={() => navigate('/home')}>
           {nowPage === 'home' ? (
             <GradationHomeIcon width='24' height='24' />
           ) : (
@@ -24,19 +26,19 @@ const HomeBottomNavigation: React.FC<Props> = ({ nowPage }) => {
           )}
 
           <HomeBottomNavigationText text='홈' color={colors.mainPurple} />
-        </div>
+        </button>
         <div className={styles.circleBtn}>
           <CouponIcon fill={colors.white} width='24' height='24' />
           <HomeBottomNavigationText text='쿠폰' color={colors.white} />
         </div>
-        <div className={styles.normalBtn}>
+        <button className={styles.normalBtn} onClick={() => navigate('/my')}>
           {nowPage === 'my' ? (
             <MyGradationIcon width='24' height='24' />
           ) : (
             <MyIcon width='24' height='24' fill={colors.greyLight02} />
           )}
           <HomeBottomNavigationText text='마이' color={colors.greyLight02} />
-        </div>
+        </button>
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ import BottomNavigation from '../../components/bottomNavigation/BottomNavigation
 import { menuData } from '../../store/data/homeData';
 import MenuGridItem from '../../components/MenuGridItem/MenuGridItem'; // MenuGridItem 컴포넌트를 import합니다.
 import { useNavigate } from 'react-router-dom';
+import { colors } from '../../styles/colors';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -42,7 +43,11 @@ const Home = () => {
             </div>
           </div>
           <div className={styles.map_location}>현위치 : 성북구 정릉로 77</div>
-          <MapImage fill='none' stroke='#C9CEFF' className={styles.menu_icon} />
+          <MapImage
+            fill='none'
+            stroke={colors.subPurpleLight}
+            className={styles.menu_icon}
+          />
         </div>
         <div className={styles.menu_grid_container}>
           <MenuGridItem value={menuData[0]} onClick={() => {}} />

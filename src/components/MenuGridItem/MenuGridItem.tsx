@@ -1,5 +1,6 @@
 // MenuGridItem.tsx
 import React from 'react';
+import { colors } from '../../styles/colors';
 import styles from './MenuGridItem.module.css';
 
 interface MenuData {
@@ -24,7 +25,7 @@ const MenuGridItem: React.FC<MenuGridItemProps> = ({ value, onClick }) => {
       <Icon
         width='32'
         height='32'
-        fill='#C9CEFF'
+        fill={colors.subPurpleLight}
         className={styles.menu_icon}
       />
     </div>

@@ -10,17 +10,23 @@ interface MenuData {
 
 interface MenuGridItemProps {
   value: MenuData;
+  onClick: () => void;
 }
 
-const MenuGridItem: React.FC<MenuGridItemProps> = ({ value }) => {
+const MenuGridItem: React.FC<MenuGridItemProps> = ({ value, onClick }) => {
   const Icon = value.Image;
   return (
-    <div className={styles.menu_grid_item}>
+    <div className={styles.menu_grid_item} onClick={onClick}>
       <div className={styles.menu_txt}>
         <div className={styles.menu_title}>{value.Title}</div>
         <div className={styles.menu_sub_title}>{value.Sub}</div>
       </div>
-      <Icon width="32" height="32" fill="#C9CEFF" className={styles.menu_icon} />
+      <Icon
+        width='32'
+        height='32'
+        fill='#C9CEFF'
+        className={styles.menu_icon}
+      />
     </div>
   );
 };

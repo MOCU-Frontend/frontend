@@ -1,5 +1,11 @@
 @import url('../../styles/colorVars.css');
 
+body {
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
 .wholeWrapper {
   position: relative;
   display: flex;
@@ -45,6 +51,7 @@
 .main {
   position: relative;
   padding: 20px;
+  padding-bottom: 80px;
   margin-top: 18px;
   gap: 20px;
   display: flex;

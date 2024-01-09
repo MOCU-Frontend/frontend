@@ -13,7 +13,10 @@ import { useMap } from '../../hooks/useMap';
 import { useUserLocationMap } from '../../hooks/useUserLocationMap';
 import { useStoreMapData } from '../../hooks/useStoreMapData';
 import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampModal';
+import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
+
 type ModalLevel = 'confirm' | 'waiting' | 'done';
+type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const BOTTOM_SHEET_HEIGHT = 371.78; // TODO: 바텀시트 height 재는 방법 생각해보기
 
@@ -28,9 +31,14 @@ const Map: React.FC = () => {
   );
   const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
   const { userLocMarker } = useUserLocationMap(map, userLocation);
+
   const [stampModalLevel, setStampModalLevel] = useState<ModalLevel | null>(
     null
   );
+  const [couponModalLevel, setCouponModalLevel] =
+    useState<CouponModalLevel | null>(null);
+  const [isRegularCustomer, setIsRegularCustomer] = useState(false);
+
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
     mapWrapperRef.current &&
@@ -142,7 +150,10 @@ const Map: React.FC = () => {
             setStampModalLevel('confirm');
             if (map) map.setSize(new naver.maps.Size(0, 0));
           }}
-          onClickCouponBtn={() => {}}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+            if (map) map.setSize(new naver.maps.Size(0, 0));
+          }}
         />
       )}
       {
@@ -159,6 +170,24 @@ const Map: React.FC = () => {
               );
             }
           }}
+        />
+      }
+      {
+        <MapCouponModal
+          couponModalLevel={couponModalLevel}
+          setCouponModalLevel={setCouponModalLevel}
+          onCancelModal={() => {
+            if (map) {
+              map.setSize(
+                new naver.maps.Size(
+                  window.innerWidth,
+                  window.innerHeight - BOTTOM_SHEET_HEIGHT
+                )
+              );
+            }
+          }}
+          isRegularCustomer={isRegularCustomer}
+          handleRegularCustomer={() => setIsRegularCustomer(true)}
         />
       }
     </div>

@@ -1,8 +1,7 @@
 @import url('../../styles/colorVars.css');
 .main {
   position: relative;
-  padding: 20px;
-  padding-bottom: 80px;
+  padding: 16px 20px 80px 20px;
   margin-top: 18px;
   gap: 20px;
   display: flex;

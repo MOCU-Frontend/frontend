@@ -74,9 +74,8 @@ const Home = () => {
         </div>
 
         <div className={styles.content_event}></div>
-
-        <BottomNavigation />
       </div>
+      <BottomNavigation />
     </div>
   );
 };

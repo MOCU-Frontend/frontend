@@ -6,6 +6,7 @@
   height: 100vh;
 }
 
+
 .headerWrapper {
     display: flex;
     flex-direction: row;
@@ -19,8 +20,12 @@
     justify-content: center;
   }
 
-  .content_search_recent {
-    margin-top: 8vh;
+  .contentWrapper {
+    position: relative;
+    top: 8vh;
+  }
+
+  .contentRecent {
     margin-left: 5vw;
     display: flex;
     width: 100%;
@@ -30,7 +35,7 @@
     gap: 12px;
   }
 
-  .search_title {
+  .searchTitle {
     color: #666;
     font-size: 14px;
     font-style: normal;
@@ -51,4 +56,29 @@
   }
   .filtersWrapper::-webkit-scrollbar {
     display: none;
+  }
+
+  .cardWrapper {
+    width: 90vw;
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    white-space: nowrap;
+    align-items: center;
+    -ms-overflow-style: none;
+    gap: 12px;
+  }
+  .cardWrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .searchCarousel {
+    display: flex;
+    width: 100%;
+    height: 8vh;
+    padding: 52px 0px 8px 0px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background: linear-gradient(0deg, #E6E6E6 0%, #E6E6E6 100%), #FFF;
   }

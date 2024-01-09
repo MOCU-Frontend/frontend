@@ -62,7 +62,7 @@ const Home = () => {
 
         <div className={styles.eventBox}></div>
       </main>
-      <BottomNavigation />
+      <BottomNavigation nowPage='home' />
     </div>
   );
 };

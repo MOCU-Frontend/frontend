@@ -51,7 +51,7 @@ const MapBottomSheet: React.FC<Props> = ({
             backgroundColor='main-purple'
             onClick={() => {}}
           />
-          {storeInform.couponNum == 0 ? (
+          {storeInform.couponNum === 0 ? (
             <Button
               label='쿠폰 사용'
               backgroundColor='main-purple'

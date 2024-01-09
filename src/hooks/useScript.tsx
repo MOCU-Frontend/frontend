@@ -32,5 +32,5 @@ export function useScript(src: string) {
     };
   }, [src]);
 
-  return [loading, error];
+  return { loading, error };
 }

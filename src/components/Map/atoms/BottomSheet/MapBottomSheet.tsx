@@ -14,6 +14,7 @@ type StoreData = {
   title: string;
   category: string;
   loc: { lat: number; lng: number };
+  couponNum: number;
   isFire: boolean;
   isChecked: boolean;
   isGift: boolean;
@@ -50,13 +51,21 @@ const MapBottomSheet: React.FC<Props> = ({
             backgroundColor='main-purple'
             onClick={() => {}}
           />
-          <TextBadgeBtn
-            label='쿠폰 사용'
-            backgroundColor='sub-gradation'
-            onClick={() => {}}
-            disabled={false}
-            badgeText={`${1}`}
-          />
+          {storeInform.couponNum === 0 ? (
+            <Button
+              label='쿠폰 사용'
+              backgroundColor='main-purple'
+              onClick={() => {}}
+              disabled={true}
+            />
+          ) : (
+            <TextBadgeBtn
+              label='쿠폰 사용'
+              backgroundColor='sub-gradation'
+              onClick={() => {}}
+              badgeText={`${storeInform.couponNum}`}
+            />
+          )}
         </div>
       </div>
     </BottomSheetNoBackground>

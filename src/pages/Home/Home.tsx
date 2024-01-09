@@ -1,9 +1,6 @@
 import React from 'react';
 import styles from './Home.module.css';
 import { ReactComponent as MapIcon } from '../../assets/icon/map.svg';
-import { ReactComponent as LogoText } from '../../assets/icon/logoText.svg';
-import { ReactComponent as AlarmIcon } from '../../assets/icon/alarm.svg';
-import { ReactComponent as SettingIcon } from '../../assets/icon/setting.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/icon/profile.svg';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/icon/shopping.svg';
@@ -13,32 +10,22 @@ import { ReactComponent as RocketIcon } from '../../assets/icon/rocket.svg';
 
 import BottomNavigation from '../../components/Home/atoms/BottomNavigation/HomeBottomNavigation';
 import { useNavigate } from 'react-router-dom';
-import { colors } from '../../styles/colors';
 import HomeLocationSec from '../../components/Home/atoms/Location/HomeLocationSec';
 import HomeMenuFullBtn from '../../components/Home/atoms/Button/MenuFullBtn/HomeMenuFullBtn';
 import HomeMenuGridBtn from '../../components/Home/atoms/Button/MenuGridBtn/HomeMenuGridBtn';
+import HomeHeader from '../../components/Home/atoms/Header/HomeHeader';
 
 const Home = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <header className={styles.header}>
-        <LogoText width={49} height={19} fill={colors.white} />
-        <div className={styles.iconBtnsWrapper}>
-          <button className={styles.iconBtn} onClick={() => {}}>
-            <AlarmIcon width={24} height={24} fill={colors.white} />
-          </button>
-          <button className={styles.iconBtn} onClick={() => {}}>
-            <SettingIcon width={24} height={24} fill={colors.white} />
-          </button>
-        </div>
-      </header>
+      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
       <div className={styles.homeTopInformBar}>
         <ProfileIcon width={48} height={48} />
         <HomeLocationSec titleText='모쿠님의 현재위치' bodyText='학교' />
       </div>
 
-      <div className={styles.main}>
+      <main className={styles.main}>
         <HomeMenuFullBtn
           onClick={() => navigate('/map')}
           titleText='지도'
@@ -74,7 +61,7 @@ const Home = () => {
         </div>
 
         <div className={styles.eventBox}></div>
-      </div>
+      </main>
       <BottomNavigation />
     </div>
   );

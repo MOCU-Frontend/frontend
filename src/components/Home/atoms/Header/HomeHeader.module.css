@@ -1,0 +1,23 @@
+.header {
+  display: flex;
+  width: 100vw;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 8px 16px 20px;
+}
+.iconBtnsWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.iconBtn {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  opacity: 0.7;
+}

@@ -25,6 +25,7 @@ type StoreData = {
   title: string;
   category: string;
   loc: { lat: number; lng: number };
+  couponNum: number;
   isFire: boolean;
   isChecked: boolean;
   isGift: boolean;
@@ -37,6 +38,7 @@ const storeMapData: StoreData[] = [
     title: '크림베이글 건대점1',
     category: '베이커리1',
     loc: { lat: 37.3595704, lng: 127.105399 },
+    couponNum: 1,
     isFire: false,
     isChecked: false,
     isGift: false,
@@ -45,6 +47,7 @@ const storeMapData: StoreData[] = [
     title: '크림베이글 건대점2',
     category: '베이커리2',
     loc: { lat: 37.3696708, lng: 127.105405 },
+    couponNum: 0,
     isFire: true,
     isChecked: false,
     isGift: false,
@@ -53,6 +56,7 @@ const storeMapData: StoreData[] = [
     title: '크림베이글 건대점3',
     category: '베이커리3',
     loc: { lat: 37.3696718, lng: 127.136404 },
+    couponNum: 5,
     isFire: false,
     isChecked: false,
     isGift: true,

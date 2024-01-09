@@ -14,6 +14,7 @@ type StoreData = {
   title: string;
   category: string;
   loc: { lat: number; lng: number };
+  couponNum: number;
   isFire: boolean;
   isChecked: boolean;
   isGift: boolean;
@@ -55,7 +56,7 @@ const MapBottomSheet: React.FC<Props> = ({
             backgroundColor='sub-gradation'
             onClick={() => {}}
             disabled={false}
-            badgeText={`${1}`}
+            badgeText={`${storeInform.couponNum}`}
           />
         </div>
       </div>

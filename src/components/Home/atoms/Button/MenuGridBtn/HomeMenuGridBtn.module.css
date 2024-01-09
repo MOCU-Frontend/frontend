@@ -5,6 +5,7 @@
   text-align: left;
   display: flex;
   flex-direction: column;
+  gap: 22px;
   background-color: var(--color-white);
   border-radius: 20px;
   border: none;

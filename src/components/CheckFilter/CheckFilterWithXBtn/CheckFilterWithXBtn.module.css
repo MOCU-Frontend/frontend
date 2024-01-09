@@ -1,0 +1,24 @@
+@import '../../../styles/colorVars.css';
+
+.wholeWrapper {
+  padding-right: 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.btn {
+  text-align: center;
+  font-weight: 400;
+  border: none;
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+  background: none;
+}
+
+.iconWrapper {
+  width: 16px;
+  height: 16px;
+}

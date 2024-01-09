@@ -11,7 +11,7 @@ import { ReactComponent as StampIcon } from '../../assets/icon/emptyStamp.svg';
 import { ReactComponent as PresentIcon } from '../../assets/icon/present.svg';
 import { ReactComponent as RocketIcon } from '../../assets/icon/rocket.svg';
 
-import BottomNavigation from '../../components/bottomNavigation/BottomNavigation';
+import BottomNavigation from '../../components/Home/atoms/BottomNavigation/HomeBottomNavigation';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../styles/colors';
 import HomeLocationSec from '../../components/Home/atoms/Location/HomeLocationSec';
@@ -21,7 +21,7 @@ import HomeMenuGridBtn from '../../components/Home/atoms/Button/MenuGridBtn/Home
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className={styles.container}>
+    <div className={styles.wholeWrapper}>
       <header className={styles.header}>
         <LogoText width={49} height={19} fill={colors.white} />
         <div className={styles.iconBtnsWrapper}>

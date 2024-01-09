@@ -1,6 +1,6 @@
 @import url('../../styles/colorVars.css');
 
-.container {
+.wholeWrapper {
   position: relative;
   display: flex;
   flex-direction: column;

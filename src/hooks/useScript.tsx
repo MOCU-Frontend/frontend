@@ -8,8 +8,10 @@ export function useScript(src: string) {
     let script: HTMLScriptElement | null = document.querySelector(
       `script[src="${src}"]`
     );
-
-    if (!script) {
+    if (script) {
+      setLoading(false);
+      return;
+    } else {
       script = document.createElement('script');
       script.src = src;
       script.type = 'text/javascript';
@@ -17,7 +19,9 @@ export function useScript(src: string) {
     }
 
     const handleLoad = () => setLoading(false);
-    const handleError = (error: ErrorEvent) => setError(error);
+    const handleError = (error: ErrorEvent) => {
+      setError(error);
+    };
 
     script.addEventListener('load', handleLoad);
     script.addEventListener('error', handleError);

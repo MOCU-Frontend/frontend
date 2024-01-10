@@ -3,6 +3,7 @@ import styles from './StoreInfo.module.css';
 import { ReactComponent as StarImage } from '../../../../assets/icon/star.svg';
 import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import { colors } from '../../../../styles/colors';
+import UseCouponBtn from '../UseCouponBtn/UseCouponBtn';
 
 interface Props {
   /**
@@ -39,7 +40,11 @@ const StoreInfo: React.FC<Props> = ({
       <div className={styles.storeWrapText}>
         <div className={styles.storeTitle}>{title}</div>
         <div className={styles.storeWrapInfoText}>
-          <div className={styles.storeCouponCount}>{couponCount}/10</div>
+          <div className={styles.storeWrapCouponSentence}>
+            <div className={styles.storeCouponCount}>{couponCount}/10</div>
+            {couponCount === 10 && <UseCouponBtn />}
+          </div>
+
           <div className={styles.storeAchieve}>달성 혜택: {achieve}</div>
         </div>
 

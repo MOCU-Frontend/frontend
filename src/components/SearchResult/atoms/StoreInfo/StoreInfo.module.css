@@ -86,3 +86,9 @@
   line-height: normal;
   letter-spacing: -0.03px;
 }
+
+.storeWrapCouponSentence {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

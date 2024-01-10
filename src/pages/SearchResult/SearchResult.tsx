@@ -5,6 +5,7 @@ import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
+import UseCouponBtn from '../../components/SearchResult/atoms/UseCouponBtn/UseCouponBtn';
 
 type CheckFilterLabel = {
   title: string;
@@ -59,7 +60,7 @@ const searchResultData: StoreData[] = [
   },
   {
     title: '브런치카페',
-    couponCount: 9,
+    couponCount: 10,
     achieve: '샌드위치',
     distance: 150,
   },

@@ -22,10 +22,14 @@ type StoreData = {
 interface Props {
   onDragBottom: () => void;
   storeInform: StoreData;
+  onClickStampBtn: () => void;
+  onClickCouponBtn: () => void;
 }
 const MapBottomSheet: React.FC<Props> = ({
   onDragBottom,
   storeInform,
+  onClickStampBtn,
+  onClickCouponBtn,
 }: Props) => {
   return (
     <BottomSheetNoBackground onDragBottom={onDragBottom}>
@@ -49,7 +53,7 @@ const MapBottomSheet: React.FC<Props> = ({
           <Button
             label='스탬프 적립'
             backgroundColor='main-purple'
-            onClick={() => {}}
+            onClick={onClickStampBtn}
           />
           {storeInform.couponNum === 0 ? (
             <Button
@@ -62,7 +66,7 @@ const MapBottomSheet: React.FC<Props> = ({
             <TextBadgeBtn
               label='쿠폰 사용'
               backgroundColor='sub-gradation'
-              onClick={() => {}}
+              onClick={onClickCouponBtn}
               badgeText={`${storeInform.couponNum}`}
             />
           )}

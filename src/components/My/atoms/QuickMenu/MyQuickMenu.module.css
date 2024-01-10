@@ -1,0 +1,25 @@
+@import '../../../../styles/colorVars.css';
+.wrapper {
+  padding: 4px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: center;
+  position: relative;
+  background-color: var(--color-white);
+  border-radius: 12px;
+}
+.badge {
+  position: absolute;
+  background-color: var(--color-main-purple);
+  right: 0;
+  top: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  transform: translate(40%, -30%);
+}

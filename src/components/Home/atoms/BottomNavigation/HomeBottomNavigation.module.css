@@ -1,0 +1,49 @@
+@import '../../../../styles/colorVars.css';
+
+.wholeWrapper {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 48px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: 20px 20px 0px 0px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+}
+
+.btnSec {
+  position: relative;
+  display: flex;
+  bottom: 0;
+  flex-direction: row;
+  align-items: center;
+  gap: 43.5px;
+}
+
+.normalBtn {
+  display: flex;
+  padding: 4px 10px;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 0;
+  background: none;
+  text-align: left;
+}
+
+.circleBtn {
+  position: relative;
+  bottom: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 56px;
+  height: 56px;
+  background-color: var(--color-main-purple);
+  border-radius: 100%;
+}

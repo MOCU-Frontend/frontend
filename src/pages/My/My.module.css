@@ -18,12 +18,15 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+.outletWrapper {
+  width: 100vw;
+  height: 100vh;
+}
 .wholeWrapper {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 100vh;
   background: var(--color-sub-gradation);
 }
 .myTopInformBar {

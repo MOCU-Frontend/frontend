@@ -1,13 +1,10 @@
 .wholeWrapper {
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100vw;
   height: 100vh;
   background-color: white;
-}
-body {
-  overflow-y: hidden;
 }
 
 .main {
@@ -15,7 +12,6 @@ body {
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow-y: scroll;
   position: relative;
 }
 .settingBtnWrapper {
@@ -23,6 +19,6 @@ body {
 }
 .bottomBtnWrapper {
   position: absolute;
-  bottom: 80px;
+  bottom: 30px;
   left: 0;
 }

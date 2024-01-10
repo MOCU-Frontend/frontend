@@ -14,7 +14,7 @@ import MyMainContentSubText from '../../components/My/atoms/Text/MainContentSub/
 import MyReviewContent from '../../components/My/atoms/Content/Review/MyReviewContent';
 import MyMissionContent from '../../components/My/atoms/Content/Mission/MyMissionContent';
 import MyRewardStampsContent from '../../components/My/atoms/Content/RewardStamps/MyRewardStampsContent';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 type RewardData = {
   date: string;
   storeName: string;
@@ -48,6 +48,7 @@ const rewardDataArr: RewardData[] = [
   },
 ];
 const My: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
@@ -65,7 +66,7 @@ const My: React.FC = () => {
         </div>
         <MyLocationContent
           locationText='서울 광진구 능동로 69'
-          onClick={() => {}}
+          onClick={() => navigate('location')}
         />
         <MyMainNormalHeaderWrapper
           headerText='최근 혜택 사용 내역'

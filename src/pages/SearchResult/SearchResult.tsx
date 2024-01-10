@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './SearchResult.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
-import UseCouponBtn from '../../components/SearchResult/atoms/UseCouponBtn/UseCouponBtn';
+import BottomSheet from '../../components/BottomSheet/BottomSheet';
+import BottomSheetStory from '../../components/BottomSheet/BottomSheetStory';
 
 type CheckFilterLabel = {
   title: string;
@@ -73,10 +75,24 @@ const searchResultData: StoreData[] = [
 ];
 
 const SearchResult = () => {
+  const navigate = useNavigate();
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
+
+  const handleFilterSelectClick = () => {
+    setIsBottomSheetVisible(true);
+  };
+
+  const handleDragBottom = () => {
+    setIsBottomSheetVisible(false);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
-        <HeaderBackBtn headerPaddingSize="search" onClickBackBtn={() => {}}>
+        <HeaderBackBtn
+          headerPaddingSize="search"
+          onClickBackBtn={() => navigate(-1)}
+        >
           <SearchBar
             placeholder="찾고 싶은 가게를 검색해 보세요"
             onClickSearchBtn={() => {}}
@@ -93,6 +109,7 @@ const SearchResult = () => {
             border={1}
             borderColor="sub-purple-light"
             borderRadius="large"
+            onClick={handleFilterSelectClick}
           />
         ))}
       </div>
@@ -108,6 +125,12 @@ const SearchResult = () => {
           />
         ))}
       </div>
+
+      {isBottomSheetVisible && (
+        <BottomSheet onDragBottom={handleDragBottom}>
+          <BottomSheetStory onDragBottom={handleDragBottom} />
+        </BottomSheet>
+      )}
     </div>
   );
 };

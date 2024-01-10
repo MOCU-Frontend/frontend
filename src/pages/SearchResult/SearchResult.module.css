@@ -1,0 +1,44 @@
+.wrapper {
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.headerWrapper {
+  display: flex;
+  flex-direction: row;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 2;
+  width: 100vw;
+  background-color: var(--color-white);
+  padding: 5.5px 20px 6.5px 13.5px;
+  justify-content: center;
+}
+
+.filtersWrapper {
+  position: fixed;
+  top: 7vh;
+  margin-left: 5vw;
+  padding: 16px;
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  -ms-overflow-style: none;
+  gap: 16px;
+}
+.filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.wrapContent {
+  position: relative;
+  top: 15vh;
+  width: 100vw;
+}

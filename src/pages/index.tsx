@@ -4,11 +4,8 @@ import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
 import StoreSearch from './StoreSearch/StoreSearch';
-<<<<<<< HEAD
 import SearchResult from './SearchResult/SearchResult';
-=======
 import My from './My/My';
->>>>>>> dev
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -29,13 +26,12 @@ const Router = () => {
       element: <StoreSearch />,
     },
     {
-<<<<<<< HEAD
       path: '/storesearch/:searchWord',
       element: <SearchResult />,
-=======
+    },
+    {
       path: '/my',
       element: <My />,
->>>>>>> dev
     },
   ]);
 

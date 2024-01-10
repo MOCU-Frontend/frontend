@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../components/Button/FullBtn/FullBtn';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
@@ -9,9 +10,13 @@ import styles from './MyLocation.module.css';
 interface Props {}
 
 const MyLocation: React.FC<Props> = ({}: Props) => {
+  const navigate = useNavigate();
   return (
     <section className={styles.wholeWrapper}>
-      <HeaderBackBtn headerTitle='내 장소' />
+      <HeaderBackBtn
+        headerTitle='내 장소'
+        onClickBackBtn={() => navigate(-1)}
+      />
       <main className={styles.main}>
         <BodyTitleText
           text='모쿠님은 현재 

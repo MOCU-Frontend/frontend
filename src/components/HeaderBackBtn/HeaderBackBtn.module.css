@@ -28,6 +28,7 @@
   background-color: var(--color-white);
   border: none;
   padding: 0;
+  z-index: 1;
 }
 
 .centerDiv {

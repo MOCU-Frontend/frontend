@@ -1,0 +1,28 @@
+.wholeWrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+body {
+  overflow-y: hidden;
+}
+
+.main {
+  padding: 32px 20px 0 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  position: relative;
+}
+.settingBtnWrapper {
+  margin: 16.45px 0 20.45px 0;
+}
+.bottomBtnWrapper {
+  position: absolute;
+  bottom: 80px;
+  left: 0;
+}

@@ -14,6 +14,7 @@ import MyMainContentSubText from '../../components/My/atoms/Text/MainContentSub/
 import MyReviewContent from '../../components/My/atoms/Content/Review/MyReviewContent';
 import MyMissionContent from '../../components/My/atoms/Content/Mission/MyMissionContent';
 import MyRewardStampsContent from '../../components/My/atoms/Content/RewardStamps/MyRewardStampsContent';
+import { Outlet } from 'react-router-dom';
 type RewardData = {
   date: string;
   storeName: string;
@@ -83,6 +84,7 @@ const My: React.FC = () => {
         <div className={styles.eventBox}></div>
       </main>
       <HomeBottomNavigation nowPage='my' />
+      <Outlet />
     </div>
   );
 };

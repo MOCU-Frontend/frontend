@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import Map from './Map/Map';
 import StoreSearch from './StoreSearch/StoreSearch';
 import My from './My/My';
+import MyLocation from './My/Location/MyLocation';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -27,6 +28,12 @@ const Router = () => {
     {
       path: '/my',
       element: <My />,
+      children: [
+        {
+          path: 'location',
+          element: <MyLocation />,
+        },
+      ],
     },
   ]);
 

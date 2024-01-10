@@ -1,0 +1,23 @@
+@import '../../../../../../styles/colorVars.css';
+
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px 0;
+  border-top: 1px solid var(--color-grey-light-00);
+  border-bottom: 1px solid var(--color-grey-light-00);
+}
+.bodyWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.bodyTextWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  transform: translate(-6.4px, 0);
+}

@@ -8,18 +8,16 @@ import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSe
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabView from '../../components/SlideMenu/SlideTabView/SlideTabView';
+import BtmSheetFilter, {
+  FilterListData1,
+  FilterListData2,
+} from '../../components/SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
 
 type CheckFilterLabel = {
   title: string;
 };
 
 const CheckFilterLabelData: CheckFilterLabel[] = [
-  {
-    title: '거리순',
-  },
-  {
-    title: '업종',
-  },
   {
     title: '이벤트',
   },
@@ -74,35 +72,55 @@ const searchResultData: StoreData[] = [
   },
 ];
 
-const menuItemDataArr = [
-  {
-    title: '정렬',
-    isChecked: true,
-    content: <div>정렬</div>,
-  },
-  {
-    title: '업종',
-    isChecked: false,
-    content: <div>업종</div>,
-  },
-  {
-    title: '옵션',
-    isChecked: false,
-    content: <div>옵션</div>,
-  },
-];
-
 const SearchResult = () => {
+  const [selectedTitle1, setSelectedTitle1] = useState(
+    FilterListData1.find((item) => item.isChecked)?.title || ''
+  );
+  const [selectedTitle2, setSelectedTitle2] = useState(
+    FilterListData2.find((item) => item.isChecked)?.title || ''
+  );
+
   const navigate = useNavigate();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
-  const handleFilterSelectClick = () => {
+  const handleFilterSelectClick = (id: string) => {
+    setSelectedMenu(id);
     setIsBottomSheetVisible(true);
   };
 
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
+
+  const menuItemDataArr = [
+    {
+      title: '정렬',
+      isChecked: true,
+      content: (
+        <BtmSheetFilter
+          FilterTitle="정렬"
+          setSelectedTitle={setSelectedTitle1}
+          closeBottomSheet={handleDragBottom}
+        />
+      ),
+    },
+    {
+      title: '업종',
+      isChecked: false,
+      content: (
+        <BtmSheetFilter
+          FilterTitle="업종"
+          setSelectedTitle={setSelectedTitle2}
+          closeBottomSheet={handleDragBottom}
+        />
+      ),
+    },
+    {
+      title: '옵션',
+      isChecked: false,
+      content: <div>옵션</div>,
+    },
+  ];
 
   const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
@@ -121,6 +139,25 @@ const SearchResult = () => {
       </div>
 
       <div className={styles.filtersWrapper}>
+        <CheckFilterSelect
+          isChecked={false}
+          label={selectedTitle1}
+          size="small"
+          border={1}
+          borderColor="sub-purple-light"
+          borderRadius="large"
+          onClick={() => handleFilterSelectClick('정렬')}
+        />
+        <CheckFilterSelect
+          isChecked={false}
+          label={selectedTitle2}
+          size="small"
+          border={1}
+          borderColor="sub-purple-light"
+          borderRadius="large"
+          onClick={() => handleFilterSelectClick('업종')}
+        />
+
         {CheckFilterLabelData.map((data, index) => (
           <CheckFilterSelect
             isChecked={false}
@@ -129,7 +166,7 @@ const SearchResult = () => {
             border={1}
             borderColor="sub-purple-light"
             borderRadius="large"
-            onClick={handleFilterSelectClick}
+            onClick={() => handleFilterSelectClick('옵션')}
           />
         ))}
       </div>

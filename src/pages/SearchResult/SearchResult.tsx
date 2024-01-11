@@ -7,7 +7,7 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
-import BottomSheetStory from '../../components/BottomSheet/BottomSheetStory';
+import SlideTabView from '../../components/SlideMenu/SlideTabView/SlideTabView';
 
 type CheckFilterLabel = {
   title: string;
@@ -74,6 +74,24 @@ const searchResultData: StoreData[] = [
   },
 ];
 
+const menuItemDataArr = [
+  {
+    title: '정렬',
+    isChecked: true,
+    content: <div>정렬</div>,
+  },
+  {
+    title: '업종',
+    isChecked: false,
+    content: <div>업종</div>,
+  },
+  {
+    title: '옵션',
+    isChecked: false,
+    content: <div>옵션</div>,
+  },
+];
+
 const SearchResult = () => {
   const navigate = useNavigate();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -85,6 +103,8 @@ const SearchResult = () => {
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
+
+  const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
   return (
     <div className={styles.wrapper}>
@@ -128,7 +148,15 @@ const SearchResult = () => {
 
       {isBottomSheetVisible && (
         <BottomSheet onDragBottom={handleDragBottom}>
-          <BottomSheetStory onDragBottom={handleDragBottom} />
+          <SlideTabView
+            menuItemDataArr={menuItemDataArr.map((item) => ({
+              ...item,
+              isChecked: item.title === selectedMenu,
+            }))}
+            handleCheckedDataIndex={(prevIndex, newIndex) => {
+              setSelectedMenu(menuItemDataArr[newIndex].title);
+            }}
+          />
         </BottomSheet>
       )}
     </div>

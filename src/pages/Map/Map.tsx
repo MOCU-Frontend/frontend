@@ -156,40 +156,36 @@ const Map: React.FC = () => {
           }}
         />
       )}
-      {
-        <MapStampModal
-          stampModalLevel={stampModalLevel}
-          setStampModalLevel={setStampModalLevel}
-          onCancelModal={() => {
-            if (map) {
-              map.setSize(
-                new naver.maps.Size(
-                  window.innerWidth,
-                  window.innerHeight - BOTTOM_SHEET_HEIGHT
-                )
-              );
-            }
-          }}
-        />
-      }
-      {
-        <MapCouponModal
-          couponModalLevel={couponModalLevel}
-          setCouponModalLevel={setCouponModalLevel}
-          onCancelModal={() => {
-            if (map) {
-              map.setSize(
-                new naver.maps.Size(
-                  window.innerWidth,
-                  window.innerHeight - BOTTOM_SHEET_HEIGHT
-                )
-              );
-            }
-          }}
-          isRegularCustomer={isRegularCustomer}
-          handleRegularCustomer={() => setIsRegularCustomer(true)}
-        />
-      }
+      <MapStampModal
+        stampModalLevel={stampModalLevel}
+        setStampModalLevel={setStampModalLevel}
+        onCancelModal={() => {
+          if (map) {
+            map.setSize(
+              new naver.maps.Size(
+                window.innerWidth,
+                window.innerHeight - BOTTOM_SHEET_HEIGHT
+              )
+            );
+          }
+        }}
+      />
+      <MapCouponModal
+        couponModalLevel={couponModalLevel}
+        setCouponModalLevel={setCouponModalLevel}
+        onCancelModal={() => {
+          if (map) {
+            map.setSize(
+              new naver.maps.Size(
+                window.innerWidth,
+                window.innerHeight - BOTTOM_SHEET_HEIGHT
+              )
+            );
+          }
+        }}
+        isRegularCustomer={isRegularCustomer}
+        handleRegularCustomer={() => setIsRegularCustomer(true)}
+      />
     </div>
   );
 };

@@ -25,11 +25,13 @@ const MyNowLocationBottomSheet: React.FC<Props> = ({
   return (
     <BottomSheetNoBackground onDragBottom={onDragBottom}>
       <div className={styles.wrapper}>
-        <MyNowLocationBottomSheetTitleText text={locationText} />
-        <MyNowLocationBottomSheetBtn
-          btnText={btnStatus === '지번' ? '지번으로 보기' : '도로명으로 보기'}
-          onClick={handleChangeBtnStatus}
-        />
+        <div className={styles.paddingWrapper}>
+          <MyNowLocationBottomSheetTitleText text={locationText} />
+          <MyNowLocationBottomSheetBtn
+            btnText={btnStatus === '지번' ? '지번으로 보기' : '도로명으로 보기'}
+            onClick={handleChangeBtnStatus}
+          />
+        </div>
         <FullBtn
           label='이 위치로 설정하기'
           onClick={handleClickSetLocationBtn}

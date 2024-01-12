@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
 import MapBottomSheet from '../../../../components/Map/atoms/BottomSheet/MapBottomSheet';
 import MapTargetBtn from '../../../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import MyNowLocationBottomSheet from '../../../../components/My/Location/Now/atoms/BottomSheet/MyNowLocationBottomSheet';
+import { useCenterMarker } from '../../../../hooks/useCenterMarker';
 import { useLocation } from '../../../../hooks/useLocation';
 import { useMap } from '../../../../hooks/useMap';
 import { useScript } from '../../../../hooks/useScript';
@@ -23,6 +24,7 @@ const MyNowLocation: React.FC = () => {
   );
   const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
   const { userLocMarker } = useUserLocationMap(map, userLocation);
+  const { centerMarker } = useCenterMarker(map);
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);

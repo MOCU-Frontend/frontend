@@ -1,0 +1,9 @@
+.wrapOption {
+  display: flex;
+  width: 100%;
+  padding: 8px 20px;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 4vw;
+  flex-wrap: wrap;
+}

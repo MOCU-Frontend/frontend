@@ -12,25 +12,9 @@ import BtmSheetFilter, {
   FilterListData1,
   FilterListData2,
 } from '../../components/SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
-
-type CheckFilterLabel = {
-  title: string;
-};
-
-const CheckFilterLabelData: CheckFilterLabel[] = [
-  {
-    title: '이벤트',
-  },
-  {
-    title: '쿠폰 사용 임박',
-  },
-  {
-    title: '적립 진행 중만',
-  },
-  {
-    title: '안 가본 곳만',
-  },
-];
+import BtmSheetOption, {
+  OptionDataArr,
+} from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
 
 type StoreData = {
   title: string;
@@ -80,6 +64,10 @@ const SearchResult = () => {
     FilterListData2.find((item) => item.isChecked)?.title || ''
   );
 
+  const [selectedOption, setSelectedOption] = useState(
+    OptionDataArr.find((item) => item.isChecked)?.title || ''
+  );
+
   const navigate = useNavigate();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
@@ -118,7 +106,7 @@ const SearchResult = () => {
     {
       title: '옵션',
       isChecked: false,
-      content: <div>옵션</div>,
+      content: <BtmSheetOption closeBottomSheet={handleDragBottom} />,
     },
   ];
 
@@ -158,17 +146,20 @@ const SearchResult = () => {
           onClick={() => handleFilterSelectClick('업종')}
         />
 
-        {CheckFilterLabelData.map((data, index) => (
-          <CheckFilterSelect
-            isChecked={false}
-            label={data.title}
-            size="small"
-            border={1}
-            borderColor="sub-purple-light"
-            borderRadius="large"
-            onClick={() => handleFilterSelectClick('옵션')}
-          />
-        ))}
+        {OptionDataArr.map(
+          (data, index) =>
+            data.isChecked && (
+              <CheckFilterSelect
+                isChecked={false}
+                label={data.title}
+                size="small"
+                border={1}
+                borderColor="sub-purple-light"
+                borderRadius="large"
+                onClick={() => handleFilterSelectClick('옵션')}
+              />
+            )
+        )}
       </div>
 
       <div className={styles.wrapContent}>

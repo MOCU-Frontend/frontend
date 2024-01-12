@@ -4,9 +4,11 @@ import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
 import MapBottomSheet from '../../../../components/Map/atoms/BottomSheet/MapBottomSheet';
 import MapTargetBtn from '../../../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import MyNowLocationBottomSheet from '../../../../components/My/Location/Now/atoms/BottomSheet/MyNowLocationBottomSheet';
+import { useAddressByCoord } from '../../../../hooks/useAddressByCoord';
 import { useCenterMarker } from '../../../../hooks/useCenterMarker';
 import { useLocation } from '../../../../hooks/useLocation';
 import { useMap } from '../../../../hooks/useMap';
+import { useMapWithGeocoder } from '../../../../hooks/useMapWithGeocoder';
 import { useScript } from '../../../../hooks/useScript';
 import { useUserLocationMap } from '../../../../hooks/useUserLocationMap';
 import styles from './MyNowLocation.module.css';
@@ -22,25 +24,50 @@ const MyNowLocation: React.FC = () => {
   const { loading: scriptLoading, error: scriptError } = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
-  const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
+  const { loading: geoCoderScriptLoading, error: geocoderScriptError } =
+    useScript(
+      `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}&submodules=geocoder`
+    );
+  const { map } = useMapWithGeocoder(
+    scriptError,
+    scriptLoading,
+    geocoderScriptError,
+    geoCoderScriptLoading,
+    mapContainerRef
+  );
   const { userLocMarker } = useUserLocationMap(map, userLocation);
-  const { centerMarker } = useCenterMarker(map);
 
   const handleShowBottomSheet = () => {
-    setIsShowBottomSheet(true);
-    mapWrapperRef.current &&
-      (mapWrapperRef.current.style.height = `${
-        window.innerHeight - BOTTOM_SHEET_HEIGHT
-      }px`);
-    if (map) {
-      map.setSize(
-        new naver.maps.Size(
-          window.innerWidth,
-          window.innerHeight - BOTTOM_SHEET_HEIGHT
-        )
-      );
-    }
+    setIsShowBottomSheet((prev) => {
+      if (!prev) {
+        mapWrapperRef.current &&
+          (mapWrapperRef.current.style.height = `${
+            window.innerHeight - BOTTOM_SHEET_HEIGHT
+          }px`);
+        if (map) {
+          map.setSize(
+            new naver.maps.Size(
+              window.innerWidth,
+              window.innerHeight - BOTTOM_SHEET_HEIGHT
+            )
+          );
+        }
+        return true;
+      } else return true;
+    });
   };
+  const { centerMarker, centerCoord } = useCenterMarker(
+    map,
+    handleShowBottomSheet
+  );
+
+  const { address: centerAddress } = useAddressByCoord(
+    scriptError,
+    scriptLoading,
+    geocoderScriptError,
+    geoCoderScriptLoading,
+    centerCoord
+  );
 
   const handleClickTargetBtn = () => {
     if (userLocation && map) {
@@ -59,8 +86,9 @@ const MyNowLocation: React.FC = () => {
     }
   };
 
-  if (scriptError) return <p>Map Error!</p>;
-  if (scriptLoading) return <div className={styles.wrapper}>map loading..</div>;
+  if (scriptError || geocoderScriptError) return <p>Map Error!</p>;
+  if (scriptLoading || geoCoderScriptLoading)
+    return <div className={styles.wrapper}>map loading..</div>;
 
   return (
     <div className={styles.wholeWrapper}>

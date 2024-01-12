@@ -1,9 +1,15 @@
 import { useEffect, useState } from 'react';
 import pinMapSmileImg from '../assets/icon/pinMapSmile.svg';
 
-export const useCenterMarker = (map: naver.maps.Map | undefined) => {
+export const useCenterMarker = (
+  map: naver.maps.Map | undefined,
+  handleShowBottomSheet: () => void
+) => {
   const [centerMarker, setCenterMarker] = useState<
     naver.maps.Marker | undefined
+  >();
+  const [centerCoord, setCenterCoord] = useState<
+    naver.maps.Coord | undefined
   >();
 
   useEffect(() => {
@@ -16,6 +22,7 @@ export const useCenterMarker = (map: naver.maps.Map | undefined) => {
             icon: pinMapSmileImg,
           })
         );
+        setCenterCoord(map.getCenter());
       }
     }
   }, [map, centerMarker]);
@@ -27,11 +34,13 @@ export const useCenterMarker = (map: naver.maps.Map | undefined) => {
         'center_changed',
         (centerLocation: naver.maps.Coord) => {
           centerMarker.setPosition(centerLocation);
+          setCenterCoord(centerLocation);
+          handleShowBottomSheet();
         }
       );
       return () => naver.maps.Event.removeListener(listener);
     }
   }, [map, centerMarker]);
 
-  return { centerMarker };
+  return { centerMarker, centerCoord };
 };

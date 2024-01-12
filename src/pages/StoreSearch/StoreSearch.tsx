@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styles from './StoreSearch.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -39,6 +39,7 @@ const storeSearchData: StoreData[] = [
 ];
 
 const StoreSearch = () => {
+  const { searchWord } = useParams();
   const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
@@ -49,7 +50,7 @@ const StoreSearch = () => {
         >
           <SearchBar
             placeholder="찾고 싶은 가게를 검색해 보세요"
-            onClickSearchBtn={() => {}}
+            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
         </HeaderBackBtn>
       </div>

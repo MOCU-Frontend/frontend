@@ -42,3 +42,33 @@
   top: 15vh;
   width: 100vw;
 }
+
+.wrapReset {
+  position: fixed;
+  bottom: 25px;
+  right: 20px;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  padding: 8px 0px;
+  align-items: center;
+  gap: 5px;
+  border: none;
+  background: none;
+}
+
+.resetText {
+  color: var(--UI-sub_purplelight, #b0b7ff);
+
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.emptySpace {
+  position: fixed;
+  top: 0;
+  height: 50vh;
+  width: 100%;
+}

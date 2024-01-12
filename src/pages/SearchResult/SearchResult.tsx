@@ -8,13 +8,84 @@ import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSe
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabView from '../../components/SlideMenu/SlideTabView/SlideTabView';
-import BtmSheetFilter, {
-  FilterListData1,
-  FilterListData2,
-} from '../../components/SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
-import BtmSheetOption, {
-  OptionDataArr,
-} from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
+import BtmSheetFilter from '../../components/SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
+import BtmSheetOption from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
+import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
+
+type FilterList = {
+  title: string;
+  isChecked: boolean;
+};
+
+const initialFilterListData1: FilterList[] = [
+  {
+    title: '거리순',
+    isChecked: true,
+  },
+  {
+    title: '적립률순',
+    isChecked: false,
+  },
+  {
+    title: '별점 높은순',
+    isChecked: false,
+  },
+  {
+    title: '리뷰 많은 순',
+    isChecked: false,
+  },
+];
+
+const initialFilterListData2: FilterList[] = [
+  {
+    title: '음식점',
+    isChecked: true,
+  },
+  {
+    title: '카페',
+    isChecked: false,
+  },
+  {
+    title: '베이커리',
+    isChecked: false,
+  },
+  {
+    title: '주류',
+    isChecked: false,
+  },
+  {
+    title: '기타',
+    isChecked: false,
+  },
+];
+
+type OptionData = {
+  title: string;
+  isChecked: boolean;
+};
+
+const initialOptionDataArr = [
+  {
+    title: '이벤트 중',
+    isChecked: true,
+  },
+  {
+    title: '쿠폰 사용 임박',
+    isChecked: true,
+  },
+  {
+    title: '적립 진행 중만',
+    isChecked: false,
+  },
+  {
+    title: '안 가본 곳만',
+    isChecked: false,
+  },
+  {
+    title: '기타 옵션',
+    isChecked: false,
+  },
+];
 
 type StoreData = {
   title: string;
@@ -57,23 +128,81 @@ const searchResultData: StoreData[] = [
 ];
 
 const SearchResult = () => {
-  const [selectedTitle1, setSelectedTitle1] = useState(
-    FilterListData1.find((item) => item.isChecked)?.title || ''
-  );
-  const [selectedTitle2, setSelectedTitle2] = useState(
-    FilterListData2.find((item) => item.isChecked)?.title || ''
-  );
-
-  const [selectedOption, setSelectedOption] = useState(
-    OptionDataArr.find((item) => item.isChecked)?.title || ''
-  );
-
   const navigate = useNavigate();
+
+  // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
+  // 필터를 클릭했을 때
   const handleFilterSelectClick = (id: string) => {
     setSelectedMenu(id);
     setIsBottomSheetVisible(true);
+  };
+
+  // BtmSheetFilter 상태 관리
+
+  const [filterListData1, setFilterListData1] = useState(
+    initialFilterListData1
+  );
+  const [selectedTitle1, setSelectedTitle1] = useState(
+    initialFilterListData1[0].title
+  );
+
+  const handleItemClick1 = (index: number) => {
+    const newFilterListData1 = filterListData1.map((item, i) => {
+      if (i === index) {
+        setSelectedTitle1(item.title);
+        return { ...item, isChecked: true };
+      }
+      return { ...item, isChecked: false };
+    });
+
+    setFilterListData1(newFilterListData1);
+  };
+
+  const [filterListData2, setFilterListData2] = useState(
+    initialFilterListData2
+  );
+  const [selectedTitle2, setSelectedTitle2] = useState(
+    initialFilterListData2[0].title
+  );
+
+  const handleItemClick2 = (index: number) => {
+    const newFilterListData2 = filterListData2.map((item, i) => {
+      if (i === index) {
+        setSelectedTitle2(item.title);
+        return { ...item, isChecked: true };
+      }
+      return { ...item, isChecked: false };
+    });
+
+    setFilterListData2(newFilterListData2);
+  };
+
+  // BtmSheetOption 상태 관리
+  const [OptionData, setOptionData] = useState(initialOptionDataArr);
+
+  const handleOptionClick = (index: number) => {
+    const checkedItems = OptionData.filter((item) => item.isChecked);
+    const newOptionData = OptionData.map((item, i) => {
+      if (i === index) {
+        // isChecked가 true인 항목이 하나만 남았고, 그 항목을 클릭했다면
+        // isChecked를 false로 만들지 않음
+        if (checkedItems.length === 1 && item.isChecked) {
+          return item;
+        }
+
+        return { ...item, isChecked: !item.isChecked };
+      }
+      return item;
+    });
+
+    setOptionData(newOptionData);
+  };
+
+  // 초기화 버튼 클릭했을 때
+  const handleResetClick = () => {
+    setOptionData(initialOptionDataArr);
   };
 
   const handleDragBottom = () => {
@@ -87,8 +216,8 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle="정렬"
-          setSelectedTitle={setSelectedTitle1}
-          closeBottomSheet={handleDragBottom}
+          FilterArray={filterListData1}
+          onClick={handleItemClick1}
         />
       ),
     },
@@ -98,15 +227,20 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle="업종"
-          setSelectedTitle={setSelectedTitle2}
-          closeBottomSheet={handleDragBottom}
+          FilterArray={filterListData2}
+          onClick={handleItemClick2}
         />
       ),
     },
     {
       title: '옵션',
       isChecked: false,
-      content: <BtmSheetOption closeBottomSheet={handleDragBottom} />,
+      content: (
+        <BtmSheetOption
+          onClick={handleOptionClick}
+          OptionDataArray={OptionData}
+        />
+      ),
     },
   ];
 
@@ -121,7 +255,7 @@ const SearchResult = () => {
         >
           <SearchBar
             placeholder="찾고 싶은 가게를 검색해 보세요"
-            onClickSearchBtn={() => {}}
+            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
         </HeaderBackBtn>
       </div>
@@ -146,7 +280,7 @@ const SearchResult = () => {
           onClick={() => handleFilterSelectClick('업종')}
         />
 
-        {OptionDataArr.map(
+        {OptionData.map(
           (data, index) =>
             data.isChecked && (
               <CheckFilterSelect
@@ -176,6 +310,7 @@ const SearchResult = () => {
 
       {isBottomSheetVisible && (
         <BottomSheet onDragBottom={handleDragBottom}>
+          <div className={styles.emptySpace} onClick={handleDragBottom} />
           <SlideTabView
             menuItemDataArr={menuItemDataArr.map((item) => ({
               ...item,
@@ -185,6 +320,12 @@ const SearchResult = () => {
               setSelectedMenu(menuItemDataArr[newIndex].title);
             }}
           />
+          {selectedMenu === '옵션' && (
+            <button className={styles.wrapReset} onClick={handleResetClick}>
+              <ResetImage />
+              <div className={styles.resetText}>전체 초기화</div>
+            </button>
+          )}
         </BottomSheet>
       )}
     </div>

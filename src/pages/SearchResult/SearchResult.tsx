@@ -7,9 +7,6 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
-import SlideTabView from '../../components/SlideMenu/SlideTabView/SlideTabView';
-import BtmSheetFilter from '../../components/SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
-import BtmSheetOption from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
 import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
 import {
   initialArrangementFilterDataArr,
@@ -17,6 +14,19 @@ import {
   initialOptionDataArr,
   searchResultData,
 } from '../../store/data/searchResult';
+import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+
+type FilterList = {
+  title: string;
+  isChecked: boolean;
+};
+
+type MenuItemData = {
+  title: string;
+  isChecked: boolean;
+  bodyType: 'filter' | 'option';
+  bodyDataArr: FilterList[];
+};
 
 const SearchResult = () => {
   const navigate = useNavigate();
@@ -24,92 +34,67 @@ const SearchResult = () => {
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
-  // BtmSheetFilter 상태 관리
-
-  const [arrangementFilterData, setArrangementFilterData] = useState(
-    initialArrangementFilterDataArr
-  );
-
-  const handleClickArrangeFilterItem = (prevIndex: number, index: number) => {
-    setArrangementFilterData((prevState) => {
-      const copiedArr = [...prevState];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
-  };
-
-  const [sectorFilterData, setSectorFilterData] = useState(
-    initialSectorFilterDataArr
-  );
-
-  const handleClickSectorFilterItem = (prevIndex: number, index: number) => {
-    setSectorFilterData((prevState) => {
-      const copiedArr = [...prevState];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
-  };
-
-  // BtmSheetOption 상태 관리
-  const [OptionDataArr, setOptionDataArr] = useState(initialOptionDataArr);
-
-  const handleOptionClick = (index: number) => {
-    setOptionDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      if (!copiedArr[index]) throw new Error('not valid optionArr index!!');
-      copiedArr[index].isChecked = !copiedArr[index].isChecked;
-      return copiedArr;
-    });
-  };
-
   // 초기화 버튼 클릭했을 때
-  const handleResetClick = () => {
-    setOptionDataArr((prevArr) =>
-      prevArr.map((data) => {
-        data.isChecked = false;
-        return data;
-      })
-    );
-  };
+  // const handleResetClick = () => {
+  //   setOptionDataArr((prevArr) =>
+  //     prevArr.map((data) => {
+  //       data.isChecked = false;
+  //       return data;
+  //     })
+  //   );
+  // };
 
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
 
-  const [menuItemDataArr, setMenuItemDataArr] = useState([
+  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>([
     {
       title: '정렬',
       isChecked: true,
-      content: (
-        <BtmSheetFilter
-          filterArray={arrangementFilterData}
-          onClick={handleClickArrangeFilterItem}
-        />
-      ),
+      bodyType: 'filter',
+      bodyDataArr: initialArrangementFilterDataArr,
     },
     {
       title: '업종',
       isChecked: false,
-      content: (
-        <BtmSheetFilter
-          filterArray={sectorFilterData}
-          onClick={handleClickSectorFilterItem}
-        />
-      ),
+      bodyType: 'filter',
+      bodyDataArr: initialSectorFilterDataArr,
     },
     {
       title: '옵션',
       isChecked: false,
-      content: (
-        <BtmSheetOption
-          onClick={handleOptionClick}
-          OptionDataArray={OptionDataArr}
-        />
-      ),
+      bodyType: 'option',
+      bodyDataArr: initialOptionDataArr,
     },
   ]);
+
+  const handleClickMenuBodyItem = (
+    menuIndex: number,
+    newIndex: number,
+    prevIndex?: number
+  ) => {
+    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
+      throw new Error('invalid newIndex!!');
+    if (
+      prevIndex !== undefined &&
+      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
+    )
+      throw new Error('invalid prevIndex!!');
+    setMenuItemDataArr((prev) => {
+      const copiedMenuItemDataArr = [...prev];
+      if (prevIndex !== undefined) {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
+          false;
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
+      } else {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
+          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
+      }
+      return copiedMenuItemDataArr;
+    });
+  };
 
   const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
     setMenuItemDataArr((prev) => {
@@ -128,10 +113,12 @@ const SearchResult = () => {
     setIsBottomSheetVisible(true);
   };
 
-  const selectedArrangeFilterItem = arrangementFilterData.find(
+  const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   );
-  const selectedSectorFilterItem = sectorFilterData.find((x) => x.isChecked);
+  const selectedSectorFilterItem = menuItemDataArr[1].bodyDataArr.find(
+    (x) => x.isChecked
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -175,7 +162,7 @@ const SearchResult = () => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {OptionDataArr.map(
+        {menuItemDataArr[2].bodyDataArr.map(
           (data, index) =>
             data.isChecked && (
               <CheckFilterSelect
@@ -209,9 +196,10 @@ const SearchResult = () => {
       {isBottomSheetVisible && (
         <BottomSheet onDragBottom={handleDragBottom}>
           {/* <div className={styles.emptySpace} onClick={handleDragBottom} /> */}
-          <SlideTabView
+          <SlideTabViewFilterOrOption
             menuItemDataArr={menuItemDataArr}
             handleCheckedDataIndex={handleClickMenuItem}
+            handleClickMenuBodyItem={handleClickMenuBodyItem}
           />
           {/* {selectedMenu === '옵션' && (
             <button className={styles.wrapReset} onClick={handleResetClick}>

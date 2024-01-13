@@ -32,34 +32,34 @@ const SearchResult = () => {
 
   // BtmSheetFilter 상태 관리
 
-  const [arrangeFilterListData, setArrangeFilterListData] = useState(
+  const [arrangeFilterData, setArrangeFilterData] = useState(
     initialArrangeFilterDataArr
   );
 
-  const handleItemClick1 = (index: number) => {
-    const newArrangeFilterListData = arrangeFilterListData.map((item, i) => {
+  const handleClickArrangeFilterItem = (index: number) => {
+    const newArrangeFilterListData = arrangeFilterData.map((item, i) => {
       if (i === index) {
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
     });
 
-    setArrangeFilterListData(newArrangeFilterListData);
+    setArrangeFilterData(newArrangeFilterListData);
   };
 
-  const [sectorFilterListData, setSectorFilterListData] = useState(
+  const [sectorFilterData, setSectorFilterData] = useState(
     initialSectorFilterDataArr
   );
 
-  const handleItemClick2 = (index: number) => {
-    const newFilterListData2 = sectorFilterListData.map((item, i) => {
+  const handleClickSectorFilterItem = (index: number) => {
+    const newFilterListData2 = sectorFilterData.map((item, i) => {
       if (i === index) {
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
     });
 
-    setSectorFilterListData(newFilterListData2);
+    setSectorFilterData(newFilterListData2);
   };
 
   // BtmSheetOption 상태 관리
@@ -99,8 +99,8 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle='정렬'
-          FilterArray={arrangeFilterListData}
-          onClick={handleItemClick1}
+          FilterArray={arrangeFilterData}
+          onClick={handleClickArrangeFilterItem}
         />
       ),
     },
@@ -110,8 +110,8 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle='업종'
-          FilterArray={sectorFilterListData}
-          onClick={handleItemClick2}
+          FilterArray={sectorFilterData}
+          onClick={handleClickSectorFilterItem}
         />
       ),
     },
@@ -129,12 +129,8 @@ const SearchResult = () => {
 
   const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
-  const selectedArrangeFilterItem = arrangeFilterListData.find(
-    (x) => x.isChecked
-  );
-  const selectedSectorFilterItem = sectorFilterListData.find(
-    (x) => x.isChecked
-  );
+  const selectedArrangeFilterItem = arrangeFilterData.find((x) => x.isChecked);
+  const selectedSectorFilterItem = sectorFilterData.find((x) => x.isChecked);
 
   return (
     <div className={styles.wrapper}>

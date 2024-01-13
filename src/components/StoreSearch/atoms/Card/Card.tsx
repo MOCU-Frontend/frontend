@@ -20,20 +20,20 @@ interface Props {
   /**
    * 사용 가능 쿠폰 개수
    */
-  couponAvailable: number;
+  couponCount: number;
 
   /**
    * 현 위치에서 몇 m 떨어져있는 지
    */
-  farFrom: number;
+  distance: number;
 }
 
 const Card: React.FC<Props> = ({
   couponMain,
   eventOn,
   title,
-  couponAvailable,
-  farFrom,
+  couponCount,
+  distance,
 }: Props) => {
   return (
     <>
@@ -41,11 +41,11 @@ const Card: React.FC<Props> = ({
         {couponMain && (
           <>
             <div className={styles.cardStoreInformation}>
-              <div className={styles.cardFirstInfo}>{couponAvailable}/10</div>
+              <div className={styles.cardFirstInfo}>{couponCount}/10</div>
               <div className={styles.cardSecondInfo}>{title}</div>
             </div>
 
-            <div className={styles.cardFarFrom}>현 위치에서 {farFrom}M </div>
+            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
           </>
         )}
 
@@ -58,11 +58,11 @@ const Card: React.FC<Props> = ({
             <div className={styles.cardStoreInformation}>
               <div className={styles.cardFirstInfo}>{title}</div>
               <div className={styles.cardSecondInfo}>
-                사용 가능 쿠폰: {couponAvailable}개{' '}
+                사용 가능 쿠폰: {couponCount}개{' '}
               </div>
             </div>
 
-            <div className={styles.cardFarFrom}>현 위치에서 {farFrom}M </div>
+            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
           </>
         )}
       </div>

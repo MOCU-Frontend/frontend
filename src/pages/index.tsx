@@ -4,6 +4,7 @@ import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
 import StoreSearch from './StoreSearch/StoreSearch';
+import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
 
@@ -24,6 +25,10 @@ const Router = () => {
     {
       path: '/storesearch',
       element: <StoreSearch />,
+    },
+    {
+      path: '/storesearch/:searchWord',
+      element: <SearchResult />,
     },
     {
       path: '/my',

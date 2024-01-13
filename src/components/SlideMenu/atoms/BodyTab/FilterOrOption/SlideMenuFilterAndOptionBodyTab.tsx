@@ -1,27 +1,45 @@
 import React, { useEffect, useRef } from 'react';
-import BodyTabWrapper from '../BodyTabWrapper/BodyTabWrapper';
-import styles from './SlideMenuBodyTab.module.css';
-type BodyTabDataType = {
+import BtmSheetFilter from '../../../../SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
+import BtmSheetOption from '../../../../SearchResult/atoms/BtmSheetOption/BtmSheetOption';
+import BodyTabWrapper from '../../BodyTabWrapper/BodyTabWrapper';
+import styles from '../SlideMenuBodyTab.module.css';
+
+type FilterList = {
   title: string;
   isChecked: boolean;
-  content: React.JSX.Element;
+};
+
+type MenuItemData = {
+  title: string;
+  isChecked: boolean;
+  bodyType: 'filter' | 'option';
+  bodyDataArr: FilterList[];
 };
 
 interface Props {
-  tabDataArr: BodyTabDataType[];
+  menuItemDataArr: MenuItemData[];
   handleCheckedDataIndex: (prevIndex: number, newIndex: number) => void;
+  handleClickMenuBodyItem: (
+    menuIndex: number,
+    newIndex: number,
+    prevIndex?: number
+  ) => void;
+  handleClickResetOptionBtn?: (menuIndex: number) => void;
 }
 
-const SlideMenuBodyTab: React.FC<Props> = ({
-  tabDataArr,
+const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
+  menuItemDataArr,
   handleCheckedDataIndex,
+  handleClickMenuBodyItem,
+  handleClickResetOptionBtn,
 }: Props) => {
   const tabRef = useRef<HTMLDivElement>(null);
 
-  const checkedDataIndex = tabDataArr.findIndex((x) => x.isChecked);
+  const checkedDataIndex = menuItemDataArr.findIndex((x) => x.isChecked);
 
   if (checkedDataIndex === -1) throw new Error('no checked menu data!');
   const calculatedXLoc = window.innerWidth * (checkedDataIndex + 1) * -1;
+
   const tabStyle = {
     transform: `translate(${calculatedXLoc}px,0)`,
     transition: 'all 0.5s ease-in',
@@ -30,9 +48,9 @@ const SlideMenuBodyTab: React.FC<Props> = ({
   useEffect(() => {
     tabRef.current &&
       (tabRef.current.style.transform = `translate(${calculatedXLoc}px,0)`);
-  }, [tabDataArr, tabRef.current]);
+  }, [menuItemDataArr, tabRef, calculatedXLoc]);
 
-  if (tabDataArr.length === 0) {
+  if (menuItemDataArr.length === 0) {
     return <div>no data</div>;
   }
   return (
@@ -47,8 +65,6 @@ const SlideMenuBodyTab: React.FC<Props> = ({
             let xDiff = 0;
             tabRef.current && (tabRef.current.style.transition = 'none');
             const moveEventCallback = (moveEv: TouchEvent) => {
-              // 다음페이지가 없다면 => xDiff > 0 => 흰화면 나오게
-              // 이전 페이지도 마찬가지
               xDiff = moveEv.touches[0].clientX - startMouseXLoc;
               tabRef.current &&
                 (tabRef.current.style.transform = `translate(${
@@ -58,13 +74,6 @@ const SlideMenuBodyTab: React.FC<Props> = ({
             };
             document.addEventListener('touchmove', moveEventCallback);
             document.addEventListener('touchend', function upEventCallback() {
-              // xDiff>0 => 다음페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-              // xDiff>0 => 다음페이지 존재 => xDiff > 요소 너비의 절반 => 다음페이지로 넘어가기 (애니메이션 주면서 전환)
-              // xDiff>0 => 다음페이지 존재 => xDiff < 요소 너비의 절반 => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-              // xDiff<0 => 이전페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-              // xDiff<0 => 이전페이지 존재 => xDiff < (요소 너비의 절반*-1) => 이전페이지로 넘어가기 (애니메이션 주면서 전환)
-              // xDiff<0 => 이전페이지 존재 => xDiff > (요소 너비의 절반*-1) => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-              //mouseup 되면 그냥 checked 변경사항 있으면 변경해주고 => 그 checked에 맞게 위치 바꿔주면 됨 (애니메이션주며)
               tabRef.current &&
                 (tabRef.current.style.transition = 'all 0.5s ease-in');
               if (xDiff > 0) {
@@ -78,7 +87,7 @@ const SlideMenuBodyTab: React.FC<Props> = ({
                 }
               } else {
                 if (
-                  checkedDataIndex + 1 !== tabDataArr.length &&
+                  checkedDataIndex + 1 !== menuItemDataArr.length &&
                   xDiff * -1 > window.innerWidth / 2
                 ) {
                   handleCheckedDataIndex(
@@ -99,8 +108,6 @@ const SlideMenuBodyTab: React.FC<Props> = ({
           let xDiff = 0;
           tabRef.current && (tabRef.current.style.transition = 'none');
           const moveEventCallback = (moveEv: MouseEvent) => {
-            // 다음페이지가 없다면 => xDiff > 0 => 흰화면 나오게
-            // 이전 페이지도 마찬가지
             xDiff = moveEv.clientX - startMouseXLoc;
             tabRef.current &&
               (tabRef.current.style.transform = `translate(${
@@ -109,13 +116,6 @@ const SlideMenuBodyTab: React.FC<Props> = ({
           };
           document.addEventListener('mousemove', moveEventCallback);
           document.addEventListener('mouseup', function upEventCallback(upEv) {
-            // xDiff>0 => 다음페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff>0 => 다음페이지 존재 => xDiff > 요소 너비의 절반 => 다음페이지로 넘어가기 (애니메이션 주면서 전환)
-            // xDiff>0 => 다음페이지 존재 => xDiff < 요소 너비의 절반 => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff<0 => 이전페이지 존재X => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            // xDiff<0 => 이전페이지 존재 => xDiff < (요소 너비의 절반*-1) => 이전페이지로 넘어가기 (애니메이션 주면서 전환)
-            // xDiff<0 => 이전페이지 존재 => xDiff > (요소 너비의 절반*-1) => 현재페이지로 돌아오기 (애니메이션 주면서 원래자리로)
-            //mouseup 되면 그냥 checked 변경사항 있으면 변경해주고 => 그 checked에 맞게 위치 바꿔주면 됨 (애니메이션주며)
             tabRef.current &&
               (tabRef.current.style.transition = 'all 0.5s ease-in');
             if (xDiff > 0) {
@@ -126,7 +126,7 @@ const SlideMenuBodyTab: React.FC<Props> = ({
               }
             } else {
               if (
-                checkedDataIndex + 1 !== tabDataArr.length &&
+                checkedDataIndex + 1 !== menuItemDataArr.length &&
                 xDiff * -1 > window.innerWidth / 2
               ) {
                 handleCheckedDataIndex(checkedDataIndex, checkedDataIndex + 1);
@@ -144,8 +144,28 @@ const SlideMenuBodyTab: React.FC<Props> = ({
             <BodyTabWrapper>
               <></>
             </BodyTabWrapper>
-            {tabDataArr.map((data) => (
-              <BodyTabWrapper key={data.title}>{data.content}</BodyTabWrapper>
+            {menuItemDataArr.map((data, index) => (
+              <BodyTabWrapper key={data.title}>
+                {data.bodyType === 'filter' ? (
+                  <BtmSheetFilter
+                    filterArray={data.bodyDataArr}
+                    onClick={(prevIndex: number, newIndex: number) =>
+                      handleClickMenuBodyItem(index, newIndex, prevIndex)
+                    }
+                  />
+                ) : (
+                  <BtmSheetOption
+                    OptionDataArray={data.bodyDataArr}
+                    onClick={(newIndex: number) =>
+                      handleClickMenuBodyItem(index, newIndex)
+                    }
+                    onClickResetBtn={() =>
+                      handleClickResetOptionBtn &&
+                      handleClickResetOptionBtn(index)
+                    }
+                  />
+                )}
+              </BodyTabWrapper>
             ))}
             <BodyTabWrapper>
               <></>
@@ -157,4 +177,4 @@ const SlideMenuBodyTab: React.FC<Props> = ({
   );
 };
 
-export default SlideMenuBodyTab;
+export default SlideMenuFilterAndOptionBodyTab;

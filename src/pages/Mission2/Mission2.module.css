@@ -1,0 +1,20 @@
+@import '../../styles/colorVars.css';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  width: 100%;
+  height: 100vh;
+  background: var(
+    --color-sub-gradation,
+    linear-gradient(119deg, #525de1 11.37%, #cac5ff 97.3%)
+  );
+}
+
+.wrapHeader {
+  display: flex;
+  flex-direction: column;
+  height: 56px;
+  width: 100%;
+}

@@ -7,6 +7,7 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
+import MyNowLocation from './My/Location/Now/MyNowLocation';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -39,6 +40,10 @@ const Router = () => {
           element: <MyLocation />,
         },
       ],
+    },
+    {
+      path: '/my/location/now',
+      element: <MyNowLocation />,
     },
   ]);
 

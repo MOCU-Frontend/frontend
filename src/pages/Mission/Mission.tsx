@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Mission.module.css';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 
@@ -9,6 +9,12 @@ import { ReactComponent as ArrowRightSmallImage } from '../../assets/icon/arrowR
 
 const Mission = () => {
   const navigate = useNavigate();
+
+  const [isTabButtonSelect, setTabButtonSelect] = useState(true);
+
+  const handleTabClick = () => {
+    setTabButtonSelect(!isTabButtonSelect);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -33,7 +39,35 @@ const Mission = () => {
         </div>
       </div>
 
-      <div className={styles.wrapContent}></div>
+      <div className={styles.wrapContent}>
+        <div className={styles.wrapTab}>
+          <button className={styles.wrapTabButton} onClick={handleTabClick}>
+            <div
+              className={
+                isTabButtonSelect
+                  ? styles.tabButtonTextTrue
+                  : styles.tabButtonTextFalse
+              }
+            >
+              오늘의 미션
+            </div>
+          </button>
+          {isTabButtonSelect && <div className={styles.tabButtonLine} />}
+
+          <button className={styles.wrapTabButton} onClick={handleTabClick}>
+            <div
+              className={
+                !isTabButtonSelect
+                  ? styles.tabButtonTextTrue
+                  : styles.tabButtonTextFalse
+              }
+            >
+              미션맵
+            </div>
+          </button>
+          {!isTabButtonSelect && <div className={styles.tabButtonLine} />}
+        </div>
+      </div>
     </div>
   );
 };

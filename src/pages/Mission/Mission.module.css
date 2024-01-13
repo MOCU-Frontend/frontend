@@ -74,3 +74,41 @@
   background: #fff;
   box-shadow: 0px 0px 7px 0px rgba(110, 117, 232, 0.1);
 }
+
+.wrapTab {
+  display: flex;
+  width: 100%;
+  padding: 12px 1px;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.wrapTabButton {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: none;
+}
+
+.tabButtonTextTrue {
+  color: var(--color-main-purple, #6e75e8);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.039px;
+}
+
+.tabButtonTextFalse {
+  color: var(--color-grey-light-02, #cacaca);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.039px;
+}
+
+.tabButtonLine {
+  height: 2px;
+  background: var(--color-main-purple, #6e75e8);
+}

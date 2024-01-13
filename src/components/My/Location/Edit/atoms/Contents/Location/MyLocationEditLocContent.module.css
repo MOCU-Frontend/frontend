@@ -1,0 +1,6 @@
+.wholeWrapper {
+  display: flex;
+  padding: 4px 0px;
+  flex-direction: column;
+  gap: 4px;
+}

@@ -8,6 +8,7 @@ import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
+import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -44,6 +45,10 @@ const Router = () => {
     {
       path: '/my/location/now',
       element: <MyNowLocation />,
+    },
+    {
+      path: '/my/location/:locationId',
+      element: <MyLocationEdit />,
     },
   ]);
 

@@ -12,7 +12,7 @@ import BtmSheetFilter from '../../components/SearchResult/atoms/BtmSheetFilter/B
 import BtmSheetOption from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
 import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
 import {
-  initialArrangeFilterDataArr,
+  initialArrangementFilterDataArr,
   initialSectorFilterDataArr,
   initialOptionDataArr,
   searchResultData,
@@ -32,12 +32,12 @@ const SearchResult = () => {
 
   // BtmSheetFilter 상태 관리
 
-  const [arrangeFilterData, setArrangeFilterData] = useState(
-    initialArrangeFilterDataArr
+  const [arrangementFilterData, setArrangementFilterData] = useState(
+    initialArrangementFilterDataArr
   );
 
   const handleClickArrangeFilterItem = (prevIndex: number, index: number) => {
-    setArrangeFilterData((prevState) => {
+    setArrangementFilterData((prevState) => {
       const copiedArr = [...prevState];
       copiedArr[prevIndex].isChecked = false;
       copiedArr[index].isChecked = true;
@@ -59,29 +59,25 @@ const SearchResult = () => {
   };
 
   // BtmSheetOption 상태 관리
-  const [OptionData, setOptionData] = useState(initialOptionDataArr);
+  const [OptionDataArr, setOptionDataArr] = useState(initialOptionDataArr);
 
   const handleOptionClick = (index: number) => {
-    const checkedItems = OptionData.filter((item) => item.isChecked);
-    const newOptionData = OptionData.map((item, i) => {
-      if (i === index) {
-        // isChecked가 true인 항목이 하나만 남았고, 그 항목을 클릭했다면
-        // isChecked를 false로 만들지 않음
-        if (checkedItems.length === 1 && item.isChecked) {
-          return item;
-        }
-
-        return { ...item, isChecked: !item.isChecked };
-      }
-      return item;
+    setOptionDataArr((prevArr) => {
+      const copiedArr = [...prevArr];
+      if (!copiedArr[index]) throw new Error('not valid optionArr index!!');
+      copiedArr[index].isChecked = !copiedArr[index].isChecked;
+      return copiedArr;
     });
-
-    setOptionData(newOptionData);
   };
 
   // 초기화 버튼 클릭했을 때
   const handleResetClick = () => {
-    setOptionData(initialOptionDataArr);
+    setOptionDataArr((prevArr) =>
+      prevArr.map((data) => {
+        data.isChecked = false;
+        return data;
+      })
+    );
   };
 
   const handleDragBottom = () => {
@@ -94,7 +90,7 @@ const SearchResult = () => {
       isChecked: true,
       content: (
         <BtmSheetFilter
-          filterArray={arrangeFilterData}
+          filterArray={arrangementFilterData}
           onClick={handleClickArrangeFilterItem}
         />
       ),
@@ -115,7 +111,7 @@ const SearchResult = () => {
       content: (
         <BtmSheetOption
           onClick={handleOptionClick}
-          OptionDataArray={OptionData}
+          OptionDataArray={OptionDataArr}
         />
       ),
     },
@@ -123,7 +119,9 @@ const SearchResult = () => {
 
   const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
-  const selectedArrangeFilterItem = arrangeFilterData.find((x) => x.isChecked);
+  const selectedArrangeFilterItem = arrangementFilterData.find(
+    (x) => x.isChecked
+  );
   const selectedSectorFilterItem = sectorFilterData.find((x) => x.isChecked);
 
   return (
@@ -168,7 +166,7 @@ const SearchResult = () => {
           onClick={() => handleFilterSelectClick('업종')}
         />
 
-        {OptionData.map(
+        {OptionDataArr.map(
           (data, index) =>
             data.isChecked && (
               <CheckFilterSelect

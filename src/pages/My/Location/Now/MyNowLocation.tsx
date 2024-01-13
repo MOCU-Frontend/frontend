@@ -108,7 +108,9 @@ const MyNowLocation: React.FC = () => {
       {isShowBottomSheet && (
         <MyNowLocationBottomSheet
           onDragBottom={handleDragDownBottomSheet}
-          locationText='서울 화양동 7-44 단산화빌딩'
+          locationText={
+            centerAddress ? centerAddress.jibunAddress : 'no address..'
+          }
           btnStatus='지번'
           handleChangeBtnStatus={() => {}}
           handleClickSetLocationBtn={() => {}}

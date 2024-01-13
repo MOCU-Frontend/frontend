@@ -20,13 +20,12 @@ export const useAddressByCoord = (
       naver.maps.Service
     ) {
       naver.maps.Service.reverseGeocode(
-        { coords: coord },
+        { coords: coord, orders: 'addr,roadaddr' },
         (status, response) => {
           if (status !== naver.maps.Service.Status.OK) {
             return alert('Something wrong!');
           }
-
-          console.log(response.v2);
+          setAddress(response.v2.address);
         }
       );
     }

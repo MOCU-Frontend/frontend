@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styles from './StoreSearch.module.css';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
@@ -10,41 +11,46 @@ import Card from '../../components/StoreSearch/atoms/Card/Card';
 
 type StoreData = {
   title: string;
-  couponAvailable: number;
-  farFrom: number;
+  couponCount: number;
+  distance: number;
 };
 
 const storeSearchData: StoreData[] = [
   {
     title: '로보카페',
-    couponAvailable: 3,
-    farFrom: 83,
+    couponCount: 3,
+    distance: 83,
   },
   {
     title: '크림베이글 건대점',
-    couponAvailable: 7,
-    farFrom: 105,
+    couponCount: 7,
+    distance: 105,
   },
   {
     title: '롯데리아 건대점',
-    couponAvailable: 5,
-    farFrom: 67,
+    couponCount: 5,
+    distance: 67,
   },
   {
     title: '가츠시',
-    couponAvailable: 8,
-    farFrom: 132,
+    couponCount: 8,
+    distance: 132,
   },
 ];
 
 const StoreSearch = () => {
+  const { searchWord } = useParams();
+  const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
-        <HeaderBackBtn headerPaddingSize="search" onClickBackBtn={() => {}}>
+        <HeaderBackBtn
+          headerPaddingSize="search"
+          onClickBackBtn={() => navigate(-1)}
+        >
           <SearchBar
             placeholder="찾고 싶은 가게를 검색해 보세요"
-            onClickSearchBtn={() => {}}
+            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
         </HeaderBackBtn>
       </div>
@@ -92,29 +98,29 @@ const StoreSearch = () => {
               couponMain={false}
               eventOn={false}
               title={storeSearchData[0].title}
-              couponAvailable={storeSearchData[0].couponAvailable}
-              farFrom={storeSearchData[0].farFrom}
+              couponCount={storeSearchData[0].couponCount}
+              distance={storeSearchData[0].distance}
             />
             <Card
               couponMain={false}
               eventOn={true}
               title={storeSearchData[1].title}
-              couponAvailable={storeSearchData[1].couponAvailable}
-              farFrom={storeSearchData[1].farFrom}
+              couponCount={storeSearchData[1].couponCount}
+              distance={storeSearchData[1].distance}
             />
             <Card
               couponMain={false}
               eventOn={true}
               title={storeSearchData[2].title}
-              couponAvailable={storeSearchData[2].couponAvailable}
-              farFrom={storeSearchData[2].farFrom}
+              couponCount={storeSearchData[2].couponCount}
+              distance={storeSearchData[2].distance}
             />
             <Card
               couponMain={false}
               eventOn={false}
               title={storeSearchData[3].title}
-              couponAvailable={storeSearchData[3].couponAvailable}
-              farFrom={storeSearchData[3].farFrom}
+              couponCount={storeSearchData[3].couponCount}
+              distance={storeSearchData[3].distance}
             />
           </div>
         </div>
@@ -127,20 +133,20 @@ const StoreSearch = () => {
             <Card
               couponMain={true}
               title={storeSearchData[3].title}
-              couponAvailable={storeSearchData[3].couponAvailable}
-              farFrom={storeSearchData[3].farFrom}
+              couponCount={storeSearchData[3].couponCount}
+              distance={storeSearchData[3].distance}
             />
             <Card
               couponMain={true}
               title={storeSearchData[1].title}
-              couponAvailable={storeSearchData[1].couponAvailable}
-              farFrom={storeSearchData[1].farFrom}
+              couponCount={storeSearchData[1].couponCount}
+              distance={storeSearchData[1].distance}
             />
             <Card
               couponMain={true}
               title={storeSearchData[2].title}
-              couponAvailable={storeSearchData[2].couponAvailable}
-              farFrom={storeSearchData[2].farFrom}
+              couponCount={storeSearchData[2].couponCount}
+              distance={storeSearchData[2].distance}
             />
           </div>
         </div>
@@ -154,29 +160,29 @@ const StoreSearch = () => {
               couponMain={false}
               eventOn={false}
               title={storeSearchData[0].title}
-              couponAvailable={storeSearchData[0].couponAvailable}
-              farFrom={storeSearchData[0].farFrom}
+              couponCount={storeSearchData[0].couponCount}
+              distance={storeSearchData[0].distance}
             />
             <Card
               couponMain={false}
               eventOn={true}
               title={storeSearchData[1].title}
-              couponAvailable={storeSearchData[1].couponAvailable}
-              farFrom={storeSearchData[1].farFrom}
+              couponCount={storeSearchData[1].couponCount}
+              distance={storeSearchData[1].distance}
             />
             <Card
               couponMain={false}
               eventOn={true}
               title={storeSearchData[2].title}
-              couponAvailable={storeSearchData[2].couponAvailable}
-              farFrom={storeSearchData[2].farFrom}
+              couponCount={storeSearchData[2].couponCount}
+              distance={storeSearchData[2].distance}
             />
             <Card
               couponMain={false}
               eventOn={false}
               title={storeSearchData[3].title}
-              couponAvailable={storeSearchData[3].couponAvailable}
-              farFrom={storeSearchData[3].farFrom}
+              couponCount={storeSearchData[3].couponCount}
+              distance={storeSearchData[3].distance}
             />
           </div>
         </div>

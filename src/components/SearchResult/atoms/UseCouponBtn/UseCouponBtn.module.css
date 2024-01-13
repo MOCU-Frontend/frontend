@@ -1,0 +1,21 @@
+@import '../../../../styles/colorVars.css';
+
+.wrapButton {
+  display: flex;
+  flex-direction: row;
+  display: flex;
+  padding: 0.5vw 1vw;
+  align-items: flex-start;
+  gap: 1vw;
+  border-radius: 4px;
+  border: 0px;
+  background: var(--UI-main_purple, #6e75e8);
+}
+
+.buttonText {
+  color: var(--UI-white, #fff);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}

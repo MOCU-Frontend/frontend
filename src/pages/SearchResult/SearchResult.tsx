@@ -35,14 +35,10 @@ const SearchResult = () => {
   const [filterListData1, setFilterListData1] = useState(
     initialFilterListData1
   );
-  const [selectedTitle1, setSelectedTitle1] = useState(
-    initialFilterListData1[0].title
-  );
 
   const handleItemClick1 = (index: number) => {
     const newFilterListData1 = filterListData1.map((item, i) => {
       if (i === index) {
-        setSelectedTitle1(item.title);
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
@@ -54,14 +50,10 @@ const SearchResult = () => {
   const [filterListData2, setFilterListData2] = useState(
     initialFilterListData2
   );
-  const [selectedTitle2, setSelectedTitle2] = useState(
-    initialFilterListData2[0].title
-  );
 
   const handleItemClick2 = (index: number) => {
     const newFilterListData2 = filterListData2.map((item, i) => {
       if (i === index) {
-        setSelectedTitle2(item.title);
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
@@ -137,6 +129,9 @@ const SearchResult = () => {
 
   const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
+  const selectedItem1 = filterListData1.find((x) => x.isChecked);
+  const selectedItem2 = filterListData2.find((x) => x.isChecked);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
@@ -154,7 +149,7 @@ const SearchResult = () => {
       <div className={styles.filtersWrapper}>
         <CheckFilterSelect
           isChecked={false}
-          label={selectedTitle1}
+          label={selectedItem1 ? selectedItem1.title : 'no selected item!'}
           size='small'
           border={1}
           borderColor='sub-purple-light'
@@ -163,7 +158,7 @@ const SearchResult = () => {
         />
         <CheckFilterSelect
           isChecked={false}
-          label={selectedTitle2}
+          label={selectedItem2 ? selectedItem2.title : 'no selected item!'}
           size='small'
           border={1}
           borderColor='sub-purple-light'

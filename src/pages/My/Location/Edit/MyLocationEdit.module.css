@@ -1,0 +1,14 @@
+.fullBtnWrapper {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+}
+.bodyWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  padding: 24px 20px 40px 20px;
+}
+.seeMapBtnWrapper {
+  padding: 0 20px;
+}

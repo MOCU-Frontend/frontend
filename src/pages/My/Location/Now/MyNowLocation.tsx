@@ -69,6 +69,8 @@ const MyNowLocation: React.FC = () => {
     centerCoord
   );
 
+  const [addressFormat, setAddressFormat] = useState<'지번' | '도로명'>('지번');
+
   const handleClickTargetBtn = () => {
     if (userLocation && map) {
       map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
@@ -109,10 +111,16 @@ const MyNowLocation: React.FC = () => {
         <MyNowLocationBottomSheet
           onDragBottom={handleDragDownBottomSheet}
           locationText={
-            centerAddress ? centerAddress.jibunAddress : 'no address..'
+            centerAddress
+              ? addressFormat === '지번'
+                ? centerAddress.jibunAddress
+                : centerAddress.roadAddress
+              : 'no address..'
           }
           btnStatus='지번'
-          handleChangeBtnStatus={() => {}}
+          handleChangeBtnStatus={() =>
+            setAddressFormat((prev) => (prev === '지번' ? '도로명' : '지번'))
+          }
           handleClickSetLocationBtn={() => {}}
         />
       )}

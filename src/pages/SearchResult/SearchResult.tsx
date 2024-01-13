@@ -15,6 +15,7 @@ import {
   searchResultData,
 } from '../../store/data/searchResult';
 import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import CheckFilter from '../../components/CheckFilter/CheckFilter';
 
 type FilterList = {
   title: string;
@@ -142,10 +143,8 @@ const SearchResult = () => {
               ? selectedArrangeFilterItem.title
               : 'no selected item!'
           }
-          size='small'
           border={1}
           borderColor='sub-purple-light'
-          borderRadius='large'
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -155,24 +154,20 @@ const SearchResult = () => {
               ? selectedSectorFilterItem.title
               : 'no selected item!'
           }
-          size='small'
           border={1}
           borderColor='sub-purple-light'
-          borderRadius='large'
           onClick={() => handleFilterSelectClick(1)}
         />
 
         {menuItemDataArr[2].bodyDataArr.map(
           (data, index) =>
             data.isChecked && (
-              <CheckFilterSelect
+              <CheckFilter
                 key={data.title + index}
                 isChecked={false}
                 label={data.title}
-                size='small'
                 border={1}
                 borderColor='sub-purple-light'
-                borderRadius='large'
                 onClick={() => handleFilterSelectClick(2)}
               />
             )

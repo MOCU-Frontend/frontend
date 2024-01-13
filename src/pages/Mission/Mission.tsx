@@ -1,8 +1,11 @@
 import React from 'react';
 import styles from './Mission.module.css';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
+
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../styles/colors';
+import { ReactComponent as ProfileImage } from '../../assets/icon/profile.svg';
+import { ReactComponent as ArrowRightSmallImage } from '../../assets/icon/arrowRightSmall.svg';
 
 const Mission = () => {
   const navigate = useNavigate();
@@ -19,6 +22,18 @@ const Mission = () => {
           backBtnbackgroundColor={colors.mapPurple}
         />
       </div>
+      <div className={styles.wrapUserInformation}>
+        <ProfileImage width={48} height={48} />
+        <div className={styles.wrapText}>
+          <div className={styles.userName}>모쿠</div>
+          <button className={styles.wrapMissionNow}>
+            <div className={styles.missionNowText}>미션 달성 현황</div>
+            <ArrowRightSmallImage width={16} height={16} />
+          </button>
+        </div>
+      </div>
+
+      <div className={styles.wrapContent}></div>
     </div>
   );
 };

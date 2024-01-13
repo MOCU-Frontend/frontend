@@ -22,16 +22,6 @@ const SearchResult = () => {
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
-  // 초기화 버튼 클릭했을 때
-  // const handleResetClick = () => {
-  //   setOptionDataArr((prevArr) =>
-  //     prevArr.map((data) => {
-  //       data.isChecked = false;
-  //       return data;
-  //     })
-  //   );
-  // };
-
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
@@ -90,6 +80,19 @@ const SearchResult = () => {
   const selectedSectorFilterItem = menuItemDataArr[1].bodyDataArr.find(
     (x) => x.isChecked
   );
+
+  const handleClickResetOptionBtn = (menuIndex: number) => {
+    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+    if (menuItemDataArr[menuIndex].bodyType === 'filter')
+      throw new Error('can reset only in option type!!');
+    setMenuItemDataArr((prevArr) => {
+      const copiedArr = [...prevArr];
+      copiedArr[menuIndex].bodyDataArr.forEach((item) => {
+        item.isChecked = false;
+      });
+      return copiedArr;
+    });
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -165,6 +168,7 @@ const SearchResult = () => {
             menuItemDataArr={menuItemDataArr}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
+            handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
           {/* {selectedMenu === '옵션' && (
             <button className={styles.wrapReset} onClick={handleResetClick}>

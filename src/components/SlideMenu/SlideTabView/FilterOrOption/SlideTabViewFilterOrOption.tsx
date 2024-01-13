@@ -23,12 +23,14 @@ interface Props {
     newIndex: number,
     prevIndex?: number
   ) => void;
+  handleClickResetOptionBtn?: (menuIndex: number) => void;
 }
 
 const SlideTabViewFilterOrOption: React.FC<Props> = ({
   menuItemDataArr,
   handleCheckedDataIndex,
   handleClickMenuBodyItem,
+  handleClickResetOptionBtn,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -42,6 +44,7 @@ const SlideTabViewFilterOrOption: React.FC<Props> = ({
         menuItemDataArr={menuItemDataArr}
         handleCheckedDataIndex={handleCheckedDataIndex}
         handleClickMenuBodyItem={handleClickMenuBodyItem}
+        handleClickResetOptionBtn={handleClickResetOptionBtn}
       />
     </div>
   );

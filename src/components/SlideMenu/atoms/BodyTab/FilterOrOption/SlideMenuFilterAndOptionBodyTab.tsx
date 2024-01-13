@@ -24,12 +24,14 @@ interface Props {
     newIndex: number,
     prevIndex?: number
   ) => void;
+  handleClickResetOptionBtn?: (menuIndex: number) => void;
 }
 
 const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
   menuItemDataArr,
   handleCheckedDataIndex,
   handleClickMenuBodyItem,
+  handleClickResetOptionBtn,
 }: Props) => {
   const tabRef = useRef<HTMLDivElement>(null);
 
@@ -156,6 +158,10 @@ const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
                     OptionDataArray={data.bodyDataArr}
                     onClick={(newIndex: number) =>
                       handleClickMenuBodyItem(index, newIndex)
+                    }
+                    onClickResetBtn={() =>
+                      handleClickResetOptionBtn &&
+                      handleClickResetOptionBtn(index)
                     }
                   />
                 )}

@@ -19,11 +19,16 @@ interface Props {
    * 버튼 클릭할 때
    */
   onClick: (index: number) => void;
+  /**
+   * 리셋 버튼 클릭할 때
+   */
+  onClickResetBtn: () => void;
 }
 
 const BtmSheetOption: React.FC<Props> = ({
   OptionDataArray,
   onClick,
+  onClickResetBtn,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -42,7 +47,7 @@ const BtmSheetOption: React.FC<Props> = ({
         ))}
       </div>
       <div className={styles.resetBtnWrapper}>
-        <SearchResultResetBtn onClick={() => {}} />
+        <SearchResultResetBtn onClick={onClickResetBtn} />
       </div>
     </div>
   );

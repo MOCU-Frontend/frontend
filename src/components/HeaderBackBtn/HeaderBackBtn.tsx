@@ -10,6 +10,7 @@ interface Props {
   backBtnColor?: string;
   backBtnGap?: number;
   headerTitleColor?: string;
+  backBtnbackgroundColor?: string;
   onClickBackBtn?: () => void;
 }
 
@@ -21,6 +22,7 @@ const HeaderBackBtn: React.FC<Props> = ({
   backBtnGap = 22.5,
   backBtnSize = 24,
   headerTitleColor = colors.greyDark01,
+  backBtnbackgroundColor = colors.white,
   onClickBackBtn = () => {},
 }: Props) => {
   let headerClassNames = `${styles.header}`;
@@ -46,7 +48,11 @@ const HeaderBackBtn: React.FC<Props> = ({
   return (
     <header style={{ gap: `${backBtnGap}px` }} className={headerClassNames}>
       <button
-        style={{ width: `${backBtnSize}px`, height: `${backBtnSize}px` }}
+        style={{
+          width: `${backBtnSize}px`,
+          height: `${backBtnSize}px`,
+          backgroundColor: `${backBtnbackgroundColor}`,
+        }}
         className={styles.backBtn}
         onClick={onClickBackBtn}
       >

@@ -7,6 +7,7 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
+import Mission from './Mission/Mission';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -29,6 +30,10 @@ const Router = () => {
     {
       path: '/storesearch/:searchWord',
       element: <SearchResult />,
+    },
+    {
+      path: '/mission',
+      element: <Mission />,
     },
     {
       path: '/my',

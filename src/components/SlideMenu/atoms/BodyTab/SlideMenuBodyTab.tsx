@@ -69,14 +69,11 @@ const SlideMenuBodyTab: React.FC<Props> = ({
                 (tabRef.current.style.transition = 'all 0.5s ease-in');
               if (xDiff > 0) {
                 if (checkedDataIndex !== 0 && xDiff > window.innerWidth / 2) {
-                  console.log(1);
-
                   handleCheckedDataIndex(
                     checkedDataIndex,
                     checkedDataIndex - 1
                   );
                 } else {
-                  console.log(2);
                   handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
                 }
               } else {
@@ -84,13 +81,11 @@ const SlideMenuBodyTab: React.FC<Props> = ({
                   checkedDataIndex + 1 !== tabDataArr.length &&
                   xDiff * -1 > window.innerWidth / 2
                 ) {
-                  console.log(3);
                   handleCheckedDataIndex(
                     checkedDataIndex,
                     checkedDataIndex + 1
                   );
                 } else {
-                  console.log(4);
                   handleCheckedDataIndex(checkedDataIndex, checkedDataIndex);
                 }
               }

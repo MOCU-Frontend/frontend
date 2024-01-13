@@ -24,12 +24,6 @@ const SearchResult = () => {
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
-  // 필터를 클릭했을 때
-  const handleFilterSelectClick = (id: string) => {
-    setSelectedMenu(id);
-    setIsBottomSheetVisible(true);
-  };
-
   // BtmSheetFilter 상태 관리
 
   const [arrangementFilterData, setArrangementFilterData] = useState(
@@ -84,7 +78,7 @@ const SearchResult = () => {
     setIsBottomSheetVisible(false);
   };
 
-  const menuItemDataArr = [
+  const [menuItemDataArr, setMenuItemDataArr] = useState([
     {
       title: '정렬',
       isChecked: true,
@@ -115,9 +109,24 @@ const SearchResult = () => {
         />
       ),
     },
-  ];
+  ]);
 
-  const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
+  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
+    setMenuItemDataArr((prev) => {
+      const copiedArr = [...prev];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[newIndex].isChecked = true;
+      return copiedArr;
+    });
+  };
+
+  // 필터를 클릭했을 때
+  const handleFilterSelectClick = (newIndex: number) => {
+    const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked menu item!!');
+    handleClickMenuItem(prevIndex, newIndex);
+    setIsBottomSheetVisible(true);
+  };
 
   const selectedArrangeFilterItem = arrangementFilterData.find(
     (x) => x.isChecked
@@ -150,7 +159,7 @@ const SearchResult = () => {
           border={1}
           borderColor='sub-purple-light'
           borderRadius='large'
-          onClick={() => handleFilterSelectClick('정렬')}
+          onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
           isChecked={false}
@@ -163,7 +172,7 @@ const SearchResult = () => {
           border={1}
           borderColor='sub-purple-light'
           borderRadius='large'
-          onClick={() => handleFilterSelectClick('업종')}
+          onClick={() => handleFilterSelectClick(1)}
         />
 
         {OptionDataArr.map(
@@ -177,7 +186,7 @@ const SearchResult = () => {
                 border={1}
                 borderColor='sub-purple-light'
                 borderRadius='large'
-                onClick={() => handleFilterSelectClick('옵션')}
+                onClick={() => handleFilterSelectClick(2)}
               />
             )
         )}
@@ -201,20 +210,15 @@ const SearchResult = () => {
         <BottomSheet onDragBottom={handleDragBottom}>
           {/* <div className={styles.emptySpace} onClick={handleDragBottom} /> */}
           <SlideTabView
-            menuItemDataArr={menuItemDataArr.map((item) => ({
-              ...item,
-              isChecked: item.title === selectedMenu,
-            }))}
-            handleCheckedDataIndex={(prevIndex, newIndex) => {
-              setSelectedMenu(menuItemDataArr[newIndex].title);
-            }}
+            menuItemDataArr={menuItemDataArr}
+            handleCheckedDataIndex={handleClickMenuItem}
           />
-          {selectedMenu === '옵션' && (
+          {/* {selectedMenu === '옵션' && (
             <button className={styles.wrapReset} onClick={handleResetClick}>
               <ResetImage />
               <div className={styles.resetText}>전체 초기화</div>
             </button>
-          )}
+          )} */}
         </BottomSheet>
       )}
     </div>

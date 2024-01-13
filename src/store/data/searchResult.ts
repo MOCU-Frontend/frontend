@@ -43,7 +43,7 @@ type FilterList = {
   isChecked: boolean;
 };
 
-export const initialArrangeFilterDataArr: FilterList[] = [
+export const initialArrangementFilterDataArr: FilterList[] = [
   {
     title: '거리순',
     isChecked: true,

@@ -162,20 +162,16 @@ const SearchResult = () => {
       </div>
 
       {isBottomSheetVisible && (
-        <BottomSheet onDragBottom={handleDragBottom}>
-          {/* <div className={styles.emptySpace} onClick={handleDragBottom} /> */}
+        <BottomSheet
+          onDragBottom={handleDragBottom}
+          onClickNotBottomSheet={handleDragBottom}
+        >
           <SlideTabViewFilterOrOption
             menuItemDataArr={menuItemDataArr}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
             handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
-          {/* {selectedMenu === '옵션' && (
-            <button className={styles.wrapReset} onClick={handleResetClick}>
-              <ResetImage />
-              <div className={styles.resetText}>전체 초기화</div>
-            </button>
-          )} */}
         </BottomSheet>
       )}
     </div>

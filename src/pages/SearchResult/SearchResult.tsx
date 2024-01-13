@@ -12,8 +12,8 @@ import BtmSheetFilter from '../../components/SearchResult/atoms/BtmSheetFilter/B
 import BtmSheetOption from '../../components/SearchResult/atoms/BtmSheetOption/BtmSheetOption';
 import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
 import {
-  initialFilterListData1,
-  initialFilterListData2,
+  initialArrangeFilterDataArr,
+  initialSectorFilterDataArr,
   initialOptionDataArr,
   searchResultData,
 } from '../../store/data/searchResult';
@@ -32,34 +32,34 @@ const SearchResult = () => {
 
   // BtmSheetFilter 상태 관리
 
-  const [filterListData1, setFilterListData1] = useState(
-    initialFilterListData1
+  const [arrangeFilterListData, setArrangeFilterListData] = useState(
+    initialArrangeFilterDataArr
   );
 
   const handleItemClick1 = (index: number) => {
-    const newFilterListData1 = filterListData1.map((item, i) => {
+    const newArrangeFilterListData = arrangeFilterListData.map((item, i) => {
       if (i === index) {
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
     });
 
-    setFilterListData1(newFilterListData1);
+    setArrangeFilterListData(newArrangeFilterListData);
   };
 
-  const [filterListData2, setFilterListData2] = useState(
-    initialFilterListData2
+  const [sectorFilterListData, setSectorFilterListData] = useState(
+    initialSectorFilterDataArr
   );
 
   const handleItemClick2 = (index: number) => {
-    const newFilterListData2 = filterListData2.map((item, i) => {
+    const newFilterListData2 = sectorFilterListData.map((item, i) => {
       if (i === index) {
         return { ...item, isChecked: true };
       }
       return { ...item, isChecked: false };
     });
 
-    setFilterListData2(newFilterListData2);
+    setSectorFilterListData(newFilterListData2);
   };
 
   // BtmSheetOption 상태 관리
@@ -99,7 +99,7 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle='정렬'
-          FilterArray={filterListData1}
+          FilterArray={arrangeFilterListData}
           onClick={handleItemClick1}
         />
       ),
@@ -110,7 +110,7 @@ const SearchResult = () => {
       content: (
         <BtmSheetFilter
           FilterTitle='업종'
-          FilterArray={filterListData2}
+          FilterArray={sectorFilterListData}
           onClick={handleItemClick2}
         />
       ),
@@ -129,8 +129,12 @@ const SearchResult = () => {
 
   const [selectedMenu, setSelectedMenu] = useState(menuItemDataArr[0].title);
 
-  const selectedItem1 = filterListData1.find((x) => x.isChecked);
-  const selectedItem2 = filterListData2.find((x) => x.isChecked);
+  const selectedArrangeFilterItem = arrangeFilterListData.find(
+    (x) => x.isChecked
+  );
+  const selectedSectorFilterItem = sectorFilterListData.find(
+    (x) => x.isChecked
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -149,7 +153,11 @@ const SearchResult = () => {
       <div className={styles.filtersWrapper}>
         <CheckFilterSelect
           isChecked={false}
-          label={selectedItem1 ? selectedItem1.title : 'no selected item!'}
+          label={
+            selectedArrangeFilterItem
+              ? selectedArrangeFilterItem.title
+              : 'no selected item!'
+          }
           size='small'
           border={1}
           borderColor='sub-purple-light'
@@ -158,7 +166,11 @@ const SearchResult = () => {
         />
         <CheckFilterSelect
           isChecked={false}
-          label={selectedItem2 ? selectedItem2.title : 'no selected item!'}
+          label={
+            selectedSectorFilterItem
+              ? selectedSectorFilterItem.title
+              : 'no selected item!'
+          }
           size='small'
           border={1}
           borderColor='sub-purple-light'

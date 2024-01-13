@@ -15,8 +15,10 @@ const BottomSheetBasic: React.FC<Props> = ({
   let sheetScreentStyle = `${styles.sheetScreen}`;
   if (isBackgroundBlur) sheetScreentStyle += ` ${styles.screenBlur}`;
   return (
-    <section className={sheetScreentStyle} ref={wrapperRef}>
-      <div className={styles.sheet}>{children}</div>
+    <section className={sheetScreentStyle}>
+      <div className={styles.sheet} ref={wrapperRef}>
+        {children}
+      </div>
     </section>
   );
 };

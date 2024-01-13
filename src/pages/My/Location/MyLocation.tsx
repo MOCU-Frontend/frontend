@@ -24,7 +24,7 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
           color='navy'
         />
         <div className={styles.settingBtnWrapper}>
-          <MyLocationSettingBtn onClick={() => {}} />
+          <MyLocationSettingBtn onClick={() => navigate('now')} />
         </div>
         <MyLocationLocEditContent
           titleText='주소'
@@ -38,7 +38,7 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
         />
       </main>
       <div className={styles.bottomBtnWrapper}>
-        <FullBtn label='새로운 장소 등록하기' />
+        <FullBtn label='새로운 장소 등록하기' onClick={() => navigate('now')} />
       </div>
     </section>
   );

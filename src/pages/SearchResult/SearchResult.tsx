@@ -9,25 +9,12 @@ import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
 import {
-  initialArrangementFilterDataArr,
-  initialSectorFilterDataArr,
-  initialOptionDataArr,
   searchResultData,
+  initialMenuItemDataArr,
+  MenuItemData,
 } from '../../store/data/searchResult';
 import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
 import CheckFilter from '../../components/CheckFilter/CheckFilter';
-
-type FilterList = {
-  title: string;
-  isChecked: boolean;
-};
-
-type MenuItemData = {
-  title: string;
-  isChecked: boolean;
-  bodyType: 'filter' | 'option';
-  bodyDataArr: FilterList[];
-};
 
 const SearchResult = () => {
   const navigate = useNavigate();
@@ -49,26 +36,9 @@ const SearchResult = () => {
     setIsBottomSheetVisible(false);
   };
 
-  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>([
-    {
-      title: '정렬',
-      isChecked: true,
-      bodyType: 'filter',
-      bodyDataArr: initialArrangementFilterDataArr,
-    },
-    {
-      title: '업종',
-      isChecked: false,
-      bodyType: 'filter',
-      bodyDataArr: initialSectorFilterDataArr,
-    },
-    {
-      title: '옵션',
-      isChecked: false,
-      bodyType: 'option',
-      bodyDataArr: initialOptionDataArr,
-    },
-  ]);
+  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
+    initialMenuItemDataArr
+  );
 
   const handleClickMenuBodyItem = (
     menuIndex: number,

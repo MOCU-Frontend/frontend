@@ -107,3 +107,31 @@ export const initialOptionDataArr = [
     isChecked: false,
   },
 ];
+
+export type MenuItemData = {
+  title: string;
+  isChecked: boolean;
+  bodyType: 'filter' | 'option';
+  bodyDataArr: FilterList[];
+};
+
+export const initialMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyType: 'filter',
+    bodyDataArr: initialArrangementFilterDataArr,
+  },
+  {
+    title: '업종',
+    isChecked: false,
+    bodyType: 'filter',
+    bodyDataArr: initialSectorFilterDataArr,
+  },
+  {
+    title: '옵션',
+    isChecked: false,
+    bodyType: 'option',
+    bodyDataArr: initialOptionDataArr,
+  },
+];

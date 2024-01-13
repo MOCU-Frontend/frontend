@@ -11,31 +11,39 @@ interface Props {
   /**
    * 제목
    */
-  FilterTitle: string;
+  filterTitle: string;
 
   /**
    * 전달된 배열
    */
-  FilterArray: FilterList[];
+  filterArray: FilterList[];
 
   /**
    * 버튼 클릭할 때
    */
-  onClick: (index: number) => void;
+  onClick: (prevIndex: number, index: number) => void;
 }
 
 const BtmSheetFilter: React.FC<Props> = ({
-  FilterTitle,
-  FilterArray,
+  filterTitle,
+  filterArray,
   onClick,
 }: Props) => {
+  const checkedFilterIndex = filterArray.findIndex((x) => x.isChecked);
+  const handleClickFilterBtn = (newIndex: number) => {
+    if (checkedFilterIndex !== -1) {
+      onClick(checkedFilterIndex, newIndex);
+    } else {
+      throw new Error('no checked filter!!!');
+    }
+  };
   return (
     <div className={styles.wrapFilter}>
-      {FilterArray.map((item, index) => (
+      {filterArray.map((item, index) => (
         <button
           key={index}
           className={styles.wrapList}
-          onClick={() => onClick(index)}
+          onClick={() => handleClickFilterBtn(index)}
         >
           <div
             className={

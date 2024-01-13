@@ -36,30 +36,26 @@ const SearchResult = () => {
     initialArrangeFilterDataArr
   );
 
-  const handleClickArrangeFilterItem = (index: number) => {
-    const newArrangeFilterListData = arrangeFilterData.map((item, i) => {
-      if (i === index) {
-        return { ...item, isChecked: true };
-      }
-      return { ...item, isChecked: false };
+  const handleClickArrangeFilterItem = (prevIndex: number, index: number) => {
+    setArrangeFilterData((prevState) => {
+      const copiedArr = [...prevState];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[index].isChecked = true;
+      return copiedArr;
     });
-
-    setArrangeFilterData(newArrangeFilterListData);
   };
 
   const [sectorFilterData, setSectorFilterData] = useState(
     initialSectorFilterDataArr
   );
 
-  const handleClickSectorFilterItem = (index: number) => {
-    const newFilterListData2 = sectorFilterData.map((item, i) => {
-      if (i === index) {
-        return { ...item, isChecked: true };
-      }
-      return { ...item, isChecked: false };
+  const handleClickSectorFilterItem = (prevIndex: number, index: number) => {
+    setSectorFilterData((prevState) => {
+      const copiedArr = [...prevState];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[index].isChecked = true;
+      return copiedArr;
     });
-
-    setSectorFilterData(newFilterListData2);
   };
 
   // BtmSheetOption 상태 관리
@@ -98,8 +94,8 @@ const SearchResult = () => {
       isChecked: true,
       content: (
         <BtmSheetFilter
-          FilterTitle='정렬'
-          FilterArray={arrangeFilterData}
+          filterTitle='정렬'
+          filterArray={arrangeFilterData}
           onClick={handleClickArrangeFilterItem}
         />
       ),
@@ -109,8 +105,8 @@ const SearchResult = () => {
       isChecked: false,
       content: (
         <BtmSheetFilter
-          FilterTitle='업종'
-          FilterArray={sectorFilterData}
+          filterTitle='업종'
+          filterArray={sectorFilterData}
           onClick={handleClickSectorFilterItem}
         />
       ),

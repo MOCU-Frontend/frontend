@@ -29,12 +29,12 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
         <MyLocationLocEditContent
           titleText='주소'
           locationText='서울 광진구 능동로 69'
-          onClickBtn={() => {}}
+          onClickBtn={() => navigate('1')}
         />
         <MyLocationLocEditContent
           titleText='학교'
           locationText='서울 광진구 능동로 120'
-          onClickBtn={() => {}}
+          onClickBtn={() => navigate('2')}
         />
       </main>
       <div className={styles.bottomBtnWrapper}>

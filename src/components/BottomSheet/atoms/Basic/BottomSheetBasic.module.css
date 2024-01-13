@@ -14,12 +14,13 @@
 }
 
 .sheet {
-  position: absolute;
+  position: fixed;
   background-color: var(--color-white);
   border-radius: 12px 12px 0px 0px;
   display: flex;
   flex-direction: column;
   width: 100vw;
-  height: 50vh;
+  height: fit-content;
   bottom: 0;
+  left: 0;
 }

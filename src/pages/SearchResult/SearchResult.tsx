@@ -215,7 +215,7 @@ const SearchResult = () => {
       isChecked: true,
       content: (
         <BtmSheetFilter
-          FilterTitle="정렬"
+          FilterTitle='정렬'
           FilterArray={filterListData1}
           onClick={handleItemClick1}
         />
@@ -226,7 +226,7 @@ const SearchResult = () => {
       isChecked: false,
       content: (
         <BtmSheetFilter
-          FilterTitle="업종"
+          FilterTitle='업종'
           FilterArray={filterListData2}
           onClick={handleItemClick2}
         />
@@ -250,11 +250,11 @@ const SearchResult = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
-          headerPaddingSize="search"
+          headerPaddingSize='search'
           onClickBackBtn={() => navigate(-1)}
         >
           <SearchBar
-            placeholder="찾고 싶은 가게를 검색해 보세요"
+            placeholder='찾고 싶은 가게를 검색해 보세요'
             onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
         </HeaderBackBtn>
@@ -264,19 +264,19 @@ const SearchResult = () => {
         <CheckFilterSelect
           isChecked={false}
           label={selectedTitle1}
-          size="small"
+          size='small'
           border={1}
-          borderColor="sub-purple-light"
-          borderRadius="large"
+          borderColor='sub-purple-light'
+          borderRadius='large'
           onClick={() => handleFilterSelectClick('정렬')}
         />
         <CheckFilterSelect
           isChecked={false}
           label={selectedTitle2}
-          size="small"
+          size='small'
           border={1}
-          borderColor="sub-purple-light"
-          borderRadius="large"
+          borderColor='sub-purple-light'
+          borderRadius='large'
           onClick={() => handleFilterSelectClick('업종')}
         />
 
@@ -286,10 +286,10 @@ const SearchResult = () => {
               <CheckFilterSelect
                 isChecked={false}
                 label={data.title}
-                size="small"
+                size='small'
                 border={1}
-                borderColor="sub-purple-light"
-                borderRadius="large"
+                borderColor='sub-purple-light'
+                borderRadius='large'
                 onClick={() => handleFilterSelectClick('옵션')}
               />
             )
@@ -310,7 +310,7 @@ const SearchResult = () => {
 
       {isBottomSheetVisible && (
         <BottomSheet onDragBottom={handleDragBottom}>
-          <div className={styles.emptySpace} onClick={handleDragBottom} />
+          {/* <div className={styles.emptySpace} onClick={handleDragBottom} /> */}
           <SlideTabView
             menuItemDataArr={menuItemDataArr.map((item) => ({
               ...item,

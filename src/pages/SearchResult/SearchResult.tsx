@@ -284,6 +284,7 @@ const SearchResult = () => {
           (data, index) =>
             data.isChecked && (
               <CheckFilterSelect
+                key={data.title + index}
                 isChecked={false}
                 label={data.title}
                 size='small'
@@ -299,11 +300,13 @@ const SearchResult = () => {
       <div className={styles.wrapContent}>
         {searchResultData.map((data, index) => (
           <StoreInfo
-            key={index}
+            key={data.title + index}
             title={data.title}
             couponCount={data.couponCount}
             achieve={data.achieve}
             distance={data.distance}
+            onClickCouponeBtn={() => {}}
+            onClickStoreDetailBtn={() => {}}
           />
         ))}
       </div>

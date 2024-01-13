@@ -94,7 +94,6 @@ const SearchResult = () => {
       isChecked: true,
       content: (
         <BtmSheetFilter
-          filterTitle='정렬'
           filterArray={arrangeFilterData}
           onClick={handleClickArrangeFilterItem}
         />
@@ -105,7 +104,6 @@ const SearchResult = () => {
       isChecked: false,
       content: (
         <BtmSheetFilter
-          filterTitle='업종'
           filterArray={sectorFilterData}
           onClick={handleClickSectorFilterItem}
         />

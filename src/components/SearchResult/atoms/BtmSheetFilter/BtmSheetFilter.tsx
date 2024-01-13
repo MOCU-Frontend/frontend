@@ -9,11 +9,6 @@ type FilterList = {
 
 interface Props {
   /**
-   * 제목
-   */
-  filterTitle: string;
-
-  /**
    * 전달된 배열
    */
   filterArray: FilterList[];
@@ -24,11 +19,7 @@ interface Props {
   onClick: (prevIndex: number, index: number) => void;
 }
 
-const BtmSheetFilter: React.FC<Props> = ({
-  filterTitle,
-  filterArray,
-  onClick,
-}: Props) => {
+const BtmSheetFilter: React.FC<Props> = ({ filterArray, onClick }: Props) => {
   const checkedFilterIndex = filterArray.findIndex((x) => x.isChecked);
   const handleClickFilterBtn = (newIndex: number) => {
     if (checkedFilterIndex !== -1) {

@@ -10,6 +10,7 @@ import { colors } from '../../styles/colors';
 
 const Mission2 = () => {
   const navigate = useNavigate();
+  const stampCnt = 1;
 
   return (
     <div className={styles.wrapper}>
@@ -40,7 +41,7 @@ const Mission2 = () => {
 
         <div className={styles.wrapContentTitle}>
           <div>미션맵 완성까지</div>
-          <div>스탬프 2개가 남았어요!</div>
+          <div>스탬프 {stampCnt}개가 남았어요!</div>
         </div>
 
         <div className={styles.wrapContentSubTitle}>
@@ -55,7 +56,7 @@ const Mission2 = () => {
             <HourglassImage width={24} height={24} fill={colors.greyDark00} />
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
-          <MissionMap stampCnt={1} todayMissionCnt={1} />
+          <MissionMap stampCnt={stampCnt} todayMissionCnt={1} />
         </div>
       </div>
     </div>

@@ -10,6 +10,7 @@ import MyLocation from './My/Location/MyLocation';
 import Mission1 from './Mission1/Mission1';
 import Mission2 from './Mission2/Mission2';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
+import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const Router = () => {
     {
       path: '/my/location/now',
       element: <MyNowLocation />,
+    },
+    {
+      path: '/my/location/:locationId',
+      element: <MyLocationEdit />,
     },
   ]);
 

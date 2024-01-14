@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Mission1.module.css';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
+import TodayMission from '../../components/Mission1/atoms/TodayMission';
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../styles/colors';
@@ -92,6 +93,11 @@ const Mission1 = () => {
             </div>
             <CoupongageImage />
           </div>
+          <TodayMission title={MissionTitleData[0].title} />
+          <TodayMission title={MissionTitleData[1].title} />
+          <TodayMission title={MissionTitleData[2].title} />
+          <TodayMission title={MissionTitleData[3].title} />
+          <TodayMission title={MissionTitleData[4].title} />
         </div>
       </div>
     </div>

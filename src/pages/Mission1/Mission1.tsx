@@ -34,6 +34,7 @@ const MissionTitleData: MissionTitle[] = [
 
 const Mission1 = () => {
   const navigate = useNavigate();
+  const todayMissionCnt = 2;
 
   return (
     <div className={styles.wrapper}>
@@ -89,7 +90,7 @@ const Mission1 = () => {
         <div className={styles.wrapMissionList}>
           <div className={styles.wrapCurrentState}>
             <div className={styles.currentStateText}>
-              다음 스탬프 획득까지 미션 2개 남았습니다.
+              다음 스탬프 획득까지 미션 {todayMissionCnt}개 남았습니다.
             </div>
             <CoupongageImage />
           </div>

@@ -11,7 +11,12 @@ const MyLocationEditDetailInput: React.FC<Props> = ({
   handleChange,
 }: Props) => {
   return (
-    <input type={'search'} className={styles.input} onChange={handleChange} />
+    <input
+      type={'search'}
+      className={styles.input}
+      value={value}
+      onChange={handleChange}
+    />
   );
 };
 

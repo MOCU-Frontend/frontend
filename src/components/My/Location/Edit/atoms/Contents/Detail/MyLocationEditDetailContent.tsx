@@ -15,7 +15,11 @@ const MyLocationEditDetailContent: React.FC<Props> = ({
   return (
     <div className={styles.wholeWrapper}>
       <MyLocationEditDetailContentTitleText text='상세 주소 입력' />
-      <MyLocationEditDetailInput value={value} handleChange={handleChange} />
+      <MyLocationEditDetailInput
+        value={value}
+        handleChange={handleChange}
+        placeholder='상세 주소를 입력해주세요.'
+      />
     </div>
   );
 };

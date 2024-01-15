@@ -41,6 +41,7 @@ const MyLocationEditLocSetContent: React.FC<Props> = ({
       {checkedData.name === '기타' && (
         <MyLocationEditDetailInput
           value={checkedData.etcName || ''}
+          placeholder='기타 주소 별칭을 입력해주세요.'
           handleChange={handleChangeCheckedDataEtcName}
         />
       )}

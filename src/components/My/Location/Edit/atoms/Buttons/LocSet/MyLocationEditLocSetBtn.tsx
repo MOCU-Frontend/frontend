@@ -3,9 +3,10 @@ import { colors } from '../../../../../../../styles/colors';
 import MyLocationEditLocSetBtnText from '../../Texts/LocSetBtn/MyLocationEditLocSetBtnText';
 import styles from './MyLocationEditLocSetBtn.module.css';
 type LocSetData = {
-  name: string;
+  name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   isChecked: boolean;
+  etcName?: string;
 };
 
 interface Props {

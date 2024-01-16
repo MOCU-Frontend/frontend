@@ -1,0 +1,93 @@
+{
+  "documents": [
+    {
+      "address": {
+        "address_name": "서울 광진구 구의동",
+        "b_code": "1121510300",
+        "h_code": "",
+        "main_address_no": "",
+        "mountain_yn": "N",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_h_name": "",
+        "region_3depth_name": "구의동",
+        "sub_address_no": "",
+        "x": "127.093135225891",
+        "y": "37.5502741239803"
+      },
+      "address_name": "서울 광진구 구의동",
+      "address_type": "REGION",
+      "road_address": null,
+      "x": "127.093135225891",
+      "y": "37.5502741239803"
+    },
+    {
+      "address": {
+        "address_name": "서울 광진구 구의1동",
+        "b_code": "",
+        "h_code": "1121585000",
+        "main_address_no": "",
+        "mountain_yn": "N",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_h_name": "구의1동",
+        "region_3depth_name": "",
+        "sub_address_no": "",
+        "x": "127.085675411153",
+        "y": "37.5424122510284"
+      },
+      "address_name": "서울 광진구 구의1동",
+      "address_type": "REGION",
+      "road_address": null,
+      "x": "127.085675411153",
+      "y": "37.5424122510284"
+    },
+    {
+      "address": {
+        "address_name": "서울 광진구 구의2동",
+        "b_code": "",
+        "h_code": "1121586000",
+        "main_address_no": "",
+        "mountain_yn": "N",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_h_name": "구의2동",
+        "region_3depth_name": "",
+        "sub_address_no": "",
+        "x": "127.089940298223",
+        "y": "37.5472276222658"
+      },
+      "address_name": "서울 광진구 구의2동",
+      "address_type": "REGION",
+      "road_address": null,
+      "x": "127.089940298223",
+      "y": "37.5472276222658"
+    },
+    {
+      "address": {
+        "address_name": "서울 광진구 구의3동",
+        "b_code": "",
+        "h_code": "1121587000",
+        "main_address_no": "",
+        "mountain_yn": "N",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_h_name": "구의3동",
+        "region_3depth_name": "",
+        "sub_address_no": "",
+        "x": "127.091961310776",
+        "y": "37.5379818127006"
+      },
+      "address_name": "서울 광진구 구의3동",
+      "address_type": "REGION",
+      "road_address": null,
+      "x": "127.091961310776",
+      "y": "37.5379818127006"
+    }
+  ],
+  "meta": {
+    "is_end": true,
+    "pageable_count": 4,
+    "total_count": 4
+  }
+}

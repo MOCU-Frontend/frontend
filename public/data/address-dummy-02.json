@@ -1,0 +1,219 @@
+{
+  "documents": [
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "중곡동",
+        "road_name": "능동로",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.076062864098",
+        "y": "37.5503978092477",
+        "zone_no": ""
+      },
+      "x": "127.076062864098",
+      "y": "37.5503978092477"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로1길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로1길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로1길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.066208201056",
+        "y": "37.5327759591006",
+        "zone_no": ""
+      },
+      "x": "127.066208201056",
+      "y": "37.5327759591006"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3가길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3가길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3가길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.065411406754",
+        "y": "37.5332151905671",
+        "zone_no": ""
+      },
+      "x": "127.065411406754",
+      "y": "37.5332151905671"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.065229645517",
+        "y": "37.5339270817647",
+        "zone_no": ""
+      },
+      "x": "127.065229645517",
+      "y": "37.5339270817647"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3나길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3나길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3나길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.065545674034",
+        "y": "37.5343448810338",
+        "zone_no": ""
+      },
+      "x": "127.065545674034",
+      "y": "37.5343448810338"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3다길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3다길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3다길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.064526010756",
+        "y": "37.5332564929923",
+        "zone_no": ""
+      },
+      "x": "127.064526010756",
+      "y": "37.5332564929923"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3라길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3라길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3라길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.065082371165",
+        "y": "37.5343579314791",
+        "zone_no": ""
+      },
+      "x": "127.065082371165",
+      "y": "37.5343579314791"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로3마길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로3마길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로3마길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.064558948733",
+        "y": "37.5344543555537",
+        "zone_no": ""
+      },
+      "x": "127.064558948733",
+      "y": "37.5344543555537"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로4길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로4길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로4길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.069691747728",
+        "y": "37.5324054453625",
+        "zone_no": ""
+      },
+      "x": "127.069691747728",
+      "y": "37.5324054453625"
+    },
+    {
+      "address": null,
+      "address_name": "서울 광진구 능동로5길",
+      "address_type": "ROAD",
+      "road_address": {
+        "address_name": "서울 광진구 능동로5길",
+        "building_name": "",
+        "main_building_no": "",
+        "region_1depth_name": "서울",
+        "region_2depth_name": "광진구",
+        "region_3depth_name": "자양동",
+        "road_name": "능동로5길",
+        "sub_building_no": "",
+        "underground_yn": "N",
+        "x": "127.067128337744",
+        "y": "37.5366628970911",
+        "zone_no": ""
+      },
+      "x": "127.067128337744",
+      "y": "37.5366628970911"
+    }
+  ],
+  "meta": {
+    "is_end": false,
+    "pageable_count": 57,
+    "total_count": 57
+  }
+}

@@ -43,7 +43,10 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
         />
       </main>
       <div className={styles.bottomBtnWrapper}>
-        <FullBtn label='새로운 장소 등록하기' onClick={() => navigate('now')} />
+        <FullBtn
+          label='새로운 장소 등록하기'
+          onClick={() => navigate('enrollment')}
+        />
       </div>
     </section>
   );

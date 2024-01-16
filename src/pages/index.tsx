@@ -10,6 +10,7 @@ import MyLocation from './My/Location/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
+import Present from './Present/Present';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ const Router = () => {
     {
       path: '/storesearch/:searchWord',
       element: <SearchResult />,
+    },
+    {
+      path: '/present',
+      element: <Present />,
     },
     {
       path: '/my',

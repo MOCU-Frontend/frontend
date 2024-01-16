@@ -94,7 +94,12 @@ const Map: React.FC = () => {
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
-          {!isShowBottomSheet && <MapHeaderSelect text='학교' />}
+          {!isShowBottomSheet && (
+            <MapHeaderSelect
+              text='학교'
+              onClick={() => navigate('/mylocation')}
+            />
+          )}
           {isShowBottomSheet && (
             <div className={styles.filtersInHeaderWrapper}>
               <CheckFilterSelect

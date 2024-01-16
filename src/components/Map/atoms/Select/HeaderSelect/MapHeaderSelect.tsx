@@ -6,14 +6,15 @@ import { colors } from '../../../../../styles/colors';
 
 interface Props {
   text: string;
+  onClick: () => void;
 }
 
-const MapHeaderSelect: React.FC<Props> = ({ text }: Props) => {
+const MapHeaderSelect: React.FC<Props> = ({ text, onClick }: Props) => {
   return (
-    <div className={styles.wrapper}>
+    <button className={styles.wrapper} onClick={onClick}>
       <MapHeaderTitleText text={text} />
       <ArrowDown width={24} height={24} stroke={colors.mainPurple} />
-    </div>
+    </button>
   );
 };
 

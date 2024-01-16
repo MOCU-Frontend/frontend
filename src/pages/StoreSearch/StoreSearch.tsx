@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterWithXBtn from '../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
 import Card from '../../components/StoreSearch/atoms/Card/Card';
 
@@ -44,7 +45,15 @@ const StoreSearch = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
-        <HeaderBackBtn
+        <SearchBarHeader
+          placeholder="찾고 싶은 가게를 검색해 보세요"
+          onClickBackBtn={() => navigate('/home')}
+          onClickSearchBtn={(value: string) =>
+            navigate(`/storesearch/${value}`)
+          }
+        />
+
+        {/* <HeaderBackBtn
           headerPaddingSize="search"
           onClickBackBtn={() => navigate(-1)}
         >
@@ -52,7 +61,7 @@ const StoreSearch = () => {
             placeholder="찾고 싶은 가게를 검색해 보세요"
             onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
-        </HeaderBackBtn>
+        </HeaderBackBtn> */}
       </div>
       <div className={styles.contentWrapper}>
         <div className={styles.contentRecent}>

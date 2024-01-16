@@ -1,8 +1,8 @@
-type AddressSearchWholeData = {
+export type AddressSearchWholeData = {
   documents: AddressSearchData[];
   meta: AddressSearchMetaData;
 };
-type AddressSearchData = {
+export type AddressSearchData = {
   address_name: string;
   address_type: string;
   x: string;

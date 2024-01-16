@@ -40,7 +40,7 @@ const MyLocation: React.FC = () => {
       <main className={styles.main}>
         <BodyTitleText text='모쿠님은 현재 학교에 있어요.' color='navy' />
         <MyLocationSettingBtn
-          onClick={() => navigate('now')}
+          onClick={() => {}}
           text='현재 위치 재설정'
           color={colors.subPurplelight}
         />

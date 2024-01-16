@@ -18,7 +18,7 @@ const MyLocationEnrollment: React.FC<Props> = ({}: Props) => {
     AddressSearchWholeData | undefined
   >();
   useEffect(() => {
-    fetch('http://localhost:3000/data/address-dummy-02.json')
+    fetch('http://localhost:3000/data/address-dummy-01.json')
       .then((response) => {
         if (response.ok === true) {
           return response.json();
@@ -44,7 +44,9 @@ const MyLocationEnrollment: React.FC<Props> = ({}: Props) => {
       </div>
       <div className={styles.myLocationSettingBtnWrapper}>
         <MyLocationSettingBtn
-          onClick={() => {}}
+          onClick={() => {
+            navigate('/my/location/now');
+          }}
           text='현재 위치로 설정'
           color={colors.subPurplelight}
         />

@@ -9,6 +9,7 @@ import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
+import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const Router = () => {
             {
               path: ':locationId',
               element: <MyLocationEdit />,
+            },
+            {
+              path: 'enrollment',
+              element: <MyLocationEnrollment />,
             },
           ],
         },

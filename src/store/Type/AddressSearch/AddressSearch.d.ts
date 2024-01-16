@@ -7,7 +7,7 @@ export type AddressSearchData = {
   address_type: string;
   x: string;
   y: string;
-  address: {
+  address?: {
     address_name: string;
     region_1depth_name: string;
     region_2depth_name: string;
@@ -21,7 +21,7 @@ export type AddressSearchData = {
     x: string;
     y: string;
   };
-  road_address: {
+  road_address?: {
     address_name: string;
     region_1depth_name: string;
     region_2depth_name: string;
@@ -30,7 +30,7 @@ export type AddressSearchData = {
     underground_yn: string;
     main_building_no: string;
     sub_building_no: string;
-    building_name: string;
+    building_name?: string;
     zone_no: string;
     x: string;
     y: string;

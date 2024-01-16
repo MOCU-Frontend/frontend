@@ -14,10 +14,15 @@ const MyLocationEnrollmentAddressList: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
-      {addressSearchDataArr.map((data) => (
+      {addressSearchDataArr.map((data, index) => (
         <MyLocationEnrollmentAddressContent
+          key={data.address_name + index}
           onClick={() => handleClickSearchAddress(data)}
-          titleText={data.road_address.building_name || data.address_name}
+          titleText={
+            data.road_address
+              ? data.road_address.building_name || data.address_name
+              : data.address_name
+          }
           subText={data.address_name}
         />
       ))}

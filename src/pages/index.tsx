@@ -39,6 +39,10 @@ const Router = () => {
       element: <Present />,
     },
     {
+      path: '/present/:searchWord',
+      element: <Present />,
+    },
+    {
       path: '/my',
       children: [
         {

@@ -34,21 +34,31 @@ const Router = () => {
     },
     {
       path: '/my',
-      element: <My />,
       children: [
         {
+          index: true,
+          path: '',
+          element: <My />,
+        },
+        {
           path: 'location',
-          element: <MyLocation />,
+          children: [
+            {
+              index: true,
+              path: '',
+              element: <MyLocation />,
+            },
+            {
+              path: 'now',
+              element: <MyNowLocation />,
+            },
+            {
+              path: ':locationId',
+              element: <MyLocationEdit />,
+            },
+          ],
         },
       ],
-    },
-    {
-      path: '/my/location/now',
-      element: <MyNowLocation />,
-    },
-    {
-      path: '/my/location/:locationId',
-      element: <MyLocationEdit />,
     },
   ]);
 

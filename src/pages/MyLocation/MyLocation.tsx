@@ -38,11 +38,7 @@ const MyLocation: React.FC = () => {
         onClickBackBtn={() => navigate(-1)}
       />
       <main className={styles.main}>
-        <BodyTitleText
-          text='모쿠님은 현재 
-서울 광진구 아차산로 ...에 있어요.'
-          color='navy'
-        />
+        <BodyTitleText text='모쿠님은 현재 학교에 있어요.' color='navy' />
         <MyLocationSettingBtn
           onClick={() => navigate('now')}
           text='현재 위치 재설정'

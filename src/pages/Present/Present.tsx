@@ -3,7 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Present.module.css';
 import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
+import PresentButton from '../../components/Present/atoms/PresentButton/PresentButton';
 import { colors } from '../../styles/colors';
+import { presentData } from '../../store/data/present';
 
 const Present = () => {
   const navigate = useNavigate();
@@ -38,6 +40,17 @@ const Present = () => {
           border={1}
           borderColor={'sub-purple-light'}
         />
+      </div>
+
+      <div className={styles.gridContainer}>
+        {presentData.map((data, index) => (
+          <PresentButton
+            key={index}
+            cafeTitle={data.cafeTitle}
+            foodTitle={data.foodTitle}
+            foodPrice={data.foodPrice.toLocaleString('ko-KR')}
+          />
+        ))}
       </div>
     </div>
   );

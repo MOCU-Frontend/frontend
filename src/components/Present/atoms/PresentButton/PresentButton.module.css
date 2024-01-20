@@ -1,0 +1,49 @@
+@import '../../../../styles/colorVars.css';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background: none;
+  border: none;
+}
+
+.imageWrapper {
+  width: 18vh;
+  height: 18vh;
+  background-color: var(--color-grey, #b4b4b4);
+  border-radius: 20px;
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cafeTitle {
+  color: var(--color-grey, #b4b4b4);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  letter-spacing: -0.036px;
+}
+
+.foodTitle {
+  color: var(--color-navy, #0f112d);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.042px;
+}
+
+.foodPrice {
+  color: var(--color-main-purple, #6e75e8);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.048px;
+}

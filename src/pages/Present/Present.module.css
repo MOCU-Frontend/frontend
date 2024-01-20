@@ -41,3 +41,18 @@
 .filtersWrapper::-webkit-scrollbar {
   display: none;
 }
+
+.gridContainer {
+  position: relative;
+  overflow-y: auto;
+  max-height: calc(100vh - 16vh - 16px);
+  margin-top: 16vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  row-gap: 20px;
+  column-gap: 24px;
+}
+.gridContainer::-webkit-scrollbar {
+  display: none;
+}

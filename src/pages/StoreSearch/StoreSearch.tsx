@@ -9,6 +9,8 @@ import SearchBar from '../../components/SearchBar/SearchBar';
 import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterWithXBtn from '../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
 import Card from '../../components/StoreSearch/atoms/Card/Card';
+import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapHeaderSelect';
+import { colors } from '../../styles/colors';
 
 type StoreData = {
   title: string;
@@ -44,6 +46,7 @@ const StoreSearch = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
+<<<<<<< HEAD
       <div className={styles.headerWrapper}>
         <SearchBarHeader
           placeholder="찾고 싶은 가게를 검색해 보세요"
@@ -62,7 +65,26 @@ const StoreSearch = () => {
             onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
         </HeaderBackBtn> */}
+=======
+      <div className={styles.mapHeaderSelectWrapper}>
+        <MapHeaderSelect
+          text='학교'
+          onClick={() => navigate('/mylocation')}
+          color={colors.black}
+          size={'small'}
+        />
+>>>>>>> dev
       </div>
+
+      <HeaderBackBtn
+        headerPaddingSize='search'
+        onClickBackBtn={() => navigate(-1)}
+      >
+        <SearchBar
+          placeholder='찾고 싶은 가게를 검색해 보세요'
+          onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
+        />
+      </HeaderBackBtn>
       <div className={styles.contentWrapper}>
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>최근 검색어</div>
@@ -71,31 +93,31 @@ const StoreSearch = () => {
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="베이글"
+              label='베이글'
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="스터디카페"
+              label='스터디카페'
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="도넛"
+              label='도넛'
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="대학로"
+              label='대학로'
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="건대입구"
+              label='건대입구'
             />
           </div>
         </div>

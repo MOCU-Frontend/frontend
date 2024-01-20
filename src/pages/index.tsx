@@ -7,6 +7,7 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
+import MyLocationPage from './MyLocation/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
@@ -73,6 +74,10 @@ const Router = () => {
           ],
         },
       ],
+    },
+    {
+      path: '/mylocation',
+      element: <MyLocationPage />,
     },
   ]);
 

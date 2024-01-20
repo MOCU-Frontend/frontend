@@ -38,7 +38,7 @@ const Router = () => {
       element: <SearchResult />,
     },
     {
-      path: '/present/:searchWord',
+      path: '/present',
       element: <Present />,
     },
     {

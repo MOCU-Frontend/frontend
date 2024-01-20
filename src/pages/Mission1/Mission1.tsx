@@ -41,11 +41,10 @@ const Mission1 = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate(-1)}
-          backBtnbackgroundColor={colors.mapPurple}
         />
       </div>
       <div className={styles.wrapUserInformation}>

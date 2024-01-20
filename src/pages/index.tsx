@@ -40,6 +40,8 @@ const Router = () => {
     {
       path: '/present/:searchWord',
       element: <Present />,
+    },
+    {
       path: '/mission/1',
       element: <Mission1 />,
     },

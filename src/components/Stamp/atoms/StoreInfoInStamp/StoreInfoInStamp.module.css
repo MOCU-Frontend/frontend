@@ -1,0 +1,101 @@
+@import '../../../../styles/colorVars.css';
+
+.wrapStoreInfo {
+  width: 100%;
+  display: inline-flex;
+  border-top: 0px;
+  border-bottom: 1px solid var(--UI-grey_light_01, #e5e5e5);
+  border-left: 0px;
+  border-right: 0px;
+  padding: 1.5vh 5.5vw;
+  align-items: center;
+  gap: 3vw;
+  background-color: white;
+}
+
+.storeWrapImgStar {
+  display: flex;
+  flex-direction: column;
+}
+
+.storeImage {
+  width: 16vw;
+  height: 16vw;
+  border-radius: 12px;
+  background: lightgray -6.04px -43.845px / 114.381% 224.181% no-repeat;
+  margin-bottom: 4px;
+}
+
+.storeWrapText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 52vw;
+}
+
+.storeTitle {
+  color: var(--UI-navy, #0f112d);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 150% */
+  letter-spacing: -0.048px;
+}
+
+.storeWrapInfoText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.storeCouponCount {
+  color: var(--UI-main_purple, #6e75e8);
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px; /* 171.429% */
+  letter-spacing: -0.042px;
+}
+
+.storeAchieve {
+  color: var(--UI-grey_dark_01, #636363);
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.03px;
+}
+
+.storeWrapStar {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1px;
+}
+
+.storeWrapDistance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.storeDistanceText {
+  color: var(--UI-grey_dark_00, #8a8a8a);
+
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.03px;
+}
+
+.storeWrapCouponSentence {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}

@@ -7,6 +7,8 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
+import Mission1 from './Mission1/Mission1';
+import Mission2 from './Mission2/Mission2';
 import MyLocationPage from './MyLocation/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
@@ -33,6 +35,14 @@ const Router = () => {
     {
       path: '/storesearch/:searchWord',
       element: <SearchResult />,
+    },
+    {
+      path: '/mission/1',
+      element: <Mission1 />,
+    },
+    {
+      path: '/mission/2',
+      element: <Mission2 />,
     },
     {
       path: '/my',

@@ -7,12 +7,9 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
-<<<<<<< HEAD
 import Mission1 from './Mission1/Mission1';
 import Mission2 from './Mission2/Mission2';
-=======
 import MyLocationPage from './MyLocation/MyLocation';
->>>>>>> dev
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';

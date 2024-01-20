@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
+import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
@@ -97,7 +98,15 @@ const SearchResult = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
-        <HeaderBackBtn
+        <SearchBarHeader
+          placeholder="찾고 싶은 가게를 검색해 보세요"
+          onClickBackBtn={() => navigate('/storesearch')}
+          onClickSearchBtn={(value: string) =>
+            navigate(`/storesearch/${value}`)
+          }
+        />
+
+        {/* <HeaderBackBtn
           headerPaddingSize='search'
           onClickBackBtn={() => navigate(-1)}
         >
@@ -105,7 +114,7 @@ const SearchResult = () => {
             placeholder='찾고 싶은 가게를 검색해 보세요'
             onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
           />
-        </HeaderBackBtn>
+        </HeaderBackBtn> */}
       </div>
 
       <div className={styles.filtersWrapper}>
@@ -117,7 +126,7 @@ const SearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -128,7 +137,7 @@ const SearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -140,7 +149,7 @@ const SearchResult = () => {
                 isChecked={false}
                 label={data.title}
                 border={1}
-                borderColor='sub-purple-light'
+                borderColor="sub-purple-light"
                 onClick={() => handleFilterSelectClick(2)}
               />
             )

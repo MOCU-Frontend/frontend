@@ -1,0 +1,14 @@
+<svg width="81" height="81" viewBox="0 0 81 81" fill="none"  xmlns="http://www.w3.org/2000/svg">
+<g id="icon/stamp">
+<path id="Vector" d="M76.1535 40.6075C76.1535 20.8083 60.103 4.75781 40.3038 4.75781C20.5046 4.75781 4.4541 20.8083 4.4541 40.6075C4.4541 60.4067 20.5046 76.4572 40.3038 76.4572C60.103 76.4572 76.1535 60.4067 76.1535 40.6075Z" fill="url(#paint0_linear_589_8149)"/>
+<path id="Vector_2" d="M40.3024 70.3236C56.7149 70.3236 70.0199 57.0186 70.0199 40.6062C70.0199 24.1936 56.7149 10.8887 40.3024 10.8887C23.8899 10.8887 10.585 24.1936 10.585 40.6062C10.585 57.0186 23.8899 70.3236 40.3024 70.3236Z" stroke="white" stroke-width="3.73434"/>
+<g id="icon/star_map">
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_589_8149" x1="4.4541" y1="27.5012" x2="77.6513" y2="68.3785" gradientUnits="userSpaceOnUse">
+<stop stop-color="#525DE1"/>
+<stop offset="1" stop-color="#CAC5FF"/>
+</linearGradient>
+</defs>
+</svg>

@@ -7,12 +7,14 @@
   height: 100vh;
 }
 
+.mapHeaderSelectWrapper {
+  padding: 8px 20px 4px 20px;
+  width: 100%;
+}
+
 .headerWrapper {
   display: flex;
   flex-direction: row;
-  position: fixed;
-  left: 0;
-  top: 0;
   z-index: 2;
   width: 100vw;
   background-color: var(--color-white);
@@ -22,7 +24,6 @@
 
 .contentWrapper {
   position: relative;
-  top: 8vh;
 }
 
 .contentRecent {

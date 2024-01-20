@@ -1,17 +1,22 @@
 import React from 'react';
 import styles from './MyLocationSettingBtn.module.css';
 import { ReactComponent as TargetIcon } from '../../../../../../assets/icon/now.svg';
-import { colors } from '../../../../../../styles/colors';
 import MyLocationSettingText from '../../Text/Setting/MyLocationSettingText';
 interface Props {
   onClick: () => void;
+  text: string;
+  color: string;
 }
 
-const MyLocationSettingBtn: React.FC<Props> = ({ onClick }: Props) => {
+const MyLocationSettingBtn: React.FC<Props> = ({
+  onClick,
+  text,
+  color,
+}: Props) => {
   return (
     <button className={styles.wrapper} onClick={onClick}>
-      <TargetIcon width={24} height={24} fill={colors.mainPurple} />
-      <MyLocationSettingText text='현재 위치 재설정' />
+      <TargetIcon width={24} height={24} fill={color} />
+      <MyLocationSettingText text={text} color={color} />
     </button>
   );
 };

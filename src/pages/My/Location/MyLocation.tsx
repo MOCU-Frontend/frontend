@@ -5,6 +5,7 @@ import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationLocEditContent from '../../../components/My/Location/atoms/Content/LocEdit/MyLocationLocEditContent';
 import BodyTitleText from '../../../components/Text/BodyTitleText/BodyTitleText';
+import { colors } from '../../../styles/colors';
 import styles from './MyLocation.module.css';
 
 interface Props {}
@@ -24,7 +25,11 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
           color='navy'
         />
         <div className={styles.settingBtnWrapper}>
-          <MyLocationSettingBtn onClick={() => navigate('now')} />
+          <MyLocationSettingBtn
+            onClick={() => navigate('now')}
+            text='현재 위치 재설정'
+            color={colors.mainPurple}
+          />
         </div>
         <MyLocationLocEditContent
           titleText='주소'
@@ -38,7 +43,10 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
         />
       </main>
       <div className={styles.bottomBtnWrapper}>
-        <FullBtn label='새로운 장소 등록하기' onClick={() => navigate('now')} />
+        <FullBtn
+          label='새로운 장소 등록하기'
+          onClick={() => navigate('enrollment')}
+        />
       </div>
     </section>
   );

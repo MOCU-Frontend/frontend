@@ -12,9 +12,10 @@ import { ReactComponent as SchoolIcon } from '../../../../assets/icon/school.svg
 import { ReactComponent as MarkerIcon } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import MyLocationEditSeeMapBtn from '../../../../components/My/Location/Edit/atoms/Buttons/SeeMap/MyLocationEditSeeMapBtn';
 type LocSetData = {
-  name: string;
+  name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   isChecked: boolean;
+  etcName?: string;
 };
 const MyLocationEdit: React.FC = () => {
   const { locationId } = useParams();
@@ -23,7 +24,7 @@ const MyLocationEdit: React.FC = () => {
     { name: '집', Icon: HomeIcon, isChecked: true },
     { name: '회사', Icon: CompanyIcon, isChecked: false },
     { name: '학교', Icon: SchoolIcon, isChecked: false },
-    { name: '기타', Icon: MarkerIcon, isChecked: false },
+    { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
   const handleClickLocSetBtn = (index: number) => {
     if (!locSetDataArr[index]) throw new Error('invalid index!');
@@ -36,6 +37,19 @@ const MyLocationEdit: React.FC = () => {
       return copiedArr;
     });
   };
+  const handleChangeCheckedDataEtcName = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const checkedData = locSetDataArr.find((x) => x.isChecked);
+    if (!checkedData) throw new Error('no checked loc set data!');
+    if (checkedData.name !== '기타') throw new Error('no etc name data!');
+    setLocSetDataArr((prevArr) => {
+      const copiedArr = [...prevArr];
+      copiedArr[3].etcName = e.target.value;
+      return copiedArr;
+    });
+  };
+
   const navigate = useNavigate();
   return (
     <>
@@ -55,6 +69,7 @@ const MyLocationEdit: React.FC = () => {
         <MyLocationEditLocSetContent
           locSetDataArr={locSetDataArr}
           handleClickBtn={handleClickLocSetBtn}
+          handleChangeCheckedDataEtcName={handleChangeCheckedDataEtcName}
         />
       </div>
       <div className={styles.seeMapBtnWrapper}>

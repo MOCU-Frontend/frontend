@@ -7,10 +7,15 @@ import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
+<<<<<<< HEAD
 import Mission1 from './Mission1/Mission1';
 import Mission2 from './Mission2/Mission2';
+=======
+import MyLocationPage from './MyLocation/MyLocation';
+>>>>>>> dev
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
+import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -44,21 +49,39 @@ const Router = () => {
     },
     {
       path: '/my',
-      element: <My />,
       children: [
         {
+          index: true,
+          path: '',
+          element: <My />,
+        },
+        {
           path: 'location',
-          element: <MyLocation />,
+          children: [
+            {
+              index: true,
+              path: '',
+              element: <MyLocation />,
+            },
+            {
+              path: 'now',
+              element: <MyNowLocation />,
+            },
+            {
+              path: ':locationId',
+              element: <MyLocationEdit />,
+            },
+            {
+              path: 'enrollment',
+              element: <MyLocationEnrollment />,
+            },
+          ],
         },
       ],
     },
     {
-      path: '/my/location/now',
-      element: <MyNowLocation />,
-    },
-    {
-      path: '/my/location/:locationId',
-      element: <MyLocationEdit />,
+      path: '/mylocation',
+      element: <MyLocationPage />,
     },
   ]);
 

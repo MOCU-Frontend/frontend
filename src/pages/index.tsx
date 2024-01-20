@@ -13,6 +13,7 @@ import MyLocationPage from './MyLocation/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
+import Present from './Present/Present';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -37,6 +38,8 @@ const Router = () => {
       element: <SearchResult />,
     },
     {
+      path: '/present/:searchWord',
+      element: <Present />,
       path: '/mission/1',
       element: <Mission1 />,
     },

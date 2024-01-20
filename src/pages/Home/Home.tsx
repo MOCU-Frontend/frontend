@@ -50,7 +50,7 @@ const Home = () => {
             titleText="선물"
             subText="선물하고 싶은 사람이 있나요?"
             Icon={PresentIcon}
-            onClick={() => {}}
+            onClick={() => navigate('/present')}
           />
           <HomeMenuGridBtn
             titleText="미션"

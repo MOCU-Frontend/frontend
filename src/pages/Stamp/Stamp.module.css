@@ -1,0 +1,12 @@
+.wrapper {
+  overflow-x: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.wrapFilter {
+  display: flex;
+  flex-direction: row;
+}

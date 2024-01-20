@@ -5,6 +5,7 @@ import Home from './Home/Home';
 import Map from './Map/Map';
 import StoreSearch from './StoreSearch/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
+import Stamp from './Stamp/Stamp';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
 import MyLocationPage from './MyLocation/MyLocation';
@@ -33,6 +34,10 @@ const Router = () => {
     {
       path: '/storesearch/:searchWord',
       element: <SearchResult />,
+    },
+    {
+      path: '/stamp',
+      element: <Stamp />,
     },
     {
       path: '/my',

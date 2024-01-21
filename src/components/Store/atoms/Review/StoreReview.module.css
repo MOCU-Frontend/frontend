@@ -1,0 +1,41 @@
+.wholeWrapper {
+  width: 100%;
+  padding: 0 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.topWrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.profileWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.profileInformWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.profileInformBottomWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+.reportBtnWrapper {
+  background: none;
+  border: none;
+  padding: 0;
+}
+.moreBtnWrapper {
+  background: none;
+  border: none;
+  padding: 0;
+  display: inline;
+}

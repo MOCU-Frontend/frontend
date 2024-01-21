@@ -7,6 +7,7 @@ import StoreInfoContent from '../../components/Store/atoms/Contents/Info/StoreIn
 import StoreStampContent from '../../components/Store/atoms/Contents/Stamp/StoreStampContent';
 import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumBtn';
 import StoreScoreContent from '../../components/Store/atoms/Contents/Score/StoreScoreContent';
+import StoreReviewContent from '../../components/Store/atoms/Contents/Review/StoreReviewContent';
 interface Props {}
 
 const Store: React.FC<Props> = ({}: Props) => {
@@ -35,6 +36,7 @@ const Store: React.FC<Props> = ({}: Props) => {
         <div className={styles.scoreWrapper}>
           <StoreScoreContent />
         </div>
+        <StoreReviewContent />
       </div>
     </div>
   );

@@ -17,11 +17,10 @@ const Mission2 = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate('/home')}
-          backBtnbackgroundColor={colors.mapPurple}
         />
       </div>
 

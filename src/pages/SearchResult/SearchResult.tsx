@@ -165,7 +165,7 @@ const SearchResult = () => {
             achieve={data.achieve}
             distance={data.distance}
             onClickCouponeBtn={() => {}}
-            onClickStoreDetailBtn={() => {}}
+            onClickStoreDetailBtn={() => navigate(`/store/${data.title}`)}
           />
         ))}
       </div>

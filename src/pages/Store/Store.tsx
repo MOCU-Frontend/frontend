@@ -6,6 +6,7 @@ import { colors } from '../../styles/colors';
 import StoreInfoContent from '../../components/Store/atoms/Contents/Info/StoreInfoContent';
 import StoreStampContent from '../../components/Store/atoms/Contents/Stamp/StoreStampContent';
 import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumBtn';
+import StoreScoreContent from '../../components/Store/atoms/Contents/Score/StoreScoreContent';
 interface Props {}
 
 const Store: React.FC<Props> = ({}: Props) => {
@@ -30,6 +31,9 @@ const Store: React.FC<Props> = ({}: Props) => {
         </div>
         <div className={styles.accumBtnWrapper}>
           <StoreAccumBtn onClick={() => {}} />
+        </div>
+        <div className={styles.scoreWrapper}>
+          <StoreScoreContent />
         </div>
       </div>
     </div>

@@ -46,3 +46,7 @@
   width: 100vw;
   border-bottom: 2px solid var(--color-grey-light-00);
 }
+.scoreWrapper {
+  width: 100vw;
+  padding: 24px 20.45px 16px 20.45px;
+}

@@ -21,14 +21,16 @@ const Store: React.FC<Props> = ({}: Props) => {
         </HeaderBackBtn>
       </div>
       <div className={styles.imgDummyBox}></div>
-      <div className={styles.infoWrapper}>
-        <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
-      </div>
-      <div className={styles.stampWrapper}>
-        <StoreStampContent />
-      </div>
-      <div className={styles.accumBtnWrapper}>
-        <StoreAccumBtn onClick={() => {}} />
+      <div className={styles.topContentBox}>
+        <div className={styles.infoWrapper}>
+          <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
+        </div>
+        <div className={styles.stampWrapper}>
+          <StoreStampContent />
+        </div>
+        <div className={styles.accumBtnWrapper}>
+          <StoreAccumBtn onClick={() => {}} />
+        </div>
       </div>
     </div>
   );

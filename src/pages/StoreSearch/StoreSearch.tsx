@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
+import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterWithXBtn from '../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
 import Card from '../../components/StoreSearch/atoms/Card/Card';
 import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapHeaderSelect';
@@ -47,7 +48,7 @@ const StoreSearch = () => {
     <div className={styles.wrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text='학교'
+          text="학교"
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -55,11 +56,11 @@ const StoreSearch = () => {
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize='search'
+        headerPaddingSize="search"
         onClickBackBtn={() => navigate(-1)}
       >
         <SearchBar
-          placeholder='찾고 싶은 가게를 검색해 보세요'
+          placeholder="찾고 싶은 가게를 검색해 보세요"
           onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
         />
       </HeaderBackBtn>
@@ -71,31 +72,31 @@ const StoreSearch = () => {
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='베이글'
+              label="베이글"
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='스터디카페'
+              label="스터디카페"
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='도넛'
+              label="도넛"
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='대학로'
+              label="대학로"
             />
             <CheckFilterWithXBtn
               onClickContent={() => {}}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='건대입구'
+              label="건대입구"
             />
           </div>
         </div>

@@ -1,0 +1,52 @@
+@import '../../styles/colorVars.css';
+.shareBtnWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.shareBtn {
+  background: none;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.wholeWrapper {
+}
+.headerWrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+}
+.imgDummyBox {
+  width: 100%;
+  height: 295px;
+  background-color: grey;
+}
+.infoWrapper {
+  padding: 0 20px;
+  width: 100%;
+}
+.stampWrapper {
+  padding: 0 20px;
+  width: 100%;
+}
+.accumBtnWrapper {
+  padding: 8px 15.6px 14px 15.6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.topContentBox {
+  width: 100vw;
+  border-bottom: 2px solid var(--color-grey-light-00);
+}
+.scoreWrapper {
+  width: 100vw;
+  padding: 24px 20.45px 16px 20.45px;
+}

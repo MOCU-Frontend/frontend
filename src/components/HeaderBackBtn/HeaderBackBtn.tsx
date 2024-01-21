@@ -46,7 +46,10 @@ const HeaderBackBtn: React.FC<Props> = ({
   return (
     <header style={{ gap: `${backBtnGap}px` }} className={headerClassNames}>
       <button
-        style={{ width: `${backBtnSize}px`, height: `${backBtnSize}px` }}
+        style={{
+          width: `${backBtnSize}px`,
+          height: `${backBtnSize}px`,
+        }}
         className={styles.backBtn}
         onClick={onClickBackBtn}
       >

@@ -1,0 +1,22 @@
+.stampTable {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stampRow {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+}
+.headerWRapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

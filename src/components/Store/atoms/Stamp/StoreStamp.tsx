@@ -5,12 +5,17 @@ import { colors } from '../../../../styles/colors';
 import StoreStampBodyText from '../Text/StampBody/StoreStampBodyText';
 interface Props {
   bodyText: string;
+  isActivated: boolean;
 }
 
-const StoreStamp: React.FC<Props> = ({ bodyText }: Props) => {
+const StoreStamp: React.FC<Props> = ({ bodyText, isActivated }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
-      <StampStarIcon width={48} height={48} fill={colors.subPurpleLight} />
+      <StampStarIcon
+        width={48}
+        height={48}
+        fill={isActivated ? colors.subPurpleLight : colors.greyLight00}
+      />
       <div className={styles.textsWrapper}>
         <StoreStampBodyText text={bodyText} />
       </div>

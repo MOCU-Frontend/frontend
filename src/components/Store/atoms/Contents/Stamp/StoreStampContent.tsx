@@ -16,18 +16,18 @@ const StoreStampContent: React.FC<Props> = ({}: Props) => {
       </div>
       <div className={styles.stampTable}>
         <div className={styles.stampRow}>
-          <StoreStamp bodyText='23.11.16' />
-          <StoreStamp bodyText='23.11.16' />
-          <StoreStamp bodyText='23.11.16' />
-          <StoreStamp bodyText='23.11.16' />
-          <StoreStamp bodyText='23.11.16' />
+          <StoreStamp bodyText='23.11.16' isActivated />
+          <StoreStamp bodyText='23.11.16' isActivated />
+          <StoreStamp bodyText='23.11.16' isActivated />
+          <StoreStamp bodyText='23.11.16' isActivated />
+          <StoreStamp bodyText='23.11.16' isActivated />
         </div>
         <div className={styles.stampRow}>
-          <StoreStamp bodyText='23.11.16' />
-          <StoreStamp bodyText='' />
-          <StoreStamp bodyText='' />
-          <StoreStamp bodyText='' />
-          <StoreStamp bodyText='베이글 1개' />
+          <StoreStamp bodyText='23.11.16' isActivated />
+          <StoreStamp bodyText='' isActivated={false} />
+          <StoreStamp bodyText='' isActivated={false} />
+          <StoreStamp bodyText='' isActivated={false} />
+          <StoreStamp bodyText='베이글 1개' isActivated={false} />
         </div>
       </div>
     </div>

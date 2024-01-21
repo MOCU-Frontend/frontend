@@ -44,7 +44,7 @@ const Home = () => {
             titleText="적립"
             subText="쿠폰 적립 현황과 달성 혜택"
             Icon={StampIcon}
-            onClick={() => {}}
+            onClick={() => navigate('/stamp')}
           />
           <HomeMenuGridBtn
             titleText="선물"

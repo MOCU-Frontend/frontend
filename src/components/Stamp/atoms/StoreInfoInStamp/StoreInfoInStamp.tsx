@@ -33,7 +33,7 @@ interface Props {
   /**
    * 쿠폰 사용 버튼 클릭시 발생하는 이벤트
    */
-  onClickCouponeBtn: () => void;
+  onClickCouponBtn: () => void;
 }
 
 const StoreInfoInStamp: React.FC<Props> = ({
@@ -42,7 +42,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
   achieve,
   distance,
   onClickStoreDetailBtn,
-  onClickCouponeBtn,
+  onClickCouponBtn,
 }: Props) => {
   return (
     <button className={styles.wrapStoreInfo}>
@@ -65,7 +65,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
           <div className={styles.storeWrapCouponSentence}>
             <div className={styles.storeCouponCount}>{couponCount}/10</div>
             {couponCount === 10 && (
-              <UseCouponBtnInStamp onClick={onClickCouponeBtn} />
+              <UseCouponBtnInStamp onClick={onClickCouponBtn} />
             )}
           </div>
 

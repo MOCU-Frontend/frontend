@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Stamp.module.css';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
+import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 
 import {
   searchResultData,
@@ -11,8 +12,30 @@ import {
   MenuItemData,
 } from '../../store/data/searchResult';
 
+type ModalLevel = 'confirm' | 'waiting' | 'done';
+type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
+
 const Stamp = () => {
   const navigate = useNavigate();
+
+  const [isCouponModalVisible, setIsCouponModalVisible] = useState(false);
+  const [couponModalLevel, setCouponModalLevel] =
+    useState<CouponModalLevel | null>(null);
+
+  const handleClickCouponBtn = () => {
+    setCouponModalLevel('confirm');
+    setIsCouponModalVisible(true);
+  };
+
+  const handleCloseCouponModal = () => {
+    setIsCouponModalVisible(false);
+    setCouponModalLevel(null); // Reset modal level when the modal is closed
+  };
+
+  const handleRegularCustomer = () => {
+    console.log('Setting as a regular customer...');
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
@@ -57,11 +80,21 @@ const Stamp = () => {
             couponCount={data.couponCount}
             achieve={data.achieve}
             distance={data.distance}
-            onClickCouponeBtn={() => {}}
+            onClickCouponBtn={handleClickCouponBtn}
             onClickStoreDetailBtn={() => {}}
           />
         ))}
       </div>
+
+      {isCouponModalVisible && (
+        <MapCouponModal
+          couponModalLevel={couponModalLevel}
+          setCouponModalLevel={setCouponModalLevel}
+          onCancelModal={handleCloseCouponModal}
+          isRegularCustomer={false}
+          handleRegularCustomer={handleRegularCustomer}
+        />
+      )}
     </div>
   );
 };

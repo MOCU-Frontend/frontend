@@ -27,3 +27,17 @@
   height: 295px;
   background-color: grey;
 }
+.infoWrapper {
+  padding: 0 20px;
+  width: 100%;
+}
+.stampWrapper {
+  padding: 0 20px;
+  width: 100%;
+}
+.accumBtnWrapper {
+  padding: 8px 15.6px 14px 15.6px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}

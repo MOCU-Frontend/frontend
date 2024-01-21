@@ -5,6 +5,7 @@ import { ReactComponent as ShareIcon } from '../../assets/icon/share.svg';
 import { colors } from '../../styles/colors';
 import StoreInfoContent from '../../components/Store/atoms/Contents/Info/StoreInfoContent';
 import StoreStampContent from '../../components/Store/atoms/Contents/Stamp/StoreStampContent';
+import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumBtn';
 interface Props {}
 
 const Store: React.FC<Props> = ({}: Props) => {
@@ -20,8 +21,15 @@ const Store: React.FC<Props> = ({}: Props) => {
         </HeaderBackBtn>
       </div>
       <div className={styles.imgDummyBox}></div>
-      <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
-      <StoreStampContent />
+      <div className={styles.infoWrapper}>
+        <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
+      </div>
+      <div className={styles.stampWrapper}>
+        <StoreStampContent />
+      </div>
+      <div className={styles.accumBtnWrapper}>
+        <StoreAccumBtn onClick={() => {}} />
+      </div>
     </div>
   );
 };

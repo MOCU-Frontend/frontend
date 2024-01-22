@@ -1,0 +1,14 @@
+@import '../../../../../styles/colorVars.css';
+.wholeWrapper {
+  display: flex;
+  width: 100vw;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.storeBox {
+  width: 106px;
+  height: 106px;
+  background-color: var(--color-grey-dark-01);
+  border-radius: 16px;
+}

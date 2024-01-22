@@ -17,6 +17,7 @@ import Present from './Present/Present';
 import MissionToday from './Mission/Today/MissionToday';
 import MissionMap from './Mission/Map/MissionMap';
 import Review from './Review/Review';
+import Coupon from './Coupon/Coupon';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const Router = () => {
     {
       path: '/present',
       element: <Present />,
+    },
+    {
+      path: '/coupon',
+      element: <Coupon />,
     },
     {
       path: '/mission',

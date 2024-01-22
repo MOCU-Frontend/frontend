@@ -13,7 +13,7 @@ import FullBtn from '../../components/Button/FullBtn/FullBtn';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
-  const [isExistReview, setIsExistReview] = useState(false);
+  const [isExistReview, setIsExistReview] = useState(true);
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>
@@ -44,12 +44,14 @@ const Store: React.FC = () => {
         </div>
         <StoreReviewContent />
       </div>
-      <div className={styles.fullBtnWrapper}>
-        <FullBtn
-          onClick={() => navigate('/review/11')}
-          label='리뷰 작성 (1일 남음)'
-        />
-      </div>
+      {isExistReview && (
+        <div className={styles.fullBtnWrapper}>
+          <FullBtn
+            onClick={() => navigate('/review/11')}
+            label='리뷰 작성 (1일 남음)'
+          />
+        </div>
+      )}
     </div>
   );
 };

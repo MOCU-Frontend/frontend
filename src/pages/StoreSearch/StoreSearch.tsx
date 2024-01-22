@@ -48,7 +48,7 @@ const StoreSearch = () => {
     <div className={styles.wrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text="학교"
+          text='학교'
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -56,11 +56,11 @@ const StoreSearch = () => {
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize="search"
+        headerPaddingSize='search'
         onClickBackBtn={() => navigate(-1)}
       >
         <SearchBar
-          placeholder="찾고 싶은 가게를 검색해 보세요"
+          placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
         />
       </HeaderBackBtn>
@@ -69,34 +69,34 @@ const StoreSearch = () => {
           <div className={styles.searchTitle}>최근 검색어</div>
           <div className={styles.filtersWrapper}>
             <CheckFilterWithXBtn
-              onClickContent={() => {}}
+              onClickContent={() => navigate('베이글')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="베이글"
+              label='베이글'
             />
             <CheckFilterWithXBtn
-              onClickContent={() => {}}
+              onClickContent={() => navigate('스터디카페')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="스터디카페"
+              label='스터디카페'
             />
             <CheckFilterWithXBtn
-              onClickContent={() => {}}
+              onClickContent={() => navigate('스터디카페')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="도넛"
+              label='도넛'
             />
             <CheckFilterWithXBtn
-              onClickContent={() => {}}
+              onClickContent={() => navigate('대학로')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="대학로"
+              label='대학로'
             />
             <CheckFilterWithXBtn
-              onClickContent={() => {}}
+              onClickContent={() => navigate('건대입구')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label="건대입구"
+              label='건대입구'
             />
           </div>
         </div>

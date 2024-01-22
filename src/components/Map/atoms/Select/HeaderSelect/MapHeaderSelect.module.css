@@ -2,8 +2,5 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: none;
-  border: none;
-  padding: none;
   text-align: left;
 }

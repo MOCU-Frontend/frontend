@@ -1,8 +1,6 @@
 @import '../../../../styles/colorVars.css';
 .wrapper {
   padding: 2px 0;
-  background: none;
-  border: none;
 }
 
 .checked {

@@ -10,16 +10,16 @@ import { colors } from '../../../styles/colors';
 
 const MissionMap = () => {
   const navigate = useNavigate();
-  const stampCnt = 1;
+  const stampCnt = 5;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor='white'
-          headerTitle='미션'
-          headerTitleColor='white'
+          backBtnColor="white"
+          headerTitle="미션"
+          headerTitleColor="white"
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -55,7 +55,9 @@ const MissionMap = () => {
             <HourglassImage width={24} height={24} fill={colors.greyDark00} />
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
-          <MissionMapContent stampCnt={stampCnt} todayMissionCnt={1} />
+          <div className={styles.wrapMapPicture}>
+            <MissionMapContent stampCnt={stampCnt} todayMissionCnt={1} />
+          </div>
         </div>
       </div>
     </div>

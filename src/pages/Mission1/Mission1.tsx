@@ -5,7 +5,7 @@ import TodayMission from '../../components/Mission1/atoms/TodayMission';
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../styles/colors';
-import { ReactComponent as ProfileImage } from '../../assets/icon/profile.svg';
+import { ReactComponent as ProfileImage } from '../../assets/icon/profileGradation.svg';
 import { ReactComponent as ArrowRightSmallImage } from '../../assets/icon/arrowRightSmall.svg';
 import { ReactComponent as InformationImage } from '../../assets/icon/information.svg';
 import { ReactComponent as CoupongageImage } from '../../assets/icon/couponGage.svg';

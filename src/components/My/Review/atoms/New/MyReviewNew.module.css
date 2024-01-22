@@ -1,0 +1,36 @@
+@import '../../../../../styles/colorVars.css';
+.wholeWrapper {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+}
+.dummyImgWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.dummyImg {
+  width: 280px;
+  height: 215px;
+  border-radius: 10px;
+  background-color: var(--color-grey-dark-01);
+}
+.infoWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.btnWrapper {
+  width: 100%;
+  margin-top: 8px;
+}
+.accumWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}

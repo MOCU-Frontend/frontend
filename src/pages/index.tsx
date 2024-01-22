@@ -17,6 +17,7 @@ import Present from './Present/Present';
 import MissionToday from './Mission/Today/MissionToday';
 import MissionMap from './Mission/Map/MissionMap';
 import Review from './Review/Review';
+import MyReview from './My/Review/MyReview';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -77,6 +78,10 @@ const Router = () => {
           index: true,
           path: '',
           element: <My />,
+        },
+        {
+          path: 'review',
+          element: <MyReview />,
         },
         {
           path: 'location',

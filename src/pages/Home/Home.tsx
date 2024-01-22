@@ -28,7 +28,11 @@ const Home = () => {
           color={colors.greyDark00}
           fill={colors.white}
         />
-        <HomeLocationSec titleText='모쿠님의 현재위치' bodyText='학교' />
+        <HomeLocationSec
+          titleText='모쿠님의 현재위치'
+          bodyText='학교'
+          onClickLoc={() => navigate('/mylocation')}
+        />
       </div>
 
       <main className={styles.main}>

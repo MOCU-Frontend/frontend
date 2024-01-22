@@ -8,16 +8,21 @@ import { colors } from '../../../../styles/colors';
 interface Props {
   titleText: string;
   bodyText: string;
+  onClickLoc: () => void;
 }
 
-const HomeLocationSec: React.FC<Props> = ({ titleText, bodyText }: Props) => {
+const HomeLocationSec: React.FC<Props> = ({
+  titleText,
+  bodyText,
+  onClickLoc,
+}: Props) => {
   return (
     <div className={styles.wrapper}>
       <HomeLocationTitleText text={titleText} />
-      <div className={styles.locationBody}>
+      <button className={styles.locationBody} onClick={onClickLoc}>
         <HomeLocationBodyText text={bodyText} />
         <ArrowDownIcon width={24} height={24} stroke={colors.white} />
-      </div>
+      </button>
     </div>
   );
 };

@@ -47,3 +47,8 @@
   width: 100vw;
   padding: 24px 20.45px 16px 20.45px;
 }
+.fullBtnWrapper {
+  position: fixed;
+  left: 0;
+  bottom: 30px;
+}

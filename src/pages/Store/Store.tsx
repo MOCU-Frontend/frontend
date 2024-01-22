@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import styles from './Store.module.css';
 import { ReactComponent as ShareIcon } from '../../assets/icon/share.svg';
@@ -9,9 +9,11 @@ import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumB
 import StoreScoreContent from '../../components/Store/atoms/Contents/Score/StoreScoreContent';
 import StoreReviewContent from '../../components/Store/atoms/Contents/Review/StoreReviewContent';
 import { useNavigate } from 'react-router-dom';
+import FullBtn from '../../components/Button/FullBtn/FullBtn';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
+  const [isExistReview, setIsExistReview] = useState(false);
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>
@@ -41,6 +43,12 @@ const Store: React.FC = () => {
           <StoreScoreContent />
         </div>
         <StoreReviewContent />
+      </div>
+      <div className={styles.fullBtnWrapper}>
+        <FullBtn
+          onClick={() => navigate('/review/11')}
+          label='리뷰 작성 (1일 남음)'
+        />
       </div>
     </div>
   );

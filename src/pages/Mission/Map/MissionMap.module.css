@@ -127,3 +127,11 @@
   line-height: 20px;
   letter-spacing: -0.03px;
 }
+
+.wrapMapPicture {
+  position: absolute;
+  bottom: 3vh;
+  left: 4vw;
+  width: 100%;
+  height: 58vh;
+}

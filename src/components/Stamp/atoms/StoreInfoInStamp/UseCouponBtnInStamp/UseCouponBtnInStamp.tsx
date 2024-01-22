@@ -7,10 +7,10 @@ interface Props {
 }
 const UseCouponBtnInStamp: React.FC<Props> = ({ onClick }) => {
   return (
-    <button className={styles.wrapButton} onClick={onClick}>
+    <div className={styles.wrapButton} onClick={onClick}>
       <CouponImage width={16} height={16} fill={colors.white} />
       <div className={styles.buttonText}>사용</div>
-    </button>
+    </div>
   );
 };
 

@@ -18,7 +18,7 @@ const MyRewardStamp: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
-      <StampStarIcon width={66} height={66} fill={colors.subPurpleLight} />
+      <StampStarIcon width={66} height={66} color={colors.subPurpleLight} />
       <div className={styles.textsWrapper}>
         <MyStampeDateText text={dateText} />
         <MyStampMenuText text={menuText} />

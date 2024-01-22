@@ -1,4 +1,4 @@
-@import '../../styles/colorVars.css';
+@import '../../../styles/colorVars.css';
 
 .wrapper {
   display: flex;
@@ -47,12 +47,9 @@
 }
 
 .wrapMissionNow {
-  background: none;
-  border: none;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  padding: 0;
   cursor: pointer;
 }
 
@@ -88,8 +85,6 @@
 .wrapTabButtonTrue {
   display: flex;
   flex-direction: column;
-  background: none;
-  border: none;
 }
 
 .wrapTabButtonFalse {

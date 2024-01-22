@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MissionMap.module.css';
+import styles from './MissionMapContent.module.css';
 
 import { ReactComponent as StampNowImage } from '../../../assets/icon/stampStarBadgeMode.svg';
 import { ReactComponent as StampFinishedImage } from '../../../assets/icon/stampStarGradation.svg';
@@ -23,7 +23,7 @@ interface Props {
   todayMissionCnt: number;
 }
 
-const MissionMap: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
+const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
   return (
     <div className={styles.wrapMissionMap}>
       <div className={styles.first}>
@@ -123,4 +123,4 @@ const MissionMap: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
   );
 };
 
-export default MissionMap;
+export default MissionMapContent;

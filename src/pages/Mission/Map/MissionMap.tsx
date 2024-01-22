@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styles from './Mission2.module.css';
-import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
-import MissionMap from '../../components/Mission2/atoms/MissionMap';
-import { ReactComponent as InformationImage } from '../../assets/icon/information.svg';
-import { ReactComponent as HourglassImage } from '../../assets/icon/hourGlassSmall.svg';
+import React from 'react';
+import styles from './MissionMap.module.css';
+import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
+import MissionMapContent from '../../../components/Mission2/atoms/MissionMapContent';
+import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
+import { ReactComponent as HourglassImage } from '../../../assets/icon/hourGlassSmall.svg';
 
 import { useNavigate } from 'react-router-dom';
-import { colors } from '../../styles/colors';
+import { colors } from '../../../styles/colors';
 
-const Mission2 = () => {
+const MissionMap = () => {
   const navigate = useNavigate();
   const stampCnt = 1;
 
@@ -20,7 +20,7 @@ const Mission2 = () => {
           backBtnColor='white'
           headerTitle='미션'
           headerTitleColor='white'
-          onClickBackBtn={() => navigate('/home')}
+          onClickBackBtn={() => navigate(-1)}
         />
       </div>
 
@@ -28,7 +28,7 @@ const Mission2 = () => {
         <div className={styles.wrapTab}>
           <button
             className={styles.wrapTabButtonFalse}
-            onClick={() => navigate('/mission/1')}
+            onClick={() => navigate('/mission/today')}
           >
             <div className={styles.tabButtonTextFalse}>오늘의 미션</div>
           </button>
@@ -55,11 +55,11 @@ const Mission2 = () => {
             <HourglassImage width={24} height={24} fill={colors.greyDark00} />
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
-          <MissionMap stampCnt={stampCnt} todayMissionCnt={1} />
+          <MissionMapContent stampCnt={stampCnt} todayMissionCnt={1} />
         </div>
       </div>
     </div>
   );
 };
 
-export default Mission2;
+export default MissionMap;

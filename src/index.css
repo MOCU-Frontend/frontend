@@ -5,3 +5,11 @@ body {
   font-family: 'Noto Sans', 'Noto Sans KR';
   box-sizing: border-box;
 }
+button {
+  padding: 0;
+  border: none;
+  background: none;
+}
+input {
+  border: none;
+}

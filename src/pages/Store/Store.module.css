@@ -7,9 +7,6 @@
   align-items: center;
 }
 .shareBtn {
-  background: none;
-  padding: 0;
-  border: none;
   display: flex;
   flex-direction: row;
   justify-content: center;

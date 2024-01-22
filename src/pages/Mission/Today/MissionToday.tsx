@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import styles from './Mission1.module.css';
-import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
-import TodayMission from '../../components/Mission1/atoms/TodayMission';
+import React from 'react';
+import styles from './MissionToday.module.css';
+import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
+import TodayMission from '../../../components/Mission1/atoms/TodayMission';
 
 import { useNavigate } from 'react-router-dom';
-import { colors } from '../../styles/colors';
-import { ReactComponent as ProfileImage } from '../../assets/icon/profile.svg';
-import { ReactComponent as ArrowRightSmallImage } from '../../assets/icon/arrowRightSmall.svg';
-import { ReactComponent as InformationImage } from '../../assets/icon/information.svg';
-import { ReactComponent as CoupongageImage } from '../../assets/icon/couponGage.svg';
+import { colors } from '../../../styles/colors';
+import { ReactComponent as ProfileImage } from '../../../assets/icon/profileGradation.svg';
+import { ReactComponent as ArrowRightSmallImage } from '../../../assets/icon/arrowRightSmall.svg';
+import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
+import { ReactComponent as CoupongageImage } from '../../../assets/icon/couponGage.svg';
 
 type MissionTitle = {
   title: string;
@@ -32,7 +32,7 @@ const MissionTitleData: MissionTitle[] = [
   },
 ];
 
-const Mission1 = () => {
+const MissionToday = () => {
   const navigate = useNavigate();
   const todayMissionCnt = 2;
 
@@ -68,7 +68,7 @@ const Mission1 = () => {
 
           <button
             className={styles.wrapTabButtonFalse}
-            onClick={() => navigate('/mission/2')}
+            onClick={() => navigate('/mission/map')}
           >
             <div className={styles.tabButtonTextFalse}>미션맵</div>
           </button>
@@ -104,4 +104,4 @@ const Mission1 = () => {
   );
 };
 
-export default Mission1;
+export default MissionToday;

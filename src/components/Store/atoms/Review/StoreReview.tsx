@@ -11,12 +11,15 @@ import StoreMoreBtnText from '../Text/MoreBtn/StoreMoreBtnText';
 import { createPortal } from 'react-dom';
 import ModalConfirm from '../../../Modal/ModalConfirm/ModalConfirm';
 import StoreReportModal from '../Modal/Report/StoreReportModal';
+import ModalReportSuccess from '../../../Modal/ModalReportSuccess/ModalReportSuccess';
 interface Props {
   nameText: string;
   timeText: string;
   bodyText: string;
   bodyTextLengthLimit?: number;
 }
+
+type ReportLevel = 'reporting' | 'success' | undefined;
 
 const StoreReview: React.FC<Props> = ({
   nameText,
@@ -26,6 +29,7 @@ const StoreReview: React.FC<Props> = ({
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
   const [isReporting, setIsReporting] = useState(false);
+  const [reportLevel, setReportLevel] = useState<ReportLevel>();
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.topWrapper}>
@@ -51,17 +55,30 @@ const StoreReview: React.FC<Props> = ({
 
         <button
           className={styles.reportBtnWrapper}
-          onClick={() => setIsReporting(true)}
+          onClick={() => setReportLevel('reporting')}
         >
           <StoreReportBtnText text='신고하기' />
         </button>
-        {isReporting &&
+        {reportLevel === 'reporting' &&
           createPortal(
             <StoreReportModal
-              onClickNo={() => setIsReporting(false)}
-              onClickX={() => setIsReporting(false)}
-              onClickYes={() => setIsReporting(false)}
+              onClickNo={() => setReportLevel(undefined)}
+              onClickX={() => setReportLevel(undefined)}
+              onClickYes={() => {
+                setReportLevel('success');
+                setTimeout(() => setReportLevel(undefined), 2000);
+              }}
               reportedUserName='윤**'
+            />,
+            document.body
+          )}
+
+        {reportLevel === 'success' &&
+          createPortal(
+            <ModalReportSuccess
+              bodyText='신고 접수 완료'
+              subText1='신고해주셔서 감사합니다.'
+              subText2='댓글은 검토 후 삭제 조치됩니다.'
             />,
             document.body
           )}

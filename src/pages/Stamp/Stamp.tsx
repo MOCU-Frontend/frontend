@@ -180,14 +180,15 @@ const Stamp = () => {
         <BottomSheet
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
-        >
-          <SlideTabViewFilterOrOption
-            menuItemDataArr={menuItemDataArr}
-            handleCheckedDataIndex={handleClickMenuItem}
-            handleClickMenuBodyItem={handleClickMenuBodyItem}
-            handleClickResetOptionBtn={handleClickResetOptionBtn}
-          />
-        </BottomSheet>
+          children={
+            <SlideTabViewFilterOrOption
+              menuItemDataArr={menuItemDataArr}
+              handleCheckedDataIndex={handleClickMenuItem}
+              handleClickMenuBodyItem={handleClickMenuBodyItem}
+              handleClickResetOptionBtn={handleClickResetOptionBtn}
+            />
+          }
+        ></BottomSheet>
       )}
 
       {isCouponModalVisible && (

@@ -1,0 +1,22 @@
+.informWrapper {
+  margin-top: 36px;
+}
+.scoreWrapper {
+  margin-top: 9px;
+}
+.inputWrapper {
+  margin-top: 35px;
+  width: 100vw;
+  padding: 0 20px;
+}
+.noticeWrapper {
+  width: 100vw;
+  width: 100vw;
+  padding: 0 20px;
+  margin-top: 12px;
+}
+.btnWrapper {
+  position: absolute;
+  left: 0;
+  bottom: 40px;
+}

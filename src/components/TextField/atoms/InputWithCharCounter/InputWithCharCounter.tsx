@@ -2,10 +2,15 @@ import React, { useState } from 'react';
 import styles from './InputWithCharCounter.module.css';
 interface Props {
   placeholder: string;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InputWithCharCounter: React.FC<Props> = ({ placeholder }: Props) => {
-  const [text, setText] = useState('');
+const InputWithCharCounter: React.FC<Props> = ({
+  placeholder,
+  text,
+  setText,
+}: Props) => {
   return (
     <div className={styles.wrapper}>
       <textarea

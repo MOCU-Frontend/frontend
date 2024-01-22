@@ -4,13 +4,23 @@ import InputWithCharCounter from '../atoms/InputWithCharCounter/InputWithCharCou
 import styles from './TextFieldNoTopBar.module.css';
 interface Props {
   placeholder: string;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TextFieldNoTopBar: React.FC<Props> = ({ placeholder }: Props) => {
+const TextFieldNoTopBar: React.FC<Props> = ({
+  placeholder,
+  text,
+  setText,
+}: Props) => {
   return (
     <ModalBasic>
       <div className={styles.wrapper}>
-        <InputWithCharCounter placeholder={placeholder} />
+        <InputWithCharCounter
+          placeholder={placeholder}
+          text={text}
+          setText={setText}
+        />
       </div>
     </ModalBasic>
   );

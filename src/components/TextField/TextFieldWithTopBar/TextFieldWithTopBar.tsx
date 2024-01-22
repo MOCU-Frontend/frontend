@@ -7,14 +7,31 @@ import styles from './TextFieldWithTopBar.module.css';
 // 물어보고 적용하기
 interface Props {
   placeholder: string;
+  onClickCheckBtn: () => void;
+  onClickXBtn: () => void;
+  text: string;
+  setText: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const TextFieldWithTopBar: React.FC<Props> = ({ placeholder }: Props) => {
+const TextFieldWithTopBar: React.FC<Props> = ({
+  placeholder,
+  onClickCheckBtn,
+  onClickXBtn,
+  text,
+  setText,
+}: Props) => {
   return (
     <ModalBasic>
-      <TextFieldTopBar onClickCheckBtn={() => {}} onClickXBtn={() => {}} />
+      <TextFieldTopBar
+        onClickCheckBtn={onClickCheckBtn}
+        onClickXBtn={onClickXBtn}
+      />
       <div className={styles.wrapper}>
-        <InputWithCharCounter placeholder={placeholder} />
+        <InputWithCharCounter
+          placeholder={placeholder}
+          text={text}
+          setText={setText}
+        />
       </div>
     </ModalBasic>
   );

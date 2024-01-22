@@ -16,6 +16,7 @@ import Store from './Store/Store';
 import Present from './Present/Present';
 import MissionToday from './Mission/Today/MissionToday';
 import MissionMap from './Mission/Map/MissionMap';
+import Review from './Review/Review';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const Router = () => {
     {
       path: '/store/:storeId',
       element: <Store />,
+    },
+    {
+      path: '/review/:storeId',
+      element: <Review />,
     },
     {
       path: '/present',

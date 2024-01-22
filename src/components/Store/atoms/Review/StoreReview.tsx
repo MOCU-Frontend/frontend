@@ -8,6 +8,9 @@ import StoreReviewTimeText from '../Text/ReviewTime/StoreReviewTimeText';
 import StoreReportBtnText from '../Text/ReportBtn/StoreReportBtnText';
 import StoreReviewBodyText from '../Text/ReviewBody/StoreReviewBodyText';
 import StoreMoreBtnText from '../Text/MoreBtn/StoreMoreBtnText';
+import { createPortal } from 'react-dom';
+import ModalConfirm from '../../../Modal/ModalConfirm/ModalConfirm';
+import StoreReportModal from '../Modal/Report/StoreReportModal';
 interface Props {
   nameText: string;
   timeText: string;
@@ -22,6 +25,7 @@ const StoreReview: React.FC<Props> = ({
   bodyTextLengthLimit = 50,
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
+  const [isReporting, setIsReporting] = useState(false);
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.topWrapper}>
@@ -45,9 +49,22 @@ const StoreReview: React.FC<Props> = ({
           </div>
         </div>
 
-        <button className={styles.reportBtnWrapper}>
+        <button
+          className={styles.reportBtnWrapper}
+          onClick={() => setIsReporting(true)}
+        >
           <StoreReportBtnText text='신고하기' />
         </button>
+        {isReporting &&
+          createPortal(
+            <StoreReportModal
+              onClickNo={() => setIsReporting(false)}
+              onClickX={() => setIsReporting(false)}
+              onClickYes={() => setIsReporting(false)}
+              reportedUserName='윤**'
+            />,
+            document.body
+          )}
       </div>
       <div>
         <StoreReviewBodyText

@@ -8,13 +8,17 @@ import StoreStampContent from '../../components/Store/atoms/Contents/Stamp/Store
 import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumBtn';
 import StoreScoreContent from '../../components/Store/atoms/Contents/Score/StoreScoreContent';
 import StoreReviewContent from '../../components/Store/atoms/Contents/Review/StoreReviewContent';
-interface Props {}
+import { useNavigate } from 'react-router-dom';
 
-const Store: React.FC<Props> = ({}: Props) => {
+const Store: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>
-        <HeaderBackBtn backBtnColor={colors.white}>
+        <HeaderBackBtn
+          backBtnColor={colors.white}
+          onClickBackBtn={() => navigate(-1)}
+        >
           <div className={styles.shareBtnWrapper}>
             <button className={styles.shareBtn}>
               <ShareIcon width={24} height={24} fill={colors.white} />

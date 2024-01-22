@@ -8,14 +8,14 @@ import SearchResult from './SearchResult/SearchResult';
 import Stamp from './Stamp/Stamp';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
-import Mission1 from './Mission1/Mission1';
-import Mission2 from './Mission2/Mission2';
 import MyLocationPage from './MyLocation/MyLocation';
 import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
 import Store from './Store/Store';
 import Present from './Present/Present';
+import MissionToday from './Mission/Today/MissionToday';
+import MissionMap from './Mission/Map/MissionMap';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -52,12 +52,18 @@ const Router = () => {
       element: <Present />,
     },
     {
-      path: '/mission/1',
-      element: <Mission1 />,
-    },
-    {
-      path: '/mission/2',
-      element: <Mission2 />,
+      path: '/mission',
+      children: [
+        {
+          index: true,
+          path: 'today',
+          element: <MissionToday />,
+        },
+        {
+          path: 'map',
+          element: <MissionMap />,
+        },
+      ],
     },
     {
       path: '/my',

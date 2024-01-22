@@ -66,7 +66,7 @@ const Home = () => {
             titleText='미션'
             subText='미션 완료하고 적립금 쌓기'
             Icon={RocketIcon}
-            onClick={() => navigate('/mission/1')}
+            onClick={() => navigate('/mission/today')}
           />
         </div>
 

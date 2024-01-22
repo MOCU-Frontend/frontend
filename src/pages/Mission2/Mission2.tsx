@@ -20,7 +20,7 @@ const Mission2 = () => {
           backBtnColor='white'
           headerTitle='미션'
           headerTitleColor='white'
-          onClickBackBtn={() => navigate('/home')}
+          onClickBackBtn={() => navigate(-1)}
         />
       </div>
 

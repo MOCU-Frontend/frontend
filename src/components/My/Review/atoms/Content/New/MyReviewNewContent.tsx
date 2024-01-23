@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SlideMenuReviewNewBodyTab from '../../../../../SlideMenu/atoms/BodyTab/ReviewNew/SlideMenuReviewNewBodyTab';
 import MyReviewNew from '../../New/MyReviewNew';
+import MyReviewSlideStatus from '../../SlideStatus/MyReviewSlideStatus';
 import styles from './MyReviewNewContent.module.css';
 
 interface Props {}
@@ -61,6 +62,10 @@ const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
     <div className={styles.myReviewNewsWrapper}>
       <SlideMenuReviewNewBodyTab
         menuItemDataArr={reviewArr}
+        handleCheckedDataIndex={handleCheckedDataIndex}
+      />
+      <MyReviewSlideStatus
+        dataArr={reviewArr}
         handleCheckedDataIndex={handleCheckedDataIndex}
       />
     </div>

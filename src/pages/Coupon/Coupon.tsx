@@ -11,7 +11,7 @@ const Coupon = () => {
   return (
     <div className={styles.wrapper}>
       <HeaderBackBtn
-        headerTitle="쿠폰 적립/사용"
+        headerTitle='쿠폰 적립/사용'
         onClickBackBtn={() => navigate(-1)}
       />
       <div className={styles.couponTextWrapper}>
@@ -23,7 +23,10 @@ const Coupon = () => {
           현위치: 서울특별시 광진구 아차산로 93
         </div>
 
-        <button className={styles.couponLocationResetBtn}>
+        <button
+          className={styles.couponLocationResetBtn}
+          onClick={() => navigate('/my/location')}
+        >
           <NowImage width={24} height={24} fill={colors.subPurpleLight} />
           <div className={styles.couponLocationResetText}>현재 위치 재설정</div>
         </button>
@@ -31,25 +34,25 @@ const Coupon = () => {
 
       <div className={styles.couponStoreInfoWrapper}>
         <StoreInfoInStamp
-          title="카페롱"
+          title='카페롱'
           couponCount={8}
-          achieve="바닐라 마카롱"
+          achieve='바닐라 마카롱'
           distance={100}
           onClickCouponBtn={() => {}}
           onClickStoreDetailBtn={() => {}}
         />
         <StoreInfoInStamp
-          title="드로잉레시피"
+          title='드로잉레시피'
           couponCount={10}
-          achieve="오븐 스파게티"
+          achieve='오븐 스파게티'
           distance={100}
           onClickCouponBtn={() => {}}
           onClickStoreDetailBtn={() => {}}
         />
         <StoreInfoInStamp
-          title="크림베이글 건대점"
+          title='크림베이글 건대점'
           couponCount={9}
-          achieve="아이스 아메리카노 한 잔"
+          achieve='아이스 아메리카노 한 잔'
           distance={100}
           onClickCouponBtn={() => {}}
           onClickStoreDetailBtn={() => {}}

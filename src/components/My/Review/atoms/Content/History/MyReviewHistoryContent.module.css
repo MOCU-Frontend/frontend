@@ -1,0 +1,26 @@
+.wholeWrapper {
+  width: 100vw;
+  padding: 0 20px;
+  margin-top: 16px;
+}
+.filterWrapper {
+  margin-top: 16px;
+}
+.titleWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.informWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+}
+.reviewsWrapper {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}

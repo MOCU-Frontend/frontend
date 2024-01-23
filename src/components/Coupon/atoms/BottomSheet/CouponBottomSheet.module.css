@@ -1,0 +1,25 @@
+.wholeWrapper {
+  padding: 16px 20px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.textSec {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.contentsSec {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+
+.btnSec {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

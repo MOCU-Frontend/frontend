@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import SlideMenuReviewNewBodyTab from '../../../../../SlideMenu/atoms/BodyTab/ReviewNew/SlideMenuReviewNewBodyTab';
-import MyReviewNew from '../../New/MyReviewNew';
 import MyReviewSlideStatus from '../../SlideStatus/MyReviewSlideStatus';
+import MyReviewDoneContent from '../Done/MyReviewDoneContent';
 import styles from './MyReviewNewContent.module.css';
 
 interface Props {}
@@ -47,11 +47,15 @@ const menuItemDataArr: MenuItemData[] = [
 ];
 
 const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
-  const [reviewArr, setReviewArr] = useState<MenuItemData[]>(menuItemDataArr);
+  const [reviewArr, setReviewArr] = useState<MenuItemData[] | undefined>(
+    menuItemDataArr
+  );
   const handleCheckedDataIndex = (prevIndex: number, newIndex: number) => {
+    if (!reviewArr) throw new Error('no reviewArr!!');
     if (!reviewArr[prevIndex]) throw new Error('invalid prevIndex!!');
     if (!reviewArr[newIndex]) throw new Error('invalid newIndex!!');
     setReviewArr((prevArr) => {
+      if (!prevArr) throw new Error('no prevArr!!');
       const copiedArr = [...prevArr];
       copiedArr[prevIndex].isChecked = false;
       copiedArr[newIndex].isChecked = true;
@@ -60,14 +64,20 @@ const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
   };
   return (
     <div className={styles.myReviewNewsWrapper}>
-      <SlideMenuReviewNewBodyTab
-        menuItemDataArr={reviewArr}
-        handleCheckedDataIndex={handleCheckedDataIndex}
-      />
-      <MyReviewSlideStatus
-        dataArr={reviewArr}
-        handleCheckedDataIndex={handleCheckedDataIndex}
-      />
+      {!reviewArr ? (
+        <MyReviewDoneContent />
+      ) : (
+        <>
+          <SlideMenuReviewNewBodyTab
+            menuItemDataArr={reviewArr}
+            handleCheckedDataIndex={handleCheckedDataIndex}
+          />
+          <MyReviewSlideStatus
+            dataArr={reviewArr}
+            handleCheckedDataIndex={handleCheckedDataIndex}
+          />
+        </>
+      )}
     </div>
   );
 };

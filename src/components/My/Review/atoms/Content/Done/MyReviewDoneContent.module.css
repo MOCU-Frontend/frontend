@@ -1,0 +1,7 @@
+.wholeWrapper {
+  margin-top: 224px;
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  align-items: center;
+}

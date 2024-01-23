@@ -118,8 +118,8 @@ const Stamp = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
-          onClickBackBtn={() => navigate('/home')}
-          headerTitle="적립 현황"
+          onClickBackBtn={() => navigate(-1)}
+          headerTitle='적립 현황'
         />
       </div>
 
@@ -155,7 +155,7 @@ const Stamp = () => {
                 isChecked={false}
                 label={data.title}
                 border={1}
-                borderColor="main-purple"
+                borderColor='main-purple'
                 onClick={() => handleFilterSelectClick(2)}
               />
             )

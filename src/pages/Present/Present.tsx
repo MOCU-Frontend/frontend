@@ -15,27 +15,27 @@ const Present = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 선물을 검색해보세요"
-          onClickBackBtn={() => navigate('/home')}
+          placeholder='찾고 싶은 선물을 검색해보세요'
+          onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => navigate(`/present/${value}`)}
         />
       </div>
 
       <div className={styles.filtersWrapper}>
         <CheckFilterSelect
-          label="지역"
+          label='지역'
           isChecked={false}
           border={1}
           borderColor={'sub-purple-light'}
         />
         <CheckFilterSelect
-          label="카테고리"
+          label='카테고리'
           isChecked={false}
           border={1}
           borderColor={'sub-purple-light'}
         />
         <CheckFilterSelect
-          label="가격대"
+          label='가격대'
           isChecked={false}
           border={1}
           borderColor={'sub-purple-light'}

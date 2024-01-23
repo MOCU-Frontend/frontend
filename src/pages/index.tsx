@@ -24,10 +24,6 @@ const Router = () => {
   const router = createBrowserRouter([
     {
       path: '/',
-      element: <Root />,
-    },
-    {
-      path: '/home',
       element: <Home />,
     },
     {

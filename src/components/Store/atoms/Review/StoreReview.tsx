@@ -9,7 +9,6 @@ import StoreReportBtnText from '../Text/ReportBtn/StoreReportBtnText';
 import StoreReviewBodyText from '../Text/ReviewBody/StoreReviewBodyText';
 import StoreMoreBtnText from '../Text/MoreBtn/StoreMoreBtnText';
 import { createPortal } from 'react-dom';
-import ModalConfirm from '../../../Modal/ModalConfirm/ModalConfirm';
 import StoreReportModal from '../Modal/Report/StoreReportModal';
 import ModalReportSuccess from '../../../Modal/ModalReportSuccess/ModalReportSuccess';
 interface Props {

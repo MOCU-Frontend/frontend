@@ -18,26 +18,26 @@ const HomeBottomNavigation: React.FC<Props> = ({ nowPage }) => {
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.btnSec}>
-        <button className={styles.normalBtn} onClick={() => navigate('/home')}>
+        <button className={styles.normalBtn} onClick={() => navigate('/')}>
           {nowPage === 'home' ? (
-            <GradationHomeIcon width="24" height="24" />
+            <GradationHomeIcon width='24' height='24' />
           ) : (
-            <HomeIcon width="24" height="24" fill={colors.greyLight02} />
+            <HomeIcon width='24' height='24' fill={colors.greyLight02} />
           )}
 
-          <HomeBottomNavigationText text="홈" color={colors.mainPurple} />
+          <HomeBottomNavigationText text='홈' color={colors.mainPurple} />
         </button>
         <div className={styles.circleBtn} onClick={() => navigate('/coupon')}>
-          <CouponIcon fill={colors.white} width="24" height="24" />
-          <HomeBottomNavigationText text="쿠폰" color={colors.white} />
+          <CouponIcon fill={colors.white} width='24' height='24' />
+          <HomeBottomNavigationText text='쿠폰' color={colors.white} />
         </div>
         <button className={styles.normalBtn} onClick={() => navigate('/my')}>
           {nowPage === 'my' ? (
-            <MyGradationIcon width="24" height="24" />
+            <MyGradationIcon width='24' height='24' />
           ) : (
-            <MyIcon width="24" height="24" fill={colors.greyLight02} />
+            <MyIcon width='24' height='24' fill={colors.greyLight02} />
           )}
-          <HomeBottomNavigationText text="마이" color={colors.greyLight02} />
+          <HomeBottomNavigationText text='마이' color={colors.greyLight02} />
         </button>
       </div>
     </div>

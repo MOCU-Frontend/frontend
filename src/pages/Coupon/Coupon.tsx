@@ -104,7 +104,9 @@ const Coupon = () => {
           couponCount={8}
           achieve='바닐라 마카롱'
           distance={100}
-          onClickCouponBtn={() => {}}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
           onClickStoreDetailBtn={() => {
             setSelectedStoreInform(storeMapData[0]);
             setIsShowBottomSheet(true);
@@ -115,7 +117,9 @@ const Coupon = () => {
           couponCount={10}
           achieve='오븐 스파게티'
           distance={100}
-          onClickCouponBtn={() => {}}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
           onClickStoreDetailBtn={() => {
             setSelectedStoreInform(storeMapData[1]);
             setIsShowBottomSheet(true);
@@ -126,7 +130,9 @@ const Coupon = () => {
           couponCount={9}
           achieve='아이스 아메리카노 한 잔'
           distance={100}
-          onClickCouponBtn={() => {}}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
           onClickStoreDetailBtn={() => {
             setSelectedStoreInform(storeMapData[2]);
             setIsShowBottomSheet(true);
@@ -153,6 +159,7 @@ const Coupon = () => {
         stampModalLevel={stampModalLevel}
         setStampModalLevel={setStampModalLevel}
         onCancelModal={() => {}}
+        onClickDoneModalRightBtn={() => navigate(`/review/${12}`)}
       />
       <MapCouponModal
         couponModalLevel={couponModalLevel}

@@ -7,6 +7,7 @@ interface Props {
   stampModalLevel: ModalLevel | null;
   setStampModalLevel: React.Dispatch<React.SetStateAction<ModalLevel | null>>;
   onCancelModal: () => void;
+  onClickDoneModalRightBtn?: () => void;
 }
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 
@@ -14,6 +15,7 @@ const MapStampModal: React.FC<Props> = ({
   stampModalLevel,
   setStampModalLevel,
   onCancelModal,
+  onClickDoneModalRightBtn,
 }: Props) => {
   const handleCancelModal = () => {
     onCancelModal();
@@ -58,7 +60,11 @@ const MapStampModal: React.FC<Props> = ({
           leftBtnLabel='닫기'
           rightBtnLabel='리뷰 남기러 가기'
           onClickLeftBtn={handleCancelModal}
-          onClickRightBtn={handleCancelModal}
+          onClickRightBtn={
+            onClickDoneModalRightBtn
+              ? onClickDoneModalRightBtn
+              : handleCancelModal
+          }
         />
       );
     default:

@@ -76,7 +76,10 @@ const My: React.FC = () => {
           <MyMainContentSubText text='한 달 동안 총 5개의 혜택을 받았어요!' />
           <MyRewardStampsContent rewardDataArr={rewardDataArr} />
         </MyMainNormalHeaderWrapper>
-        <MyReviewContent possibleReviewNum={1} onClick={() => {}} />
+        <MyReviewContent
+          possibleReviewNum={1}
+          onClick={() => navigate('review')}
+        />
         <MyMissionContent
           onClick={() => {}}
           accumStampNum={8}

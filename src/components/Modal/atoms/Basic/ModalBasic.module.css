@@ -11,7 +11,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  z-index: 2;
+  z-index: 6;
 }
 .modal {
   background-color: var(--color-white);

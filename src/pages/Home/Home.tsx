@@ -42,6 +42,8 @@ const Home = () => {
           subText='내 근처에 있는 맛집 찾고 혜택도 얻을 수 있다?'
           informText='현위치 : 성북구 정릉로 77'
           Icon={MapIcon}
+          border={2}
+          borderColor={colors.subPurplelight}
         />
         <div className={styles.menu_grid_container}>
           <HomeMenuGridBtn

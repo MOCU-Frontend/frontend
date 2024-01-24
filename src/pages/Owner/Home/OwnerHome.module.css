@@ -1,0 +1,40 @@
+@import url('../../../styles/colorVars.css');
+
+body {
+  -ms-overflow-style: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.wholeWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background: var(--color-sub-gradation);
+}
+
+.homeTopInformBar {
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 0 20px;
+}
+
+.main {
+  position: relative;
+  padding: 20px;
+  padding-bottom: 80px;
+  margin-top: 18px;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  flex-grow: 1;
+  border-radius: 40px 40px 0 0;
+  background: var(--color-bg-purple-light);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+}

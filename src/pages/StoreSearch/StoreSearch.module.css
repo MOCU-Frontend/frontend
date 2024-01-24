@@ -7,19 +7,16 @@
   height: 100vh;
 }
 
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+  z-index: 3;
+}
+
 .mapHeaderSelectWrapper {
   padding: 8px 20px 4px 20px;
   width: 100%;
-}
-
-.headerWrapper {
-  display: flex;
-  flex-direction: row;
-  z-index: 2;
-  width: 100vw;
-  background-color: var(--color-white);
-  padding: 5.5px 20px 6.5px 13.5px;
-  justify-content: center;
 }
 
 .contentWrapper {
@@ -59,7 +56,7 @@
   display: none;
 }
 
-.cardWrapper {
+.storeSearchCardWrapper {
   width: 90vw;
   display: flex;
   flex-direction: row;
@@ -69,7 +66,7 @@
   -ms-overflow-style: none;
   gap: 12px;
 }
-.cardWrapper::-webkit-scrollbar {
+.storeSearchCardWrapper::-webkit-scrollbar {
   display: none;
 }
 

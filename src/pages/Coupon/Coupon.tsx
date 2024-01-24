@@ -76,10 +76,13 @@ const Coupon = () => {
 
   return (
     <div className={styles.wrapper}>
-      <HeaderBackBtn
-        headerTitle='쿠폰 적립/사용'
-        onClickBackBtn={() => navigate(-1)}
-      />
+      <div className={styles.headerWrapper}>
+        <HeaderBackBtn
+          headerTitle="쿠폰 적립/사용"
+          onClickBackBtn={() => navigate(-1)}
+        />
+      </div>
+
       <div className={styles.couponTextWrapper}>
         <div className={styles.couponTitleWrapper}>
           <div className={styles.couponTitle}>쿠폰을 적립, 사용할 수 있는</div>
@@ -100,9 +103,9 @@ const Coupon = () => {
 
       <div className={styles.couponStoreInfoWrapper}>
         <StoreInfoInStamp
-          title='카페롱'
+          title="카페롱"
           couponCount={8}
-          achieve='바닐라 마카롱'
+          achieve="바닐라 마카롱"
           distance={100}
           onClickCouponBtn={() => {
             setCouponModalLevel('confirm');
@@ -113,9 +116,9 @@ const Coupon = () => {
           }}
         />
         <StoreInfoInStamp
-          title='드로잉레시피'
+          title="드로잉레시피"
           couponCount={10}
-          achieve='오븐 스파게티'
+          achieve="오븐 스파게티"
           distance={100}
           onClickCouponBtn={() => {
             setCouponModalLevel('confirm');
@@ -126,9 +129,61 @@ const Coupon = () => {
           }}
         />
         <StoreInfoInStamp
-          title='크림베이글 건대점'
+          title="크림베이글 건대점"
           couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
+          achieve="아이스 아메리카노 한 잔"
+          distance={100}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
+          onClickStoreDetailBtn={() => {
+            setSelectedStoreInform(storeMapData[2]);
+            setIsShowBottomSheet(true);
+          }}
+        />
+        <StoreInfoInStamp
+          title="크림베이글 건대점"
+          couponCount={9}
+          achieve="아이스 아메리카노 한 잔"
+          distance={100}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
+          onClickStoreDetailBtn={() => {
+            setSelectedStoreInform(storeMapData[2]);
+            setIsShowBottomSheet(true);
+          }}
+        />
+        <StoreInfoInStamp
+          title="크림베이글 건대점"
+          couponCount={9}
+          achieve="아이스 아메리카노 한 잔"
+          distance={100}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
+          onClickStoreDetailBtn={() => {
+            setSelectedStoreInform(storeMapData[2]);
+            setIsShowBottomSheet(true);
+          }}
+        />
+        <StoreInfoInStamp
+          title="크림베이글 건대점"
+          couponCount={9}
+          achieve="아이스 아메리카노 한 잔"
+          distance={100}
+          onClickCouponBtn={() => {
+            setCouponModalLevel('confirm');
+          }}
+          onClickStoreDetailBtn={() => {
+            setSelectedStoreInform(storeMapData[2]);
+            setIsShowBottomSheet(true);
+          }}
+        />
+        <StoreInfoInStamp
+          title="크림베이글 건대점"
+          couponCount={9}
+          achieve="아이스 아메리카노 한 잔"
           distance={100}
           onClickCouponBtn={() => {
             setCouponModalLevel('confirm');

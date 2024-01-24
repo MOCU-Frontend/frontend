@@ -116,50 +116,52 @@ const Stamp = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.headerWrapper}>
-        <HeaderBackBtn
-          onClickBackBtn={() => navigate(-1)}
-          headerTitle='적립 현황'
-        />
-      </div>
+      <div className={styles.headerFilterWrapper}>
+        <div className={styles.headerWrapper}>
+          <HeaderBackBtn
+            onClickBackBtn={() => navigate('/home')}
+            headerTitle="적립 현황"
+          />
+        </div>
 
-      <div className={styles.filtersWrapper}>
-        <CheckFilterSelect
-          label={
-            selectedArrangeFilterItem
-              ? selectedArrangeFilterItem.title
-              : 'no selected item!'
-          }
-          isChecked={false}
-          border={1}
-          borderColor={'main-purple'}
-          onClick={() => handleFilterSelectClick(0)}
-        />
-        <CheckFilterSelect
-          label={
-            selectedSectorFilterItem
-              ? selectedSectorFilterItem.title
-              : 'no selected item!'
-          }
-          isChecked={false}
-          border={1}
-          borderColor={'main-purple'}
-          onClick={() => handleFilterSelectClick(1)}
-        />
+        <div className={styles.filtersWrapper}>
+          <CheckFilterSelect
+            label={
+              selectedArrangeFilterItem
+                ? selectedArrangeFilterItem.title
+                : 'no selected item!'
+            }
+            isChecked={false}
+            border={1}
+            borderColor={'main-purple'}
+            onClick={() => handleFilterSelectClick(0)}
+          />
+          <CheckFilterSelect
+            label={
+              selectedSectorFilterItem
+                ? selectedSectorFilterItem.title
+                : 'no selected item!'
+            }
+            isChecked={false}
+            border={1}
+            borderColor={'main-purple'}
+            onClick={() => handleFilterSelectClick(1)}
+          />
 
-        {menuItemDataArr[2].bodyDataArr.map(
-          (data, index) =>
-            data.isChecked && (
-              <CheckFilter
-                key={data.title + index}
-                isChecked={false}
-                label={data.title}
-                border={1}
-                borderColor='main-purple'
-                onClick={() => handleFilterSelectClick(2)}
-              />
-            )
-        )}
+          {menuItemDataArr[2].bodyDataArr.map(
+            (data, index) =>
+              data.isChecked && (
+                <CheckFilter
+                  key={data.title + index}
+                  isChecked={false}
+                  label={data.title}
+                  border={1}
+                  borderColor="main-purple"
+                  onClick={() => handleFilterSelectClick(2)}
+                />
+              )
+          )}
+        </div>
       </div>
 
       <div className={styles.contentWrapper}>

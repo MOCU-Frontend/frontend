@@ -36,6 +36,30 @@ export const searchResultData: StoreData[] = [
     achieve: '아메리카노',
     distance: 150,
   },
+  {
+    title: '카페 아르무아',
+    couponCount: 0,
+    achieve: '아메리카노',
+    distance: 150,
+  },
+  {
+    title: '카페 아르무아',
+    couponCount: 0,
+    achieve: '아메리카노',
+    distance: 150,
+  },
+  {
+    title: '카페 아르무아',
+    couponCount: 0,
+    achieve: '아메리카노',
+    distance: 150,
+  },
+  {
+    title: '카페 아르무아',
+    couponCount: 0,
+    achieve: '아메리카노',
+    distance: 150,
+  },
 ];
 
 type FilterList = {

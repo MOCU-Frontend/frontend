@@ -1,26 +1,29 @@
 .wrapper {
-  overflow-x: hidden;
+  /* sticky 지정을 위해 overflow 설정 해제 */
+  /* overflow-x: hidden; */
   position: relative;
   display: flex;
   flex-direction: column;
   height: 100vh;
 }
 
+.headerFilterWrapper {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background-color: white;
+}
+
 .headerWrapper {
   display: flex;
   flex-direction: row;
-  position: fixed;
-  left: 0;
-  top: 0;
   z-index: 2;
   width: 100vw;
 }
 
 .filtersWrapper {
-  position: fixed;
-  top: 6vh;
   padding: 16px;
-  width: 90vw;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   overflow-x: scroll;
@@ -41,7 +44,5 @@
 }
 
 .contentWrapper {
-  position: relative;
-  top: 15vh;
   width: 100vw;
 }

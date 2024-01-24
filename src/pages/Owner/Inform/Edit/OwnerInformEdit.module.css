@@ -1,0 +1,10 @@
+.headerBtnWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.contentWrapper {
+  padding: 0 20px;
+}

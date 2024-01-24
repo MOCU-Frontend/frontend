@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Card.module.css';
+import styles from './StoreSearchCard.module.css';
 
 interface Props {
   /**
@@ -28,7 +28,7 @@ interface Props {
   distance: number;
 }
 
-const Card: React.FC<Props> = ({
+const StoreSearchCard: React.FC<Props> = ({
   couponMain,
   eventOn,
   title,
@@ -70,4 +70,4 @@ const Card: React.FC<Props> = ({
   );
 };
 
-export default Card;
+export default StoreSearchCard;

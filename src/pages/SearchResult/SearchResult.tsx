@@ -100,7 +100,7 @@ const SearchResult = () => {
       <div className={styles.headerWrapper}>
         <SearchBarHeader
           placeholder="찾고 싶은 가게를 검색해 보세요"
-          onClickBackBtn={() => navigate('/storesearch')}
+          onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) =>
             navigate(`/storesearch/${value}`)
           }

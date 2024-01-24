@@ -31,7 +31,7 @@ const Store: React.FC = () => {
       <div className={styles.imgDummyBox}></div>
       <div className={styles.topContentBox}>
         <div className={styles.infoWrapper}>
-          <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
+          <StoreInfoContent title="크림베이글 건대점" category="베이커리" />
         </div>
         <div className={styles.stampWrapper}>
           <StoreStampContent />
@@ -48,7 +48,7 @@ const Store: React.FC = () => {
         <div className={styles.fullBtnWrapper}>
           <FullBtn
             onClick={() => navigate('/review/11')}
-            label='리뷰 작성 (1일 남음)'
+            label="리뷰 작성 (1일 남음)"
           />
         </div>
       )}

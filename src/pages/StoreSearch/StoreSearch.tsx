@@ -8,7 +8,7 @@ import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterWithXBtn from '../../components/CheckFilter/CheckFilterWithXBtn/CheckFilterWithXBtn';
-import Card from '../../components/StoreSearch/atoms/Card/Card';
+import StoreSearchCard from '../../components/StoreSearch/atoms/StoreSearchCard/StoreSearchCard';
 import MapHeaderSelect from '../../components/Map/atoms/Select/HeaderSelect/MapHeaderSelect';
 import { colors } from '../../styles/colors';
 
@@ -48,7 +48,7 @@ const StoreSearch = () => {
     <div className={styles.wrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text='학교'
+          text="학교"
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -56,11 +56,11 @@ const StoreSearch = () => {
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize='search'
+        headerPaddingSize="search"
         onClickBackBtn={() => navigate(-1)}
       >
         <SearchBar
-          placeholder='찾고 싶은 가게를 검색해 보세요'
+          placeholder="찾고 싶은 가게를 검색해 보세요"
           onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
         />
       </HeaderBackBtn>
@@ -72,60 +72,60 @@ const StoreSearch = () => {
               onClickContent={() => navigate('베이글')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='베이글'
+              label="베이글"
             />
             <CheckFilterWithXBtn
               onClickContent={() => navigate('스터디카페')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='스터디카페'
+              label="스터디카페"
             />
             <CheckFilterWithXBtn
               onClickContent={() => navigate('스터디카페')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='도넛'
+              label="도넛"
             />
             <CheckFilterWithXBtn
               onClickContent={() => navigate('대학로')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='대학로'
+              label="대학로"
             />
             <CheckFilterWithXBtn
               onClickContent={() => navigate('건대입구')}
               onClickXBtn={() => {}}
               isChecked={false}
-              label='건대입구'
+              label="건대입구"
             />
           </div>
         </div>
 
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>최근 방문한 가게</div>
-          <div className={styles.cardWrapper}>
-            <Card
+          <div className={styles.StoreSearchCardWrapper}>
+            <StoreSearchCard
               couponMain={false}
               eventOn={false}
               title={storeSearchData[0].title}
               couponCount={storeSearchData[0].couponCount}
               distance={storeSearchData[0].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={true}
               title={storeSearchData[1].title}
               couponCount={storeSearchData[1].couponCount}
               distance={storeSearchData[1].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={true}
               title={storeSearchData[2].title}
               couponCount={storeSearchData[2].couponCount}
               distance={storeSearchData[2].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={false}
               title={storeSearchData[3].title}
@@ -139,20 +139,20 @@ const StoreSearch = () => {
 
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>쿠폰 사용 임박!</div>
-          <div className={styles.cardWrapper}>
-            <Card
+          <div className={styles.StoreSearchCardWrapper}>
+            <StoreSearchCard
               couponMain={true}
               title={storeSearchData[3].title}
               couponCount={storeSearchData[3].couponCount}
               distance={storeSearchData[3].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={true}
               title={storeSearchData[1].title}
               couponCount={storeSearchData[1].couponCount}
               distance={storeSearchData[1].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={true}
               title={storeSearchData[2].title}
               couponCount={storeSearchData[2].couponCount}
@@ -165,29 +165,29 @@ const StoreSearch = () => {
           <div className={styles.searchTitle}>
             모쿠님을 위한 맞춤 가게 추천{' '}
           </div>
-          <div className={styles.cardWrapper}>
-            <Card
+          <div className={styles.StoreSearchCardWrapper}>
+            <StoreSearchCard
               couponMain={false}
               eventOn={false}
               title={storeSearchData[0].title}
               couponCount={storeSearchData[0].couponCount}
               distance={storeSearchData[0].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={true}
               title={storeSearchData[1].title}
               couponCount={storeSearchData[1].couponCount}
               distance={storeSearchData[1].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={true}
               title={storeSearchData[2].title}
               couponCount={storeSearchData[2].couponCount}
               distance={storeSearchData[2].distance}
             />
-            <Card
+            <StoreSearchCard
               couponMain={false}
               eventOn={false}
               title={storeSearchData[3].title}

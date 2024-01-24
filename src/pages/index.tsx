@@ -19,6 +19,10 @@ import MissionMap from './Mission/Map/MissionMap';
 import Review from './Review/Review';
 import Coupon from './Coupon/Coupon';
 import MyReview from './My/Review/MyReview';
+import OwnerHome from './Owner/Home/OwnerHome';
+import OwnerInform from './Owner/Inform/OwnerInform';
+import OwnerRequest from './Owner/Request/OwnerRequest';
+import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -111,6 +115,28 @@ const Router = () => {
     {
       path: '/mylocation',
       element: <MyLocationPage />,
+    },
+    {
+      path: '/owner',
+      children: [
+        {
+          index: true,
+          path: '',
+          element: <OwnerHome />,
+        },
+        {
+          path: 'inform',
+          element: <OwnerInform />,
+        },
+        {
+          path: 'request',
+          element: <OwnerRequest />,
+        },
+        {
+          path: 'coupon',
+          element: <OwnerCoupon />,
+        },
+      ],
     },
   ]);
 

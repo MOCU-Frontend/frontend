@@ -46,24 +46,27 @@ const StoreSearch = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wrapper}>
-      <div className={styles.mapHeaderSelectWrapper}>
-        <MapHeaderSelect
-          text="학교"
-          onClick={() => navigate('/mylocation')}
-          color={colors.black}
-          size={'small'}
-        />
+      <div className={styles.headerWrapper}>
+        <div className={styles.mapHeaderSelectWrapper}>
+          <MapHeaderSelect
+            text="학교"
+            onClick={() => navigate('/mylocation')}
+            color={colors.black}
+            size={'small'}
+          />
+        </div>
+
+        <HeaderBackBtn
+          headerPaddingSize="search"
+          onClickBackBtn={() => navigate(-1)}
+        >
+          <SearchBar
+            placeholder="찾고 싶은 가게를 검색해 보세요"
+            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
+          />
+        </HeaderBackBtn>
       </div>
 
-      <HeaderBackBtn
-        headerPaddingSize="search"
-        onClickBackBtn={() => navigate(-1)}
-      >
-        <SearchBar
-          placeholder="찾고 싶은 가게를 검색해 보세요"
-          onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
-        />
-      </HeaderBackBtn>
       <div className={styles.contentWrapper}>
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>최근 검색어</div>
@@ -103,7 +106,7 @@ const StoreSearch = () => {
 
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>최근 방문한 가게</div>
-          <div className={styles.StoreSearchCardWrapper}>
+          <div className={styles.storeSearchCardWrapper}>
             <StoreSearchCard
               couponMain={false}
               eventOn={false}
@@ -139,7 +142,7 @@ const StoreSearch = () => {
 
         <div className={styles.contentRecent}>
           <div className={styles.searchTitle}>쿠폰 사용 임박!</div>
-          <div className={styles.StoreSearchCardWrapper}>
+          <div className={styles.storeSearchCardWrapper}>
             <StoreSearchCard
               couponMain={true}
               title={storeSearchData[3].title}
@@ -165,7 +168,7 @@ const StoreSearch = () => {
           <div className={styles.searchTitle}>
             모쿠님을 위한 맞춤 가게 추천{' '}
           </div>
-          <div className={styles.StoreSearchCardWrapper}>
+          <div className={styles.storeSearchCardWrapper}>
             <StoreSearchCard
               couponMain={false}
               eventOn={false}

@@ -67,7 +67,7 @@ const OwnerInform: React.FC<Props> = ({}: Props) => {
       </main>
 
       <div className={styles.editBtnWrapper}>
-        <OwnerInformEditBtn onClick={() => {}} />
+        <OwnerInformEditBtn onClick={() => navigate('edit')} />
       </div>
     </div>
   );

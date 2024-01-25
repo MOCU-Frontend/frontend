@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderXBtn from '../../../../components/HeaderBackBtn/HeaderXBtn/HeaderXBtn';
 import OwnerInformEditHeaderBtn from '../../../../components/Owner/Inform/Edit/atoms/Btns/Header/OwnerInformEditHeaderBtn';
+import OwnerInformEditFilterContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Filter/OwnerInformEditFilterContent';
 import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Img/OwnerInformEditImgContent';
+import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
+import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
 import styles from './OwnerInformEdit.module.css';
 
 const OwnerInformEdit: React.FC = () => {
   const navigate = useNavigate();
+  const [sangho, setSangho] = useState('');
   return (
     <div>
       <HeaderXBtn headerTitle='가게 정보 수정' onClickXBtn={() => navigate(-1)}>
@@ -15,10 +19,37 @@ const OwnerInformEdit: React.FC = () => {
           <OwnerInformEditHeaderBtn label='임시저장' onClick={() => {}} />
         </div>
       </HeaderXBtn>
-      <div className={styles.imgContentWrapper}>
+      <div className={styles.overflowContentWrapper}>
         <OwnerInformEditImgContent />
       </div>
       <div className={styles.contentWrapper}>
+        <OwnerInformEditInputContent
+          title='상호명'
+          inputValue={sangho}
+          handleChangeInputValue={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setSangho(e.target.value)
+          }
+          placeholder='상호명을 입력해주세요.'
+        />
+      </div>
+      <div className={styles.overflowContentWrapper}>
+        <OwnerInformEditFilterContent
+          title='업종'
+          filterArr={[
+            { name: '베이커리', isChecked: true },
+            { name: '카페', isChecked: false },
+            { name: '음식점', isChecked: false },
+            { name: '주류', isChecked: false },
+            { name: '기타', isChecked: false },
+          ]}
+        />
+      </div>
+      <div className={styles.contentWrapper}>
+        <OwnerInformEdiStampContent
+          stampCount={0}
+          handlePlus={() => {}}
+          handleMinus={() => {}}
+        />
         <OwnerInformEditMenuContent
           menuArr={[
             { name: '아이스아메리카노', price: 4500 },

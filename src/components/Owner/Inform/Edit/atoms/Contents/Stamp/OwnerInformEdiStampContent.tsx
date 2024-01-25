@@ -21,13 +21,15 @@ const OwnerInformEdiStampContent: React.FC<Props> = ({
     <div className={styles.wholeWrapper}>
       <OwnerInformSecTitleText text='쿠폰 사용이 가능한 적립 도장' />
       <OwnerInformEditBasicBox>
-        <div className={styles.counterBoxWrapper}>
-          <div className={styles.counterWrapper}>
-            <OwnerInformEditCounterBtn onClick={handleMinus} label='-' />
-            <OwnerInformEditCounterText text={`${stampCount}`} />
-            <OwnerInformEditCounterBtn onClick={handlePlus} label='+' />
+        <div className={styles.overflowWrapper}>
+          <div className={styles.counterBoxWrapper}>
+            <div className={styles.counterWrapper}>
+              <OwnerInformEditCounterBtn onClick={handleMinus} label='-' />
+              <OwnerInformEditCounterText text={`${stampCount}`} />
+              <OwnerInformEditCounterBtn onClick={handlePlus} label='+' />
+            </div>
+            <OwnerInformEditBodyText text='개 도장 적립하면 쿠폰 사용 가능' />
           </div>
-          <OwnerInformEditBodyText text='개 도장 적립하면 쿠폰 사용 가능' />
         </div>
       </OwnerInformEditBasicBox>
     </div>

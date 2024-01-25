@@ -9,4 +9,17 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+  width: fit-content;
+}
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.overflowWrapper {
+  padding: 0 12px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
 }

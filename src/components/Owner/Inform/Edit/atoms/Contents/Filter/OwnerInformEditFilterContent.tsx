@@ -20,17 +20,20 @@ const OwnerInformEditFilterContent: React.FC<Props> = ({
   return (
     <div className={styles.wholeWrapper}>
       <OwnerInformSecTitleText text={title} />
-      <div className={styles.filtersWrapper}>
-        {filterArr.map((data) => (
-          <CheckFilter
-            label={data.name}
-            isChecked={data.isChecked}
-            backgroundColor={'bg-purple-light'}
-            border={1}
-            borderColor={'sub-purple-light'}
-            textColor={'sub-purple-light'}
-          />
-        ))}
+      <div className={styles.overflowWrapper}>
+        <div className={styles.filtersWrapper}>
+          {filterArr.map((data, index) => (
+            <CheckFilter
+              key={data.name + index}
+              label={data.name}
+              isChecked={data.isChecked}
+              backgroundColor={'bg-purple-light'}
+              border={1}
+              borderColor={'sub-purple-light'}
+              textColor={'sub-purple-light'}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -7,7 +7,12 @@
 }
 .contentWrapper {
   padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
 }
-.imgContentWrapper {
+.overflowContentWrapper {
   padding-left: 20px;
+  margin-bottom: 24px;
 }

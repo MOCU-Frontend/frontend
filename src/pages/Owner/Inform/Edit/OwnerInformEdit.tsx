@@ -15,8 +15,10 @@ const OwnerInformEdit: React.FC = () => {
           <OwnerInformEditHeaderBtn label='임시저장' onClick={() => {}} />
         </div>
       </HeaderXBtn>
-      <div className={styles.contentWrapper}>
+      <div className={styles.imgContentWrapper}>
         <OwnerInformEditImgContent />
+      </div>
+      <div className={styles.contentWrapper}>
         <OwnerInformEditMenuContent
           menuArr={[
             { name: '아이스아메리카노', price: 4500 },

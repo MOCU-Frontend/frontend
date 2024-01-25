@@ -1,13 +1,17 @@
 .wholeWrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .imgsWrapper {
-  padding: 12px 20px;
   display: flex;
+  width: fit-content;
   flex-direction: row;
   align-items: center;
   gap: 16px;
-  overflow-x: scroll;
+}
+.overflowWrapper {
+  padding: 12px 20px 12px 0;
+  overflow: scroll;
   white-space: nowrap;
 }

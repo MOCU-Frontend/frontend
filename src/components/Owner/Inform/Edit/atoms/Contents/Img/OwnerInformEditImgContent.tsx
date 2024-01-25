@@ -10,12 +10,17 @@ const OwnerInformEditImgContent: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <OwnerInformSecTitleText text='사진 등록' />
-      <div className={styles.imgsWrapper}>
-        <OwnerInformEditMoreImgBtn pictureNumText='6/10' />
-        <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
-        <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
-        <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
-        <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+      <div className={styles.overflowWrapper}>
+        <div className={styles.imgsWrapper}>
+          <OwnerInformEditMoreImgBtn pictureNumText='6/10' />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+          <OwnerInformEditImgWithXBadge onClickXBtn={() => {}} />
+        </div>
       </div>
     </div>
   );

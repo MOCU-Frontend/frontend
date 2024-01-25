@@ -1,0 +1,7 @@
+@import '../../../../../../styles/colorVars.css';
+
+.wholeWrapper {
+  padding: 2px 4px;
+  border-radius: 4px;
+  background-color: var(--color-point-yellow);
+}

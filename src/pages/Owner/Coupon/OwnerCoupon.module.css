@@ -1,0 +1,19 @@
+@import '../../../styles/colorVars.css';
+
+.filtersWrapper {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid var(--color-grey);
+}
+.itemsWrapper {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16.5px;
+}
+.menuWrapper {
+  padding: 12px 20px;
+}

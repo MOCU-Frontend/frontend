@@ -5,6 +5,7 @@ import OwnerInformEditHeaderBtn from '../../../../components/Owner/Inform/Edit/a
 import OwnerInformEditFilterContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Filter/OwnerInformEditFilterContent';
 import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Img/OwnerInformEditImgContent';
 import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
+import OwnerInformEditInputsContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Inputs/OwnerInformEditInputsContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
 import styles from './OwnerInformEdit.module.css';
@@ -12,6 +13,29 @@ import styles from './OwnerInformEdit.module.css';
 const OwnerInformEdit: React.FC = () => {
   const navigate = useNavigate();
   const [sangho, setSangho] = useState('');
+  const [couponGiftArr, setCouponGiftArr] = useState([
+    {
+      title: '1번째 보상',
+      placeholder: '새로운 보상을 입력해주세요.',
+      inputValue: '',
+    },
+    {
+      title: '2번째 보상',
+      placeholder: '새로운 보상을 입력해주세요.',
+      inputValue: '',
+    },
+  ]);
+  const handleChangeCouponGiftArrInputValue = (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    if (!couponGiftArr[index]) throw new Error('invalid index!!');
+    setCouponGiftArr((prevArr) => {
+      const copiedArr = [...prevArr];
+      copiedArr[index].inputValue = e.target.value;
+      return copiedArr;
+    });
+  };
   return (
     <div>
       <HeaderXBtn headerTitle='가게 정보 수정' onClickXBtn={() => navigate(-1)}>
@@ -49,6 +73,13 @@ const OwnerInformEdit: React.FC = () => {
           stampCount={0}
           handlePlus={() => {}}
           handleMinus={() => {}}
+        />
+        <OwnerInformEditInputsContent
+          title='쿠폰 사용 시 보상'
+          subInputInformArr={couponGiftArr}
+          moreBtnText='다음 단계 보상 추가하기'
+          onClickMoreBtn={() => {}}
+          handleChangeInputValue={handleChangeCouponGiftArrInputValue}
         />
         <OwnerInformEditMenuContent
           menuArr={[

@@ -8,7 +8,6 @@ import styles from './OwnerInformEditInputsContent.module.css';
 type SubInputInform = {
   title: string;
   inputValue: string;
-  handleChangeInputValue: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder: string;
 };
 
@@ -17,6 +16,10 @@ interface Props {
   subInputInformArr: SubInputInform[];
   moreBtnText: string;
   onClickMoreBtn: () => void;
+  handleChangeInputValue: (
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 }
 
 const OwnerInformEditInputsContent: React.FC<Props> = ({
@@ -24,6 +27,7 @@ const OwnerInformEditInputsContent: React.FC<Props> = ({
   subInputInformArr,
   moreBtnText,
   onClickMoreBtn,
+  handleChangeInputValue,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -33,7 +37,9 @@ const OwnerInformEditInputsContent: React.FC<Props> = ({
           <OwnerInformSecSubTitleText text={data.title} />
           <OwnerInformEditBasicInput
             text={data.inputValue}
-            handleChange={data.handleChangeInputValue}
+            handleChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleChangeInputValue(index, e)
+            }
             placeholder={data.placeholder}
           />
         </div>

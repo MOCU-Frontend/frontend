@@ -6,15 +6,19 @@ import styles from './OwnerInformEditCheckBoxContent.module.css';
 
 interface Props {
   isChecked: boolean;
+  handleCheck: () => void;
   label: string;
 }
 
 const OwnerInformEditCheckBoxContent: React.FC<Props> = ({
   isChecked,
   label,
+  handleCheck,
 }: Props) => {
+  console.log(isChecked);
+
   return (
-    <div className={styles.wholeWrapper}>
+    <div className={styles.wholeWrapper} onClick={handleCheck}>
       <OwnerInformEditCheckBox isChecked={isChecked} />
       <OwnerInformEditCheckBoxText
         text={label}

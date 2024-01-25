@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderXBtn from '../../../../components/HeaderBackBtn/HeaderXBtn/HeaderXBtn';
 import OwnerInformEditHeaderBtn from '../../../../components/Owner/Inform/Edit/atoms/Btns/Header/OwnerInformEditHeaderBtn';
+import OwnerInformEditCheckBoxContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/CheckBox/OwnerInformEditCheckBoxContent';
 import OwnerInformEditFilterContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Filter/OwnerInformEditFilterContent';
 import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Img/OwnerInformEditImgContent';
 import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
@@ -25,6 +26,7 @@ const OwnerInformEdit: React.FC = () => {
       inputValue: '',
     },
   ]);
+  const [isCouponChecked, setIsCouponChecked] = useState(false);
   const handleChangeCouponGiftArrInputValue = (
     index: number,
     e: React.ChangeEvent<HTMLInputElement>
@@ -80,6 +82,11 @@ const OwnerInformEdit: React.FC = () => {
           moreBtnText='다음 단계 보상 추가하기'
           onClickMoreBtn={() => {}}
           handleChangeInputValue={handleChangeCouponGiftArrInputValue}
+        />
+        <OwnerInformEditCheckBoxContent
+          isChecked={isCouponChecked}
+          label='쿠폰 사용 횟수별로 다르게 설정'
+          handleCheck={() => setIsCouponChecked((prev) => !prev)}
         />
         <OwnerInformEditMenuContent
           menuArr={[

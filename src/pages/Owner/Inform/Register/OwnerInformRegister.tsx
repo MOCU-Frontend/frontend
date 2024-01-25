@@ -11,9 +11,9 @@ import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edi
 import OwnerInformEditInputsContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Inputs/OwnerInformEditInputsContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
-import styles from './OwnerInformEdit.module.css';
+import styles from './OwnerInformRegister.module.css';
 
-const OwnerInformEdit: React.FC = () => {
+const OwnerInformRegister: React.FC = () => {
   const navigate = useNavigate();
   const [sangho, setSangho] = useState('');
   const [filterArr, setFilterArr] = useState([
@@ -52,16 +52,17 @@ const OwnerInformEdit: React.FC = () => {
   const handleClickFilter = (index: number) => {
     if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked data!!');
     setFilterArr((prevArr) => {
       const copiedArr = [...prevArr];
-      prevIndex !== -1 && (copiedArr[prevIndex].isChecked = false);
+      copiedArr[prevIndex].isChecked = false;
       copiedArr[index].isChecked = true;
       return copiedArr;
     });
   };
   return (
     <div>
-      <HeaderXBtn headerTitle='가게 정보 수정' onClickXBtn={() => navigate(-1)}>
+      <HeaderXBtn headerTitle='가게 정보 입력' onClickXBtn={() => navigate(-1)}>
         <div className={styles.headerBtnWrapper}>
           <OwnerInformEditHeaderBtn label='임시저장' onClick={() => {}} />
         </div>
@@ -120,14 +121,10 @@ const OwnerInformEdit: React.FC = () => {
         />
       </div>
       <div className={styles.submitBtnWrapper}>
-        <FullBtn
-          label='수정 완료하기'
-          onClick={() => navigate('/owner/inform/notice/register')}
-          disabled={!sangho}
-        />
+        <FullBtn label='입력 완료하기' onClick={() => {}} />
       </div>
     </div>
   );
 };
 
-export default OwnerInformEdit;
+export default OwnerInformRegister;

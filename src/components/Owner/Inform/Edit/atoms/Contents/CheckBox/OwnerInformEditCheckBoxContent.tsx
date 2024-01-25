@@ -15,8 +15,6 @@ const OwnerInformEditCheckBoxContent: React.FC<Props> = ({
   label,
   handleCheck,
 }: Props) => {
-  console.log(isChecked);
-
   return (
     <div className={styles.wholeWrapper} onClick={handleCheck}>
       <OwnerInformEditCheckBox isChecked={isChecked} />

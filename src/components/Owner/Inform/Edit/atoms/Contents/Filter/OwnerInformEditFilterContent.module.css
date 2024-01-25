@@ -12,7 +12,9 @@
   gap: 13px;
   width: fit-content;
 }
-
+.overflowWrapper::-webkit-scrollbar {
+  display: none;
+}
 .overflowWrapper {
   padding: 0 12px;
   overflow: scroll;

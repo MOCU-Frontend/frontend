@@ -1,0 +1,20 @@
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.imgsWrapper {
+  display: flex;
+  width: fit-content;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.overflowWrapper {
+  padding: 12px 20px 12px 0;
+  overflow: scroll;
+  white-space: nowrap;
+}
+.overflowWrapper::-webkit-scrollbar {
+  display: none;
+}

@@ -1,0 +1,28 @@
+@import '../../../../../../styles/colorVars.css';
+
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bodyWrapper {
+  padding: 12px 24px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.menuDummyImg {
+  width: 102px;
+  height: 54px;
+  border-radius: 5px;
+  background-color: var(--color-grey-dark-01);
+}
+.bodyWholeWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}

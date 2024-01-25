@@ -10,7 +10,10 @@ type Color =
   | 'grey'
   | 'sub-gradation'
   | 'bg-purple-light'
-  | 'sub-purple-light';
+  | 'sub-purple-light'
+  | 'grey-light-00'
+  | 'grey-light-02'
+  | 'grey-dark-01';
 
 interface Props {
   /**

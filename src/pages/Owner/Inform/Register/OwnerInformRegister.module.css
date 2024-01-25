@@ -1,0 +1,22 @@
+.headerBtnWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.contentWrapper {
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+.overflowContentWrapper {
+  padding-left: 20px;
+  margin-bottom: 24px;
+}
+.submitBtnWrapper {
+  margin: 46px 0 30px 0;
+  width: 100%;
+}

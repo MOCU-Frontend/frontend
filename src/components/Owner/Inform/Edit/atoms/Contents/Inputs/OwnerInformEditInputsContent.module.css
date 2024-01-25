@@ -1,0 +1,10 @@
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.subSecWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}

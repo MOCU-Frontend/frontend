@@ -1,0 +1,9 @@
+.wholeWrapper {
+  width: 24px;
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+}

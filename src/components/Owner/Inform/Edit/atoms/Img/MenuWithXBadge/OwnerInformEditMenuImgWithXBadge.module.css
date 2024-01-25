@@ -1,0 +1,14 @@
+@import '../../../../../../../styles/colorVars.css';
+.wholeWrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background: var(--color-grey-light-00);
+}
+.xBadgeWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(40%, -40%);
+}

@@ -23,6 +23,9 @@ import OwnerHome from './Owner/Home/OwnerHome';
 import OwnerInform from './Owner/Inform/OwnerInform';
 import OwnerRequest from './Owner/Request/OwnerRequest';
 import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
+import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
+import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
+import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -126,7 +129,12 @@ const Router = () => {
         },
         {
           path: 'inform',
-          element: <OwnerInform />,
+          children: [
+            { index: true, path: '', element: <OwnerInform /> },
+            { path: 'edit', element: <OwnerInformEdit /> },
+            { path: 'register', element: <OwnerInformRegister /> },
+            { path: 'notice/register', element: <OwnerInformNoticeRegister /> },
+          ],
         },
         {
           path: 'request',

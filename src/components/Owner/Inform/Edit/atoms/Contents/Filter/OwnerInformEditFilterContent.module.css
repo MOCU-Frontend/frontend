@@ -1,0 +1,22 @@
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+.filtersWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  width: fit-content;
+}
+.overflowWrapper::-webkit-scrollbar {
+  display: none;
+}
+.overflowWrapper {
+  padding: 0 12px;
+  overflow: scroll;
+  white-space: nowrap;
+}

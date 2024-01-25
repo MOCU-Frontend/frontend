@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import FullBtn from '../../../../components/Button/FullBtn/FullBtn';
 import HeaderXBtn from '../../../../components/HeaderBackBtn/HeaderXBtn/HeaderXBtn';
 import OwnerInformEditHeaderBtn from '../../../../components/Owner/Inform/Edit/atoms/Btns/Header/OwnerInformEditHeaderBtn';
 import OwnerInformEditCheckBoxContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/CheckBox/OwnerInformEditCheckBoxContent';
@@ -105,6 +106,9 @@ const OwnerInformEdit: React.FC = () => {
             { name: '블루베리치즈베이글', price: 5200 },
           ]}
         />
+      </div>
+      <div className={styles.submitBtnWrapper}>
+        <FullBtn label='입력 완료하기' onClick={() => {}} />
       </div>
     </div>
   );

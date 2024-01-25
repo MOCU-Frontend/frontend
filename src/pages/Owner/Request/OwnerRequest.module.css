@@ -1,0 +1,13 @@
+.filtersWrapper {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+}
+.itemsWrapper {
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16.5px;
+}

@@ -8,7 +8,12 @@ type Color =
   | 'white'
   | 'navy'
   | 'grey'
-  | 'sub-gradation';
+  | 'sub-gradation'
+  | 'bg-purple-light'
+  | 'sub-purple-light'
+  | 'grey-light-00'
+  | 'grey-light-02'
+  | 'grey-dark-01';
 interface Props {
   /**
    * 배경색

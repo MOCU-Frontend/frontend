@@ -29,7 +29,10 @@ const OwnerInformEditMenuContent: React.FC<Props> = ({ menuArr }: Props) => {
             onClickXBtn={() => {}}
           />
         ))}
-        <OwnerInformEditMoreBtn bodyText='메뉴 추가하기' onClick={() => {}} />
+        <OwnerInformEditMoreBtn
+          bodyText='메뉴 추가하기'
+          onClick={() => setIsshowTextField(true)}
+        />
       </div>
       {isShowTextField && (
         <OwnerInformEditMenuTextField

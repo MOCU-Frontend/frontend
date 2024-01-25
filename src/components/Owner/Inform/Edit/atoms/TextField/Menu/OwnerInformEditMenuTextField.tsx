@@ -46,7 +46,7 @@ const OwnerInformEditMenuTextField: React.FC<Props> = ({
           onChange={handleChangePrice}
           placeholder='가격을 입력하세요.'
         />
-        <div>
+        <div className={styles.imgsWrapper}>
           <OwnerInformEditMenuMoreImgBtn onClick={() => {}} />
           <OwnerInformEditMenuImgWithXBadge onClickXBtn={() => {}} />
         </div>

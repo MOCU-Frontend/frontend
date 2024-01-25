@@ -16,6 +16,13 @@ import styles from './OwnerInformEdit.module.css';
 const OwnerInformEdit: React.FC = () => {
   const navigate = useNavigate();
   const [sangho, setSangho] = useState('');
+  const [filterArr, setFilterArr] = useState([
+    { name: '베이커리', isChecked: true },
+    { name: '카페', isChecked: false },
+    { name: '음식점', isChecked: false },
+    { name: '주류', isChecked: false },
+    { name: '기타', isChecked: false },
+  ]);
   const [couponGiftArr, setCouponGiftArr] = useState([
     {
       title: '1번째 보상',
@@ -42,6 +49,17 @@ const OwnerInformEdit: React.FC = () => {
       return copiedArr;
     });
   };
+  const handleClickFilter = (index: number) => {
+    if (!filterArr[index]) throw new Error('invalid index!!');
+    const prevIndex = filterArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked data!!');
+    setFilterArr((prevArr) => {
+      const copiedArr = [...prevArr];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[index].isChecked = true;
+      return copiedArr;
+    });
+  };
   return (
     <div>
       <HeaderXBtn headerTitle='가게 정보 수정' onClickXBtn={() => navigate(-1)}>
@@ -65,13 +83,8 @@ const OwnerInformEdit: React.FC = () => {
       <div className={styles.overflowContentWrapper}>
         <OwnerInformEditFilterContent
           title='업종'
-          filterArr={[
-            { name: '베이커리', isChecked: true },
-            { name: '카페', isChecked: false },
-            { name: '음식점', isChecked: false },
-            { name: '주류', isChecked: false },
-            { name: '기타', isChecked: false },
-          ]}
+          filterArr={filterArr}
+          handleClickFilter={handleClickFilter}
         />
       </div>
       <div className={styles.contentWrapper}>

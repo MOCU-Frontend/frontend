@@ -11,11 +11,13 @@ type Filter = {
 interface Props {
   title: string;
   filterArr: Filter[];
+  handleClickFilter: (index: number) => void;
 }
 
 const OwnerInformEditFilterContent: React.FC<Props> = ({
   title,
   filterArr,
+  handleClickFilter,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -31,6 +33,7 @@ const OwnerInformEditFilterContent: React.FC<Props> = ({
               border={1}
               borderColor={'sub-purple-light'}
               textColor={'sub-purple-light'}
+              onClick={() => handleClickFilter(index)}
             />
           ))}
         </div>

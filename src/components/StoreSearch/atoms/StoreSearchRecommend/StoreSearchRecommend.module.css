@@ -1,0 +1,32 @@
+.contentRecent {
+  margin-left: 5vw;
+  display: flex;
+  width: 100%;
+  padding: 12px 0px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.searchTitle {
+  color: #666;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: -0.042px;
+}
+
+.storeSearchCardWrapper {
+  width: 90vw;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  -ms-overflow-style: none;
+  gap: 12px;
+}
+.storeSearchCardWrapper::-webkit-scrollbar {
+  display: none;
+}

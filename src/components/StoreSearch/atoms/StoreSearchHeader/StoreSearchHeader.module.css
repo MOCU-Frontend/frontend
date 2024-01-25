@@ -1,0 +1,13 @@
+@import '../../../../styles/colorVars.css';
+
+.headerWrapper {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-white);
+  z-index: 3;
+}
+
+.mapHeaderSelectWrapper {
+  padding: 8px 20px 4px 20px;
+  width: 100%;
+}

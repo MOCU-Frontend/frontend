@@ -174,6 +174,7 @@ const Stamp = () => {
             distance={data.distance}
             onClickCouponBtn={handleClickCouponBtn}
             onClickStoreDetailBtn={() => {}}
+            onClickMapBtn={() => navigate('/map')}
           />
         ))}
       </div>

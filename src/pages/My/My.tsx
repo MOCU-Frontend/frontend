@@ -81,7 +81,7 @@ const My: React.FC = () => {
           onClick={() => navigate('review')}
         />
         <MyMissionContent
-          onClick={() => {}}
+          onClick={() => navigate('/mission/map')}
           accumStampNum={8}
           wholeStampNum={10}
         />

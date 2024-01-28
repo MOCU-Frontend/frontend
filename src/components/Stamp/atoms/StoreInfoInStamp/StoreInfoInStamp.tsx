@@ -34,6 +34,10 @@ interface Props {
    * 쿠폰 사용 버튼 클릭시 발생하는 이벤트
    */
   onClickCouponBtn: () => void;
+  /**
+   * 맵 아이콘 버튼 클릭시 발생하는 이벤트
+   */
+  onClickMapBtn: () => void;
 }
 
 const StoreInfoInStamp: React.FC<Props> = ({
@@ -43,6 +47,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
   distance,
   onClickStoreDetailBtn,
   onClickCouponBtn,
+  onClickMapBtn,
 }: Props) => {
   return (
     <button className={styles.wrapStoreInfo}>
@@ -73,7 +78,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className={styles.storeWrapDistance}>
+      <div className={styles.storeWrapDistance} onClick={onClickMapBtn}>
         <MapImage width={17.6} height={22} fill={colors.greyDark00} />
         <div className={styles.storeDistanceText}>{distance}m</div>
       </div>

@@ -74,6 +74,27 @@ const Coupon = () => {
     setIsShowBottomSheet(false);
   };
 
+  const [couponStoreDataArr, setCouponStoreDataArr] = useState([
+    {
+      title: '카페롱',
+      couponCount: 8,
+      achieve: '바닐라 마카롱',
+      distance: 100,
+    },
+    {
+      title: '드로잉레시피',
+      couponCount: 10,
+      achieve: '오븐 스파게티',
+      distance: 100,
+    },
+    {
+      title: '크림베이글 건대점',
+      couponCount: 9,
+      achieve: '아이스 아메리카노 한 잔',
+      distance: 100,
+    },
+  ]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
@@ -102,104 +123,23 @@ const Coupon = () => {
       </div>
 
       <div className={styles.couponStoreInfoWrapper}>
-        <StoreInfoInStamp
-          title='카페롱'
-          couponCount={8}
-          achieve='바닐라 마카롱'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[0]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='드로잉레시피'
-          couponCount={10}
-          achieve='오븐 스파게티'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[1]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='크림베이글 건대점'
-          couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[2]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='크림베이글 건대점'
-          couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[2]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='크림베이글 건대점'
-          couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[2]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='크림베이글 건대점'
-          couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[2]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
-        <StoreInfoInStamp
-          title='크림베이글 건대점'
-          couponCount={9}
-          achieve='아이스 아메리카노 한 잔'
-          distance={100}
-          onClickCouponBtn={() => {
-            setCouponModalLevel('confirm');
-          }}
-          onClickStoreDetailBtn={() => {
-            setSelectedStoreInform(storeMapData[2]);
-            setIsShowBottomSheet(true);
-          }}
-          onClickMapBtn={() => navigate('/map')}
-        />
+        {couponStoreDataArr.map((data, index) => (
+          <StoreInfoInStamp
+            key={data.title + index}
+            title={data.title}
+            couponCount={data.couponCount}
+            achieve={data.achieve}
+            distance={data.distance}
+            onClickCouponBtn={() => {
+              setCouponModalLevel('confirm');
+            }}
+            onClickStoreDetailBtn={() => {
+              setSelectedStoreInform(storeMapData[0]);
+              setIsShowBottomSheet(true);
+            }}
+            onClickMapBtn={() => navigate('/map')}
+          />
+        ))}
       </div>
       {isShowBottomSheet && selectedStoreInform && (
         <CouponBottomSheet

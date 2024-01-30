@@ -31,6 +31,7 @@ import Setting from './Setting/Setting';
 import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
 import GiftBox from './Gift/Box/GiftBox';
 import StoreDangol from './Store/Dangol/StoreDangol';
+import RewardHistory from './Reward/History/RewardHistory';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -54,6 +55,10 @@ const Router = () => {
     {
       path: '/setting',
       element: <Setting />,
+    },
+    {
+      path: '/reward',
+      children: [{ path: 'history', element: <RewardHistory /> }],
     },
     {
       path: '/store',

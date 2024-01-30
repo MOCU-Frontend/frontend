@@ -91,7 +91,7 @@ const My: React.FC = () => {
         />
         <MyMainNormalHeaderWrapper
           headerText='최근 혜택 사용 내역'
-          onClick={() => {}}
+          onClick={() => navigate('/reward/history')}
           gap={12}
         >
           <MyMainContentSubText text='한 달 동안 총 5개의 혜택을 받았어요!' />

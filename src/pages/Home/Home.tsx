@@ -75,7 +75,10 @@ const Home = () => {
           />
         </div>
 
-        <div className={styles.eventBox} onClick={() => navigate('/ad')}></div>
+        <div
+          className={styles.eventBox}
+          onClick={() => navigate('/ad/1')}
+        ></div>
       </main>
       <BottomNavigation nowPage='home' />
     </div>

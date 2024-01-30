@@ -106,7 +106,10 @@ const My: React.FC = () => {
           accumStampNum={8}
           wholeStampNum={10}
         />
-        <div className={styles.eventBox} onClick={() => navigate('/ad')}></div>
+        <div
+          className={styles.eventBox}
+          onClick={() => navigate('/ad/1')}
+        ></div>
       </main>
       <HomeBottomNavigation nowPage='my' />
       <Outlet />

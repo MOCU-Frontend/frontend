@@ -46,7 +46,12 @@ const Router = () => {
     },
     {
       path: '/ad',
-      element: <Advertisement />,
+      children: [
+        {
+          path: ':adId',
+          element: <Advertisement />,
+        },
+      ],
     },
     {
       path: '/alarm',

@@ -1,4 +1,4 @@
-@import '../../../../styles/colorVars.css';
+@import '../../../../../../styles/colorVars.css';
 
 .wrapStoreInfo {
   width: 100%;
@@ -77,9 +77,15 @@
   gap: 1px;
 }
 
-.storeWrapDistance {
+.rightWrapper {
   display: flex;
   flex-direction: column;
+  align-items: flex-end;
+  gap: 26px;
+}
+.distanceWrapper {
+  display: flex;
+  flex-direction: row;
   align-items: center;
   gap: 2px;
 }

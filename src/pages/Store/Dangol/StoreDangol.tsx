@@ -126,7 +126,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
       <div className={styles.seeMoreBtnWrapper}>
         <StoreDangolSeeMoreBtn
           btnText='단골로 설정 가능한 가게 2'
-          onClick={() => {}}
+          onClick={() => navigate('add')}
         />
       </div>
 

@@ -19,20 +19,23 @@ const LocationSetting: React.FC<Props> = ({}: Props) => {
           color={colors.black}
         />
       </div>
-      <div className={styles.searchBarWrapper}>
+      <div
+        className={styles.searchBarWrapper}
+        onClick={() => navigate('search')}
+      >
         <SearchBar
           placeholder='지번, 도로명, 건물명으로 검색'
           onClickSearchBtn={() => {}}
         />
       </div>
-      <div className={styles.mapWrapper}>
+      <div className={styles.mapWrapper} onClick={() => navigate('now')}>
         <div className={styles.mapSmall}></div>
       </div>
       <div className={styles.seeMapBtnWrapper}>
-        <MyLocationEditSeeMapBtn onClick={() => {}} />
+        <MyLocationEditSeeMapBtn onClick={() => navigate('now')} />
       </div>
       <MyNowLocationBottomSheet
-        onDragBottom={() => {}}
+        onDragBottom={() => navigate(-1)}
         locationText={'no address..'}
         btnStatus='지번'
         handleChangeBtnStatus={() => {}}

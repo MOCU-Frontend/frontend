@@ -1,10 +1,9 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
 import StoreSearch from './Store/Search/StoreSearch';
-import SearchResult from './SearchResult/SearchResult';
+import StoreSearchResult from './Store/Search/Result/StoreSearchResult';
 import Stamp from './Stamp/Stamp';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
@@ -54,7 +53,7 @@ const Router = () => {
             },
             {
               path: ':searchWord',
-              element: <SearchResult />,
+              element: <StoreSearchResult />,
             },
           ],
         },

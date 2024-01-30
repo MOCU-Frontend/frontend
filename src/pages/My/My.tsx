@@ -76,7 +76,7 @@ const My: React.FC = () => {
             titleText='단골'
             num={2}
             Icon={MyStoreGradationIcon}
-            onClick={() => {}}
+            onClick={() => navigate('/store/dangol')}
           />
           <MyQuickMenu
             titleText='선물함'

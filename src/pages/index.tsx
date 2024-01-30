@@ -30,6 +30,7 @@ import Alarm from './Alarm/Alarm';
 import Setting from './Setting/Setting';
 import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
 import GiftBox from './Gift/Box/GiftBox';
+import StoreDangol from './Store/Dangol/StoreDangol';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -75,6 +76,7 @@ const Router = () => {
             },
           ],
         },
+        { path: 'dangol', element: <StoreDangol /> },
       ],
     },
     {

@@ -66,9 +66,24 @@ const My: React.FC = () => {
       </div>
       <main className={styles.main}>
         <div className={styles.quickMenusWrapper}>
-          <MyQuickMenu titleText='쿠폰' num={4} Icon={CouponGradationIcon} />
-          <MyQuickMenu titleText='단골' num={2} Icon={MyStoreGradationIcon} />
-          <MyQuickMenu titleText='선물함' num={0} Icon={GiftGradationIcon} />
+          <MyQuickMenu
+            titleText='쿠폰'
+            num={4}
+            Icon={CouponGradationIcon}
+            onClick={() => navigate('/coupon')}
+          />
+          <MyQuickMenu
+            titleText='단골'
+            num={2}
+            Icon={MyStoreGradationIcon}
+            onClick={() => {}}
+          />
+          <MyQuickMenu
+            titleText='선물함'
+            num={0}
+            Icon={GiftGradationIcon}
+            onClick={() => {}}
+          />
         </div>
         <MyLocationContent
           locationText='서울 광진구 능동로 69'

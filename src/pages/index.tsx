@@ -29,6 +29,7 @@ import Gift from './Gift/Gift';
 const Router = () => {
   const router = createBrowserRouter([
     {
+      index: true,
       path: '/',
       element: <Home />,
     },

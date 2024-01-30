@@ -31,3 +31,8 @@
   margin: 16px 20px 0 20px;
   border-top: 1px solid var(--UI-grey_light_01, #e5e5e5);
 }
+.fullBtnWrapper {
+  position: fixed;
+  bottom: 20px;
+  left: 0;
+}

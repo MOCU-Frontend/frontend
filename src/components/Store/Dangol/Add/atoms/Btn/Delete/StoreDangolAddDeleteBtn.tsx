@@ -14,7 +14,11 @@ const StoreDangolAddDeleteBtn: React.FC<Props> = ({
   onClick,
 }: Props) => {
   return (
-    <button className={styles.wholeWrapper} onClick={onClick}>
+    <button
+      className={styles.wholeWrapper}
+      onClick={onClick}
+      disabled={!isChecked}
+    >
       <DeleteIcon
         width={24}
         height={24}

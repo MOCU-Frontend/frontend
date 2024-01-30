@@ -6,13 +6,19 @@ import styles from './StoreDangolAdd.module.css';
 import { ReactComponent as ShareIcon } from '../../../../../assets/icon/help.svg';
 import StoreDangolAddDeleteBtn from '../../../../../components/Store/Dangol/Add/atoms/Btn/Delete/StoreDangolAddDeleteBtn';
 import BodyTitleText from '../../../../../components/Text/BodyTitleText/BodyTitleText';
-import StoreInfoInStamp from '../../../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolAddItem from '../../../../../components/Store/Dangol/Add/atoms/StoreItem/StoreDangolAddItem';
+import FullBtn from '../../../../../components/Button/FullBtn/FullBtn';
+import ModalReportSuccess from '../../../../../components/Modal/ModalReportSuccess/ModalReportSuccess';
+import ModalConfirm from '../../../../../components/Modal/ModalConfirm/ModalConfirm';
+import ModalDelete from '../../../../../components/Modal/ModalDelete/ModalDelete';
+import ModalCompleteDangol from '../../../../../components/Modal/ModalCompleteDangol/ModalCompleteDangol';
 
 interface Props {}
 
 const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const [isShowModalDelete, setIsShowModalDelete] = useState(false);
+  const [isShowModalDangol, setIsShowModalDangol] = useState(false);
   const [dangolStoreDataArr, setDangolStoreDataArr] = useState([
     {
       title: '카페롱',
@@ -36,6 +42,9 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       isChecked: false,
     },
   ]);
+  const checkedStoreDataArr = dangolStoreDataArr.filter(
+    (data) => data.isChecked
+  );
   const handleClickDangolStoreCheckBox = (index: number) => {
     if (!dangolStoreDataArr[index]) throw new Error('invalid index!');
     setDangolStoreDataArr((prevArr) => {
@@ -63,7 +72,10 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
         />
       </div>
       <div className={styles.deleteBtnWrapper}>
-        <StoreDangolAddDeleteBtn onClick={() => {}} isChecked />
+        <StoreDangolAddDeleteBtn
+          onClick={() => setIsShowModalDelete(true)}
+          isChecked={checkedStoreDataArr.length > 0}
+        />
       </div>
       <div className={styles.wrapContent}>
         {dangolStoreDataArr.map((data, index) => (
@@ -79,6 +91,35 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
           />
         ))}
       </div>
+      <div className={styles.fullBtnWrapper}>
+        <FullBtn
+          label='단골로 설정'
+          onClick={() => setIsShowModalDangol(true)}
+          disabled={checkedStoreDataArr.length === 0}
+        />
+      </div>
+      {isShowModalDelete && (
+        <ModalDelete
+          bodyText='선택하신 가게를 정말 삭제할까요?'
+          subText='조용한 주택'
+          nextText='다음 혜택: 분다버그 2캔'
+          informText='*15초 후 자동으로 이전 메인 페이지로 돌아갑니다.'
+          headerTitle=''
+          onClickNo={() => setIsShowModalDelete(false)}
+          onClickX={() => setIsShowModalDelete(false)}
+          onClickYes={() => setIsShowModalDelete(false)}
+        />
+      )}
+      {isShowModalDangol && (
+        <ModalCompleteDangol
+          headerTitle=''
+          bodyText='단골설정 완료!'
+          informText='*15초 후 자동으로 이전 페이지로 돌아갑니다.'
+          onClickBtn={() => setIsShowModalDangol(false)}
+          btnLabel='내 단골 가게 확인하기'
+          onClickX={() => setIsShowModalDangol(false)}
+        />
+      )}
     </div>
   );
 };

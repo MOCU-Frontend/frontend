@@ -10,40 +10,19 @@ import { ReactComponent as ArrowRightSmallImage } from '../../../assets/icon/arr
 import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
 import { ReactComponent as CoupongageImage } from '../../../assets/icon/couponGage.svg';
 
-type MissionTitle = {
-  title: string;
-};
-
-const MissionTitleData: MissionTitle[] = [
-  {
-    title: '내 주변 쿠폰 찾아보기',
-  },
-  {
-    title: '쿠폰 사용하기',
-  },
-  {
-    title: '친구에게 선물하기',
-  },
-  {
-    title: '리뷰 남기기',
-  },
-  {
-    title: '이벤트 중인 가게 방문하기',
-  },
-];
+import { MissionTitleData, MissionCntData } from '../../../store/data/mission';
 
 const MissionToday = () => {
   const navigate = useNavigate();
-  const todayMissionCnt = 2;
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor='white'
-          headerTitle='미션'
-          headerTitleColor='white'
+          backBtnColor="white"
+          headerTitle="미션"
+          headerTitleColor="white"
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -89,7 +68,8 @@ const MissionToday = () => {
         <div className={styles.wrapMissionList}>
           <div className={styles.wrapCurrentState}>
             <div className={styles.currentStateText}>
-              다음 스탬프 획득까지 미션 {todayMissionCnt}개 남았습니다.
+              다음 스탬프 획득까지 미션 {MissionCntData[0].todayMissionCnt}개
+              남았습니다.
             </div>
             <CoupongageImage />
           </div>

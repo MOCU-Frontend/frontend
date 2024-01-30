@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './MissionMapContent.module.css';
+import Button from '../../Button/Button';
 
 import { ReactComponent as StampNowImage } from '../../../assets/icon/stampStarBadgeMode.svg';
 import { ReactComponent as StampFinishedImage } from '../../../assets/icon/stampStarGradation.svg';
@@ -104,6 +105,12 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
                 stroke={colors.white}
               />
             </div>
+            <Button
+              size="small"
+              label="최종 보상 받기"
+              textColor="sub-purple-light"
+              borderRadius="large"
+            />
           </>
         ) : (
           <>
@@ -116,6 +123,11 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
                 stroke={colors.subPurpleLight}
               />
             </div>
+            <Button
+              label="최종 보상 받기"
+              textColor="sub-purple-light"
+              borderRadius="medium"
+            />
           </>
         )}
       </div>

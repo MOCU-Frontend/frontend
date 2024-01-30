@@ -13,6 +13,7 @@ interface Props {
   btnStatus: LocationBtnStatus;
   handleChangeBtnStatus: () => void;
   handleClickSetLocationBtn: () => void;
+  btnText?: string;
 }
 
 const MyNowLocationBottomSheet: React.FC<Props> = ({
@@ -21,6 +22,7 @@ const MyNowLocationBottomSheet: React.FC<Props> = ({
   btnStatus,
   handleChangeBtnStatus,
   handleClickSetLocationBtn,
+  btnText = '이 위치로 설정하기',
 }: Props) => {
   return (
     <BottomSheetNoBackground onDragBottom={onDragBottom}>
@@ -32,10 +34,7 @@ const MyNowLocationBottomSheet: React.FC<Props> = ({
             onClick={handleChangeBtnStatus}
           />
         </div>
-        <FullBtn
-          label='이 위치로 설정하기'
-          onClick={handleClickSetLocationBtn}
-        />
+        <FullBtn label={btnText} onClick={handleClickSetLocationBtn} />
       </div>
     </BottomSheetNoBackground>
   );

@@ -1,0 +1,15 @@
+@import '../../../styles/colorVars.css';
+
+.titleTextWrapper {
+  padding: 30px 20px 0 20px;
+  width: 100%;
+}
+.mainContentWrapper {
+  padding: 30px 20px 0 20px;
+  width: 100%;
+}
+.backBtnText {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-grey-dark-00);
+}

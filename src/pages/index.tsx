@@ -32,6 +32,10 @@ import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
 import GiftBox from './Gift/Box/GiftBox';
 import StoreDangol from './Store/Dangol/StoreDangol';
 import RewardHistory from './Reward/History/RewardHistory';
+import LocationSetting from './LocationSetting/LocationSetting';
+import LocationSettingNow from './LocationSetting/now/LocationSettingNow';
+import LocationSettingSearch from './LocationSetting/search/LocationSettingSearch';
+import LocationSettingName from './LocationSetting/Name/LocationSettingName';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -165,6 +169,15 @@ const Router = () => {
     {
       path: '/mylocation',
       element: <MyLocationPage />,
+    },
+    {
+      path: '/locationsetting',
+      children: [
+        { path: '', element: <LocationSetting /> },
+        { path: 'now', element: <LocationSettingNow /> },
+        { path: 'search', element: <LocationSettingSearch /> },
+        { path: 'name', element: <LocationSettingName /> },
+      ],
     },
     {
       path: '/owner',

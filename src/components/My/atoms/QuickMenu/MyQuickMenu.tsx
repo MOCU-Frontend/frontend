@@ -7,11 +7,12 @@ interface Props {
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
   titleText: string;
   num: number;
+  onClick: () => void;
 }
 
-const MyQuickMenu: React.FC<Props> = ({ Icon, titleText, num }: Props) => {
+const MyQuickMenu: React.FC<Props> = ({ Icon, titleText, num, onClick }) => {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={onClick}>
       <Icon width={24} height={24} />
       <MyQuickMenuTitleText text={titleText} />
       {num > 0 && (

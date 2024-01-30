@@ -1,10 +1,9 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
-import StoreSearch from './StoreSearch/StoreSearch';
-import SearchResult from './SearchResult/SearchResult';
+import StoreSearch from './Store/Search/StoreSearch';
+import StoreSearchResult from './Store/Search/Result/StoreSearchResult';
 import Stamp from './Stamp/Stamp';
 import My from './My/My';
 import MyLocation from './My/Location/MyLocation';
@@ -13,7 +12,6 @@ import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
 import Store from './Store/Store';
-import Present from './Present/Present';
 import MissionToday from './Mission/Today/MissionToday';
 import MissionMap from './Mission/Map/MissionMap';
 import Review from './Review/Review';
@@ -26,10 +24,19 @@ import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
 import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
 import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
 import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
+import Gift from './Gift/Gift';
+import Advertisement from './Advertisement/Advertisement';
+import Alarm from './Alarm/Alarm';
+import Setting from './Setting/Setting';
+import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
+import GiftBox from './Gift/Box/GiftBox';
+import StoreDangol from './Store/Dangol/StoreDangol';
+import RewardHistory from './Reward/History/RewardHistory';
 
 const Router = () => {
   const router = createBrowserRouter([
     {
+      index: true,
       path: '/',
       element: <Home />,
     },
@@ -38,28 +45,64 @@ const Router = () => {
       element: <Map />,
     },
     {
-      path: '/storesearch',
-      element: <StoreSearch />,
+      path: '/ad',
+      children: [
+        {
+          path: ':adId',
+          element: <Advertisement />,
+        },
+      ],
     },
     {
-      path: '/storesearch/:searchWord',
-      element: <SearchResult />,
+      path: '/alarm',
+      element: <Alarm />,
+    },
+    {
+      path: '/setting',
+      element: <Setting />,
+    },
+    {
+      path: '/reward',
+      children: [{ path: 'history', element: <RewardHistory /> }],
+    },
+    {
+      path: '/store',
+      children: [
+        {
+          path: ':storeId',
+          element: <Store />,
+        },
+        {
+          path: 'search',
+          children: [
+            {
+              index: true,
+              path: '',
+              element: <StoreSearch />,
+            },
+            {
+              path: ':searchWord',
+              element: <StoreSearchResult />,
+            },
+          ],
+        },
+        { path: 'dangol', element: <StoreDangol /> },
+      ],
     },
     {
       path: '/stamp',
       element: <Stamp />,
     },
     {
-      path: '/store/:storeId',
-      element: <Store />,
-    },
-    {
       path: '/review/:storeId',
       element: <Review />,
     },
     {
-      path: '/present',
-      element: <Present />,
+      path: '/gift',
+      children: [
+        { index: true, path: '', element: <Gift /> },
+        { path: 'box', element: <GiftBox /> },
+      ],
     },
     {
       path: '/coupon',
@@ -86,6 +129,10 @@ const Router = () => {
           index: true,
           path: '',
           element: <My />,
+        },
+        {
+          path: 'profile',
+          children: [{ path: 'edit', element: <MyProfileEdit /> }],
         },
         {
           path: 'review',

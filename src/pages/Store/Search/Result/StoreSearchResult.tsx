@@ -1,23 +1,20 @@
 import React, { useState } from 'react';
-import styles from './SearchResult.module.css';
+import styles from './StoreSearchResult.module.css';
 import { useNavigate } from 'react-router-dom';
 
-import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
-import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
-import StoreInfo from '../../components/SearchResult/atoms/StoreInfo/StoreInfo';
-import BottomSheet from '../../components/BottomSheet/BottomSheet';
-import { ReactComponent as ResetImage } from '../../assets/icon/reset.svg';
+import CheckFilterSelect from '../../../../components/CheckFilter/Select/CheckFilterSelect';
+import SearchBarHeader from '../../../../components/SearchBar/SearchBarHeader/SearchBarHeader';
+import StoreInfo from '../../../../components/SearchResult/atoms/StoreInfo/StoreInfo';
+import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
 import {
   searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
-} from '../../store/data/searchResult';
-import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
-import CheckFilter from '../../components/CheckFilter/CheckFilter';
+} from '../../../../store/data/searchResult';
+import SlideTabViewFilterOrOption from '../../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 
-const SearchResult = () => {
+const StoreSearchResult = () => {
   const navigate = useNavigate();
 
   // BottomSheet를 보이게 하는지 상태관리
@@ -99,22 +96,12 @@ const SearchResult = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 가게를 검색해 보세요"
+          placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) =>
             navigate(`/storesearch/${value}`)
           }
         />
-
-        {/* <HeaderBackBtn
-          headerPaddingSize='search'
-          onClickBackBtn={() => navigate(-1)}
-        >
-          <SearchBar
-            placeholder='찾고 싶은 가게를 검색해 보세요'
-            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
-          />
-        </HeaderBackBtn> */}
       </div>
 
       <div className={styles.filtersWrapper}>
@@ -126,7 +113,7 @@ const SearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -137,7 +124,7 @@ const SearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -149,7 +136,7 @@ const SearchResult = () => {
                 isChecked={false}
                 label={data.title}
                 border={1}
-                borderColor="sub-purple-light"
+                borderColor='sub-purple-light'
                 onClick={() => handleFilterSelectClick(2)}
               />
             )
@@ -187,4 +174,4 @@ const SearchResult = () => {
   );
 };
 
-export default SearchResult;
+export default StoreSearchResult;

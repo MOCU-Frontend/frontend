@@ -51,18 +51,39 @@ const My: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
+      <HomeHeader
+        onClickAlarmBtn={() => navigate('/alarm')}
+        onClickSettingBtn={() => navigate('/setting')}
+      />
       <div className={styles.myTopInformBar}>
-        <button className={styles.profileBtn} onClick={() => {}}>
+        <button
+          className={styles.profileBtn}
+          onClick={() => navigate('profile/edit')}
+        >
           <ProfileGradationIcon width={48} height={48} />
         </button>
         <MyTopSection titleText='모쿠 님의 마이페이지' subText='@298370' />
       </div>
       <main className={styles.main}>
         <div className={styles.quickMenusWrapper}>
-          <MyQuickMenu titleText='쿠폰' num={4} Icon={CouponGradationIcon} />
-          <MyQuickMenu titleText='단골' num={2} Icon={MyStoreGradationIcon} />
-          <MyQuickMenu titleText='선물함' num={0} Icon={GiftGradationIcon} />
+          <MyQuickMenu
+            titleText='쿠폰'
+            num={4}
+            Icon={CouponGradationIcon}
+            onClick={() => navigate('/coupon')}
+          />
+          <MyQuickMenu
+            titleText='단골'
+            num={2}
+            Icon={MyStoreGradationIcon}
+            onClick={() => navigate('/store/dangol')}
+          />
+          <MyQuickMenu
+            titleText='선물함'
+            num={0}
+            Icon={GiftGradationIcon}
+            onClick={() => navigate('/gift/box')}
+          />
         </div>
         <MyLocationContent
           locationText='서울 광진구 능동로 69'
@@ -70,7 +91,7 @@ const My: React.FC = () => {
         />
         <MyMainNormalHeaderWrapper
           headerText='최근 혜택 사용 내역'
-          onClick={() => {}}
+          onClick={() => navigate('/reward/history')}
           gap={12}
         >
           <MyMainContentSubText text='한 달 동안 총 5개의 혜택을 받았어요!' />
@@ -85,7 +106,10 @@ const My: React.FC = () => {
           accumStampNum={8}
           wholeStampNum={10}
         />
-        <div className={styles.eventBox}></div>
+        <div
+          className={styles.eventBox}
+          onClick={() => navigate('/ad/1')}
+        ></div>
       </main>
       <HomeBottomNavigation nowPage='my' />
       <Outlet />

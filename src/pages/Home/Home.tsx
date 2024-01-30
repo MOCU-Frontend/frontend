@@ -5,7 +5,7 @@ import { ReactComponent as ProfileIcon } from '../../assets/icon/profile.svg';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/icon/shopping.svg';
 import { ReactComponent as StampIcon } from '../../assets/icon/emptyStamp.svg';
-import { ReactComponent as PresentIcon } from '../../assets/icon/present.svg';
+import { ReactComponent as GiftIcon } from '../../assets/icon/present.svg';
 import { ReactComponent as RocketIcon } from '../../assets/icon/rocket.svg';
 
 import BottomNavigation from '../../components/Home/atoms/BottomNavigation/HomeBottomNavigation';
@@ -20,7 +20,10 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
+      <HomeHeader
+        onClickAlarmBtn={() => navigate('alarm')}
+        onClickSettingBtn={() => navigate('setting')}
+      />
       <div className={styles.homeTopInformBar}>
         <ProfileIcon
           width={48}
@@ -50,7 +53,7 @@ const Home = () => {
             titleText='가게'
             subText='당신이 찾는 혜택 맛집은?'
             Icon={ShoppingIcon}
-            onClick={() => navigate('/storesearch')}
+            onClick={() => navigate('/store/search')}
           />
           <HomeMenuGridBtn
             titleText='적립'
@@ -61,8 +64,8 @@ const Home = () => {
           <HomeMenuGridBtn
             titleText='선물'
             subText='선물하고 싶은 사람이 있나요?'
-            Icon={PresentIcon}
-            onClick={() => navigate('/present')}
+            Icon={GiftIcon}
+            onClick={() => navigate('/gift')}
           />
           <HomeMenuGridBtn
             titleText='미션'
@@ -72,7 +75,10 @@ const Home = () => {
           />
         </div>
 
-        <div className={styles.eventBox}></div>
+        <div
+          className={styles.eventBox}
+          onClick={() => navigate('/ad/1')}
+        ></div>
       </main>
       <BottomNavigation nowPage='home' />
     </div>

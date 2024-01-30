@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './PresentButton.module.css';
+import styles from './GiftCard.module.css';
 
 interface Props {
   /*
@@ -18,11 +18,7 @@ interface Props {
   foodPrice: string;
 }
 
-const PresentButton: React.FC<Props> = ({
-  cafeTitle,
-  foodTitle,
-  foodPrice,
-}) => {
+const GiftCard: React.FC<Props> = ({ cafeTitle, foodTitle, foodPrice }) => {
   return (
     <button className={styles.wrapper}>
       <div className={styles.imageWrapper} />
@@ -35,4 +31,4 @@ const PresentButton: React.FC<Props> = ({
   );
 };
 
-export default PresentButton;
+export default GiftCard;

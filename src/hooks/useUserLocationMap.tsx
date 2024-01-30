@@ -8,7 +8,8 @@ type Location = {
 
 export const useUserLocationMap = (
   map: naver.maps.Map | undefined,
-  userLocation: Location | undefined
+  userLocation: Location | undefined,
+  isSetCenter = false
 ) => {
   const [userLocMarker, setUserLocMarker] = useState<
     naver.maps.Marker | undefined
@@ -16,7 +17,10 @@ export const useUserLocationMap = (
 
   useEffect(() => {
     if (userLocation && map) {
-      // map.setCenter(new naver.maps.LatLng(userLocation.lat, userLocation.lng));
+      if (isSetCenter)
+        map.setCenter(
+          new naver.maps.LatLng(userLocation.lat, userLocation.lng)
+        );
       if (!userLocMarker) {
         setUserLocMarker(
           new naver.maps.Marker({

@@ -51,7 +51,10 @@ const My: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
+      <HomeHeader
+        onClickAlarmBtn={() => navigate('/alarm')}
+        onClickSettingBtn={() => navigate('/setting')}
+      />
       <div className={styles.myTopInformBar}>
         <button className={styles.profileBtn} onClick={() => {}}>
           <ProfileGradationIcon width={48} height={48} />
@@ -85,7 +88,7 @@ const My: React.FC = () => {
           accumStampNum={8}
           wholeStampNum={10}
         />
-        <div className={styles.eventBox}></div>
+        <div className={styles.eventBox} onClick={() => navigate('/ad')}></div>
       </main>
       <HomeBottomNavigation nowPage='my' />
       <Outlet />

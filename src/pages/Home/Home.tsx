@@ -20,7 +20,10 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
+      <HomeHeader
+        onClickAlarmBtn={() => navigate('alarm')}
+        onClickSettingBtn={() => navigate('setting')}
+      />
       <div className={styles.homeTopInformBar}>
         <ProfileIcon
           width={48}
@@ -72,7 +75,7 @@ const Home = () => {
           />
         </div>
 
-        <div className={styles.eventBox}></div>
+        <div className={styles.eventBox} onClick={() => navigate('/ad')}></div>
       </main>
       <BottomNavigation nowPage='home' />
     </div>

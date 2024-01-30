@@ -25,6 +25,9 @@ import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
 import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
 import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
 import Gift from './Gift/Gift';
+import Advertisement from './Advertisement/Advertisement';
+import Alarm from './Alarm/Alarm';
+import Setting from './Setting/Setting';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -36,6 +39,18 @@ const Router = () => {
     {
       path: '/map',
       element: <Map />,
+    },
+    {
+      path: '/ad',
+      element: <Advertisement />,
+    },
+    {
+      path: '/alarm',
+      element: <Alarm />,
+    },
+    {
+      path: '/setting',
+      element: <Setting />,
     },
     {
       path: '/store',

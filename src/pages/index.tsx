@@ -35,6 +35,7 @@ import RewardHistory from './Reward/History/RewardHistory';
 import LocationSetting from './LocationSetting/LocationSetting';
 import LocationSettingNow from './LocationSetting/now/LocationSettingNow';
 import LocationSettingSearch from './LocationSetting/search/LocationSettingSearch';
+import LocationSettingName from './LocationSetting/Name/LocationSettingName';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -175,6 +176,7 @@ const Router = () => {
         { path: '', element: <LocationSetting /> },
         { path: 'now', element: <LocationSettingNow /> },
         { path: 'search', element: <LocationSettingSearch /> },
+        { path: 'name', element: <LocationSettingName /> },
       ],
     },
     {

@@ -39,7 +39,7 @@ const LocationSetting: React.FC<Props> = ({}: Props) => {
         locationText={'no address..'}
         btnStatus='지번'
         handleChangeBtnStatus={() => {}}
-        handleClickSetLocationBtn={() => {}}
+        handleClickSetLocationBtn={() => navigate('name')}
       />
     </>
   );

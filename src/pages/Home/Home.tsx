@@ -5,7 +5,7 @@ import { ReactComponent as ProfileIcon } from '../../assets/icon/profile.svg';
 
 import { ReactComponent as ShoppingIcon } from '../../assets/icon/shopping.svg';
 import { ReactComponent as StampIcon } from '../../assets/icon/emptyStamp.svg';
-import { ReactComponent as PresentIcon } from '../../assets/icon/present.svg';
+import { ReactComponent as GiftIcon } from '../../assets/icon/present.svg';
 import { ReactComponent as RocketIcon } from '../../assets/icon/rocket.svg';
 
 import BottomNavigation from '../../components/Home/atoms/BottomNavigation/HomeBottomNavigation';
@@ -61,8 +61,8 @@ const Home = () => {
           <HomeMenuGridBtn
             titleText='선물'
             subText='선물하고 싶은 사람이 있나요?'
-            Icon={PresentIcon}
-            onClick={() => navigate('/present')}
+            Icon={GiftIcon}
+            onClick={() => navigate('/gift')}
           />
           <HomeMenuGridBtn
             titleText='미션'

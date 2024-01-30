@@ -13,7 +13,6 @@ import MyNowLocation from './My/Location/Now/MyNowLocation';
 import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
 import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
 import Store from './Store/Store';
-import Present from './Present/Present';
 import MissionToday from './Mission/Today/MissionToday';
 import MissionMap from './Mission/Map/MissionMap';
 import Review from './Review/Review';
@@ -26,6 +25,7 @@ import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
 import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
 import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
 import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
+import Gift from './Gift/Gift';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -58,8 +58,8 @@ const Router = () => {
       element: <Review />,
     },
     {
-      path: '/present',
-      element: <Present />,
+      path: '/gift',
+      element: <Gift />,
     },
     {
       path: '/coupon',

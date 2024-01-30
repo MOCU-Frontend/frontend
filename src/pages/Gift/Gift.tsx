@@ -1,13 +1,12 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from './Present.module.css';
+import styles from './Gift.module.css';
 import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
-import PresentButton from '../../components/Present/atoms/PresentButton/PresentButton';
-import { colors } from '../../styles/colors';
-import { presentData } from '../../store/data/present';
+import { giftData } from '../../store/data/gift';
+import GiftCard from '../../components/Gift/atoms/Card/GiftCard';
 
-const Present = () => {
+const Gift = () => {
   const navigate = useNavigate();
   const { searchWord } = useParams();
 
@@ -43,8 +42,8 @@ const Present = () => {
       </div>
 
       <div className={styles.gridContainer}>
-        {presentData.map((data, index) => (
-          <PresentButton
+        {giftData.map((data, index) => (
+          <GiftCard
             key={index}
             cafeTitle={data.cafeTitle}
             foodTitle={data.foodTitle}
@@ -56,4 +55,4 @@ const Present = () => {
   );
 };
 
-export default Present;
+export default Gift;

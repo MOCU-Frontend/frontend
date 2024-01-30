@@ -4,7 +4,7 @@ export type StoreData = {
   foodPrice: number;
 };
 
-export const presentData: StoreData[] = [
+export const giftData: StoreData[] = [
   {
     cafeTitle: '크림베이글',
     foodTitle: '블루베리 크림 베이글',

@@ -28,6 +28,7 @@ import Gift from './Gift/Gift';
 import Advertisement from './Advertisement/Advertisement';
 import Alarm from './Alarm/Alarm';
 import Setting from './Setting/Setting';
+import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -112,6 +113,10 @@ const Router = () => {
           index: true,
           path: '',
           element: <My />,
+        },
+        {
+          path: 'profile',
+          children: [{ path: 'edit', element: <MyProfileEdit /> }],
         },
         {
           path: 'review',

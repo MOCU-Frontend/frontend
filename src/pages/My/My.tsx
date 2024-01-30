@@ -56,7 +56,10 @@ const My: React.FC = () => {
         onClickSettingBtn={() => navigate('/setting')}
       />
       <div className={styles.myTopInformBar}>
-        <button className={styles.profileBtn} onClick={() => {}}>
+        <button
+          className={styles.profileBtn}
+          onClick={() => navigate('profile/edit')}
+        >
           <ProfileGradationIcon width={48} height={48} />
         </button>
         <MyTopSection titleText='모쿠 님의 마이페이지' subText='@298370' />

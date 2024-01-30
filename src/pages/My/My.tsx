@@ -82,7 +82,7 @@ const My: React.FC = () => {
             titleText='선물함'
             num={0}
             Icon={GiftGradationIcon}
-            onClick={() => {}}
+            onClick={() => navigate('/gift/box')}
           />
         </div>
         <MyLocationContent

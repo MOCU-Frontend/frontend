@@ -29,6 +29,7 @@ import Advertisement from './Advertisement/Advertisement';
 import Alarm from './Alarm/Alarm';
 import Setting from './Setting/Setting';
 import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
+import GiftBox from './Gift/Box/GiftBox';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -86,7 +87,10 @@ const Router = () => {
     },
     {
       path: '/gift',
-      element: <Gift />,
+      children: [
+        { index: true, path: '', element: <Gift /> },
+        { path: 'box', element: <GiftBox /> },
+      ],
     },
     {
       path: '/coupon',

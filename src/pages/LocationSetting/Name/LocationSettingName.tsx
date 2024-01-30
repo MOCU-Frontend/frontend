@@ -77,6 +77,7 @@ const LocationSettingName: React.FC = () => {
         btnStatus='지번'
         handleChangeBtnStatus={() => {}}
         handleClickSetLocationBtn={() => {}}
+        btnText='별칭 설정 완료'
       />
     </>
   );

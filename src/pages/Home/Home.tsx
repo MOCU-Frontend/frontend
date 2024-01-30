@@ -50,7 +50,7 @@ const Home = () => {
             titleText='가게'
             subText='당신이 찾는 혜택 맛집은?'
             Icon={ShoppingIcon}
-            onClick={() => navigate('/storesearch')}
+            onClick={() => navigate('/store/search')}
           />
           <HomeMenuGridBtn
             titleText='적립'

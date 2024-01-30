@@ -14,7 +14,7 @@ const StoreSearchHeader = () => {
     <div className={styles.headerWrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text="학교"
+          text='학교'
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -22,12 +22,12 @@ const StoreSearchHeader = () => {
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize="search"
+        headerPaddingSize='search'
         onClickBackBtn={() => navigate(-1)}
         children={
           <SearchBar
-            placeholder="찾고 싶은 가게를 검색해 보세요"
-            onClickSearchBtn={(value) => navigate(`/storesearch/${value}`)}
+            placeholder='찾고 싶은 가게를 검색해 보세요'
+            onClickSearchBtn={(value) => navigate(`${value}`)}
           />
         }
       ></HeaderBackBtn>

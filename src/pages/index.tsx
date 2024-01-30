@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Root from './Root/Root';
 import Home from './Home/Home';
 import Map from './Map/Map';
-import StoreSearch from './StoreSearch/StoreSearch';
+import StoreSearch from './Store/Search/StoreSearch';
 import SearchResult from './SearchResult/SearchResult';
 import Stamp from './Stamp/Stamp';
 import My from './My/My';
@@ -38,20 +38,31 @@ const Router = () => {
       element: <Map />,
     },
     {
-      path: '/storesearch',
-      element: <StoreSearch />,
-    },
-    {
-      path: '/storesearch/:searchWord',
-      element: <SearchResult />,
+      path: '/store',
+      children: [
+        {
+          path: ':storeId',
+          element: <Store />,
+        },
+        {
+          path: 'search',
+          children: [
+            {
+              index: true,
+              path: '',
+              element: <StoreSearch />,
+            },
+            {
+              path: ':searchWord',
+              element: <SearchResult />,
+            },
+          ],
+        },
+      ],
     },
     {
       path: '/stamp',
       element: <Stamp />,
-    },
-    {
-      path: '/store/:storeId',
-      element: <Store />,
     },
     {
       path: '/review/:storeId',

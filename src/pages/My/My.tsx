@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import HomeHeader from '../../components/Home/atoms/Header/HomeHeader';
 import styles from './My.module.css';
 import { ReactComponent as ProfileGradationIcon } from '../../assets/icon/profileGradationBadgeMode.svg';
@@ -15,6 +15,8 @@ import MyReviewContent from '../../components/My/atoms/Content/Review/MyReviewCo
 import MyMissionContent from '../../components/My/atoms/Content/Mission/MyMissionContent';
 import MyRewardStampsContent from '../../components/My/atoms/Content/RewardStamps/MyRewardStampsContent';
 import { Outlet, useNavigate } from 'react-router-dom';
+import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
+import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 type RewardData = {
   date: string;
   storeName: string;
@@ -47,8 +49,27 @@ const rewardDataArr: RewardData[] = [
     menuNum: 1,
   },
 ];
+
 const My: React.FC = () => {
   const navigate = useNavigate();
+  const [adItemArr, setAdItemArr] = useState([
+    { adId: 1, isChecked: true },
+    { adId: 2, isChecked: false },
+    { adId: 3, isChecked: false },
+    { adId: 4, isChecked: false },
+  ]);
+  const handleCheckedDataIndex = (prevIndex: number, newIndex: number) => {
+    if (!adItemArr) throw new Error('no reviewArr!!');
+    if (!adItemArr[prevIndex]) throw new Error('invalid prevIndex!!');
+    if (!adItemArr[newIndex]) throw new Error('invalid newIndex!!');
+    setAdItemArr((prevArr) => {
+      if (!prevArr) throw new Error('no prevArr!!');
+      const copiedArr = [...prevArr];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[newIndex].isChecked = true;
+      return copiedArr;
+    });
+  };
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -106,10 +127,18 @@ const My: React.FC = () => {
           accumStampNum={8}
           wholeStampNum={10}
         />
-        <div
-          className={styles.eventBox}
-          onClick={() => navigate('/ad/1')}
-        ></div>
+        <div className={styles.bodyTabWrapper}>
+          <SlideMenuAdBodyTab
+            menuItemDataArr={adItemArr}
+            handleCheckedDataIndex={handleCheckedDataIndex}
+          />
+          <div className={styles.statusWrapper}>
+            <HomeAdSlideStatus
+              handleCheckedDataIndex={handleCheckedDataIndex}
+              dataArr={adItemArr}
+            />
+          </div>
+        </div>
       </main>
       <HomeBottomNavigation nowPage='my' />
       <Outlet />

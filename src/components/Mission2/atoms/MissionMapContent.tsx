@@ -10,6 +10,8 @@ import { ReactComponent as EllipseHorizonImage } from '../../../assets/icon/mapE
 import { ReactComponent as EllipseRightUImage } from '../../../assets/icon/mapEllipseRightU.svg';
 import { ReactComponent as EllipseLeftUImage } from '../../../assets/icon/mapEllipseLeftU.svg';
 import { ReactComponent as RewardImage } from '../../../assets/icon/mapReward.svg';
+import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampStarNoBadge.svg';
+import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
 
 interface Props {
@@ -38,10 +40,16 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
         )}
       </div>
       <div className={styles.second}>
-        {stampCnt >= 1 ? (
+        {stampCnt > 1 ? (
           <StampFinishedImage />
         ) : (
-          <StampNowImage width={80} height={80} />
+          <>
+            <StampNowImage width={80} height={80} />
+            <div className={styles.gaugeWrapper}>
+              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
+              <GaugeImage width={50} height={6} />
+            </div>
+          </>
         )}
       </div>
       <div className={styles.secondEllipse}>
@@ -52,10 +60,18 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
         )}
       </div>
       <div className={styles.third}>
-        {stampCnt >= 2 ? (
+        {stampCnt > 2 ? (
           <StampFinishedImage />
+        ) : stampCnt === 2 ? (
+          <>
+            <StampNowImage width={80} height={80} />
+            <div className={styles.gaugeWrapper}>
+              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
+              <GaugeImage width={50} height={6} />
+            </div>
+          </>
         ) : (
-          <StampNowImage width={80} height={80} />
+          <StampNoBadgeImage width={80} height={80} />
         )}
       </div>
       <div className={styles.thirdEllipse}>
@@ -66,10 +82,18 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
         )}
       </div>
       <div className={styles.fourth}>
-        {stampCnt >= 3 ? (
+        {stampCnt > 3 ? (
           <StampFinishedImage />
+        ) : stampCnt === 3 ? (
+          <>
+            <StampNowImage width={80} height={80} />
+            <div className={styles.gaugeWrapper}>
+              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
+              <GaugeImage width={50} height={6} />
+            </div>
+          </>
         ) : (
-          <StampNowImage width={80} height={80} />
+          <StampNoBadgeImage width={80} height={80} />
         )}
       </div>
       <div className={styles.fourthEllipse}>
@@ -80,10 +104,18 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
         )}
       </div>
       <div className={styles.fifth}>
-        {stampCnt >= 4 ? (
+        {stampCnt > 4 ? (
           <StampFinishedImage />
+        ) : stampCnt === 4 ? (
+          <>
+            <StampNowImage width={80} height={80} />
+            <div className={styles.gaugeWrapper}>
+              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
+              <GaugeImage width={50} height={6} />
+            </div>
+          </>
         ) : (
-          <StampNowImage width={80} height={80} />
+          <StampNoBadgeImage width={80} height={80} />
         )}
       </div>
       <div className={styles.fifthEllipse}>
@@ -105,12 +137,6 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
                 stroke={colors.white}
               />
             </div>
-            <Button
-              size="small"
-              label="최종 보상 받기"
-              textColor="sub-purple-light"
-              borderRadius="large"
-            />
           </>
         ) : (
           <>
@@ -123,14 +149,34 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
                 stroke={colors.subPurpleLight}
               />
             </div>
-            <Button
-              label="최종 보상 받기"
-              textColor="sub-purple-light"
-              borderRadius="medium"
-            />
+            <div className={styles.finalButton}>
+              <Button
+                size="small"
+                label="최종 보상 받기"
+                textColor="sub-purple-light"
+                borderRadius="large"
+              />
+            </div>
           </>
         )}
       </div>
+      <div className={styles.finalButton}>
+        {stampCnt === 5 ? (
+          <Button
+            size="small"
+            label="최종 보상 받기"
+            textColor="sub-purple-light"
+          />
+        ) : (
+          <Button
+            size="small"
+            label="최종 보상 받기"
+            textColor="sub-purple-light"
+            disabled={true}
+          />
+        )}
+      </div>
+      <div className={styles.finalButtonText}>*스타벅스 2만원권</div>
     </div>
   );
 };

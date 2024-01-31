@@ -58,7 +58,7 @@ const MissionMap = () => {
           <div className={styles.wrapMapPicture}>
             <MissionMapContent
               stampCnt={MissionCntData[0].stampCnt}
-              todayMissionCnt={1}
+              todayMissionCnt={MissionCntData[0].todayMissionCnt}
             />
           </div>
         </div>

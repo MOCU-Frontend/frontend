@@ -1,0 +1,13 @@
+.wholeWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  width: 100vw;
+  justify-content: center;
+}
+.status {
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+}

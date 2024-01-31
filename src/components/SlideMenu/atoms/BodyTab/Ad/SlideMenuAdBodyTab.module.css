@@ -1,0 +1,23 @@
+@import '../../../../../styles/colorVars.css';
+
+.tabWrapper {
+  display: flex;
+  flex-direction: row;
+  width: fit-content;
+}
+.wholeWrapper {
+  /* height: 200px; */
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.adBox {
+  height: 56px;
+  background-color: var(--color-grey-dark-01);
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+}

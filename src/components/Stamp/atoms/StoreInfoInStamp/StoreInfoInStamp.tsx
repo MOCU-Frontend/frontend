@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './StoreInfoInStamp.module.css';
-import { ReactComponent as StarImage } from '../../../../assets/icon/star.svg';
 import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import { colors } from '../../../../styles/colors';
 import UseCouponBtnInStamp from './UseCouponBtnInStamp/UseCouponBtnInStamp';
+import StarGageBar from '../../../StarGageBar/StarGageBar';
 
 interface Props {
   /**
@@ -54,11 +54,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
       <div className={styles.storeWrapImgStar}>
         <div className={styles.storeImage} />
         <div className={styles.storeWrapStar}>
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
+          <StarGageBar width={54} height={10} score={2.2} />
         </div>
       </div>
 

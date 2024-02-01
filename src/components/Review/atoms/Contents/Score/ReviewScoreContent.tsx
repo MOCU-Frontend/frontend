@@ -25,6 +25,9 @@ const ReviewScoreContent: React.FC<Props> = ({}: Props) => {
     case 1:
       scoreText = '매우 아쉬워요';
       break;
+    case 0:
+      scoreText = '';
+      break;
     default:
       throw new Error('invalid score!');
   }

@@ -43,6 +43,7 @@ const Home = () => {
       <HomeHeader
         onClickAlarmBtn={() => navigate('alarm')}
         onClickSettingBtn={() => navigate('setting')}
+        alarmNum={0}
       />
       <div className={styles.homeTopInformBar}>
         <ProfileIcon

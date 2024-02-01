@@ -75,6 +75,7 @@ const My: React.FC = () => {
       <HomeHeader
         onClickAlarmBtn={() => navigate('/alarm')}
         onClickSettingBtn={() => navigate('/setting')}
+        alarmNum={0}
       />
       <div className={styles.myTopInformBar}>
         <button

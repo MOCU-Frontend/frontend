@@ -12,7 +12,7 @@ const StoreScoreContent: React.FC<Props> = ({}: Props) => {
     <div className={styles.wholeWrapper}>
       <div className={styles.titleWrapper}>
         <StoreScoreTitleText text='5.0' />
-        <StarGageBar width={84} height={18} score={3.4} />
+        <StarGageBar width={84} height={18} score={1.2} />
       </div>
       <div className={styles.scoreDetailsWrapper}>
         <div className={styles.scoreDetail}>

@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './StoreInfoInStamp.module.css';
-import { ReactComponent as StarImage } from '../../../../assets/icon/star.svg';
 import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import { colors } from '../../../../styles/colors';
 import UseCouponBtnInStamp from './UseCouponBtnInStamp/UseCouponBtnInStamp';
+import StarGageBar from '../../../StarGageBar/StarGageBar';
 
 interface Props {
   /**
@@ -34,6 +34,10 @@ interface Props {
    * 쿠폰 사용 버튼 클릭시 발생하는 이벤트
    */
   onClickCouponBtn: () => void;
+  /**
+   * 맵 아이콘 버튼 클릭시 발생하는 이벤트
+   */
+  onClickMapBtn: () => void;
 }
 
 const StoreInfoInStamp: React.FC<Props> = ({
@@ -43,17 +47,14 @@ const StoreInfoInStamp: React.FC<Props> = ({
   distance,
   onClickStoreDetailBtn,
   onClickCouponBtn,
+  onClickMapBtn,
 }: Props) => {
   return (
     <button className={styles.wrapStoreInfo}>
       <div className={styles.storeWrapImgStar}>
         <div className={styles.storeImage} />
         <div className={styles.storeWrapStar}>
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
-          <StarImage width={10} height={10} />
+          <StarGageBar width={54} height={10} score={2.2} />
         </div>
       </div>
 
@@ -73,7 +74,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
         </div>
       </div>
 
-      <div className={styles.storeWrapDistance}>
+      <div className={styles.storeWrapDistance} onClick={onClickMapBtn}>
         <MapImage width={17.6} height={22} fill={colors.greyDark00} />
         <div className={styles.storeDistanceText}>{distance}m</div>
       </div>

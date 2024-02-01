@@ -11,6 +11,7 @@ import StoreMoreBtnText from '../Text/MoreBtn/StoreMoreBtnText';
 import { createPortal } from 'react-dom';
 import StoreReportModal from '../Modal/Report/StoreReportModal';
 import ModalReportSuccess from '../../../Modal/ModalReportSuccess/ModalReportSuccess';
+import StarGageBar from '../../../StarGageBar/StarGageBar';
 interface Props {
   nameText: string;
   timeText: string;
@@ -42,11 +43,7 @@ const StoreReview: React.FC<Props> = ({
           <div className={styles.profileInformWrapper}>
             <StoreReviewNameText text={nameText} />
             <div className={styles.profileInformBottomWrapper}>
-              <StarGageBarIcon
-                width={54}
-                height={10}
-                fill={colors.pointYellow}
-              />
+              <StarGageBar width={54} height={10} score={4.3} />
               <StoreReviewTimeText text={timeText} />
             </div>
           </div>

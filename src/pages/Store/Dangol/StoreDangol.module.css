@@ -1,0 +1,34 @@
+.helpBtnWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.helpBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.filtersWrapper {
+  width: 100%;
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  white-space: nowrap;
+  align-items: center;
+  -ms-overflow-style: none;
+  gap: 16px;
+}
+.filtersWrapper::-webkit-scrollbar {
+  display: none;
+}
+.seeMoreBtnWrapper {
+  padding: 10px 20px 0 20px;
+  width: 100%;
+}
+.wrapContent {
+  padding: 0 20px;
+}

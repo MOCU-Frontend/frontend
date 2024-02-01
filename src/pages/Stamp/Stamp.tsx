@@ -9,11 +9,13 @@ import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponMod
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
 
+import StampHeaderFilter from '../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
+
 import {
   searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
-} from '../../store/data/searchResult';
+} from '../../store/data/stamp';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -96,10 +98,10 @@ const Stamp = () => {
 
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
-  );
+  ) as MenuItemData | undefined;
   const selectedSectorFilterItem = menuItemDataArr[1].bodyDataArr.find(
     (x) => x.isChecked
-  );
+  ) as MenuItemData | undefined;
 
   const handleClickResetOptionBtn = (menuIndex: number) => {
     if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
@@ -116,53 +118,14 @@ const Stamp = () => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.headerFilterWrapper}>
-        <div className={styles.headerWrapper}>
-          <HeaderBackBtn
-            onClickBackBtn={() => navigate(-1)}
-            headerTitle='적립 현황'
-          />
-        </div>
-
-        <div className={styles.filtersWrapper}>
-          <CheckFilterSelect
-            label={
-              selectedArrangeFilterItem
-                ? selectedArrangeFilterItem.title
-                : 'no selected item!'
-            }
-            isChecked={false}
-            border={1}
-            borderColor={'main-purple'}
-            onClick={() => handleFilterSelectClick(0)}
-          />
-          <CheckFilterSelect
-            label={
-              selectedSectorFilterItem
-                ? selectedSectorFilterItem.title
-                : 'no selected item!'
-            }
-            isChecked={false}
-            border={1}
-            borderColor={'main-purple'}
-            onClick={() => handleFilterSelectClick(1)}
-          />
-
-          {menuItemDataArr[2].bodyDataArr.map(
-            (data, index) =>
-              data.isChecked && (
-                <CheckFilter
-                  key={data.title + index}
-                  isChecked={false}
-                  label={data.title}
-                  border={1}
-                  borderColor='main-purple'
-                  onClick={() => handleFilterSelectClick(2)}
-                />
-              )
-          )}
-        </div>
-      </div>
+      <StampHeaderFilter
+        onBackBtnClick={() => navigate(-1)}
+        title="적립 현황"
+        selectedArrangeFilterItem={selectedArrangeFilterItem}
+        selectedSectorFilterItem={selectedSectorFilterItem}
+        filterItems={menuItemDataArr[2].bodyDataArr}
+        onFilterSelectClick={handleFilterSelectClick}
+      />
 
       <div className={styles.contentWrapper}>
         {searchResultData.map((data, index) => (
@@ -174,6 +137,7 @@ const Stamp = () => {
             distance={data.distance}
             onClickCouponBtn={handleClickCouponBtn}
             onClickStoreDetailBtn={() => {}}
+            onClickMapBtn={() => navigate('/map')}
           />
         ))}
       </div>

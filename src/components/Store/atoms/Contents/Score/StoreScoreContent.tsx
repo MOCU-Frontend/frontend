@@ -4,7 +4,7 @@ import styles from './StoreScoreContent.module.css';
 import { ReactComponent as StarGageBarIcon } from '../../../../../assets/icon/starGageBarRegular.svg';
 import StoreScoreBodyText from '../../Text/ScoreBody/StoreScoreBodyText';
 import ScoreGageBar from '../../GageBar/ScoreGageBar';
-import { colors } from '../../../../../styles/colors';
+import StarGageBar from '../../../../StarGageBar/StarGageBar';
 interface Props {}
 
 const StoreScoreContent: React.FC<Props> = ({}: Props) => {
@@ -12,7 +12,7 @@ const StoreScoreContent: React.FC<Props> = ({}: Props) => {
     <div className={styles.wholeWrapper}>
       <div className={styles.titleWrapper}>
         <StoreScoreTitleText text='5.0' />
-        <StarGageBarIcon width={84} height={18} fill={colors.pointYellow} />
+        <StarGageBar width={84} height={18} score={3.4} />
       </div>
       <div className={styles.scoreDetailsWrapper}>
         <div className={styles.scoreDetail}>

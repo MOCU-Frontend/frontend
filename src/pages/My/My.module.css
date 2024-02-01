@@ -62,4 +62,5 @@ body::-webkit-scrollbar {
   left: 0;
   bottom: 5px;
   position: absolute;
+  transform: translate(-20px, 0);
 }

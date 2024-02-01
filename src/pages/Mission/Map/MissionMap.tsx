@@ -7,10 +7,10 @@ import { ReactComponent as HourglassImage } from '../../../assets/icon/hourGlass
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../styles/colors';
+import { MissionCntData } from '../../../store/data/mission';
 
 const MissionMap = () => {
   const navigate = useNavigate();
-  const stampCnt = 5;
 
   return (
     <div className={styles.wrapper}>
@@ -40,7 +40,7 @@ const MissionMap = () => {
 
         <div className={styles.wrapContentTitle}>
           <div>미션맵 완성까지</div>
-          <div>스탬프 {stampCnt}개가 남았어요!</div>
+          <div>스탬프 {MissionCntData[0].stampCnt}개가 남았어요!</div>
         </div>
 
         <div className={styles.wrapContentSubTitle}>
@@ -56,7 +56,10 @@ const MissionMap = () => {
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
           <div className={styles.wrapMapPicture}>
-            <MissionMapContent stampCnt={stampCnt} todayMissionCnt={1} />
+            <MissionMapContent
+              stampCnt={MissionCntData[0].stampCnt}
+              todayMissionCnt={MissionCntData[0].todayMissionCnt}
+            />
           </div>
         </div>
       </div>

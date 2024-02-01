@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../components/Button/FullBtn/FullBtn';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
@@ -12,6 +12,11 @@ interface Props {}
 
 const MyLocation: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const [locDataArr, setLocaDataArr] = useState([
+    { category: '집', address: '서울 광진구 능동로 69', id: 1 },
+    { category: '학교', address: '서울 광진구 능동로 120', id: 2 },
+    { category: '본가', address: '서울 광진구 능동로 112', id: 3 },
+  ]);
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -31,16 +36,14 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
             color={colors.mainPurple}
           />
         </div>
-        <MyLocationLocEditContent
-          titleText='주소'
-          locationText='서울 광진구 능동로 69'
-          onClickBtn={() => navigate('1')}
-        />
-        <MyLocationLocEditContent
-          titleText='학교'
-          locationText='서울 광진구 능동로 120'
-          onClickBtn={() => navigate('2')}
-        />
+        {locDataArr.map((data, index) => (
+          <MyLocationLocEditContent
+            key={data.id + index}
+            titleText={data.category}
+            locationText={data.address}
+            onClickBtn={() => navigate(`${data.id}`)}
+          />
+        ))}
       </main>
       <div className={styles.bottomBtnWrapper}>
         <FullBtn

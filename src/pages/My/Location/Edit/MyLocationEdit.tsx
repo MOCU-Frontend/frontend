@@ -73,7 +73,7 @@ const MyLocationEdit: React.FC = () => {
         />
       </div>
       <div className={styles.seeMapBtnWrapper}>
-        <MyLocationEditSeeMapBtn onClick={() => {}} />
+        <MyLocationEditSeeMapBtn onClick={() => navigate('/my/location/now')} />
       </div>
       <div className={styles.fullBtnWrapper}>
         <FullBtn label='수정 완료하기' onClick={() => {}} />

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './GiftCard.module.css';
+import storeImg from '../../../../assets/imgs/storeExample.png';
 
 interface Props {
   /*
@@ -21,7 +22,7 @@ interface Props {
 const GiftCard: React.FC<Props> = ({ cafeTitle, foodTitle, foodPrice }) => {
   return (
     <button className={styles.wrapper}>
-      <div className={styles.imageWrapper} />
+      <img src={storeImg} alt='' className={styles.imageWrapper} />
       <div className={styles.textWrapper}>
         <div className={styles.cafeTitle}>{cafeTitle}</div>
         <div className={styles.foodTitle}>{foodTitle}</div>

@@ -4,6 +4,7 @@ import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerReg
 import { colors } from '../../../../styles/colors';
 import UseCouponBtnInStamp from './UseCouponBtnInStamp/UseCouponBtnInStamp';
 import StarGageBar from '../../../StarGageBar/StarGageBar';
+import storeImg from '../../../../assets/imgs/storeExample.png';
 
 interface Props {
   /**
@@ -52,7 +53,7 @@ const StoreInfoInStamp: React.FC<Props> = ({
   return (
     <button className={styles.wrapStoreInfo}>
       <div className={styles.storeWrapImgStar}>
-        <div className={styles.storeImage} />
+        <img src={storeImg} alt='' className={styles.storeImage} />
         <div className={styles.storeWrapStar}>
           <StarGageBar width={54} height={10} score={2.2} />
         </div>

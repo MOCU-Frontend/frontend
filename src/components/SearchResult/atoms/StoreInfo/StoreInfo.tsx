@@ -5,7 +5,7 @@ import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerReg
 import { colors } from '../../../../styles/colors';
 import UseCouponBtn from '../UseCouponBtn/UseCouponBtn';
 import StarGageBar from '../../../StarGageBar/StarGageBar';
-
+import storeImg from '../../../../assets/imgs/storeExample.png';
 interface Props {
   /**
    * 가게 이름
@@ -47,7 +47,7 @@ const StoreInfo: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.wrapStoreInfo}>
-      <div className={styles.storeImage} />
+      <img src={storeImg} alt='' className={styles.storeImage} />
       <div className={styles.storeWrapText}>
         <div className={styles.storeTitle} onClick={onClickStoreDetailBtn}>
           {title}

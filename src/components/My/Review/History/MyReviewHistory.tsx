@@ -8,6 +8,7 @@ import StoreReviewNameText from '../../../Store/atoms/Text/ReviewName/StoreRevie
 import StoreReviewTimeText from '../../../Store/atoms/Text/ReviewTime/StoreReviewTimeText';
 import StoreReviewBodyText from '../../../Store/atoms/Text/ReviewBody/StoreReviewBodyText';
 import StoreMoreBtnText from '../../../Store/atoms/Text/MoreBtn/StoreMoreBtnText';
+import StarGageBar from '../../../StarGageBar/StarGageBar';
 interface Props {
   nameText: string;
   timeText: string;
@@ -43,11 +44,7 @@ const MyReviewHistory: React.FC<Props> = ({
             </button>
 
             <div className={styles.profileInformBottomWrapper}>
-              <StarGageBarIcon
-                width={54}
-                height={10}
-                fill={colors.pointYellow}
-              />
+              <StarGageBar width={54} height={10} score={4.4} />
               <StoreReviewTimeText text={timeText} />
             </div>
           </div>

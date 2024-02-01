@@ -10,6 +10,7 @@ import StoreScoreContent from '../../components/Store/atoms/Contents/Score/Store
 import StoreReviewContent from '../../components/Store/atoms/Contents/Review/StoreReviewContent';
 import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../components/Button/FullBtn/FullBtn';
+import storeImg from '../../assets/imgs/storeExample.png';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
@@ -28,10 +29,10 @@ const Store: React.FC = () => {
           </div>
         </HeaderBackBtn>
       </div>
-      <div className={styles.imgDummyBox}></div>
+      <img src={storeImg} alt='' className={styles.imgDummyBox} />
       <div className={styles.topContentBox}>
         <div className={styles.infoWrapper}>
-          <StoreInfoContent title="크림베이글 건대점" category="베이커리" />
+          <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
         </div>
         <div className={styles.stampWrapper}>
           <StoreStampContent />
@@ -48,7 +49,7 @@ const Store: React.FC = () => {
         <div className={styles.fullBtnWrapper}>
           <FullBtn
             onClick={() => navigate('/review/11')}
-            label="리뷰 작성 (1일 남음)"
+            label='리뷰 작성 (1일 남음)'
           />
         </div>
       )}

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import BodyTabWrapper from '../../BodyTabWrapper/BodyTabWrapper';
 import BodyTabWrapperNoPadding from '../../BodyTabWrapper/NoPadding/BodyTabWrapperNoPadding';
 import styles from './SlideMenuAdBodyTab.module.css';
+import adImg from '../../../../../assets/imgs/adExample.png';
 
 type MenuItemData = {
   adId: number;
@@ -135,7 +136,7 @@ const SlideMenuAdBodyTab: React.FC<Props> = ({
             </BodyTabWrapperNoPadding>
             {menuItemDataArr.map((data, index) => (
               <BodyTabWrapperNoPadding key={data.adId + index}>
-                <div className={styles.adBox}>{data.adId}</div>
+                <img src={adImg} alt='' className={styles.adImage} />
               </BodyTabWrapperNoPadding>
             ))}
             <BodyTabWrapperNoPadding>

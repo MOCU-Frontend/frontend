@@ -3,6 +3,7 @@ import BodyTabWrapper from '../../BodyTabWrapper/BodyTabWrapper';
 import BodyTabWrapperNoPadding from '../../BodyTabWrapper/NoPadding/BodyTabWrapperNoPadding';
 import styles from './SlideMenuAdBodyTab.module.css';
 import adImg from '../../../../../assets/imgs/adExample.png';
+import { useNavigate } from 'react-router-dom';
 
 type MenuItemData = {
   adId: number;
@@ -19,7 +20,7 @@ const SlideMenuAdBodyTab: React.FC<Props> = ({
   handleCheckedDataIndex,
 }: Props) => {
   const tabRef = useRef<HTMLDivElement>(null);
-
+  const navigate = useNavigate();
   const checkedDataIndex = menuItemDataArr.findIndex((x) => x.isChecked);
 
   if (checkedDataIndex === -1) throw new Error('no checked menu data!');
@@ -136,7 +137,12 @@ const SlideMenuAdBodyTab: React.FC<Props> = ({
             </BodyTabWrapperNoPadding>
             {menuItemDataArr.map((data, index) => (
               <BodyTabWrapperNoPadding key={data.adId + index}>
-                <img src={adImg} alt='' className={styles.adImage} />
+                <img
+                  src={adImg}
+                  alt=''
+                  className={styles.adImage}
+                  onClick={() => navigate(`/ad/${data.adId}`)}
+                />
               </BodyTabWrapperNoPadding>
             ))}
             <BodyTabWrapperNoPadding>

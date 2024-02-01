@@ -13,7 +13,11 @@ const OwnerHome: React.FC = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>
-      <HomeHeader onClickAlarmBtn={() => {}} onClickSettingBtn={() => {}} />
+      <HomeHeader
+        onClickAlarmBtn={() => {}}
+        onClickSettingBtn={() => {}}
+        alarmNum={4}
+      />
       <div className={styles.homeTopInformBar}>
         <ProfileIcon width={48} height={48} />
         <OwnerHomeHelloContent userName='크림베이글 건대점' />

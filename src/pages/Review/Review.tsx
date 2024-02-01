@@ -21,7 +21,7 @@ const Review: React.FC = () => {
         <ReviewInformContent storeName='크림베이글 건대점' />
       </div>
       <div className={styles.scoreWrapper}>
-        <ReviewScoreContent scoreText='아주 만족해요' />
+        <ReviewScoreContent />
       </div>
       <div className={styles.inputWrapper}>
         <ReviewInputContent text={text} setText={setText} />

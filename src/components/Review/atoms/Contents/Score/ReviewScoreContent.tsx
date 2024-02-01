@@ -1,16 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './ReviewScoreContent.module.css';
 import { ReactComponent as StarGageBarIcon } from '../../../../../assets/icon/starGageBarRegular.svg';
 import { colors } from '../../../../../styles/colors';
 import ReviewScoreText from '../../Text/Score/ReviewScoreText';
-interface Props {
-  scoreText: string;
-}
+import StarGageBarBtn from '../../../../StarGageBar/StarGageBarBtn';
+interface Props {}
 
-const ReviewScoreContent: React.FC<Props> = ({ scoreText }: Props) => {
+const ReviewScoreContent: React.FC<Props> = ({}: Props) => {
+  const [score, setScore] = useState(0);
+  let scoreText = '';
+  switch (score) {
+    case 5:
+      scoreText = '아주 만족해요';
+      break;
+    case 4:
+      scoreText = '만족해요';
+      break;
+    case 3:
+      scoreText = '괜찮아요';
+      break;
+    case 2:
+      scoreText = '아쉬워요';
+      break;
+    case 1:
+      scoreText = '매우 아쉬워요';
+      break;
+    default:
+      throw new Error('invalid score!');
+  }
   return (
     <div className={styles.wholeWrapper}>
-      <StarGageBarIcon width={128} height={24} fill={colors.pointYellow} />
+      <StarGageBarBtn
+        width={128}
+        height={24}
+        score={score}
+        setScore={setScore}
+      />
       <ReviewScoreText text={scoreText} />
     </div>
   );

@@ -186,7 +186,7 @@ const MyLocationEnrollment: React.FC = () => {
             />
           </div>
           <div className={styles.fullBtnWrapper}>
-            <FullBtn label='수정 완료하기' onClick={() => {}} />
+            <FullBtn label='등록 완료하기' onClick={() => {}} />
           </div>
         </>
       )}

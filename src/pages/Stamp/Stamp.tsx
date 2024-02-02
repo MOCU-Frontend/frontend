@@ -134,7 +134,8 @@ const Stamp = () => {
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
         filterItems={menuItemDataArr[2].bodyDataArr}
-        onFilterSelectClick={handleFilterSelectClick}
+        handleFilterSelectClick={handleFilterSelectClick}
+        handleOptionClick={handleOptionClick}
       />
 
       <div className={styles.contentWrapper}>
@@ -158,7 +159,10 @@ const Stamp = () => {
           onClickNotBottomSheet={handleDragBottom}
           children={
             <SlideTabViewFilterOrOption
-              menuItemDataArr={menuItemDataArr}
+              // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
+              menuItemDataArr={menuItemDataArr.filter(
+                (item, index) => index === 0 || index === 1
+              )}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
               // handleClickResetOptionBtn={handleClickResetOptionBtn}

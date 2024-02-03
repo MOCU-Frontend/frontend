@@ -87,41 +87,13 @@ const Gift = () => {
       <div>
         <GiftHeaderFilter
           onBackBtnClick={() => navigate(-1)}
-          onSearchBtnClick={(value: string) => navigate(`/present/${value}`)}
+          onSearchBtnClick={(value: string) => navigate(`/gift/${value}`)}
           selectedDistanceFilterItem={selectedDistanceFilterItem}
           selectedCategoryFilterItem={selectedCategoryFilterItem}
           selectedPriceFilterItem={selectedPriceFilterItem}
           handleFilterSelectClick={handleFilterSelectClick}
         />
       </div>
-      {/* <div className={styles.headerWrapper}>
-        <SearchBarHeader
-          placeholder="찾고 싶은 선물을 검색해보세요"
-          onClickBackBtn={() => navigate(-1)}
-          onClickSearchBtn={(value: string) => navigate(`/present/${value}`)}
-        />
-      </div>
-
-      <div className={styles.filtersWrapper}>
-        <CheckFilterSelect
-          label="지역"
-          isChecked={false}
-          border={1}
-          borderColor={'sub-purple-light'}
-        />
-        <CheckFilterSelect
-          label="카테고리"
-          isChecked={false}
-          border={1}
-          borderColor={'sub-purple-light'}
-        />
-        <CheckFilterSelect
-          label="가격대"
-          isChecked={false}
-          border={1}
-          borderColor={'sub-purple-light'}
-        />
-      </div> */}
 
       <div className={styles.gridContainer}>
         {giftData.map((data, index) => (
@@ -130,6 +102,7 @@ const Gift = () => {
             cafeTitle={data.cafeTitle}
             foodTitle={data.foodTitle}
             foodPrice={data.foodPrice.toLocaleString('ko-KR')}
+            onCardBtnClick={() => navigate(`/gift/${index}`)}
           />
         ))}
       </div>

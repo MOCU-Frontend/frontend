@@ -23,7 +23,7 @@ const MissionToday = () => {
           backBtnColor="white"
           headerTitle="미션"
           headerTitleColor="white"
-          onClickBackBtn={() => navigate(-1)}
+          onClickBackBtn={() => navigate('/')}
         />
       </div>
       <div className={styles.wrapUserInformation}>
@@ -71,7 +71,7 @@ const MissionToday = () => {
               다음 스탬프 획득까지 미션 {MissionCntData[0].todayMissionCnt}개
               남았습니다.
             </div>
-            <CoupongageImage />
+            <CoupongageImage width={180} height={16} />
           </div>
           <TodayMission title={MissionTitleData[0].title} />
           <TodayMission title={MissionTitleData[1].title} />

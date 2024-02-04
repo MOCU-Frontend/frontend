@@ -13,6 +13,7 @@ import {
 } from '../../../../store/data/searchResult';
 import SlideTabViewFilterOrOption from '../../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
+import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
@@ -103,15 +104,20 @@ const StoreSearchResult = () => {
   //   });
   // };
 
+  const { handleAddSeachKeyword } = useRecentSearchWord();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
           placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickBackBtn={() => navigate(-1)}
-          onClickSearchBtn={(value: string) =>
-            navigate(`/storesearch/${value}`)
-          }
+          onClickSearchBtn={(value: string) => {
+            if (value) {
+              handleAddSeachKeyword({ title: value });
+              navigate(`/store/search/${value}`);
+            }
+          }}
           firstValue={searchWord}
         />
       </div>

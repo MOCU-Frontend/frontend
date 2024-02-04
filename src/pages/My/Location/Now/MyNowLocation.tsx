@@ -11,6 +11,7 @@ import { useMap } from '../../../../hooks/useMap';
 import { useMapWithGeocoder } from '../../../../hooks/useMapWithGeocoder';
 import { useScript } from '../../../../hooks/useScript';
 import { useUserLocationMap } from '../../../../hooks/useUserLocationMap';
+import useStore from '../../../../store/useStore';
 import styles from './MyNowLocation.module.css';
 
 const BOTTOM_SHEET_HEIGHT = 186.65; // TODO: 바텀시트 height 재는 방법 생각해보기
@@ -61,7 +62,7 @@ const MyNowLocation: React.FC = () => {
     handleShowBottomSheet
   );
 
-  const { address: centerAddress } = useAddressByCoord(
+  const { address: centerAddress, buildingName } = useAddressByCoord(
     scriptError,
     scriptLoading,
     geocoderScriptError,
@@ -69,7 +70,9 @@ const MyNowLocation: React.FC = () => {
     centerCoord
   );
 
-  const [addressFormat, setAddressFormat] = useState<'지번' | '도로명'>('지번');
+  const [addressFormat, setAddressFormat] = useState<'지번' | '도로명'>(
+    '도로명'
+  );
 
   const handleClickTargetBtn = () => {
     if (userLocation && map) {
@@ -87,6 +90,7 @@ const MyNowLocation: React.FC = () => {
       map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
     }
   };
+  const setNowAddress = useStore((state) => state.setNowAddress);
 
   if (scriptError || geocoderScriptError) return <p>Map Error!</p>;
   if (scriptLoading || geoCoderScriptLoading)
@@ -117,11 +121,20 @@ const MyNowLocation: React.FC = () => {
                 : centerAddress.roadAddress
               : 'no address..'
           }
-          btnStatus='지번'
+          btnStatus={addressFormat}
           handleChangeBtnStatus={() =>
             setAddressFormat((prev) => (prev === '지번' ? '도로명' : '지번'))
           }
-          handleClickSetLocationBtn={() => {}}
+          handleClickSetLocationBtn={() => {
+            if (centerAddress) {
+              setNowAddress({
+                jibun: centerAddress.jibunAddress,
+                road: centerAddress.roadAddress,
+                buildingName,
+              });
+              navigate(-1);
+            }
+          }}
         />
       )}
       <div className={styles.bottomSheetBlock}></div>

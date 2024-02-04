@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../components/Button/FullBtn/FullBtn';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationLocEditContent from '../../../components/My/Location/atoms/Content/LocEdit/MyLocationLocEditContent';
 import BodyTitleText from '../../../components/Text/BodyTitleText/BodyTitleText';
+import useStore from '../../../store/useStore';
 import { colors } from '../../../styles/colors';
 import styles from './MyLocation.module.css';
 
@@ -12,6 +13,12 @@ interface Props {}
 
 const MyLocation: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const nowAddress = useStore((state) => state.nowAddress);
+  const [locDataArr, setLocaDataArr] = useState([
+    { category: '집', address: '서울 광진구 능동로 69', id: 1 },
+    { category: '학교', address: '서울 광진구 능동로 120', id: 2 },
+    { category: '본가', address: '서울 광진구 능동로 112', id: 3 },
+  ]);
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -20,8 +27,11 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
       />
       <main className={styles.main}>
         <BodyTitleText
-          text='모쿠님은 현재 
-서울 광진구 아차산로 ...에 있어요.'
+          text={
+            nowAddress
+              ? `모쿠님은 현재 ${nowAddress.road || nowAddress.jibun}에 있어요.`
+              : '현재 위치를 등록해주세요.'
+          }
           color='navy'
         />
         <div className={styles.settingBtnWrapper}>
@@ -31,16 +41,14 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
             color={colors.mainPurple}
           />
         </div>
-        <MyLocationLocEditContent
-          titleText='주소'
-          locationText='서울 광진구 능동로 69'
-          onClickBtn={() => navigate('1')}
-        />
-        <MyLocationLocEditContent
-          titleText='학교'
-          locationText='서울 광진구 능동로 120'
-          onClickBtn={() => navigate('2')}
-        />
+        {locDataArr.map((data, index) => (
+          <MyLocationLocEditContent
+            key={data.id + index}
+            titleText={data.category}
+            locationText={data.address}
+            onClickBtn={() => navigate(`${data.id}`)}
+          />
+        ))}
       </main>
       <div className={styles.bottomBtnWrapper}>
         <FullBtn

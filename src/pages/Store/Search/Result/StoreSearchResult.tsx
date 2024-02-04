@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './StoreSearchResult.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import CheckFilterSelect from '../../../../components/CheckFilter/Select/CheckFilterSelect';
 import SearchBarHeader from '../../../../components/SearchBar/SearchBarHeader/SearchBarHeader';
@@ -13,9 +13,11 @@ import {
 } from '../../../../store/data/searchResult';
 import SlideTabViewFilterOrOption from '../../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
+import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
+  const { searchWord } = useParams();
 
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -102,15 +104,21 @@ const StoreSearchResult = () => {
   //   });
   // };
 
+  const { handleAddSeachKeyword } = useRecentSearchWord();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 가게를 검색해 보세요"
+          placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickBackBtn={() => navigate(-1)}
-          onClickSearchBtn={(value: string) =>
-            navigate(`/storesearch/${value}`)
-          }
+          onClickSearchBtn={(value: string) => {
+            if (value) {
+              handleAddSeachKeyword({ title: value });
+              navigate(`/store/search/${value}`);
+            }
+          }}
+          firstValue={searchWord}
         />
       </div>
 
@@ -123,7 +131,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -134,7 +142,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -144,7 +152,7 @@ const StoreSearchResult = () => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="sub-purple-light"
+            borderColor='sub-purple-light'
             onClick={() => {
               handleOptionClick(index);
             }}

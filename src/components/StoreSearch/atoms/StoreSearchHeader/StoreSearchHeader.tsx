@@ -8,8 +8,15 @@ import MapHeaderSelect from '../../../Map/atoms/Select/HeaderSelect/MapHeaderSel
 import HeaderBackBtn from '../../../HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../../SearchBar/SearchBar';
 import useStore from '../../../../store/useStore';
+import { RecentSearchData } from '../../../../store/data/storeSearch';
 
-const StoreSearchHeader = () => {
+interface Props {
+  handleAddSeachKeyword: (searchWord: RecentSearchData) => void;
+}
+
+const StoreSearchHeader: React.FC<Props> = ({
+  handleAddSeachKeyword,
+}: Props) => {
   const navigate = useNavigate();
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
@@ -29,7 +36,12 @@ const StoreSearchHeader = () => {
         children={
           <SearchBar
             placeholder='찾고 싶은 가게를 검색해 보세요'
-            onClickSearchBtn={(value) => navigate(`${value}`)}
+            onClickSearchBtn={(value) => {
+              if (value) {
+                handleAddSeachKeyword({ title: value });
+                navigate(`${value}`);
+              }
+            }}
           />
         }
       ></HeaderBackBtn>

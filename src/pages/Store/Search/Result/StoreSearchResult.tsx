@@ -72,6 +72,16 @@ const StoreSearchResult = () => {
     setIsBottomSheetVisible(true);
   };
 
+  // 옵션 필터를 클릭했을 때
+  const handleOptionClick = (index: number) => {
+    setMenuItemDataArr((prev) => {
+      const copiedArr = [...prev];
+      copiedArr[2].bodyDataArr[index].isChecked =
+        !copiedArr[2].bodyDataArr[index].isChecked;
+      return copiedArr;
+    });
+  };
+
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   );
@@ -79,24 +89,24 @@ const StoreSearchResult = () => {
     (x) => x.isChecked
   );
 
-  const handleClickResetOptionBtn = (menuIndex: number) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (menuItemDataArr[menuIndex].bodyType === 'filter')
-      throw new Error('can reset only in option type!!');
-    setMenuItemDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[menuIndex].bodyDataArr.forEach((item) => {
-        item.isChecked = false;
-      });
-      return copiedArr;
-    });
-  };
+  // const handleClickResetOptionBtn = (menuIndex: number) => {
+  //   if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+  //   if (menuItemDataArr[menuIndex].bodyType === 'filter')
+  //     throw new Error('can reset only in option type!!');
+  //   setMenuItemDataArr((prevArr) => {
+  //     const copiedArr = [...prevArr];
+  //     copiedArr[menuIndex].bodyDataArr.forEach((item) => {
+  //       item.isChecked = false;
+  //     });
+  //     return copiedArr;
+  //   });
+  // };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder='찾고 싶은 가게를 검색해 보세요'
+          placeholder="찾고 싶은 가게를 검색해 보세요"
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) =>
             navigate(`/storesearch/${value}`)
@@ -113,7 +123,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -124,23 +134,22 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {menuItemDataArr[2].bodyDataArr.map(
-          (data, index) =>
-            data.isChecked && (
-              <CheckFilter
-                key={data.title + index}
-                isChecked={false}
-                label={data.title}
-                border={1}
-                borderColor='sub-purple-light'
-                onClick={() => handleFilterSelectClick(2)}
-              />
-            )
-        )}
+        {menuItemDataArr[2].bodyDataArr.map((data, index) => (
+          <CheckFilter
+            key={data.title + index}
+            isChecked={data.isChecked}
+            label={data.title}
+            border={1}
+            borderColor="sub-purple-light"
+            onClick={() => {
+              handleOptionClick(index);
+            }}
+          />
+        ))}
       </div>
 
       <div className={styles.wrapContent}>
@@ -163,10 +172,13 @@ const StoreSearchResult = () => {
           onClickNotBottomSheet={handleDragBottom}
         >
           <SlideTabViewFilterOrOption
-            menuItemDataArr={menuItemDataArr}
+            // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
+            menuItemDataArr={menuItemDataArr.filter(
+              (item, index) => index === 0 || index === 1
+            )}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
-            handleClickResetOptionBtn={handleClickResetOptionBtn}
+            // handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
         </BottomSheet>
       )}

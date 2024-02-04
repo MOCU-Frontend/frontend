@@ -96,6 +96,16 @@ const Stamp = () => {
     setIsBottomSheetVisible(true);
   };
 
+  // 옵션 필터를 클릭했을 때
+  const handleOptionClick = (index: number) => {
+    setMenuItemDataArr((prev) => {
+      const copiedArr = [...prev];
+      copiedArr[2].bodyDataArr[index].isChecked =
+        !copiedArr[2].bodyDataArr[index].isChecked;
+      return copiedArr;
+    });
+  };
+
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   ) as MenuItemData | undefined;
@@ -103,18 +113,18 @@ const Stamp = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
-  const handleClickResetOptionBtn = (menuIndex: number) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (menuItemDataArr[menuIndex].bodyType === 'filter')
-      throw new Error('can reset only in option type!!');
-    setMenuItemDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[menuIndex].bodyDataArr.forEach((item) => {
-        item.isChecked = false;
-      });
-      return copiedArr;
-    });
-  };
+  // const handleClickResetOptionBtn = (menuIndex: number) => {
+  //   if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+  //   if (menuItemDataArr[menuIndex].bodyType === 'filter')
+  //     throw new Error('can reset only in option type!!');
+  //   setMenuItemDataArr((prevArr) => {
+  //     const copiedArr = [...prevArr];
+  //     copiedArr[menuIndex].bodyDataArr.forEach((item) => {
+  //       item.isChecked = false;
+  //     });
+  //     return copiedArr;
+  //   });
+  // };
 
   return (
     <div className={styles.wrapper}>
@@ -124,7 +134,8 @@ const Stamp = () => {
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
         filterItems={menuItemDataArr[2].bodyDataArr}
-        onFilterSelectClick={handleFilterSelectClick}
+        handleFilterSelectClick={handleFilterSelectClick}
+        handleOptionClick={handleOptionClick}
       />
 
       <div className={styles.contentWrapper}>
@@ -148,10 +159,13 @@ const Stamp = () => {
           onClickNotBottomSheet={handleDragBottom}
           children={
             <SlideTabViewFilterOrOption
-              menuItemDataArr={menuItemDataArr}
+              // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
+              menuItemDataArr={menuItemDataArr.filter(
+                (item, index) => index === 0 || index === 1
+              )}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
-              handleClickResetOptionBtn={handleClickResetOptionBtn}
+              // handleClickResetOptionBtn={handleClickResetOptionBtn}
             />
           }
         ></BottomSheet>

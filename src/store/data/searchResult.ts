@@ -112,11 +112,11 @@ export const initialSectorFilterDataArr: FilterList[] = [
 export const initialOptionDataArr = [
   {
     title: '이벤트 중',
-    isChecked: true,
+    isChecked: false,
   },
   {
     title: '쿠폰 사용 임박',
-    isChecked: true,
+    isChecked: false,
   },
   {
     title: '적립 진행 중만',

@@ -3,7 +3,7 @@ import BottomSheetBasic from './atoms/Basic/BottomSheetBasic';
 import BottomSheetTopBarLine from './atoms/TopBarLine/BottomSheetTopBarLine';
 
 interface Props {
-  children: ReactNode;
+  children?: ReactNode;
   isBackgroundBlur?: boolean;
   onClickNotBottomSheet: () => void;
   onDragBottom: () => void;

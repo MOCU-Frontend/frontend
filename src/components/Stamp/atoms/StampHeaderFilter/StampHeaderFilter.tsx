@@ -47,7 +47,13 @@ interface Props {
    *
    * 필터를 클릭했을 때
    */
-  onFilterSelectClick: (index: number) => void;
+  handleFilterSelectClick: (index: number) => void;
+
+  /*
+   *
+   * 옵션 필터를 클릭했을 때
+   */
+  handleOptionClick: (index: number) => void;
 }
 
 const StampHeaderFilter: React.FC<Props> = ({
@@ -56,7 +62,8 @@ const StampHeaderFilter: React.FC<Props> = ({
   selectedArrangeFilterItem,
   selectedSectorFilterItem,
   filterItems,
-  onFilterSelectClick,
+  handleFilterSelectClick,
+  handleOptionClick,
 }) => {
   return (
     <div className={styles.headerFilterWrapper}>
@@ -74,7 +81,7 @@ const StampHeaderFilter: React.FC<Props> = ({
           isChecked={false}
           border={1}
           borderColor={'main-purple'}
-          onClick={() => onFilterSelectClick(0)}
+          onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
           label={
@@ -85,22 +92,19 @@ const StampHeaderFilter: React.FC<Props> = ({
           isChecked={false}
           border={1}
           borderColor={'main-purple'}
-          onClick={() => onFilterSelectClick(1)}
+          onClick={() => handleFilterSelectClick(1)}
         />
 
-        {filterItems.map(
-          (data, index) =>
-            data.isChecked && (
-              <CheckFilter
-                key={data.title + index}
-                isChecked={false}
-                label={data.title}
-                border={1}
-                borderColor="main-purple"
-                onClick={() => onFilterSelectClick(2)}
-              />
-            )
-        )}
+        {filterItems.map((data, index) => (
+          <CheckFilter
+            key={data.title + index}
+            isChecked={data.isChecked}
+            label={data.title}
+            border={1}
+            borderColor="main-purple"
+            onClick={() => handleOptionClick(index)}
+          />
+        ))}
       </div>
     </div>
   );

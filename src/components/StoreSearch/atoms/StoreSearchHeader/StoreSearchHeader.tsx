@@ -7,14 +7,16 @@ import { colors } from '../../../../styles/colors';
 import MapHeaderSelect from '../../../Map/atoms/Select/HeaderSelect/MapHeaderSelect';
 import HeaderBackBtn from '../../../HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../../SearchBar/SearchBar';
+import useStore from '../../../../store/useStore';
 
 const StoreSearchHeader = () => {
   const navigate = useNavigate();
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text='학교'
+          text={nowUserLocation.name}
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}

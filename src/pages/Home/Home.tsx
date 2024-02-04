@@ -17,6 +17,7 @@ import HomeHeader from '../../components/Home/atoms/Header/HomeHeader';
 import { colors } from '../../styles/colors';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
+import useStore from '../../store/useStore';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ const Home = () => {
       return copiedArr;
     });
   };
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -54,7 +56,7 @@ const Home = () => {
         />
         <HomeLocationSec
           titleText='모쿠님의 현재위치'
-          bodyText='학교'
+          bodyText={nowUserLocation.name}
           onClickLoc={() => navigate('/mylocation')}
         />
       </div>

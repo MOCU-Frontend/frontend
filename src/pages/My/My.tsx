@@ -17,6 +17,7 @@ import MyRewardStampsContent from '../../components/My/atoms/Content/RewardStamp
 import { Outlet, useNavigate } from 'react-router-dom';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
+import useStore from '../../store/useStore';
 type RewardData = {
   date: string;
   storeName: string;
@@ -70,6 +71,7 @@ const My: React.FC = () => {
       return copiedArr;
     });
   };
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -108,7 +110,7 @@ const My: React.FC = () => {
           />
         </div>
         <MyLocationContent
-          locationText='서울 광진구 능동로 69'
+          locationText={nowUserLocation.address}
           onClick={() => navigate('location')}
         />
         <MyMainNormalHeaderWrapper

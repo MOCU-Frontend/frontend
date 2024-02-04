@@ -5,6 +5,7 @@ import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationLocEditContent from '../../../components/My/Location/atoms/Content/LocEdit/MyLocationLocEditContent';
 import BodyTitleText from '../../../components/Text/BodyTitleText/BodyTitleText';
+import { userLocationArr } from '../../../store/data/nowUserLocation';
 import useStore from '../../../store/useStore';
 import { colors } from '../../../styles/colors';
 import styles from './MyLocation.module.css';
@@ -14,11 +15,7 @@ interface Props {}
 const MyLocation: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
   const nowAddress = useStore((state) => state.nowAddress);
-  const [locDataArr, setLocaDataArr] = useState([
-    { category: '집', address: '서울 광진구 능동로 69', id: 1 },
-    { category: '학교', address: '서울 광진구 능동로 120', id: 2 },
-    { category: '본가', address: '서울 광진구 능동로 112', id: 3 },
-  ]);
+  const [locDataArr, setLocaDataArr] = useState(userLocationArr);
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -44,7 +41,7 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
         {locDataArr.map((data, index) => (
           <MyLocationLocEditContent
             key={data.id + index}
-            titleText={data.category}
+            titleText={data.name}
             locationText={data.address}
             onClickBtn={() => navigate(`${data.id}`)}
           />

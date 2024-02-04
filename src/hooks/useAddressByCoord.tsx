@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { NaverMapTypeEdited } from '../store/Type/NaverMap/NaverMap';
 
 export const useAddressByCoord = (
   scriptError: ErrorEvent | undefined,
@@ -10,6 +11,7 @@ export const useAddressByCoord = (
   const [address, setAddress] = useState<
     naver.maps.Service.ReverseGeocodeAddress | undefined
   >();
+  const [buildingName, setBuildingName] = useState<string | undefined>();
   useEffect(() => {
     if (
       !scriptError &&
@@ -26,6 +28,14 @@ export const useAddressByCoord = (
             return alert('Something wrong!');
           }
           setAddress(response.v2.address);
+          const resultsEdited: NaverMapTypeEdited.ResultItem[] = response.v2
+            .results as any;
+          const roadAddr = resultsEdited.find((x) => x.name === 'roadaddr');
+          if (roadAddr) {
+            setBuildingName(roadAddr.land.addition0.value);
+          } else {
+            setBuildingName(undefined);
+          }
         }
       );
     }
@@ -37,5 +47,5 @@ export const useAddressByCoord = (
     geoCoderScriptLoading,
   ]);
 
-  return { address };
+  return { address, buildingName };
 };

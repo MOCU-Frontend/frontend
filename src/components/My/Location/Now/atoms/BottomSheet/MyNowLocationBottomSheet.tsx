@@ -30,7 +30,7 @@ const MyNowLocationBottomSheet: React.FC<Props> = ({
         <div className={styles.paddingWrapper}>
           <MyNowLocationBottomSheetTitleText text={locationText} />
           <MyNowLocationBottomSheetBtn
-            btnText={btnStatus === '지번' ? '지번으로 보기' : '도로명으로 보기'}
+            btnText={btnStatus === '지번' ? '도로명으로 보기' : '지번으로 보기'}
             onClick={handleChangeBtnStatus}
           />
         </div>

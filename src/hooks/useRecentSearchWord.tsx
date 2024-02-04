@@ -26,7 +26,7 @@ export const useRecentSearchWord = () => {
   };
   const handleAddSeachKeyword = (searchWord: RecentSearchData) => {
     setSearchKeywordDataArr((arr) => {
-      const arrCopied = [...arr, searchWord];
+      const arrCopied = [searchWord, ...arr];
       localStorage.setItem(
         'mocu-recendSearchWordArr',
         JSON.stringify(arrCopied)

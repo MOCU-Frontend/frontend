@@ -21,3 +21,13 @@
   flex-shrink: 0;
   background: linear-gradient(0deg, #e6e6e6 0%, #e6e6e6 100%), #fff;
 }
+
+.bodyTabWrapper {
+  position: relative;
+  width: 100%;
+}
+.statusWrapper {
+  left: 0;
+  bottom: 5px;
+  position: absolute;
+}

@@ -1,0 +1,6 @@
+@import '../../../../../styles/colorVars.css';
+
+.wrapper {
+  width: 100vw;
+  background-color: var(--color-grey-light-02);
+}

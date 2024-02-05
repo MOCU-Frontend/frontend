@@ -15,7 +15,6 @@ import { initialMenuItemDataArr, MenuItemData } from '../../store/data/gift';
 
 const Gift = () => {
   const navigate = useNavigate();
-  const { searchWord } = useParams();
 
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -102,7 +101,11 @@ const Gift = () => {
             cafeTitle={data.cafeTitle}
             foodTitle={data.foodTitle}
             foodPrice={data.foodPrice.toLocaleString('ko-KR')}
-            onCardBtnClick={() => navigate(`/gift/${index}`)}
+            onCardBtnClick={() =>
+              navigate(
+                `/gift/${data.cafeTitle}/${data.foodTitle}/${data.foodPrice}`
+              )
+            }
           />
         ))}
       </div>

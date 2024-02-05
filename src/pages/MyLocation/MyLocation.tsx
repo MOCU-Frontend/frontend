@@ -1,24 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationListFilter from '../../components/MyLocation/atoms/ListFilter/MyLocationListFilter';
 import BodyTitleText from '../../components/Text/BodyTitleText/BodyTitleText';
+import { useUserLocation } from '../../hooks/useUserLocation';
+import useStore from '../../store/useStore';
 import { colors } from '../../styles/colors';
 import styles from './MyLocation.module.css';
 
-type Location = {
-  title: string;
-  address: string;
-  isChecked: boolean;
-};
-
 const MyLocation: React.FC = () => {
   const navigate = useNavigate();
-  const [locationArr, setLocationArr] = useState<Location[]>([
-    { title: '학교', address: '서울 광진구 능동로 120', isChecked: true },
-    { title: '집', address: '서울 광진구 아차산로 225', isChecked: false },
-  ]);
+
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
+  const { locationArr, setLocationArr } = useUserLocation(nowUserLocation);
+  const setNowUserLocation = useStore((state) => state.setNowUserLocation);
+
   const handleClickListFilter = (index: number) => {
     if (!locationArr[index]) throw new Error('invalid index!!');
     if (locationArr.findIndex((x) => x.isChecked) === -1)
@@ -30,6 +27,7 @@ const MyLocation: React.FC = () => {
       arrCopied[index].isChecked = true;
       return arrCopied;
     });
+    setNowUserLocation(locationArr[index]);
   };
   return (
     <section className={styles.wholeWrapper}>
@@ -38,7 +36,10 @@ const MyLocation: React.FC = () => {
         onClickBackBtn={() => navigate(-1)}
       />
       <main className={styles.main}>
-        <BodyTitleText text='모쿠님은 현재 학교에 있어요.' color='navy' />
+        <BodyTitleText
+          text={`모쿠님은 현재 ${nowUserLocation.name}에 있어요.`}
+          color='navy'
+        />
         <MyLocationSettingBtn
           onClick={() => {}}
           text='현재 위치 재설정'
@@ -47,9 +48,9 @@ const MyLocation: React.FC = () => {
         <div className={styles.listFiltersWrapper}>
           {locationArr.map((data, index) => (
             <MyLocationListFilter
-              key={data.title + index}
+              key={data.name + index}
               onClick={() => handleClickListFilter(index)}
-              titleText={data.title}
+              titleText={data.name}
               bodyText={data.address}
               isChecked={data.isChecked}
             />

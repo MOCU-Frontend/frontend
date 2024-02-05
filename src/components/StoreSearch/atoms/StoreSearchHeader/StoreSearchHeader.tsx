@@ -7,14 +7,23 @@ import { colors } from '../../../../styles/colors';
 import MapHeaderSelect from '../../../Map/atoms/Select/HeaderSelect/MapHeaderSelect';
 import HeaderBackBtn from '../../../HeaderBackBtn/HeaderBackBtn';
 import SearchBar from '../../../SearchBar/SearchBar';
+import useStore from '../../../../store/useStore';
+import { RecentSearchData } from '../../../../store/data/storeSearch';
 
-const StoreSearchHeader = () => {
+interface Props {
+  handleAddSeachKeyword: (searchWord: RecentSearchData) => void;
+}
+
+const StoreSearchHeader: React.FC<Props> = ({
+  handleAddSeachKeyword,
+}: Props) => {
   const navigate = useNavigate();
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
     <div className={styles.headerWrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text='학교'
+          text={nowUserLocation.name}
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -27,7 +36,12 @@ const StoreSearchHeader = () => {
         children={
           <SearchBar
             placeholder='찾고 싶은 가게를 검색해 보세요'
-            onClickSearchBtn={(value) => navigate(`${value}`)}
+            onClickSearchBtn={(value) => {
+              if (value) {
+                handleAddSeachKeyword({ title: value });
+                navigate(`${value}`);
+              }
+            }}
           />
         }
       ></HeaderBackBtn>

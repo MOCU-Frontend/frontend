@@ -5,13 +5,15 @@ import styles from './SearchBar.module.css';
 interface Props {
   onClickSearchBtn: (text: string) => void;
   placeholder: string;
+  firstValue?: string;
 }
 
 const SearchBar: React.FC<Props> = ({
   onClickSearchBtn,
   placeholder,
+  firstValue = '',
 }: Props) => {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(firstValue);
 
   return (
     <div className={styles.wrapper}>

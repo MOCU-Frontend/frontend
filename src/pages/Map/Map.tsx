@@ -15,6 +15,7 @@ import { useStoreMapData } from '../../hooks/useStoreMapData';
 import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampModal';
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import { colors } from '../../styles/colors';
+import useStore from '../../store/useStore';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -80,6 +81,8 @@ const Map: React.FC = () => {
     }
   };
 
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
+
   if (scriptError) return <p>Map Error!</p>;
   if (scriptLoading) return <div className={styles.wrapper}>map loading..</div>;
 
@@ -97,7 +100,7 @@ const Map: React.FC = () => {
         >
           {!isShowBottomSheet && (
             <MapHeaderSelect
-              text='학교'
+              text={nowUserLocation.name}
               onClick={() => navigate('/mylocation')}
               color={colors.mainPurple}
               size={'medium'}

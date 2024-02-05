@@ -85,7 +85,7 @@ const Gift = () => {
     <div className={styles.wrapper}>
       <div>
         <GiftHeaderFilter
-          onBackBtnClick={() => navigate(-1)}
+          onBackBtnClick={() => navigate('/')}
           onSearchBtnClick={(value: string) => navigate(`/gift/${value}`)}
           selectedDistanceFilterItem={selectedDistanceFilterItem}
           selectedCategoryFilterItem={selectedCategoryFilterItem}

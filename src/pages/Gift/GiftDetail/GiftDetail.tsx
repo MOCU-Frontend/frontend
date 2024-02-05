@@ -1,25 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GiftDetail.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import { colors } from '../../../styles/colors';
-
+import GiftCard from '../../../components/Gift/atoms/Card/GiftCard';
+import { giftData } from '../../../store/data/gift';
 import { ReactComponent as ShareIcon } from '../../../assets/icon/share.svg';
 import { ReactComponent as RightArrowIcon } from '../../../assets/icon/arrowRightSmall.svg';
 import { ReactComponent as HourGlassIcon } from '../../../assets/icon/hourGlassSmall.svg';
 import { ReactComponent as MapIcon } from '../../../assets/icon/map.svg';
 import { ReactComponent as PinMapIcon } from '../../../assets/icon/mapMarkerSmall.svg';
 import StarGageBar from '../../../components/StarGageBar/StarGageBar';
+import FullBtn from '../../../components/Button/FullBtn/FullBtn';
 
 const GiftDetail = () => {
   const navigate = useNavigate();
   const { cafeTitle, foodTitle, foodPrice } = useParams();
+
+  const [activeTab, setActiveTab] = useState(1); // 초기값은 첫 번째 항목
+
+  const handleTabClick = (tabNumber: number) => {
+    setActiveTab(tabNumber);
+  };
+
   return (
     <div className={styles.giftWrapper}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
           backBtnColor={colors.white}
-          onClickBackBtn={() => navigate(-1)}
+          onClickBackBtn={() => navigate('/gift')}
           headerTitle="선물하기"
           headerTitleColor={colors.white}
         >
@@ -73,6 +82,79 @@ const GiftDetail = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div className={styles.tabWrapper}>
+        <div
+          className={`${styles.tapButton} ${
+            activeTab === 1 ? styles.tabTrue : styles.tabFalse
+          }`}
+          onClick={() => handleTabClick(1)}
+        >
+          상품설명
+        </div>
+        <div
+          className={`${styles.tapButton} ${
+            activeTab === 2 ? styles.tabTrue : styles.tabFalse
+          }`}
+          onClick={() => handleTabClick(2)}
+        >
+          선물후기
+        </div>
+        <div
+          className={`${styles.tapButton} ${
+            activeTab === 3 ? styles.tabTrue : styles.tabFalse
+          }`}
+          onClick={() => handleTabClick(3)}
+        >
+          상세정보
+        </div>
+      </div>
+      {activeTab === 1 && (
+        <div className={styles.descriptionWrapper}>
+          <div className={styles.descriptionImg} />
+          <div className={styles.descriptionTextWrapper}>
+            이 가게의 다른 제품
+          </div>
+          <div className={styles.giftCardWrapper}>
+            {giftData.map((data, index) => (
+              <GiftCard
+                key={index}
+                cafeTitle={data.cafeTitle}
+                foodTitle={data.foodTitle}
+                foodPrice={data.foodPrice.toLocaleString('ko-KR')}
+                onCardBtnClick={() =>
+                  navigate(
+                    `/gift/${data.cafeTitle}/${data.foodTitle}/${data.foodPrice}`
+                  )
+                }
+              />
+            ))}
+          </div>
+          <div className={styles.descriptionTextWrapper}>
+            이런 선물은 어때요?
+          </div>
+          <div className={styles.giftCardWrapper}>
+            {giftData.map((data, index) => (
+              <GiftCard
+                key={index}
+                cafeTitle={data.cafeTitle}
+                foodTitle={data.foodTitle}
+                foodPrice={data.foodPrice.toLocaleString('ko-KR')}
+                onCardBtnClick={() =>
+                  navigate(
+                    `/gift/${data.cafeTitle}/${data.foodTitle}/${data.foodPrice}`
+                  )
+                }
+              />
+            ))}
+          </div>
+
+          <div className={styles.emptyArea} />
+        </div>
+      )}
+
+      <div className={styles.wrapGiftBtn}>
+        <FullBtn label="선물하기" />
       </div>
     </div>
   );

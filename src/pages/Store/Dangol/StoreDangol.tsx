@@ -196,6 +196,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
             handleClickResetOptionBtn={handleClickResetOptionBtn}
+            onClickCompleteBtn={handleDragBottom}
           />
         </BottomSheet>
       )}

@@ -130,7 +130,7 @@ const Stamp = () => {
     <div className={styles.wrapper}>
       <StampHeaderFilter
         onBackBtnClick={() => navigate(-1)}
-        title="적립 현황"
+        title='적립 현황'
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
         filterItems={menuItemDataArr[2].bodyDataArr}
@@ -166,6 +166,7 @@ const Stamp = () => {
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
               // handleClickResetOptionBtn={handleClickResetOptionBtn}
+              onClickCompleteBtn={handleDragBottom}
             />
           }
         ></BottomSheet>

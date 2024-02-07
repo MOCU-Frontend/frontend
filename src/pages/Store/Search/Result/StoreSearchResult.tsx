@@ -186,6 +186,7 @@ const StoreSearchResult = () => {
             )}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
+            onClickCompleteBtn={handleDragBottom}
             // handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
         </BottomSheet>

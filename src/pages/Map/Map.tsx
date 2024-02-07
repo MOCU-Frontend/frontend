@@ -44,6 +44,7 @@ const Map: React.FC = () => {
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
+    setIsShowSearchBtn(false);
     mapWrapperRef.current &&
       (mapWrapperRef.current.style.height = `${
         window.innerHeight - BOTTOM_SHEET_HEIGHT
@@ -75,12 +76,15 @@ const Map: React.FC = () => {
 
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
+    setIsShowSearchBtn(true);
     if (map) {
       mapWrapperRef.current &&
         (mapWrapperRef.current.style.height = `${window.innerHeight}px`);
       map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
     }
   };
+
+  const [isShowSearchBtn, setIsShowSearchBtn] = useState(true);
 
   const nowUserLocation = useStore((state) => state.nowUserLocation);
 
@@ -146,9 +150,11 @@ const Map: React.FC = () => {
             <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
           </div>
         )}
-        <div className={styles.mapSearchBtnWrapper}>
-          <MapSearchBtn onClick={() => {}} />
-        </div>
+        {isShowSearchBtn && (
+          <div className={styles.mapSearchBtnWrapper}>
+            <MapSearchBtn onClick={() => {}} />
+          </div>
+        )}
       </div>
 
       <div className={styles.mapWrapper} ref={mapWrapperRef}>

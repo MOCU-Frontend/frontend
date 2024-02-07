@@ -10,10 +10,12 @@ import {
   searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
+  initialOptionDataArr,
 } from '../../../../store/data/searchResult';
-import SlideTabViewFilterOrOption from '../../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
+import { FilterList } from '../../../../store/data/stamp';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
@@ -29,6 +31,8 @@ const StoreSearchResult = () => {
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
     initialMenuItemDataArr
   );
+  const [optionDataArr, setOptionDataArr] =
+    useState<FilterList[]>(initialOptionDataArr);
 
   const handleClickMenuBodyItem = (
     menuIndex: number,
@@ -76,10 +80,9 @@ const StoreSearchResult = () => {
 
   // 옵션 필터를 클릭했을 때
   const handleOptionClick = (index: number) => {
-    setMenuItemDataArr((prev) => {
+    setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      copiedArr[2].bodyDataArr[index].isChecked =
-        !copiedArr[2].bodyDataArr[index].isChecked;
+      optionDataArr[index].isChecked = !optionDataArr[index].isChecked;
       return copiedArr;
     });
   };
@@ -146,7 +149,7 @@ const StoreSearchResult = () => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {menuItemDataArr[2].bodyDataArr.map((data, index) => (
+        {optionDataArr.map((data, index) => (
           <CheckFilter
             key={data.title + index}
             isChecked={data.isChecked}
@@ -179,7 +182,7 @@ const StoreSearchResult = () => {
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
         >
-          <SlideTabViewFilterOrOption
+          <SlideTabViewFilter
             // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
             menuItemDataArr={menuItemDataArr.filter(
               (item, index) => index === 0 || index === 1

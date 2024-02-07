@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import BtmSheetFilter from '../../../../SearchResult/atoms/BtmSheetFilter/BtmSheetFilter';
-import BtmSheetOption from '../../../../SearchResult/atoms/BtmSheetOption/BtmSheetOption';
 import BodyTabWrapper from '../../BodyTabWrapper/BodyTabWrapper';
 import styles from '../SlideMenuBodyTab.module.css';
 
@@ -12,7 +11,6 @@ type FilterList = {
 type MenuItemData = {
   title: string;
   isChecked: boolean;
-  bodyType: 'filter' | 'option';
   bodyDataArr: FilterList[];
 };
 
@@ -24,14 +22,12 @@ interface Props {
     newIndex: number,
     prevIndex?: number
   ) => void;
-  handleClickResetOptionBtn?: (menuIndex: number) => void;
 }
 
-const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
+const SlideMenuFilterBodyTab: React.FC<Props> = ({
   menuItemDataArr,
   handleCheckedDataIndex,
   handleClickMenuBodyItem,
-  handleClickResetOptionBtn,
 }: Props) => {
   const tabRef = useRef<HTMLDivElement>(null);
 
@@ -146,25 +142,12 @@ const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
             </BodyTabWrapper>
             {menuItemDataArr.map((data, index) => (
               <BodyTabWrapper key={data.title}>
-                {data.bodyType === 'filter' ? (
-                  <BtmSheetFilter
-                    filterArray={data.bodyDataArr}
-                    onClick={(prevIndex: number, newIndex: number) =>
-                      handleClickMenuBodyItem(index, newIndex, prevIndex)
-                    }
-                  />
-                ) : (
-                  <BtmSheetOption
-                    OptionDataArray={data.bodyDataArr}
-                    onClick={(newIndex: number) =>
-                      handleClickMenuBodyItem(index, newIndex)
-                    }
-                    onClickResetBtn={() =>
-                      handleClickResetOptionBtn &&
-                      handleClickResetOptionBtn(index)
-                    }
-                  />
-                )}
+                <BtmSheetFilter
+                  filterArray={data.bodyDataArr}
+                  onClick={(prevIndex: number, newIndex: number) =>
+                    handleClickMenuBodyItem(index, newIndex, prevIndex)
+                  }
+                />
               </BodyTabWrapper>
             ))}
             <BodyTabWrapper>
@@ -177,4 +160,4 @@ const SlideMenuFilterAndOptionBodyTab: React.FC<Props> = ({
   );
 };
 
-export default SlideMenuFilterAndOptionBodyTab;
+export default SlideMenuFilterBodyTab;

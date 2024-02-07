@@ -7,7 +7,7 @@ import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSe
 import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
-import SlideTabViewFilterOrOption from '../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 
 import StampHeaderFilter from '../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
 
@@ -15,7 +15,9 @@ import {
   searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
+  FilterList,
 } from '../../store/data/stamp';
+import { initialOptionDataArr } from '../../store/data/searchResult';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -96,12 +98,13 @@ const Stamp = () => {
     setIsBottomSheetVisible(true);
   };
 
+  const [optionDataArr, setOptionDataArr] =
+    useState<FilterList[]>(initialOptionDataArr);
   // 옵션 필터를 클릭했을 때
   const handleOptionClick = (index: number) => {
-    setMenuItemDataArr((prev) => {
+    setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      copiedArr[2].bodyDataArr[index].isChecked =
-        !copiedArr[2].bodyDataArr[index].isChecked;
+      optionDataArr[index].isChecked = !optionDataArr[index].isChecked;
       return copiedArr;
     });
   };
@@ -133,7 +136,7 @@ const Stamp = () => {
         title='적립 현황'
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
-        filterItems={menuItemDataArr[2].bodyDataArr}
+        filterItems={optionDataArr}
         handleFilterSelectClick={handleFilterSelectClick}
         handleOptionClick={handleOptionClick}
       />
@@ -158,11 +161,9 @@ const Stamp = () => {
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
           children={
-            <SlideTabViewFilterOrOption
+            <SlideTabViewFilter
               // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
-              menuItemDataArr={menuItemDataArr.filter(
-                (item, index) => index === 0 || index === 1
-              )}
+              menuItemDataArr={menuItemDataArr}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
               // handleClickResetOptionBtn={handleClickResetOptionBtn}

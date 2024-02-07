@@ -88,8 +88,12 @@ export const initialArrangementFilterDataArr: FilterList[] = [
 
 export const initialSectorFilterDataArr: FilterList[] = [
   {
-    title: '음식점',
+    title: '전체',
     isChecked: true,
+  },
+  {
+    title: '음식점',
+    isChecked: false,
   },
   {
     title: '카페',
@@ -135,7 +139,6 @@ export const initialOptionDataArr = [
 export type MenuItemData = {
   title: string;
   isChecked: boolean;
-  bodyType: 'filter' | 'option';
   bodyDataArr: FilterList[];
 };
 
@@ -143,19 +146,11 @@ export const initialMenuItemDataArr: MenuItemData[] = [
   {
     title: '정렬',
     isChecked: true,
-    bodyType: 'filter',
     bodyDataArr: initialArrangementFilterDataArr,
   },
   {
     title: '업종',
     isChecked: false,
-    bodyType: 'filter',
     bodyDataArr: initialSectorFilterDataArr,
-  },
-  {
-    title: '옵션',
-    isChecked: false,
-    bodyType: 'option',
-    bodyDataArr: initialOptionDataArr,
   },
 ];

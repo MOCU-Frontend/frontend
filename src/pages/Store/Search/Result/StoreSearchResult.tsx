@@ -11,11 +11,11 @@ import {
   initialMenuItemDataArr,
   MenuItemData,
   initialOptionDataArr,
+  FilterListWithId,
 } from '../../../../store/data/searchResult';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
-import { FilterList } from '../../../../store/data/stamp';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const StoreSearchResult = () => {
     initialMenuItemDataArr
   );
   const [optionDataArr, setOptionDataArr] =
-    useState<FilterList[]>(initialOptionDataArr);
+    useState<FilterListWithId[]>(initialOptionDataArr);
 
   const handleClickMenuBodyItem = (
     menuIndex: number,
@@ -79,10 +79,13 @@ const StoreSearchResult = () => {
   };
 
   // 옵션 필터를 클릭했을 때
-  const handleOptionClick = (index: number) => {
+  const handleOptionClick = (id: number) => {
     setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      optionDataArr[index].isChecked = !optionDataArr[index].isChecked;
+      const item = optionDataArr.find((x) => x.id === id);
+      if (item) {
+        item.isChecked = !item.isChecked;
+      }
       return copiedArr;
     });
   };
@@ -108,6 +111,18 @@ const StoreSearchResult = () => {
   // };
 
   const { handleAddSeachKeyword } = useRecentSearchWord();
+
+  let checkedOptionDataArr: FilterListWithId[] = [];
+  let uncheckedOptionDataArr: FilterListWithId[] = [];
+  optionDataArr.forEach((data) =>
+    data.isChecked
+      ? (checkedOptionDataArr = [...checkedOptionDataArr, data])
+      : (uncheckedOptionDataArr = [...uncheckedOptionDataArr, data])
+  );
+  const sortedOptionDataArr = [
+    ...checkedOptionDataArr,
+    ...uncheckedOptionDataArr,
+  ];
 
   return (
     <div className={styles.wrapper}>
@@ -149,7 +164,7 @@ const StoreSearchResult = () => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {optionDataArr.map((data, index) => (
+        {sortedOptionDataArr.map((data, index) => (
           <CheckFilter
             key={data.title + index}
             isChecked={data.isChecked}
@@ -157,7 +172,7 @@ const StoreSearchResult = () => {
             border={1}
             borderColor='sub-purple-light'
             onClick={() => {
-              handleOptionClick(index);
+              handleOptionClick(data.id);
             }}
           />
         ))}

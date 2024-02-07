@@ -67,6 +67,12 @@ export type FilterList = {
   isChecked: boolean;
 };
 
+export type FilterListWithId = {
+  title: string;
+  isChecked: boolean;
+  id: number;
+};
+
 export const initialArrangementFilterDataArr: FilterList[] = [
   {
     title: '거리순',
@@ -117,22 +123,27 @@ export const initialOptionDataArr = [
   {
     title: '이벤트 중',
     isChecked: false,
+    id: 1,
   },
   {
     title: '쿠폰 사용 임박',
     isChecked: false,
+    id: 2,
   },
   {
     title: '적립 진행 중만',
     isChecked: false,
+    id: 3,
   },
   {
     title: '안 가본 곳만',
     isChecked: false,
+    id: 4,
   },
   {
     title: '기타 옵션',
     isChecked: false,
+    id: 5,
   },
 ];
 

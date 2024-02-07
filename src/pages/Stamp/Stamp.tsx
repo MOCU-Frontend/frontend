@@ -17,7 +17,10 @@ import {
   MenuItemData,
   FilterList,
 } from '../../store/data/stamp';
-import { initialOptionDataArr } from '../../store/data/searchResult';
+import {
+  FilterListWithId,
+  initialOptionDataArr,
+} from '../../store/data/searchResult';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -99,12 +102,15 @@ const Stamp = () => {
   };
 
   const [optionDataArr, setOptionDataArr] =
-    useState<FilterList[]>(initialOptionDataArr);
+    useState<FilterListWithId[]>(initialOptionDataArr);
   // 옵션 필터를 클릭했을 때
-  const handleOptionClick = (index: number) => {
+  const handleOptionClick = (id: number) => {
     setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      optionDataArr[index].isChecked = !optionDataArr[index].isChecked;
+      const item = optionDataArr.find((x) => x.id === id);
+      if (item) {
+        item.isChecked = !item.isChecked;
+      }
       return copiedArr;
     });
   };
@@ -129,6 +135,18 @@ const Stamp = () => {
   //   });
   // };
 
+  let checkedOptionDataArr: FilterListWithId[] = [];
+  let uncheckedOptionDataArr: FilterListWithId[] = [];
+  optionDataArr.forEach((data) =>
+    data.isChecked
+      ? (checkedOptionDataArr = [...checkedOptionDataArr, data])
+      : (uncheckedOptionDataArr = [...uncheckedOptionDataArr, data])
+  );
+  const sortedOptionDataArr = [
+    ...checkedOptionDataArr,
+    ...uncheckedOptionDataArr,
+  ];
+
   return (
     <div className={styles.wrapper}>
       <StampHeaderFilter
@@ -136,7 +154,7 @@ const Stamp = () => {
         title='적립 현황'
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
-        filterItems={optionDataArr}
+        filterItems={sortedOptionDataArr}
         handleFilterSelectClick={handleFilterSelectClick}
         handleOptionClick={handleOptionClick}
       />

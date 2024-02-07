@@ -7,6 +7,7 @@ import { colors } from '../../../styles/colors';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import {
+  FilterListWithId,
   initialMenuItemDataArr,
   initialOptionDataArr,
   MenuItemData,
@@ -101,15 +102,30 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   );
 
   const [optionDataArr, setOptionDataArr] =
-    useState<FilterList[]>(initialOptionDataArr);
+    useState<FilterListWithId[]>(initialOptionDataArr);
   // 옵션 필터를 클릭했을 때
-  const handleOptionClick = (index: number) => {
+  const handleOptionClick = (id: number) => {
     setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      optionDataArr[index].isChecked = !optionDataArr[index].isChecked;
+      const item = optionDataArr.find((x) => x.id === id);
+      if (item) {
+        item.isChecked = !item.isChecked;
+      }
       return copiedArr;
     });
   };
+
+  let checkedOptionDataArr: FilterListWithId[] = [];
+  let uncheckedOptionDataArr: FilterListWithId[] = [];
+  optionDataArr.forEach((data) =>
+    data.isChecked
+      ? (checkedOptionDataArr = [...checkedOptionDataArr, data])
+      : (uncheckedOptionDataArr = [...uncheckedOptionDataArr, data])
+  );
+  const sortedOptionDataArr = [
+    ...checkedOptionDataArr,
+    ...uncheckedOptionDataArr,
+  ];
 
   return (
     <div className={styles.wholeWrapper}>
@@ -156,14 +172,14 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {optionDataArr.map((data, index) => (
+        {sortedOptionDataArr.map((data, index) => (
           <CheckFilter
             key={data.title + index}
             isChecked={data.isChecked}
             label={data.title}
             border={1}
             borderColor='main-purple'
-            onClick={() => handleOptionClick(index)}
+            onClick={() => handleOptionClick(data.id)}
           />
         ))}
       </div>

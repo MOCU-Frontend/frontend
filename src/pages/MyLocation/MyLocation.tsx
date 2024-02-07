@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
+import MyLocationEditLinkBtn from '../../components/MyLocation/atoms/Btn/EditLink/MyLocationEditLinkBtn';
 import MyLocationListFilter from '../../components/MyLocation/atoms/ListFilter/MyLocationListFilter';
 import BodyTitleText from '../../components/Text/BodyTitleText/BodyTitleText';
 import { useUserLocation } from '../../hooks/useUserLocation';
@@ -40,11 +41,9 @@ const MyLocation: React.FC = () => {
           text={`모쿠님은 현재 ${nowUserLocation.name}에 있어요.`}
           color='navy'
         />
-        <MyLocationSettingBtn
-          onClick={() => {}}
-          text='현재 위치 재설정'
-          color={colors.subPurplelight}
-        />
+        <div className={styles.editLinkBtnWrapper}>
+          <MyLocationEditLinkBtn onClick={() => navigate('/my/location')} />
+        </div>
         <div className={styles.listFiltersWrapper}>
           {locationArr.map((data, index) => (
             <MyLocationListFilter

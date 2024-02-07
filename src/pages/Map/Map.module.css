@@ -74,3 +74,12 @@
   bottom: 19px;
   z-index: 1;
 }
+.mapSearchBtnWrapper {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  transform: translate(0, 54px);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}

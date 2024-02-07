@@ -10,8 +10,10 @@ import {
   searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
+  initialOptionDataArr,
+  FilterListWithId,
 } from '../../../../store/data/searchResult';
-import SlideTabViewFilterOrOption from '../../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
@@ -29,6 +31,8 @@ const StoreSearchResult = () => {
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
     initialMenuItemDataArr
   );
+  const [optionDataArr, setOptionDataArr] =
+    useState<FilterListWithId[]>(initialOptionDataArr);
 
   const handleClickMenuBodyItem = (
     menuIndex: number,
@@ -75,11 +79,13 @@ const StoreSearchResult = () => {
   };
 
   // 옵션 필터를 클릭했을 때
-  const handleOptionClick = (index: number) => {
-    setMenuItemDataArr((prev) => {
+  const handleOptionClick = (id: number) => {
+    setOptionDataArr((prev) => {
       const copiedArr = [...prev];
-      copiedArr[2].bodyDataArr[index].isChecked =
-        !copiedArr[2].bodyDataArr[index].isChecked;
+      const item = optionDataArr.find((x) => x.id === id);
+      if (item) {
+        item.isChecked = !item.isChecked;
+      }
       return copiedArr;
     });
   };
@@ -105,6 +111,18 @@ const StoreSearchResult = () => {
   // };
 
   const { handleAddSeachKeyword } = useRecentSearchWord();
+
+  let checkedOptionDataArr: FilterListWithId[] = [];
+  let uncheckedOptionDataArr: FilterListWithId[] = [];
+  optionDataArr.forEach((data) =>
+    data.isChecked
+      ? (checkedOptionDataArr = [...checkedOptionDataArr, data])
+      : (uncheckedOptionDataArr = [...uncheckedOptionDataArr, data])
+  );
+  const sortedOptionDataArr = [
+    ...checkedOptionDataArr,
+    ...uncheckedOptionDataArr,
+  ];
 
   return (
     <div className={styles.wrapper}>
@@ -146,7 +164,7 @@ const StoreSearchResult = () => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {menuItemDataArr[2].bodyDataArr.map((data, index) => (
+        {sortedOptionDataArr.map((data, index) => (
           <CheckFilter
             key={data.title + index}
             isChecked={data.isChecked}
@@ -154,7 +172,7 @@ const StoreSearchResult = () => {
             border={1}
             borderColor='sub-purple-light'
             onClick={() => {
-              handleOptionClick(index);
+              handleOptionClick(data.id);
             }}
           />
         ))}
@@ -179,13 +197,14 @@ const StoreSearchResult = () => {
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
         >
-          <SlideTabViewFilterOrOption
+          <SlideTabViewFilter
             // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
             menuItemDataArr={menuItemDataArr.filter(
               (item, index) => index === 0 || index === 1
             )}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
+            onClickCompleteBtn={handleDragBottom}
             // handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
         </BottomSheet>

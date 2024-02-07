@@ -26,6 +26,7 @@ interface Props {
    * 현 위치에서 몇 m 떨어져있는 지
    */
   distance: number;
+  onClick: () => void;
 }
 
 const StoreSearchCard: React.FC<Props> = ({
@@ -34,39 +35,36 @@ const StoreSearchCard: React.FC<Props> = ({
   title,
   couponCount,
   distance,
+  onClick,
 }: Props) => {
   return (
-    <>
-      <div className={styles.wrapper}>
-        {couponMain && (
-          <>
-            <div className={styles.cardStoreInformation}>
-              <div className={styles.cardFirstInfo}>{couponCount}/10</div>
-              <div className={styles.cardSecondInfo}>{title}</div>
+    <div className={styles.wrapper} onClick={onClick}>
+      {couponMain && (
+        <>
+          <div className={styles.cardStoreInformation}>
+            <div className={styles.cardFirstInfo}>{couponCount}/10</div>
+            <div className={styles.cardSecondInfo}>{title}</div>
+          </div>
+
+          <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
+        </>
+      )}
+
+      {!couponMain && (
+        <>
+          {eventOn && <div className={styles.cardEventIng}>이벤트 진행 중</div>}
+
+          <div className={styles.cardStoreInformation}>
+            <div className={styles.cardFirstInfo}>{title}</div>
+            <div className={styles.cardSecondInfo}>
+              사용 가능 쿠폰: {couponCount}개{' '}
             </div>
+          </div>
 
-            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
-          </>
-        )}
-
-        {!couponMain && (
-          <>
-            {eventOn && (
-              <div className={styles.cardEventIng}>이벤트 진행 중</div>
-            )}
-
-            <div className={styles.cardStoreInformation}>
-              <div className={styles.cardFirstInfo}>{title}</div>
-              <div className={styles.cardSecondInfo}>
-                사용 가능 쿠폰: {couponCount}개{' '}
-              </div>
-            </div>
-
-            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
-          </>
-        )}
-      </div>
-    </>
+          <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
+        </>
+      )}
+    </div>
   );
 };
 

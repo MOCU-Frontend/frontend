@@ -10,6 +10,7 @@ import StoreSearchRecommend from '../../../components/StoreSearch/atoms/StoreSea
 import { useRecentSearchWord } from '../../../hooks/useRecentSearchWord';
 import HomeAdSlideStatus from '../../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import SlideMenuEventBodyTab from '../../../components/SlideMenu/atoms/BodyTab/Event/SlideMenuEventBodyTab';
+import { storeSearchData } from '../../../store/data/storeSearch';
 
 const StoreSearch = () => {
   const {
@@ -43,8 +44,7 @@ const StoreSearch = () => {
           searchKeywordDataArr={searchKeywordDataArr}
           handleDeleteSeachKeyword={handleDeleteSeachKeyword}
         />
-        <StoreSearchRecent />
-        {/* <div className={styles.searchCarousel} /> */}
+        <StoreSearchRecent storeSeachDataArr={storeSearchData} />
         <div className={styles.bodyTabWrapper}>
           <SlideMenuEventBodyTab
             menuItemDataArr={eventItemArr}
@@ -57,8 +57,8 @@ const StoreSearch = () => {
             />
           </div>
         </div>
-        <StoreSearchImminentCoupon />
         <StoreSearchRecommend />
+        <StoreSearchImminentCoupon />
       </div>
     </div>
   );

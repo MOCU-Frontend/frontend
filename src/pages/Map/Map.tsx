@@ -16,6 +16,7 @@ import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampM
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import { colors } from '../../styles/colors';
 import useStore from '../../store/useStore';
+import MapSearchBtn from '../../components/Map/atoms/Button/Search/MapSearchBtn';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -145,6 +146,9 @@ const Map: React.FC = () => {
             <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
           </div>
         )}
+        <div className={styles.mapSearchBtnWrapper}>
+          <MapSearchBtn onClick={() => {}} />
+        </div>
       </div>
 
       <div className={styles.mapWrapper} ref={mapWrapperRef}>

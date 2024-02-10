@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './Gift.module.css';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
-import SlideTabViewFilterOrOption from './../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 
 import SearchBarHeader from '../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
@@ -71,6 +71,11 @@ const Gift = () => {
     setIsBottomSheetVisible(true);
   };
 
+  // 완료 버튼을 클릭했을 때
+  const handleCompleteClick = () => {
+    setIsBottomSheetVisible(false);
+  };
+
   const selectedDistanceFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   ) as MenuItemData | undefined;
@@ -115,10 +120,11 @@ const Gift = () => {
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
           children={
-            <SlideTabViewFilterOrOption
+            <SlideTabViewFilter
               menuItemDataArr={menuItemDataArr}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
+              onClickCompleteBtn={handleCompleteClick}
             />
           }
         ></BottomSheet>

@@ -7,13 +7,16 @@ import { colors } from '../../../styles/colors';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import {
+  FilterListWithId,
   initialMenuItemDataArr,
+  initialOptionDataArr,
   MenuItemData,
 } from '../../../store/data/searchResult';
 import BottomSheet from '../../../components/BottomSheet/BottomSheet';
-import SlideTabViewFilterOrOption from '../../../components/SlideMenu/SlideTabView/FilterOrOption/SlideTabViewFilterOrOption';
+import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StoreInfoInStamp from '../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
+import { FilterList } from '../../../store/data/stamp';
 
 interface Props {}
 
@@ -98,18 +101,31 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
     (x) => x.isChecked
   );
 
-  const handleClickResetOptionBtn = (menuIndex: number) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (menuItemDataArr[menuIndex].bodyType === 'filter')
-      throw new Error('can reset only in option type!!');
-    setMenuItemDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[menuIndex].bodyDataArr.forEach((item) => {
-        item.isChecked = false;
-      });
+  const [optionDataArr, setOptionDataArr] =
+    useState<FilterListWithId[]>(initialOptionDataArr);
+  // 옵션 필터를 클릭했을 때
+  const handleOptionClick = (id: number) => {
+    setOptionDataArr((prev) => {
+      const copiedArr = [...prev];
+      const item = optionDataArr.find((x) => x.id === id);
+      if (item) {
+        item.isChecked = !item.isChecked;
+      }
       return copiedArr;
     });
   };
+
+  let checkedOptionDataArr: FilterListWithId[] = [];
+  let uncheckedOptionDataArr: FilterListWithId[] = [];
+  optionDataArr.forEach((data) =>
+    data.isChecked
+      ? (checkedOptionDataArr = [...checkedOptionDataArr, data])
+      : (uncheckedOptionDataArr = [...uncheckedOptionDataArr, data])
+  );
+  const sortedOptionDataArr = [
+    ...checkedOptionDataArr,
+    ...uncheckedOptionDataArr,
+  ];
 
   return (
     <div className={styles.wholeWrapper}>
@@ -156,19 +172,16 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
           onClick={() => handleFilterSelectClick(1)}
         />
 
-        {menuItemDataArr[2].bodyDataArr.map(
-          (data, index) =>
-            data.isChecked && (
-              <CheckFilter
-                key={data.title + index}
-                isChecked={false}
-                label={data.title}
-                border={1}
-                borderColor='main-purple'
-                onClick={() => handleFilterSelectClick(2)}
-              />
-            )
-        )}
+        {sortedOptionDataArr.map((data, index) => (
+          <CheckFilter
+            key={data.title + index}
+            isChecked={data.isChecked}
+            label={data.title}
+            border={1}
+            borderColor='main-purple'
+            onClick={() => handleOptionClick(data.id)}
+          />
+        ))}
       </div>
 
       <div className={styles.wrapContent}>
@@ -191,11 +204,11 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
           onDragBottom={handleDragBottom}
           onClickNotBottomSheet={handleDragBottom}
         >
-          <SlideTabViewFilterOrOption
+          <SlideTabViewFilter
             menuItemDataArr={menuItemDataArr}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
-            handleClickResetOptionBtn={handleClickResetOptionBtn}
+            onClickCompleteBtn={handleDragBottom}
           />
         </BottomSheet>
       )}

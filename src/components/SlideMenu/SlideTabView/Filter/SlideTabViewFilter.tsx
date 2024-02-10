@@ -1,7 +1,8 @@
 import React from 'react';
-import SlideMenuFilterAndOptionBodyTab from '../../atoms/BodyTab/FilterOrOption/SlideMenuFilterAndOptionBodyTab';
+import SlideMenuFilterBodyTab from '../../atoms/BodyTab/Filter/SlideMenuFilterBodyTab';
 import SlideMenuTab from '../../atoms/MenuTab/SlideMenuTab';
-import styles from '../SlideTabView.module.css';
+import SlideMenuTabBtnText from '../../atoms/Text/TabBtn/SlideMenuTabBtnText';
+import styles from './SlideTabViewFilter.module.css';
 
 type FilterList = {
   title: string;
@@ -11,7 +12,6 @@ type FilterList = {
 type MenuItemData = {
   title: string;
   isChecked: boolean;
-  bodyType: 'filter' | 'option';
   bodyDataArr: FilterList[];
 };
 
@@ -23,14 +23,14 @@ interface Props {
     newIndex: number,
     prevIndex?: number
   ) => void;
-  handleClickResetOptionBtn?: (menuIndex: number) => void;
+  onClickCompleteBtn: () => void;
 }
 
-const SlideTabViewFilterOrOption: React.FC<Props> = ({
+const SlideTabViewFilter: React.FC<Props> = ({
   menuItemDataArr,
   handleCheckedDataIndex,
   handleClickMenuBodyItem,
-  handleClickResetOptionBtn,
+  onClickCompleteBtn,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -39,15 +39,17 @@ const SlideTabViewFilterOrOption: React.FC<Props> = ({
           menuDataArr={menuItemDataArr}
           handleCheckedDataIndex={handleCheckedDataIndex}
         />
+        <button onClick={onClickCompleteBtn}>
+          <SlideMenuTabBtnText text='완료' />
+        </button>
       </div>
-      <SlideMenuFilterAndOptionBodyTab
+      <SlideMenuFilterBodyTab
         menuItemDataArr={menuItemDataArr}
         handleCheckedDataIndex={handleCheckedDataIndex}
         handleClickMenuBodyItem={handleClickMenuBodyItem}
-        handleClickResetOptionBtn={handleClickResetOptionBtn}
       />
     </div>
   );
 };
 
-export default SlideTabViewFilterOrOption;
+export default SlideTabViewFilter;

@@ -68,7 +68,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       <div className={styles.titleWrapper}>
         <BodyTitleText
           text='단골로 설정할 가게를 선택하여 설정을 완료해주세요.'
-          color={colors.black}
+          color={colors.navy}
         />
       </div>
       <div className={styles.deleteBtnWrapper}>

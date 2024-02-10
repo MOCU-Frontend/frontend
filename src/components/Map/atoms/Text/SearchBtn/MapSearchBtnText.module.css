@@ -1,0 +1,6 @@
+@import '../../../../../styles/colorVars.css';
+.text {
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--color-main-purple);
+}

@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import styles from './StampHeaderFilter.module.css';
 
 import HeaderBackBtn from '../../../HeaderBackBtn/HeaderBackBtn';
 import CheckFilterSelect from '../../../CheckFilter/Select/CheckFilterSelect';
 import CheckFilter from '../../../CheckFilter/CheckFilter';
 
-import {
-  searchResultData,
-  initialMenuItemDataArr,
-  MenuItemData,
-  FilterList,
-} from '../../../../store/data/stamp';
+import { MenuItemData, FilterListWithId } from '../../../../store/data/stamp';
 
 interface Props {
   /*
@@ -42,7 +36,7 @@ interface Props {
    *
    * 필터에서 사용가능한 항목
    */
-  filterItems: FilterList[];
+  filterItems: FilterListWithId[];
   /*
    *
    * 필터를 클릭했을 때
@@ -101,8 +95,8 @@ const StampHeaderFilter: React.FC<Props> = ({
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="main-purple"
-            onClick={() => handleOptionClick(index)}
+            borderColor='main-purple'
+            onClick={() => handleOptionClick(data.id)}
           />
         ))}
       </div>

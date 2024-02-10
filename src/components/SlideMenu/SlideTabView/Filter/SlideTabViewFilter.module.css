@@ -1,0 +1,15 @@
+@import '../../../../styles/colorVars.css';
+
+.menuWrapper {
+  padding: 8px 20px;
+}
+.wholeWrapper {
+  background-color: var(--color-white);
+  color: var(--color-black);
+}
+.menuWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}

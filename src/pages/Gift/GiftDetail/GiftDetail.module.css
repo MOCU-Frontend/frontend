@@ -3,11 +3,20 @@
 .giftWrapper {
   display: flex;
   flex-direction: column;
+  overflow-x: hidden;
 }
 
 .headerWrapper {
   position: fixed;
+  background-color: var(--color-white, #efefef);
   top: 0;
+  width: 100vw;
+  z-index: 1000;
+}
+
+.wrapGiftBtn {
+  position: fixed;
+  bottom: 0;
   width: 100vw;
   z-index: 1000;
 }
@@ -208,18 +217,12 @@
   display: none;
 }
 
+/* GiftCard가 찌그러지지 않게 */
+.giftCardWrapper > button {
+  flex-shrink: 0;
+}
+
 .emptyArea {
   width: 100%;
   height: 10vh;
-}
-
-.wrapBtnWrapper {
-  position: relative;
-}
-
-.wrapGiftBtn {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000;
 }

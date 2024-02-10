@@ -10,6 +10,7 @@
   height: 18vh;
   background-color: var(--color-grey, #b4b4b4);
   border-radius: 20px;
+  margin-right: 10px;
 }
 
 .textWrapper {

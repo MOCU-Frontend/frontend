@@ -27,14 +27,14 @@ const GiftDetail = () => {
     <div className={styles.giftWrapper}>
       <div className={styles.headerWrapper}>
         <HeaderBackBtn
-          backBtnColor={colors.white}
+          backBtnColor={colors.black}
           onClickBackBtn={() => navigate('/gift')}
           headerTitle="선물하기"
-          headerTitleColor={colors.white}
+          headerTitleColor={colors.black}
         >
           <div className={styles.shareBtnWrapper}>
             <button className={styles.shareBtn}>
-              <ShareIcon width={24} height={24} fill={colors.white} />
+              <ShareIcon width={24} height={24} fill={colors.black} />
             </button>
           </div>
         </HeaderBackBtn>

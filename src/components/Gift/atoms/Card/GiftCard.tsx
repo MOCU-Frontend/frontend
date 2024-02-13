@@ -17,12 +17,22 @@ interface Props {
    * 음식 가격
    */
   foodPrice: string;
+
+  /*
+   * 카드를 클릭했을 때
+   */
+  onCardBtnClick: () => void;
 }
 
-const GiftCard: React.FC<Props> = ({ cafeTitle, foodTitle, foodPrice }) => {
+const GiftCard: React.FC<Props> = ({
+  cafeTitle,
+  foodTitle,
+  foodPrice,
+  onCardBtnClick,
+}) => {
   return (
-    <button className={styles.wrapper}>
-      <img src={storeImg} alt='' className={styles.imageWrapper} />
+    <button className={styles.wrapper} onClick={onCardBtnClick}>
+      <img src={storeImg} alt="" className={styles.imageWrapper} />
       <div className={styles.textWrapper}>
         <div className={styles.cafeTitle}>{cafeTitle}</div>
         <div className={styles.foodTitle}>{foodTitle}</div>

@@ -25,6 +25,7 @@ import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
 import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
 import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
 import Gift from './Gift/Gift';
+import GiftDetail from './Gift/GiftDetail/GiftDetail';
 import Advertisement from './Advertisement/Advertisement';
 import Alarm from './Alarm/Alarm';
 import Setting from './Setting/Setting';
@@ -112,6 +113,10 @@ const Router = () => {
       path: '/gift',
       children: [
         { index: true, path: '', element: <Gift /> },
+        {
+          path: ':cafeTitle/:foodTitle/:foodPrice',
+          element: <GiftDetail />,
+        },
         { path: 'box', element: <GiftBox /> },
       ],
     },

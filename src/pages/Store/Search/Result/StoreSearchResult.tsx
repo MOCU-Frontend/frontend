@@ -110,7 +110,7 @@ const StoreSearchResult = () => {
   //   });
   // };
 
-  const { handleAddSeachKeyword } = useRecentSearchWord();
+  const { handleAddSearchKeyword } = useRecentSearchWord();
 
   let checkedOptionDataArr: FilterListWithId[] = [];
   let uncheckedOptionDataArr: FilterListWithId[] = [];
@@ -128,11 +128,11 @@ const StoreSearchResult = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder='찾고 싶은 가게를 검색해 보세요'
+          placeholder="찾고 싶은 가게를 검색해 보세요"
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => {
             if (value) {
-              handleAddSeachKeyword({ title: value });
+              handleAddSearchKeyword({ title: value });
               navigate(`/store/search/${value}`);
             }
           }}
@@ -149,7 +149,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -160,7 +160,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -170,7 +170,7 @@ const StoreSearchResult = () => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor='sub-purple-light'
+            borderColor="sub-purple-light"
             onClick={() => {
               handleOptionClick(data.id);
             }}

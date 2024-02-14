@@ -1,0 +1,56 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "recentSearches": [
+      {
+        "query": "x"
+      },
+      {
+        "query": "y"
+      },
+      {
+        "query": "1"
+      },
+      {
+        "query": "2"
+      },
+      {
+        "query": "3"
+      }
+    ],
+    "recentlyVisitedStoreInfoList": [
+      {
+        "storeName": "크림베이글 건대점",
+        "numOfStamp": 2,
+        "numOfCouponAvailable": 0,
+        "hasEvent": false,
+        "distance": 250.57360275732424
+      }
+    ],
+    "storeInEventInfoList": [
+      {
+        "storeName": "스타벅스 건대점",
+        "mainImageUrl": "http://example.com/main_image.jpg"
+      }
+    ],
+    "dueDateStoreInfoList": [
+      {
+        "storeName": "크림베이글 건대점",
+        "numOfStamp": 2,
+        "numOfCouponAvailable": 0,
+        "hasEvent": false,
+        "distance": 250.57360275732424
+      }
+    ],
+    "recommendStoreInfoList": [
+      {
+        "storeName": "크림베이글 건대점",
+        "hasEvent": false,
+        "mainImageUrl": "http://example.com/main_image.jpg"
+      }
+    ]
+  },
+  "messages": "요청에 성공하였습니다."
+}

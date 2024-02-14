@@ -9,19 +9,11 @@ import MapRightContent from '../Content/RightContent/MapRightContent';
 import Button from '../../../Button/Button';
 import TextBadgeBtn from '../../../Button/TextBadgeBtn/TextBadgeBtn';
 import BottomSheetNoBackground from '../../../BottomSheet/BottomSheetNoBackground';
+import { MapStoreData } from '../../../../store/Type/Map/map';
 
-type StoreData = {
-  title: string;
-  category: string;
-  loc: { lat: number; lng: number };
-  couponNum: number;
-  isFire: boolean;
-  isChecked: boolean;
-  isGift: boolean;
-};
 interface Props {
   onDragBottom: () => void;
-  storeInform: StoreData;
+  storeInform: MapStoreData;
   onClickStampBtn: () => void;
   onClickCouponBtn: () => void;
 }
@@ -35,7 +27,7 @@ const MapBottomSheet: React.FC<Props> = ({
     <BottomSheetNoBackground onDragBottom={onDragBottom}>
       <div className={styles.wholeWrapper}>
         <div className={styles.textSec}>
-          <BodyTitleText text={storeInform.title} color={colors.navy} />
+          <BodyTitleText text={storeInform.storeName} color={colors.navy} />
           <MapBodySubText text={`${storeInform.category} • 쿠폰사용 임박`} />
         </div>
         <div className={styles.contentsSec}>
@@ -55,7 +47,7 @@ const MapBottomSheet: React.FC<Props> = ({
             backgroundColor='main-purple'
             onClick={onClickStampBtn}
           />
-          {storeInform.couponNum === 0 ? (
+          {storeInform.numOfCouponAvailable === 0 ? (
             <Button
               label='쿠폰 사용'
               backgroundColor='main-purple'
@@ -67,7 +59,7 @@ const MapBottomSheet: React.FC<Props> = ({
               label='쿠폰 사용'
               backgroundColor='sub-gradation'
               onClick={onClickCouponBtn}
-              badgeText={`${storeInform.couponNum}`}
+              badgeText={`${storeInform.numOfCouponAvailable}`}
             />
           )}
         </div>

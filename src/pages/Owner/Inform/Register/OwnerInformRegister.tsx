@@ -23,32 +23,12 @@ const OwnerInformRegister: React.FC = () => {
     { name: '주류', isChecked: false },
     { name: '기타', isChecked: false },
   ]);
-  const [couponGiftArr, setCouponGiftArr] = useState([
-    {
-      title: '1번째 보상',
-      placeholder: '새로운 보상을 입력해주세요.',
-      inputValue: '',
-    },
-    {
-      title: '2번째 보상',
-      placeholder: '새로운 보상을 입력해주세요.',
-      inputValue: '',
-    },
-  ]);
+
+  const [couponGift, setCouponGift] = useState('');
   const [isEventChecked, setIsEventChecked] = useState(false);
   const [eventText, setEventText] = useState('');
   const [isCouponChecked, setIsCouponChecked] = useState(false);
-  const handleChangeCouponGiftArrInputValue = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (!couponGiftArr[index]) throw new Error('invalid index!!');
-    setCouponGiftArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[index].inputValue = e.target.value;
-      return copiedArr;
-    });
-  };
+
   const handleClickFilter = (index: number) => {
     if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
@@ -93,12 +73,14 @@ const OwnerInformRegister: React.FC = () => {
           handlePlus={() => {}}
           handleMinus={() => {}}
         />
-        <OwnerInformEditInputsContent
+
+        <OwnerInformEditInputContent
           title='쿠폰 사용 시 보상'
-          subInputInformArr={couponGiftArr}
-          moreBtnText='다음 단계 보상 추가하기'
-          onClickMoreBtn={() => {}}
-          handleChangeInputValue={handleChangeCouponGiftArrInputValue}
+          inputValue={sangho}
+          handleChangeInputValue={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setCouponGift(e.target.value)
+          }
+          placeholder='새로운 보상을 입력해주세요.'
         />
         <OwnerInformEditCheckBoxContent
           isChecked={isCouponChecked}

@@ -46,12 +46,10 @@ const OwnerInform: React.FC<Props> = ({}: Props) => {
           title='쿠폰 사용이 가능한 적립 도장'
           bodyText='10개 도장 적립하면 쿠폰 사용이 가능'
         />
-        <OwnerInformSubSecsContent
+
+        <OwnerInformBasicSecContent
           title='쿠폰 사용 시 보상'
-          subInform={[
-            { title: '1단계 보상', bodyText: '아이스 아메리카노 한 잔' },
-            { title: '2단계 보상', bodyText: '플레인 베이글 한 개' },
-          ]}
+          bodyText='아이스 아메리카노 한 잔'
         />
         <OwnerInformBasicSecContent
           title='이벤트'

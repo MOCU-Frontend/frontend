@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './StoreSearchResult.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 import CheckFilterSelect from '../../../../components/CheckFilter/Select/CheckFilterSelect';
 import SearchBarHeader from '../../../../components/SearchBar/SearchBarHeader/SearchBarHeader';
@@ -17,9 +19,36 @@ import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Fi
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
+import {
+  StoreSearchResultResponse,
+  StoreSearchResultData,
+} from '../../../../store/Type/StoreSearchResult/storeSearchResult';
+
 const StoreSearchResult = () => {
   const navigate = useNavigate();
   const { searchWord } = useParams();
+
+  // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
+  const fetchStoreSearchResultData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/storeSearchResult/storeSearchResultData-sortByRate.json'
+      );
+      const data: StoreSearchResultResponse = response.data;
+      return data.result;
+    } catch (error) {
+      throw new Error('StoreSearchResult data error');
+    }
+  };
+
+  const {
+    data: storeSearchResultData,
+    isLoading: isStoreSearchResultDataLoading,
+    isError: isStoreSearchResultError,
+  } = useQuery({
+    queryKey: ['StoreSearchResultData'],
+    queryFn: () => fetchStoreSearchResultData(),
+  });
 
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -128,7 +157,7 @@ const StoreSearchResult = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder='찾고 싶은 가게를 검색해 보세요'
+          placeholder="찾고 싶은 가게를 검색해 보세요"
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => {
             if (value) {
@@ -149,7 +178,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -160,7 +189,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='sub-purple-light'
+          borderColor="sub-purple-light"
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -170,7 +199,7 @@ const StoreSearchResult = () => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor='sub-purple-light'
+            borderColor="sub-purple-light"
             onClick={() => {
               handleOptionClick(data.id);
             }}

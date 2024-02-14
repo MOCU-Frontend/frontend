@@ -59,7 +59,7 @@ const Map: React.FC = () => {
     }
   };
 
-  const { storeMarkerArr, selectedStoreInform } = useStoreMapData(
+  const { storeMarkerArr, selectedStoreData } = useStoreMapData(
     map,
     handleShowBottomSheet
   );
@@ -163,10 +163,10 @@ const Map: React.FC = () => {
           <MapTargetBtn onClick={handleClickTargetBtn} />
         </div>
       </div>
-      {isShowBottomSheet && selectedStoreInform && (
+      {isShowBottomSheet && selectedStoreData && (
         <MapBottomSheet
           onDragBottom={handleDragDownBottomSheet}
-          storeInform={selectedStoreInform}
+          storeInform={selectedStoreData}
           onClickStampBtn={() => {
             setStampModalLevel('confirm');
             if (map) map.setSize(new naver.maps.Size(0, 0));

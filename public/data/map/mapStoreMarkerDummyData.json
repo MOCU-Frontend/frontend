@@ -1,0 +1,32 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "storeId": 2,
+      "latitude": 37.541716,
+      "longitude": 127.06976,
+      "category": "베이커리",
+      "hasEvent": false,
+      "dueDate": false
+    },
+    {
+      "storeId": 3,
+      "latitude": 37.54158,
+      "longitude": 127.070982,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false
+    },
+    {
+      "storeId": 4,
+      "latitude": 37.540634,
+      "longitude": 127.070144,
+      "category": "음식점",
+      "hasEvent": false,
+      "dueDate": false
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

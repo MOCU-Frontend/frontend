@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './MissionToday.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import TodayMission from '../../../components/Mission1/atoms/TodayMission';
@@ -10,10 +10,39 @@ import { ReactComponent as ArrowRightSmallImage } from '../../../assets/icon/arr
 import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
 import { ReactComponent as CoupongageImage } from '../../../assets/icon/couponGage.svg';
 
-import { MissionTitleData, MissionCntData } from '../../../store/data/mission';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+
+import {
+  MissionResponse,
+  MissionData,
+} from '../../../store/Type/Mission/mission';
 
 const MissionToday = () => {
   const navigate = useNavigate();
+
+  const fetchMissionData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/mission/missionDummyData-01.json'
+      );
+      const data: MissionResponse = response.data;
+      return data.result;
+    } catch (error) {
+      throw new Error('MissionData data error');
+    }
+  };
+
+  // `useQuery`를 사용하여 `fetchMissionData` 함수를 호출하고,
+  // 그 결과를 `storeMissionData`에 저장합니다.
+  const {
+    data: storeMissionData,
+    isLoading: isMissionDataLoading,
+    isError: isMissionDataError,
+  } = useQuery({
+    queryKey: ['mapStoreMarker'],
+    queryFn: () => fetchMissionData(),
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -68,16 +97,19 @@ const MissionToday = () => {
         <div className={styles.wrapMissionList}>
           <div className={styles.wrapCurrentState}>
             <div className={styles.currentStateText}>
-              다음 스탬프 획득까지 미션 {MissionCntData[0].todayMissionCnt}개
-              남았습니다.
+              다음 스탬프 획득까지 미션 4개 남았습니다.
             </div>
             <CoupongageImage width={180} height={16} />
           </div>
-          <TodayMission title={MissionTitleData[0].title} />
-          <TodayMission title={MissionTitleData[1].title} />
-          <TodayMission title={MissionTitleData[2].title} />
-          <TodayMission title={MissionTitleData[3].title} />
-          <TodayMission title={MissionTitleData[4].title} />
+
+          {Array.isArray(storeMissionData) &&
+            storeMissionData.map((mission) => (
+              <TodayMission
+                key={mission.todayMissionId}
+                content={mission.content}
+                status={mission.status}
+              />
+            ))}
         </div>
       </div>
     </div>

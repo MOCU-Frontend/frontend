@@ -1,0 +1,23 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "todayMissionId": 33,
+      "content": "단골 맺기",
+      "status": "not-done"
+    },
+    {
+      "todayMissionId": 34,
+      "content": "단골가게에서 적립하기",
+      "status": "not-done"
+    },
+    {
+      "todayMissionId": 35,
+      "content": "MOCU앱 출석하기",
+      "status": "not-done"
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

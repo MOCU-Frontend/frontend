@@ -1,0 +1,23 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "todayMissionId": 81,
+      "content": "리뷰 작성하기",
+      "status": "done"
+    },
+    {
+      "todayMissionId": 82,
+      "content": "쿠폰 사용 임박 가게에서 적립하기",
+      "status": "not-done"
+    },
+    {
+      "todayMissionId": 83,
+      "content": "MOCU앱 출석하기",
+      "status": "not-done"
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

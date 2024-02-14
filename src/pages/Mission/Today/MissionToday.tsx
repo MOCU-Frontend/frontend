@@ -40,7 +40,7 @@ const MissionToday = () => {
     isLoading: isMissionDataLoading,
     isError: isMissionDataError,
   } = useQuery({
-    queryKey: ['mapStoreMarker'],
+    queryKey: ['missionData'],
     queryFn: () => fetchMissionData(),
   });
 

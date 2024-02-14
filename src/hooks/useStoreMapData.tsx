@@ -9,12 +9,15 @@ import {
 } from '../store/Type/Map/map';
 import { useQuery } from '@tanstack/react-query';
 
+// `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
   map: naver.maps.Map | undefined,
   handleClickMarker: () => void
 ) => {
+  // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
+  // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
   const fetchMapStoreMarkerData = async (
     lat: number,
     lng: number,
@@ -30,6 +33,9 @@ export const useStoreMapData = (
       throw new Error('MapStoreMarker data error');
     }
   };
+
+  // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
+  // 그 결과를 `storeMapMarkerData`에 저장합니다.
   const {
     data: storeMapMarkerData,
     isLoading: isStoreMapMarkerDataLoading,
@@ -39,6 +45,7 @@ export const useStoreMapData = (
     queryFn: () => fetchMapStoreMarkerData(1, 5, 4),
   });
 
+  // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
   const fetchMapStoreData = async (userId: number, storeId: number) => {
     try {
       const response = await axios.get(
@@ -50,7 +57,13 @@ export const useStoreMapData = (
       throw new Error('MapStore data error');
     }
   };
+
+  // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
   const [selectedStoreId, setSelectedStoreId] = useState<number | undefined>();
+
+  // `useQuery`를 사용하여 `fetchMapStoreData` 함수를 호출하고,
+  // 그 결과를 `selectedStoreData`에 저장합니다.
+  // `selectedStoreId`가 변경될 때마다 새로운 데이터를 가져옵니다.
   const {
     data: selectedStoreData,
     isLoading: isSelectedStoreLoading,

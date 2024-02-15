@@ -8,8 +8,13 @@ import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/Stor
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
-
 import StampHeaderFilter from '../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
+
+import { StampResponse, StampData } from '../../store/Type/Stamp/stamp';
+
+import instance from '../../apis/instance';
+import { useQuery } from '@tanstack/react-query';
+import axios, { AxiosResponse } from 'axios';
 
 import {
   searchResultData,
@@ -27,6 +32,24 @@ type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const Stamp = () => {
   const navigate = useNavigate();
+
+  const fetchStampData = async () => {
+    const response = await instance.get<StampResponse>(
+      '/data/stamp/stampPageData.json'
+    );
+    console.log(response);
+    return response.data;
+  };
+
+  // useQuery에서 사용
+  const {
+    data: StampData,
+    isLoading: isStoreStampDataLoading,
+    isError: isStoreStampError,
+  } = useQuery({
+    queryKey: ['StampData'],
+    queryFn: fetchStampData,
+  });
 
   const [isCouponModalVisible, setIsCouponModalVisible] = useState(false);
   const [couponModalLevel, setCouponModalLevel] =
@@ -122,19 +145,6 @@ const Stamp = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
-  // const handleClickResetOptionBtn = (menuIndex: number) => {
-  //   if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-  //   if (menuItemDataArr[menuIndex].bodyType === 'filter')
-  //     throw new Error('can reset only in option type!!');
-  //   setMenuItemDataArr((prevArr) => {
-  //     const copiedArr = [...prevArr];
-  //     copiedArr[menuIndex].bodyDataArr.forEach((item) => {
-  //       item.isChecked = false;
-  //     });
-  //     return copiedArr;
-  //   });
-  // };
-
   let checkedOptionDataArr: FilterListWithId[] = [];
   let uncheckedOptionDataArr: FilterListWithId[] = [];
   optionDataArr.forEach((data) =>
@@ -151,7 +161,7 @@ const Stamp = () => {
     <div className={styles.wrapper}>
       <StampHeaderFilter
         onBackBtnClick={() => navigate(-1)}
-        title='적립 현황'
+        title="적립 현황"
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
         filterItems={sortedOptionDataArr}
@@ -160,18 +170,19 @@ const Stamp = () => {
       />
 
       <div className={styles.contentWrapper}>
-        {searchResultData.map((data, index) => (
-          <StoreInfoInStamp
-            key={data.title + index}
-            title={data.title}
-            couponCount={data.couponCount}
-            achieve={data.achieve}
-            distance={data.distance}
-            onClickCouponBtn={handleClickCouponBtn}
-            onClickStoreDetailBtn={() => {}}
-            onClickMapBtn={() => navigate('/map')}
-          />
-        ))}
+        {StampData &&
+          StampData.result.map((data: StampData, index: number) => (
+            <StoreInfoInStamp
+              key={data.storeName + index}
+              title={data.storeName}
+              couponCount={data.numOfStamp}
+              achieve={data.reward}
+              distance={data.distance}
+              onClickCouponBtn={handleClickCouponBtn}
+              onClickStoreDetailBtn={() => {}}
+              onClickMapBtn={() => navigate('/map')}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

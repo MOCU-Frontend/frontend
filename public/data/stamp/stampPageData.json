@@ -1,0 +1,28 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "mainImageUrl": "http://example.com/main_image.jpg",
+      "storeName": "스타벅스 건대점",
+      "numOfStamp": 1,
+      "maxStamp": 10,
+      "numOfCouponAvailable": 0,
+      "reward": "초코라떼 한 잔",
+      "rating": 5,
+      "distance": 161.29987834105938
+    },
+    {
+      "mainImageUrl": "http://example.com/main_image.jpg",
+      "storeName": "크림베이글 건대점",
+      "numOfStamp": 8,
+      "maxStamp": 10,
+      "numOfCouponAvailable": 0,
+      "reward": "아이스 아메리카노 한 잔",
+      "rating": 3.1,
+      "distance": 250.57360275732424
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

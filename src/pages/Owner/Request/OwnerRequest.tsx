@@ -1,56 +1,36 @@
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import OwnerRequestItem from '../../../components/Owner/Request/atoms/Item/OwnerRequestItem';
+import { OwnerRequestDataResponse } from '../../../store/Type/Owner/Request/ownerRequest';
 import styles from './OwnerRequest.module.css';
-type RequestCategory = '수락 완료 요청' | '미수락 요청';
-type RequestData = {
-  category: RequestCategory;
-  userName: string;
-  dateText: string;
-};
 interface Props {}
 
 const OwnerRequest: React.FC<Props> = ({}: Props) => {
-  const [requestArr, setRequestArr] = useState<RequestData[]>([
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '미수락 요청',
-      userName: '모쿠',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-    {
-      category: '수락 완료 요청',
-      userName: '송희',
-      dateText: '11월 24일 17:24',
-    },
-  ]);
+  const fetchOwnerRequestData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/owner/request/owner-request-data-dummy.json'
+      );
+      const data: OwnerRequestDataResponse = response.data;
+      return data.result;
+    } catch (error) {
+      throw new Error('OwnerStore data error');
+    }
+  };
+  const {
+    data: ownerRequestData,
+    isLoading: isOwnerRequestDataLoading,
+    isError: isOwnerRequestDataError,
+  } = useQuery({
+    queryKey: ['OwnerRequest'],
+    queryFn: () => fetchOwnerRequestData(),
+  });
+
   const navigate = useNavigate();
   return (
     <div>
@@ -79,14 +59,22 @@ const OwnerRequest: React.FC<Props> = ({}: Props) => {
         />
       </div>
       <div className={styles.itemsWrapper}>
-        {requestArr.map((data, index) => (
-          <OwnerRequestItem
-            key={data.userName + index}
-            category={data.category}
-            userName={data.userName}
-            dateText={data.dateText}
-          />
-        ))}
+        {ownerRequestData &&
+          ownerRequestData.map((data, index) => {
+            const date = new Date(data.modifiedDate);
+            return (
+              <OwnerRequestItem
+                key={data.name + index}
+                category={
+                  data.acceptOption === 'accept'
+                    ? '수락 완료 요청'
+                    : '미수락 요청'
+                }
+                userName={data.name}
+                dateText={`${date.getMonth()}월 ${date.getDate()}일 ${date.getHours()}:${date.getMinutes()}`}
+              />
+            );
+          })}
       </div>
     </div>
   );

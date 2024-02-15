@@ -99,7 +99,7 @@ const Map: React.FC = () => {
         }
       >
         <HeaderBackBtn
-          headerPaddingSize='checkFilter'
+          headerPaddingSize="checkFilter"
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
@@ -115,19 +115,19 @@ const Map: React.FC = () => {
             <div className={styles.filtersInHeaderWrapper}>
               <CheckFilterSelect
                 border={1}
-                borderColor='sub-purple-light'
-                label='업종 전체'
+                borderColor="sub-purple-light"
+                label="업종 전체"
                 isChecked={false}
                 onClick={() => {}}
               />
               <CheckFilter
                 border={1}
-                borderColor='sub-purple-light'
-                label='이벤트 중'
+                borderColor="sub-purple-light"
+                label="이벤트 중"
                 isChecked={false}
               />
-              <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
-              <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+              <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
+              <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
             </div>
           )}
         </HeaderBackBtn>
@@ -135,19 +135,19 @@ const Map: React.FC = () => {
           <div className={styles.filtersWrapper}>
             <CheckFilterSelect
               border={1}
-              borderColor='sub-purple-light'
-              label='업종 전체'
+              borderColor="sub-purple-light"
+              label="업종 전체"
               isChecked={false}
               onClick={() => {}}
             />
             <CheckFilter
               border={1}
-              borderColor='sub-purple-light'
-              label='이벤트 중'
+              borderColor="sub-purple-light"
+              label="이벤트 중"
               isChecked={false}
             />
-            <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
-            <CheckFilter label='쿠폰 사용 임박' isChecked={true} />
+            <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
+            <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
           </div>
         )}
         {isShowSearchBtn && (

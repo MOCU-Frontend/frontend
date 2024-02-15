@@ -7,40 +7,31 @@ import { ReactComponent as InformIcon } from '../../../../../../assets/icon/info
 import { colors } from '../../../../../../styles/colors';
 import StoreReview from '../../../../../Store/atoms/Review/StoreReview';
 import MyReviewHistory from '../../../History/MyReviewHistory';
+import axios from 'axios';
+import { MyReviewwHistoryDataResponse } from '../../../../../../store/Type/My/ReviewHistory/MyReviewHistory';
+import { useQuery } from '@tanstack/react-query';
 interface Props {}
-const reviewDataArr = [
-  {
-    storeName: '크림베이글 건대점',
-    time: '9시간 전',
-    body: '크림도 많이 들어있고 너무 맛있어요~!! 특히 블루베리 크림 베이글 추천합니다.! 다 좋은데 너무 추웠어요 그리고',
-  },
-  {
-    storeName: '카페 안즈',
-    time: '12시간 전',
-    body: '집 앞에 새로 생긴 카페인거 같아서 가봤는데 분위기도 좋고 커피도 맛있어요.',
-  },
-  {
-    storeName: '개미집',
-    time: '13시간 전',
-    body: '일주일에 한번은 먹는거 같아요. 이번에는 쿠폰 다 모아서 사리 서비스로 받았네요. 항상 친절하세요! 그리고',
-  },
-  {
-    storeName: '한술식당 길음점 ',
-    time: '14시간 전',
-    body: '별점이 높아서 방문해봤어요! 기대했던대로 맛있고 직원분들도 너무 친절했어요.',
-  },
-  {
-    storeName: '한술식당 길음점 ',
-    time: '14시간 전',
-    body: '별점이 높아서 방문해봤어요! 기대했던대로 맛있고 직원분들도 너무 친절했어요.',
-  },
-  {
-    storeName: '한술식당 길음점 ',
-    time: '14시간 전',
-    body: '별점이 높아서 방문해봤어요! 기대했던대로 맛있고 직원분들도 너무 친절했어요.',
-  },
-];
+
 const MyReviewHistoryContent: React.FC<Props> = ({}: Props) => {
+  const fetchMyReviewHistoryData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/my/review/history/my-review-history-data-dummy.json'
+      );
+      const data: MyReviewwHistoryDataResponse = response.data;
+      return data.result;
+    } catch (error) {
+      throw new Error('MyReviewwHistory data error');
+    }
+  };
+  const {
+    data: myReviewwHistoryData,
+    isLoading: isMyReviewwHistoryDataLoading,
+    isError: isMyReviewwHistoryDataError,
+  } = useQuery({
+    queryKey: ['MyReviewwHistory'],
+    queryFn: () => fetchMyReviewHistoryData(),
+  });
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.titleWrapper}>
@@ -58,15 +49,17 @@ const MyReviewHistoryContent: React.FC<Props> = ({}: Props) => {
         />
       </div>
       <div className={styles.reviewsWrapper}>
-        {reviewDataArr.map((data, index) => (
-          <MyReviewHistory
-            key={data.storeName + index}
-            nameText={data.storeName}
-            timeText={data.time}
-            bodyText={data.body}
-            bodyTextLengthLimit={60}
-          />
-        ))}
+        {myReviewwHistoryData &&
+          myReviewwHistoryData.map((data, index) => (
+            <MyReviewHistory
+              key={data.storeName + index}
+              nameText={data.storeName}
+              rate={data.rate}
+              timeText={data.createdDate}
+              bodyText={data.content}
+              bodyTextLengthLimit={60}
+            />
+          ))}
       </div>
     </div>
   );

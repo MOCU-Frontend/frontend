@@ -19,22 +19,6 @@ export const useStoreMapData = (
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
   // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
-  // const fetchMapStoreMarkerData = async (
-  //   lat: number,
-  //   lng: number,
-  //   userId: number
-  // ) => {
-  //   try {
-  //     const response = await axios.get(
-  //       'http://localhost:3000/data/map/mapStoreMarkerDummyData.json'
-  //     );
-  //     const data: MapStoreMarkerResponse = response.data;
-  //     return data.result;
-  //   } catch (error) {
-  //     throw new Error('MapStoreMarker data error');
-  //   }
-  // };
-
   const fetchMapStoreMarkerData = async (
     lat: number,
     lng: number,
@@ -58,19 +42,7 @@ export const useStoreMapData = (
     queryFn: () => fetchMapStoreMarkerData(1, 5, 4),
   });
 
-  // // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
-  // const fetchMapStoreData = async (userId: number, storeId: number) => {
-  //   try {
-  //     const response = await axios.get(
-  //       'http://localhost:3000/data/map/mapStoreDummyData.json'
-  //     );
-  //     const data: MapStoreResponse = response.data;
-  //     return data.result;
-  //   } catch (error) {
-  //     throw new Error('MapStore data error');
-  //   }
-  // };
-
+  // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
   const fetchMapStoreData = async (userId: number, storeId: number) => {
     const response = await instance.get<MapStoreResponse>(
       '/data/map/mapStoreDummyData.json'

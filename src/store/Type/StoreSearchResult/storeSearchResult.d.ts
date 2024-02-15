@@ -2,7 +2,7 @@ export type StoreSearchResultResponse = {
   code: number;
   status: number;
   message: string;
-  result: StoreSearchResultData;
+  result: StoreSearchResultData[];
   messages: string;
 };
 

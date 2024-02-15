@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 import styles from './StoreSearch.module.css';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import instance from '../../../apis/instance';
+
 import {
   storeSearchResponse,
   storeSearchData,
@@ -19,15 +20,11 @@ import SlideMenuEventBodyTab from '../../../components/SlideMenu/atoms/BodyTab/E
 
 const StoreSearch = () => {
   const fetchStoreSearchData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/storeSearch/storeSearchData-exist.json'
-      );
-      const data: storeSearchResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('storeSearch data error');
-    }
+    const response = await instance.get<storeSearchResponse>(
+      '/data/storeSearch/storeSearchData-exist.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
 
   const {

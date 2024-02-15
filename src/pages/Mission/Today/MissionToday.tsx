@@ -10,7 +10,7 @@ import { ReactComponent as ArrowRightSmallImage } from '../../../assets/icon/arr
 import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
 import { ReactComponent as CoupongageImage } from '../../../assets/icon/couponGage.svg';
 
-import axios from 'axios';
+import instance from '../../../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 
 import {
@@ -22,15 +22,11 @@ const MissionToday = () => {
   const navigate = useNavigate();
 
   const fetchMissionData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/mission/missionDummyData-01.json'
-      );
-      const data: MissionResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('MissionData data error');
-    }
+    const response = await instance.get<MissionResponse>(
+      '/data/mission/missionDummyData-01.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
 
   // `useQuery`를 사용하여 `fetchMissionData` 함수를 호출하고,

@@ -12,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../components/Button/FullBtn/FullBtn';
 import storeImg from '../../assets/imgs/storeExample.png';
 
+import instance from '../../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -24,15 +25,11 @@ const Store: React.FC = () => {
   const navigate = useNavigate();
 
   const fetchStoreDetailData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/storeDetail/storeDetail-sortByRate.json'
-      );
-      const data: StoreDetailResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('StoreDetail data error');
-    }
+    const response = await instance.get<StoreDetailResponse>(
+      'data/storeDetail/storeDetail-sortByRate.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
 
   const {

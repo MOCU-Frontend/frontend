@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import instance from '../../../apis/instance';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
@@ -11,17 +12,26 @@ import styles from './OwnerRequest.module.css';
 interface Props {}
 
 const OwnerRequest: React.FC<Props> = ({}: Props) => {
+  // const fetchOwnerRequestData = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       'http://localhost:3000/data/owner/request/owner-request-data-dummy.json'
+  //     );
+  //     const data: OwnerRequestDataResponse = response.data;
+  //     return data.result;
+  //   } catch (error) {
+  //     throw new Error('OwnerStore data error');
+  //   }
+  // };
+
   const fetchOwnerRequestData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/owner/request/owner-request-data-dummy.json'
-      );
-      const data: OwnerRequestDataResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('OwnerStore data error');
-    }
+    const response = await instance.get<OwnerRequestDataResponse>(
+      '/data/owner/request/owner-request-data-dummy.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
+
   const {
     data: ownerRequestData,
     isLoading: isOwnerRequestDataLoading,
@@ -35,26 +45,26 @@ const OwnerRequest: React.FC<Props> = ({}: Props) => {
   return (
     <div>
       <HeaderBackBtn
-        headerTitle='고객 요청 관리'
+        headerTitle="고객 요청 관리"
         onClickBackBtn={() => navigate(-1)}
       />
       <div className={styles.filtersWrapper}>
         <CheckFilter
-          label='수락 안 한 요청만'
-          backgroundColor='grey-light-00'
-          textColor='grey-dark-01'
+          label="수락 안 한 요청만"
+          backgroundColor="grey-light-00"
+          textColor="grey-dark-01"
           isChecked={false}
           border={1}
-          borderColor='grey-light-02'
+          borderColor="grey-light-02"
           onClick={() => {}}
         />
         <CheckFilterSelect
-          label='보상 • 적립 전체'
-          backgroundColor='grey-light-00'
-          textColor='grey-dark-01'
+          label="보상 • 적립 전체"
+          backgroundColor="grey-light-00"
+          textColor="grey-dark-01"
           isChecked={false}
           border={1}
-          borderColor='grey-light-02'
+          borderColor="grey-light-02"
           onClick={() => {}}
         />
       </div>

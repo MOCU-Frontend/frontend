@@ -1,5 +1,7 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import instance from '../apis/instance';
+
 import {
   OwnerStoreData,
   OwnerStoreDataResponse,
@@ -8,16 +10,24 @@ import {
 } from '../store/Type/Owner/owner';
 
 export const useOwnerStoreData = (storeId?: number) => {
+  //   const fetchOwnerStoreData = async (storeId: number) => {
+  //     try {
+  //       const response = await axios.get(
+  //         'http://localhost:3000/data/owner/owner-store-data-dummy.json'
+  //       );
+  //       const data: OwnerStoreDataResponse = response.data;
+  //       return data.result;
+  //     } catch (error) {
+  //       throw new Error('OwnerStore data error');
+  //     }
+  //   };
+
   const fetchOwnerStoreData = async (storeId: number) => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/owner/owner-store-data-dummy.json'
-      );
-      const data: OwnerStoreDataResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('OwnerStore data error');
-    }
+    const response = await instance.get<OwnerStoreDataResponse>(
+      '/data/owner/owner-store-data-dummy.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
   const {
     data: ownerStoreData,

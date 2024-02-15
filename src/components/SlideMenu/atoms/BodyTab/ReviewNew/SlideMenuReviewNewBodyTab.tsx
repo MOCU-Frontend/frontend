@@ -1,20 +1,11 @@
 import React, { useEffect, useRef } from 'react';
+import { MyReviewwNewData } from '../../../../../store/Type/My/ReviewNew/MyReviewNew';
 import MyReviewNew from '../../../../My/Review/atoms/New/MyReviewNew';
 import BodyTabWrapper from '../../BodyTabWrapper/BodyTabWrapper';
 import styles from '../SlideMenuBodyTab.module.css';
 
-type MenuItemData = {
-  dateText: string;
-  storeCategory: string;
-  storeTitle: string;
-  accumText: string;
-  nextGift: string;
-  remainingDayNum: number;
-  isChecked: boolean;
-};
-
 interface Props {
-  menuItemDataArr: MenuItemData[];
+  menuItemDataArr: (MyReviewwNewData & { isChecked: boolean })[];
   handleCheckedDataIndex: (prevIndex: number, newIndex: number) => void;
 }
 
@@ -133,14 +124,14 @@ const SlideMenuReviewNewBodyTab: React.FC<Props> = ({
               <></>
             </BodyTabWrapper>
             {menuItemDataArr.map((data, index) => (
-              <BodyTabWrapper key={data.storeTitle + index}>
+              <BodyTabWrapper key={data.name + index}>
                 <MyReviewNew
-                  dateText={data.dateText}
-                  storeCategory={data.storeCategory}
-                  storeTitle={data.storeTitle}
-                  accumText={data.accumText}
-                  nextGift={data.nextGift}
-                  remainingDayNum={data.remainingDayNum}
+                  dateText={data.visitedDate}
+                  storeCategory={data.category}
+                  storeTitle={data.name}
+                  accumText={`${data.numOfStamp}/${data.maxStamp}`}
+                  nextGift={data.reward}
+                  remainingDayNum={2}
                 />
               </BodyTabWrapper>
             ))}

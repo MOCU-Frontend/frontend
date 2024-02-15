@@ -1,0 +1,15 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "storeImageUrl": null,
+      "storeName": "행복한연탄구이",
+      "rate": 5,
+      "createdDate": "2024-02-14 08:13:24",
+      "content": "맛있어요"
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

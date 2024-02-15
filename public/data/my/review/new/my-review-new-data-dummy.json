@@ -1,0 +1,26 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "storeImageUrl": null,
+      "visitedDate": "2024-02-15 09:27:58.0",
+      "name": "행복한연탄구이",
+      "category": "default",
+      "maxStamp": 10,
+      "numOfStamp": 0,
+      "reward": "음료"
+    },
+    {
+      "storeImageUrl": null,
+      "visitedDate": "2024-02-15 09:29:14.0",
+      "name": "행복한연탄구이",
+      "category": "default",
+      "maxStamp": 10,
+      "numOfStamp": 0,
+      "reward": "음료"
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

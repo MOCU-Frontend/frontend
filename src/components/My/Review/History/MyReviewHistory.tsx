@@ -13,6 +13,7 @@ interface Props {
   nameText: string;
   timeText: string;
   bodyText: string;
+  rate: number;
   bodyTextLengthLimit?: number;
 }
 
@@ -20,6 +21,7 @@ const MyReviewHistory: React.FC<Props> = ({
   nameText,
   timeText,
   bodyText,
+  rate,
   bodyTextLengthLimit = 50,
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
@@ -44,7 +46,8 @@ const MyReviewHistory: React.FC<Props> = ({
             </button>
 
             <div className={styles.profileInformBottomWrapper}>
-              <StarGageBar width={54} height={10} score={4.4} />
+              {/* TODO: 별졈 에러 수정 */}
+              <StarGageBar width={54} height={10} score={rate} />
               <StoreReviewTimeText text={timeText} />
             </div>
           </div>

@@ -34,7 +34,7 @@ const StoreSearchResult = () => {
         'http://localhost:3000/data/storeSearchResult/storeSearchResultData-sortByRate.json'
       );
       const data: StoreSearchResultResponse = response.data;
-      return Array.isArray(data.result) ? data.result : [data.result];
+      return data.result;
     } catch (error) {
       throw new Error('StoreSearchResult data error');
     }
@@ -207,17 +207,17 @@ const StoreSearchResult = () => {
       </div>
 
       <div className={styles.wrapContent}>
-        {Array.isArray(storeSearchResultData) &&
-          storeSearchResultData.map((data, index) => (
-            <StoreInfo
-              key={data.storeName + index}
-              title={data.storeName}
-              couponCount={data.numOfStamp}
-              achieve={data.reward}
-              onClickCouponeBtn={() => {}}
-              onClickStoreDetailBtn={() => navigate(`/store/${data.storeName}`)}
-            />
-          ))}
+        {storeSearchResultData && (
+          <StoreInfo
+            title={storeSearchResultData.storeName}
+            couponCount={storeSearchResultData.numOfStamp}
+            achieve={storeSearchResultData.reward}
+            onClickCouponeBtn={() => {}}
+            onClickStoreDetailBtn={() =>
+              navigate(`/store/${storeSearchResultData.storeName}`)
+            }
+          />
+        )}
       </div>
 
       {isBottomSheetVisible && (

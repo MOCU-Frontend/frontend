@@ -51,6 +51,7 @@ const StoreSearch = () => {
     { id: 3, isChecked: false },
     { id: 4, isChecked: false },
   ]);
+
   const handleCheckedDataIndex = (prevIndex: number, newIndex: number) => {
     if (!eventItemArr) throw new Error('no reviewArr!!');
     if (!eventItemArr[prevIndex]) throw new Error('invalid prevIndex!!');
@@ -63,6 +64,7 @@ const StoreSearch = () => {
       return copiedArr;
     });
   };
+
   return (
     <div className={styles.wrapper}>
       <StoreSearchHeader handleAddSearchKeyword={handleAddSearchKeyword} />

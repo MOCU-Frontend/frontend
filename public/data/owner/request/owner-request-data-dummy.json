@@ -1,0 +1,32 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "name": "lee",
+      "acceptOption": "not-accept",
+      "modifiedDate": "2024-02-15 16:22",
+      "stampOrReward": "stamp"
+    },
+    {
+      "name": "noh",
+      "acceptOption": "accept",
+      "modifiedDate": "2024-02-15 04:04",
+      "stampOrReward": "reward"
+    },
+    {
+      "name": "noh",
+      "acceptOption": "accept",
+      "modifiedDate": "2024-02-15 04:03",
+      "stampOrReward": "stamp"
+    },
+    {
+      "name": "noh",
+      "acceptOption": "accept",
+      "modifiedDate": "2024-02-15 03:36",
+      "stampOrReward": "reward"
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

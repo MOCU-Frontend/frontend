@@ -11,9 +11,9 @@ export const useRecentSearchWord = () => {
   const [searchKeywordDataArr, setSearchKeywordDataArr] =
     useState<RecentSearchData[]>(recendSearchWordArr);
 
-  const handleDeleteSeachKeyword = (index: number) => {
+  const handleDeleteSearchKeyword = (index: number) => {
     if (!searchKeywordDataArr[index])
-      throw new Error('invalid index seachKeyword!');
+      throw new Error('invalid index searchKeyword!');
     setSearchKeywordDataArr((arr) => {
       const arrCopied = [...arr];
       arrCopied.splice(index, 1);
@@ -24,7 +24,7 @@ export const useRecentSearchWord = () => {
       return arrCopied;
     });
   };
-  const handleAddSeachKeyword = (searchWord: RecentSearchData) => {
+  const handleAddSearchKeyword = (searchWord: RecentSearchData) => {
     setSearchKeywordDataArr((arr) => {
       const arrCopied = [searchWord, ...arr];
       localStorage.setItem(
@@ -37,7 +37,7 @@ export const useRecentSearchWord = () => {
 
   return {
     searchKeywordDataArr,
-    handleDeleteSeachKeyword,
-    handleAddSeachKeyword,
+    handleDeleteSearchKeyword,
+    handleAddSearchKeyword,
   };
 };

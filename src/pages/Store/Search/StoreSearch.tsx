@@ -14,8 +14,8 @@ import SlideMenuEventBodyTab from '../../../components/SlideMenu/atoms/BodyTab/E
 const StoreSearch = () => {
   const {
     searchKeywordDataArr,
-    handleDeleteSeachKeyword,
-    handleAddSeachKeyword,
+    handleDeleteSearchKeyword,
+    handleAddSearchKeyword,
   } = useRecentSearchWord();
   const [eventItemArr, setEventItemArr] = useState([
     { id: 1, isChecked: true },
@@ -37,11 +37,11 @@ const StoreSearch = () => {
   };
   return (
     <div className={styles.wrapper}>
-      <StoreSearchHeader handleAddSeachKeyword={handleAddSeachKeyword} />
+      <StoreSearchHeader handleAddSeachKeyword={handleAddSearchKeyword} />
       <div className={styles.contentWrapper}>
         <StoreSearchKeyword
           searchKeywordDataArr={searchKeywordDataArr}
-          handleDeleteSeachKeyword={handleDeleteSeachKeyword}
+          handleDeleteSeachKeyword={handleDeleteSearchKeyword}
         />
         <StoreSearchRecent />
         {/* <div className={styles.searchCarousel} /> */}

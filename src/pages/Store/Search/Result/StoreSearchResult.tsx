@@ -139,7 +139,7 @@ const StoreSearchResult = () => {
   //   });
   // };
 
-  const { handleAddSeachKeyword } = useRecentSearchWord();
+  const { handleAddSearchKeyword } = useRecentSearchWord();
 
   let checkedOptionDataArr: FilterListWithId[] = [];
   let uncheckedOptionDataArr: FilterListWithId[] = [];
@@ -161,7 +161,7 @@ const StoreSearchResult = () => {
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => {
             if (value) {
-              handleAddSeachKeyword({ title: value });
+              handleAddSearchKeyword({ title: value });
               navigate(`/store/search/${value}`);
             }
           }}

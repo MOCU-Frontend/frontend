@@ -7,6 +7,7 @@ import {
   MapStoreMarkerResponse,
   MapStoreResponse,
 } from '../store/Type/Map/map';
+import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
@@ -18,20 +19,32 @@ export const useStoreMapData = (
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
   // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
+  // const fetchMapStoreMarkerData = async (
+  //   lat: number,
+  //   lng: number,
+  //   userId: number
+  // ) => {
+  //   try {
+  //     const response = await axios.get(
+  //       'http://localhost:3000/data/map/mapStoreMarkerDummyData.json'
+  //     );
+  //     const data: MapStoreMarkerResponse = response.data;
+  //     return data.result;
+  //   } catch (error) {
+  //     throw new Error('MapStoreMarker data error');
+  //   }
+  // };
+
   const fetchMapStoreMarkerData = async (
     lat: number,
     lng: number,
     userId: number
   ) => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/map/mapStoreMarkerDummyData.json'
-      );
-      const data: MapStoreMarkerResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('MapStoreMarker data error');
-    }
+    const response = await instance.get<MapStoreMarkerResponse>(
+      '/data/map/mapStoreMarkerDummyData.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
@@ -45,17 +58,25 @@ export const useStoreMapData = (
     queryFn: () => fetchMapStoreMarkerData(1, 5, 4),
   });
 
-  // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
+  // // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
+  // const fetchMapStoreData = async (userId: number, storeId: number) => {
+  //   try {
+  //     const response = await axios.get(
+  //       'http://localhost:3000/data/map/mapStoreDummyData.json'
+  //     );
+  //     const data: MapStoreResponse = response.data;
+  //     return data.result;
+  //   } catch (error) {
+  //     throw new Error('MapStore data error');
+  //   }
+  // };
+
   const fetchMapStoreData = async (userId: number, storeId: number) => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/map/mapStoreDummyData.json'
-      );
-      const data: MapStoreResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('MapStore data error');
-    }
+    const response = await instance.get<MapStoreResponse>(
+      '/data/map/mapStoreDummyData.json'
+    );
+    console.log(response);
+    return response.data.result;
   };
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.

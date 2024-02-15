@@ -11,11 +11,17 @@ import OwnerInformLocContent from '../../../components/Owner/Inform/atoms/Conten
 import OwnerInformBasicSecContent from '../../../components/Owner/Inform/atoms/Contents/BasicSec/OwnerInformBasicSecContent';
 import OwnerInformSubSecsContent from '../../../components/Owner/Inform/atoms/Contents/SubSecs/OwnerInformSubSecsContent';
 import OwnerInformMenuSecContent from '../../../components/Owner/Inform/atoms/Contents/MenuSec/OwnerInformMenuSecContent';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { OwnerStoreDataResponse } from '../../../store/Type/Owner/owner';
+import { useOwnerStoreData } from '../../../hooks/useOwnerStoreData';
 
 interface Props {}
 
 const OwnerInform: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const { ownerStoreData } = useOwnerStoreData(5);
+
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>
@@ -37,30 +43,31 @@ const OwnerInform: React.FC<Props> = ({}: Props) => {
       <main className={styles.mainWrapper}>
         <div className={styles.mainTopWrapper}>
           <OwnerInformInfoContent
-            category='베이커리'
-            title='크림베이글 건대점'
+            category={ownerStoreData ? ownerStoreData.category : ''}
+            title={ownerStoreData ? ownerStoreData.storeName : ''}
           />
-          <OwnerInformLocContent locText='서울 특별시 광진구 아차산로 31길 20-4' />
+          <OwnerInformLocContent
+            locText={ownerStoreData ? ownerStoreData.address : ''}
+          />
         </div>
         <OwnerInformBasicSecContent
           title='쿠폰 사용이 가능한 적립 도장'
-          bodyText='10개 도장 적립하면 쿠폰 사용이 가능'
+          bodyText={`${
+            ownerStoreData ? ownerStoreData.maxStamp : ''
+          }개 도장 적립하면 쿠폰 사용이 가능`}
         />
 
         <OwnerInformBasicSecContent
           title='쿠폰 사용 시 보상'
-          bodyText='아이스 아메리카노 한 잔'
+          bodyText={ownerStoreData ? ownerStoreData.reward : ''}
         />
         <OwnerInformBasicSecContent
           title='이벤트'
-          bodyText='첫 방문 시 음료 한 잔 무료'
+          bodyText={ownerStoreData ? ownerStoreData.event || ' ' : ''}
         />
         <OwnerInformMenuSecContent
           title='메뉴'
-          menuItemArr={[
-            { name: '아이스아메리카노', price: 4500 },
-            { name: '플레인', price: 4500 },
-          ]}
+          menuItemArr={ownerStoreData ? ownerStoreData.menus : []}
         />
       </main>
 

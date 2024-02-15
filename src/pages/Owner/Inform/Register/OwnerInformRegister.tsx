@@ -28,7 +28,7 @@ const OwnerInformRegister: React.FC = () => {
   const [isEventChecked, setIsEventChecked] = useState(false);
   const [eventText, setEventText] = useState('');
   const [isCouponChecked, setIsCouponChecked] = useState(false);
-
+  const [maxStamp, setMaxStamp] = useState(10);
   const handleClickFilter = (index: number) => {
     if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
@@ -69,14 +69,14 @@ const OwnerInformRegister: React.FC = () => {
       </div>
       <div className={styles.contentWrapper}>
         <OwnerInformEdiStampContent
-          stampCount={0}
-          handlePlus={() => {}}
-          handleMinus={() => {}}
+          stampCount={maxStamp}
+          handlePlus={() => setMaxStamp((num) => num + 1)}
+          handleMinus={() => setMaxStamp((num) => (num > 0 ? num - 1 : 0))}
         />
 
         <OwnerInformEditInputContent
           title='쿠폰 사용 시 보상'
-          inputValue={sangho}
+          inputValue={couponGift}
           handleChangeInputValue={(e: React.ChangeEvent<HTMLInputElement>) =>
             setCouponGift(e.target.value)
           }

@@ -16,6 +16,34 @@ export type OwnerStoreData = {
   menus: OwnerStoreMenuData[];
   event: string | null;
 };
+export type OwnerStorePostRequestData = {
+  ownerId: number;
+  storeName: string;
+  category: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  reward: string;
+  maxStamp: number;
+  mainImageUrl: string;
+  storeImages: string[];
+  menus: OwnerStoreMenuData[];
+  event: string | null;
+};
+export type OwnerStorePatchRequestData = {
+  storeId: number;
+  storeName: string;
+  category: string;
+  latitude: number;
+  longitude: number;
+  address: string;
+  reward: string;
+  maxStamp: number;
+  mainImageUrl: string;
+  storeImages: string[];
+  menus: OwnerStoreMenuData[];
+  event: string | null;
+};
 export type OwnerStoreMenuData = {
   name: string;
   price: number;

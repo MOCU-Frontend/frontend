@@ -11,10 +11,13 @@ import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edi
 import OwnerInformEditInputsContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Inputs/OwnerInformEditInputsContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
+import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
+import { OwnerStoreMenuData } from '../../../../store/Type/Owner/owner';
 import styles from './OwnerInformRegister.module.css';
 
 const OwnerInformRegister: React.FC = () => {
   const navigate = useNavigate();
+  const { ownerStoreDataPostMutation } = useOwnerStoreData();
   const [sangho, setSangho] = useState('');
   const [filterArr, setFilterArr] = useState([
     { name: '베이커리', isChecked: true },
@@ -40,6 +43,8 @@ const OwnerInformRegister: React.FC = () => {
       return copiedArr;
     });
   };
+  const [menuArr, setMenuArr] = useState<OwnerStoreMenuData[]>([]);
+  const checkedCategoryFilter = filterArr.find((x) => x.isChecked);
   return (
     <div>
       <HeaderXBtn headerTitle='가게 정보 입력' onClickXBtn={() => navigate(-1)}>
@@ -96,14 +101,59 @@ const OwnerInformRegister: React.FC = () => {
           eventText={eventText}
         />
         <OwnerInformEditMenuContent
-          menuArr={[
-            { name: '아이스아메리카노', price: 4500 },
-            { name: '블루베리치즈베이글', price: 5200 },
-          ]}
+          menuArr={menuArr}
+          handleAddMenu={(newMenu: OwnerStoreMenuData) =>
+            setMenuArr((prevArr) => [...prevArr, newMenu])
+          }
+          handleDeleteMenu={(index: number) =>
+            setMenuArr((prevArr) => {
+              const copiedArr = [...prevArr];
+              copiedArr.splice(index, 1);
+              return copiedArr;
+            })
+          }
         />
       </div>
       <div className={styles.submitBtnWrapper}>
-        <FullBtn label='입력 완료하기' onClick={() => {}} />
+        <FullBtn
+          label='입력 완료하기'
+          onClick={() => {
+            if (
+              sangho &&
+              checkedCategoryFilter &&
+              couponGift &&
+              menuArr.length > 0 &&
+              maxStamp > 0
+            ) {
+              ownerStoreDataPostMutation.mutate({
+                ownerId: 2,
+                storeName: sangho,
+                category: checkedCategoryFilter.name,
+                address: '서울 광진구 아차산로 241 1층 106호',
+                latitude: 37.5406341,
+                longitude: 127.070144,
+                reward: couponGift,
+                maxStamp,
+                mainImageUrl: 'http://example.com/main_image.jpg',
+                storeImages: [
+                  'http://example.com/image1.jpg',
+                  'http://example.com/image2.jpg',
+                ],
+                menus: menuArr,
+                event: eventText || null,
+              });
+            }
+          }}
+          disabled={
+            !(
+              sangho &&
+              checkedCategoryFilter &&
+              couponGift &&
+              menuArr.length > 0 &&
+              maxStamp > 0
+            )
+          }
+        />
       </div>
     </div>
   );

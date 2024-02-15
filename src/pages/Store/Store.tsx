@@ -12,8 +12,38 @@ import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../components/Button/FullBtn/FullBtn';
 import storeImg from '../../assets/imgs/storeExample.png';
 
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+
+import {
+  StoreDetailResponse,
+  StoreDetailData,
+} from '../../store/Type/StoreDetail/storeDetail';
+
 const Store: React.FC = () => {
   const navigate = useNavigate();
+
+  const fetchStoreDetailData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/storeDetail/storeDetail-sortByRate.json'
+      );
+      const data: StoreDetailResponse = response.data;
+      return data.result;
+    } catch (error) {
+      throw new Error('StoreDetail data error');
+    }
+  };
+
+  const {
+    data: storeDetailData,
+    isLoading: isStoreDetailDataLoading,
+    isError: isStoreDetailError,
+  } = useQuery({
+    queryKey: ['StoreDetailData'],
+    queryFn: () => fetchStoreDetailData(),
+  });
+
   const [isExistReview, setIsExistReview] = useState(true);
   return (
     <div className={styles.wholeWrapper}>
@@ -29,27 +59,38 @@ const Store: React.FC = () => {
           </div>
         </HeaderBackBtn>
       </div>
-      <img src={storeImg} alt='' className={styles.imgDummyBox} />
+      <img src={storeImg} alt="" className={styles.imgDummyBox} />
       <div className={styles.topContentBox}>
         <div className={styles.infoWrapper}>
-          <StoreInfoContent title='크림베이글 건대점' category='베이커리' />
+          <StoreInfoContent
+            title={storeDetailData && storeDetailData?.storeName}
+            category={storeDetailData && storeDetailData?.category}
+          />
         </div>
         <div className={styles.stampWrapper}>
-          <StoreStampContent />
+          <StoreStampContent
+            numOfStamp={storeDetailData && storeDetailData?.numOfStamp}
+            maxStamp={storeDetailData && storeDetailData?.maxStamp}
+            reward={storeDetailData && storeDetailData?.reward}
+          />
         </div>
         <div className={styles.accumBtnWrapper}>
           <StoreAccumBtn onClick={() => {}} />
         </div>
         <div className={styles.scoreWrapper}>
-          <StoreScoreContent />
+          <StoreScoreContent
+            rating={storeDetailData && storeDetailData?.rating}
+          />
         </div>
-        <StoreReviewContent />
+        <StoreReviewContent
+          reviews={storeDetailData && storeDetailData?.reviews}
+        />
       </div>
       {isExistReview && (
         <div className={styles.fullBtnWrapper}>
           <FullBtn
             onClick={() => navigate('/review/11')}
-            label='리뷰 작성 (1일 남음)'
+            label="리뷰 작성 (1일 남음)"
           />
         </div>
       )}

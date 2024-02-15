@@ -1,0 +1,28 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "storeImages": [
+      "http://example.com/image11.jpg",
+      "http://example.com/image12.jpg"
+    ],
+    "category": "베이커리",
+    "storeName": "크림베이글 건대점",
+    "numOfStamp": 2,
+    "numOfCouponAvailable": 0,
+    "maxStamp": 10,
+    "reward": "아이스 아메리카노 한 잔",
+    "rating": 3.1,
+    "reviews": [
+      {
+        "name": "kim",
+        "userImage": null,
+        "rate": 3,
+        "content": "AFEAFEADFAGEGAE",
+        "modifiedDate": null
+      }
+    ]
+  },
+  "messages": "요청에 성공하였습니다."
+}

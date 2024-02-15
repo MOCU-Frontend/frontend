@@ -65,16 +65,11 @@ const StoreSearch = () => {
   };
   return (
     <div className={styles.wrapper}>
-      <StoreSearchHeader handleAddSeachKeyword={handleAddSearchKeyword} />
+      <StoreSearchHeader handleAddSearchKeyword={handleAddSearchKeyword} />
       <div className={styles.contentWrapper}>
         <StoreSearchKeyword
           searchKeywordDataArr={searchKeywordDataArr}
-          handleDeleteSeachKeyword={handleDeleteSearchKeyword}
-        />
-        <StoreSearchRecent
-          recentlyVisitedStoreInfoList={
-            storeSearchData?.recentlyVisitedStoreInfoList
-          }
+          handleDeleteSearchKeyword={handleDeleteSearchKeyword}
         />
         {/* <div className={styles.searchCarousel} /> */}
         <div className={styles.bodyTabWrapper}>

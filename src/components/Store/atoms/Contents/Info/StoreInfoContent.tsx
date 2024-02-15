@@ -4,8 +4,8 @@ import StoreInfoTitleText from '../../Text/InfoTitle/StoreInfoTitleText';
 import styles from './StoreInfoContent.module.css';
 
 interface Props {
-  title: string;
-  category: string;
+  title: string | undefined;
+  category: string | undefined;
 }
 
 const StoreInfoContent: React.FC<Props> = ({ title, category }: Props) => {

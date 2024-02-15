@@ -11,11 +11,11 @@ import useStore from '../../../../store/useStore';
 import { RecentSearchData } from '../../../../store/data/storeSearch';
 
 interface Props {
-  handleAddSeachKeyword: (searchWord: RecentSearchData) => void;
+  handleAddSearchKeyword: (searchWord: RecentSearchData) => void;
 }
 
 const StoreSearchHeader: React.FC<Props> = ({
-  handleAddSeachKeyword,
+  handleAddSearchKeyword,
 }: Props) => {
   const navigate = useNavigate();
   const nowUserLocation = useStore((state) => state.nowUserLocation);
@@ -31,14 +31,14 @@ const StoreSearchHeader: React.FC<Props> = ({
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize='search'
+        headerPaddingSize="search"
         onClickBackBtn={() => navigate(-1)}
         children={
           <SearchBar
-            placeholder='찾고 싶은 가게를 검색해 보세요'
+            placeholder="찾고 싶은 가게를 검색해 보세요"
             onClickSearchBtn={(value) => {
               if (value) {
-                handleAddSeachKeyword({ title: value });
+                handleAddSearchKeyword({ title: value });
                 navigate(`${value}`);
               }
             }}

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styles from './StoreSearchResult.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
 
 import CheckFilterSelect from '../../../../components/CheckFilter/Select/CheckFilterSelect';
 import SearchBarHeader from '../../../../components/SearchBar/SearchBarHeader/SearchBarHeader';
@@ -17,9 +19,35 @@ import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Fi
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
+import {
+  StoreSearchResultResponse,
+  StoreSearchResultData,
+} from '../../../../store/Type/StoreSearchResult/storeSearchResult';
+
 const StoreSearchResult = () => {
   const navigate = useNavigate();
   const { searchWord } = useParams();
+
+  const fetchStoreSearchResultData = async () => {
+    try {
+      const response = await axios.get(
+        'http://localhost:3000/data/storeSearchResult/storeSearchResultData-sortByRate.json'
+      );
+      const data: StoreSearchResultResponse = response.data;
+      return Array.isArray(data.result) ? data.result : [data.result];
+    } catch (error) {
+      throw new Error('StoreSearchResult data error');
+    }
+  };
+
+  const {
+    data: storeSearchResultData,
+    isLoading: isStoreSearchResultDataLoading,
+    isError: isStoreSearchResultError,
+  } = useQuery({
+    queryKey: ['StoreSearchResultData'],
+    queryFn: () => fetchStoreSearchResultData(),
+  });
 
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -179,17 +207,16 @@ const StoreSearchResult = () => {
       </div>
 
       <div className={styles.wrapContent}>
-        {searchResultData.map((data, index) => (
-          <StoreInfo
-            key={data.title + index}
-            title={data.title}
-            couponCount={data.couponCount}
-            achieve={data.achieve}
-            distance={data.distance}
-            onClickCouponeBtn={() => {}}
-            onClickStoreDetailBtn={() => navigate(`/store/${data.title}`)}
-          />
-        ))}
+        {Array.isArray(storeSearchResultData) &&
+          storeSearchResultData.map((data) => (
+            <StoreInfo
+              title={data.storeName}
+              couponCount={data.numOfStamp}
+              achieve={data.reward}
+              onClickCouponeBtn={() => {}}
+              onClickStoreDetailBtn={() => navigate(`/store/${data.storeName}`)}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

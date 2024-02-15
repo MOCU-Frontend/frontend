@@ -26,7 +26,7 @@ interface Props {
   /**
    * 거리
    */
-  distance: number;
+  distance?: number;
   /**
    * 클릭시 스토어 detail 페이지로 이동하게
    */
@@ -47,7 +47,7 @@ const StoreInfo: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.wrapStoreInfo}>
-      <img src={storeImg} alt='' className={styles.storeImage} />
+      <img src={storeImg} alt="" className={styles.storeImage} />
       <div className={styles.storeWrapText}>
         <div className={styles.storeTitle} onClick={onClickStoreDetailBtn}>
           {title}

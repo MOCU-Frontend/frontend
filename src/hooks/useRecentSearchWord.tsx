@@ -13,7 +13,7 @@ export const useRecentSearchWord = () => {
 
   const handleDeleteSearchKeyword = (index: number) => {
     if (!searchKeywordDataArr[index])
-      throw new Error('invalid index seachKeyword!');
+      throw new Error('invalid index searchKeyword!');
     setSearchKeywordDataArr((arr) => {
       const arrCopied = [...arr];
       arrCopied.splice(index, 1);

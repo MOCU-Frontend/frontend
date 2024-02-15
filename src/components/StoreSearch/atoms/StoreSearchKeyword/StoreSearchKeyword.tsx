@@ -7,12 +7,12 @@ import CheckFilterWithXBtn from '../../../CheckFilter/CheckFilterWithXBtn/CheckF
 
 interface Props {
   searchKeywordDataArr: RecentSearchData[];
-  handleDeleteSeachKeyword: (index: number) => void;
+  handleDeleteSearchKeyword: (index: number) => void;
 }
 
 const StoreSearchKeyword: React.FC<Props> = ({
   searchKeywordDataArr,
-  handleDeleteSeachKeyword,
+  handleDeleteSearchKeyword,
 }: Props) => {
   const navigate = useNavigate();
   return (
@@ -23,7 +23,7 @@ const StoreSearchKeyword: React.FC<Props> = ({
           <CheckFilterWithXBtn
             key={index}
             onClickContent={() => navigate(data.title)}
-            onClickXBtn={() => handleDeleteSeachKeyword(index)}
+            onClickXBtn={() => handleDeleteSearchKeyword(index)}
             isChecked={false}
             label={data.title}
           />

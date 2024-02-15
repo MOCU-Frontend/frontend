@@ -1,0 +1,31 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "storeName": "크림베이글 건대점",
+    "category": "베이커리",
+    "address": "서울 특별시 광진구 아차산로 31길 20-4",
+    "reward": "아이스 아메리카노 한 잔",
+    "maxStamp": 10,
+    "mainImageUrl": "http://example.com/main_image.jpg",
+    "storeImages": [
+      "http://example.com/image11.jpg",
+      "http://example.com/image12.jpg"
+    ],
+    "menus": [
+      {
+        "name": "아이스아메리카노",
+        "price": 4000,
+        "imageUrl": "http://example.com/image13.jpg"
+      },
+      {
+        "name": "플레인 베이글",
+        "price": 6000,
+        "imageUrl": "http://example.com/image14.jpg"
+      }
+    ],
+    "event": null
+  },
+  "messages": "요청에 성공하였습니다."
+}

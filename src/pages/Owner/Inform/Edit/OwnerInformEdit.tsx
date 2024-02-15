@@ -3,52 +3,50 @@ import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../../components/Button/FullBtn/FullBtn';
 import HeaderXBtn from '../../../../components/HeaderBackBtn/HeaderXBtn/HeaderXBtn';
 import OwnerInformEditHeaderBtn from '../../../../components/Owner/Inform/Edit/atoms/Btns/Header/OwnerInformEditHeaderBtn';
-import OwnerInformEditCheckBoxContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/CheckBox/OwnerInformEditCheckBoxContent';
 import OwnerInformEditEventContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Event/OwnerInformEditEventContent';
 import OwnerInformEditFilterContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Filter/OwnerInformEditFilterContent';
 import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Img/OwnerInformEditImgContent';
 import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
-import OwnerInformEditInputsContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Inputs/OwnerInformEditInputsContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
+import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
 import styles from './OwnerInformEdit.module.css';
-
+const basicFilterArr = [
+  { name: '베이커리', isChecked: true },
+  { name: '카페', isChecked: false },
+  { name: '음식점', isChecked: false },
+  { name: '주류', isChecked: false },
+  { name: '기타', isChecked: false },
+];
 const OwnerInformEdit: React.FC = () => {
   const navigate = useNavigate();
-  const [sangho, setSangho] = useState('');
-  const [filterArr, setFilterArr] = useState([
-    { name: '베이커리', isChecked: true },
-    { name: '카페', isChecked: false },
-    { name: '음식점', isChecked: false },
-    { name: '주류', isChecked: false },
-    { name: '기타', isChecked: false },
-  ]);
-  const [couponGiftArr, setCouponGiftArr] = useState([
-    {
-      title: '1번째 보상',
-      placeholder: '새로운 보상을 입력해주세요.',
-      inputValue: '',
-    },
-    {
-      title: '2번째 보상',
-      placeholder: '새로운 보상을 입력해주세요.',
-      inputValue: '',
-    },
-  ]);
-  const [isEventChecked, setIsEventChecked] = useState(false);
-  const [eventText, setEventText] = useState('');
-  const [isCouponChecked, setIsCouponChecked] = useState(false);
-  const handleChangeCouponGiftArrInputValue = (
-    index: number,
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (!couponGiftArr[index]) throw new Error('invalid index!!');
-    setCouponGiftArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[index].inputValue = e.target.value;
-      return copiedArr;
-    });
-  };
+  const { ownerStoreData } = useOwnerStoreData(5);
+  const [sangho, setSangho] = useState(
+    ownerStoreData ? ownerStoreData.storeName : ''
+  );
+  const [filterArr, setFilterArr] = useState(
+    ownerStoreData
+      ? basicFilterArr.map((item) =>
+          item.name === ownerStoreData.category
+            ? { ...item, isChecked: true }
+            : { ...item, isChecked: false }
+        )
+      : basicFilterArr
+  );
+  const [couponGift, setCouponGift] = useState(
+    ownerStoreData ? ownerStoreData.reward : ''
+  );
+  const [isEventChecked, setIsEventChecked] = useState(
+    ownerStoreData ? !!ownerStoreData.event : false
+  );
+  const [eventText, setEventText] = useState(
+    ownerStoreData ? ownerStoreData.event || '' : ''
+  );
+
+  const [maxStamp, setMaxStamp] = useState(
+    ownerStoreData ? ownerStoreData.maxStamp : 0
+  );
+
   const handleClickFilter = (index: number) => {
     if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
@@ -88,21 +86,18 @@ const OwnerInformEdit: React.FC = () => {
       </div>
       <div className={styles.contentWrapper}>
         <OwnerInformEdiStampContent
-          stampCount={0}
-          handlePlus={() => {}}
-          handleMinus={() => {}}
+          stampCount={maxStamp}
+          handlePlus={() => setMaxStamp((num) => num + 1)}
+          handleMinus={() => setMaxStamp((num) => (num > 0 ? num - 1 : 0))}
         />
-        <OwnerInformEditInputsContent
+
+        <OwnerInformEditInputContent
           title='쿠폰 사용 시 보상'
-          subInputInformArr={couponGiftArr}
-          moreBtnText='다음 단계 보상 추가하기'
-          onClickMoreBtn={() => {}}
-          handleChangeInputValue={handleChangeCouponGiftArrInputValue}
-        />
-        <OwnerInformEditCheckBoxContent
-          isChecked={isCouponChecked}
-          label='쿠폰 사용 횟수별로 다르게 설정'
-          handleCheck={() => setIsCouponChecked((prev) => !prev)}
+          inputValue={couponGift}
+          handleChangeInputValue={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setCouponGift(e.target.value)
+          }
+          placeholder='새로운 보상을 입력해주세요.'
         />
         <OwnerInformEditEventContent
           isChecked={isEventChecked}

@@ -20,12 +20,12 @@ interface Props {
   /**
    * 사용 가능 쿠폰 개수
    */
-  couponCount: number;
+  couponCount?: number;
 
   /**
    * 현 위치에서 몇 m 떨어져있는 지
    */
-  distance: number;
+  distance?: number;
 }
 
 const StoreSearchCard: React.FC<Props> = ({

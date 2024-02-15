@@ -156,7 +156,7 @@ const StoreSearchResult = () => {
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 가게를 검색해 보세요"
+          placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => {
             if (value) {
@@ -177,7 +177,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -188,7 +188,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -198,7 +198,7 @@ const StoreSearchResult = () => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="sub-purple-light"
+            borderColor='sub-purple-light'
             onClick={() => {
               handleOptionClick(data.id);
             }}
@@ -208,8 +208,9 @@ const StoreSearchResult = () => {
 
       <div className={styles.wrapContent}>
         {Array.isArray(storeSearchResultData) &&
-          storeSearchResultData.map((data) => (
+          storeSearchResultData.map((data, index) => (
             <StoreInfo
+              key={data.storeName + index}
               title={data.storeName}
               couponCount={data.numOfStamp}
               achieve={data.reward}

@@ -1,20 +1,26 @@
 import React, { useState } from 'react';
+import { OwnerStoreMenuData } from '../../../../../../../store/Type/Owner/owner';
 import OwnerInformSecTitleText from '../../../../atoms/Texts/SecTitle/OwnerInformSecTitleText';
 import OwnerInformEditMoreBtn from '../../Btns/More/OwnerInformEditMoreBtn';
 import OwnerInformEditInform from '../../Inform/OwnerInformEditInform';
 import OwnerInformEditMenu from '../../Menu/OwnerInformEditMenu';
 import OwnerInformEditMenuTextField from '../../TextField/Menu/OwnerInformEditMenuTextField';
 import styles from './OwnerInformEditMenuContent.module.css';
-type Menu = {
-  name: string;
-  price: number;
-};
+
 interface Props {
-  menuArr: Menu[];
+  menuArr: OwnerStoreMenuData[];
+  handleAddMenu: (newMenu: OwnerStoreMenuData) => void;
+  handleDeleteMenu: (index: number) => void;
 }
 
-const OwnerInformEditMenuContent: React.FC<Props> = ({ menuArr }: Props) => {
+const OwnerInformEditMenuContent: React.FC<Props> = ({
+  menuArr,
+  handleAddMenu,
+  handleDeleteMenu,
+}: Props) => {
   const [isShowTextField, setIsshowTextField] = useState(false);
+  const [name, setName] = useState('');
+  const [price, setPrice] = useState(0);
   return (
     <div className={styles.wholeWrapper}>
       <OwnerInformSecTitleText text='메뉴' />
@@ -26,7 +32,7 @@ const OwnerInformEditMenuContent: React.FC<Props> = ({ menuArr }: Props) => {
             name={data.name}
             price={data.price}
             onClickMenuXBtn={() => {}}
-            onClickXBtn={() => {}}
+            onClickXBtn={() => handleDeleteMenu(index)}
           />
         ))}
         <OwnerInformEditMoreBtn
@@ -36,11 +42,20 @@ const OwnerInformEditMenuContent: React.FC<Props> = ({ menuArr }: Props) => {
       </div>
       {isShowTextField && (
         <OwnerInformEditMenuTextField
-          name=''
-          price=''
-          handleChangeName={(e: React.ChangeEvent<HTMLInputElement>) => {}}
-          handleChangePrice={(e: React.ChangeEvent<HTMLInputElement>) => {}}
-          onClickCheckBtn={() => setIsshowTextField(false)}
+          name={name}
+          price={price}
+          handleChangeName={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setName(e.target.value)
+          }
+          handleChangePrice={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setPrice(parseInt(e.target.value))
+          }
+          onClickCheckBtn={() => {
+            if (name && price) {
+              handleAddMenu({ name, price, imageUrl: '' });
+              setIsshowTextField(false);
+            }
+          }}
           onClickXBtn={() => setIsshowTextField(false)}
         />
       )}

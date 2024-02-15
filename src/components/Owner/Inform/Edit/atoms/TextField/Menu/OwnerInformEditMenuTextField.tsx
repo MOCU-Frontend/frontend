@@ -12,7 +12,7 @@ interface Props {
   onClickCheckBtn: () => void;
   onClickXBtn: () => void;
   name: string;
-  price: string;
+  price: number;
   handleChangeName: (e: React.ChangeEvent<HTMLInputElement>) => void;
   handleChangePrice: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }

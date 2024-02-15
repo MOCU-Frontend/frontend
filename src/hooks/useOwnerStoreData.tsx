@@ -1,8 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import { OwnerStoreDataResponse } from '../store/Type/Owner/owner';
+import {
+  OwnerStoreData,
+  OwnerStoreDataResponse,
+  OwnerStorePatchRequestData,
+  OwnerStorePostRequestData,
+} from '../store/Type/Owner/owner';
 
-export const useOwnerStoreData = (storeId: number) => {
+export const useOwnerStoreData = (storeId?: number) => {
   const fetchOwnerStoreData = async (storeId: number) => {
     try {
       const response = await axios.get(
@@ -20,7 +25,26 @@ export const useOwnerStoreData = (storeId: number) => {
     isError: isOwnerStoreDataError,
   } = useQuery({
     queryKey: ['OwnerStore'],
-    queryFn: () => fetchOwnerStoreData(storeId),
+    queryFn: () => fetchOwnerStoreData(storeId || 5),
+    enabled: !!storeId,
   });
-  return { ownerStoreData, isOwnerStoreDataLoading, isOwnerStoreDataError };
+  const ownerStoreDataPatchMutation = useMutation({
+    mutationFn: (newData: OwnerStorePatchRequestData) => {
+      return axios.patch('/ownerStoreData', newData);
+    },
+    onSuccess: () => {},
+  });
+  const ownerStoreDataPostMutation = useMutation({
+    mutationFn: (newData: OwnerStorePostRequestData) => {
+      return axios.post('/ownerStoreData', newData);
+    },
+    onSuccess: () => {},
+  });
+  return {
+    ownerStoreData,
+    isOwnerStoreDataLoading,
+    isOwnerStoreDataError,
+    ownerStoreDataPatchMutation,
+    ownerStoreDataPostMutation,
+  };
 };

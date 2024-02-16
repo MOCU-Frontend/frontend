@@ -11,13 +11,23 @@ const TodayMission: React.FC<Props> = ({ content, status }: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.todayMissionText}>{content}</div>
-      <Button
-        label="미션 수행하기"
-        size="small"
-        borderRadius="large"
-        disabled={status === 'done'}
-        disabledBackgroundColor="sub-purple-light"
-      />
+      {status === 'done' && (
+        <Button
+          label="미션 완료하기"
+          size="small"
+          borderRadius="large"
+          disabledBackgroundColor="sub-purple-light"
+        />
+      )}
+
+      {status === 'not-done' && (
+        <Button
+          label="미션 수행하기"
+          size="small"
+          borderRadius="large"
+          disabledBackgroundColor="sub-purple-light"
+        />
+      )}
     </div>
   );
 };

@@ -1,0 +1,10 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "content": "이미 2개의 미션 스탬프를 획득하였습니다.",
+    "possibleGetReward": false
+  },
+  "messages": "요청에 성공하였습니다."
+}

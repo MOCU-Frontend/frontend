@@ -1,4 +1,4 @@
-export type MissionMapResponse = {
+export type BtnPatchResponse = {
   code: number;
   status: number;
   message: string;
@@ -7,5 +7,6 @@ export type MissionMapResponse = {
 };
 
 export type Result = {
-  reward: string;
+  content: string;
+  possibleGetReward: boolean;
 };

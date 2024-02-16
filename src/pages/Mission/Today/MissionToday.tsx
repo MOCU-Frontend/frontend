@@ -21,9 +21,14 @@ import {
 const MissionToday = () => {
   const navigate = useNavigate();
 
+  // 오늘의 미션 페이지 조회 API
   const fetchMissionData = async () => {
     const response = await instance.get<MissionResponse>(
+      // 더미데이터
       '/data/mission/missionDummyData-01.json'
+
+      // 실제 연결
+      // '/mission/today-mission/userId=1'
     );
     console.log(response);
     return response.data.result;

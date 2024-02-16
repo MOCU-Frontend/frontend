@@ -1,6 +1,9 @@
 import React from 'react';
 import styles from './MissionMapContent.module.css';
 import Button from '../../Button/Button';
+import MissionMapEllipse from './MissionMapEllipse/MissionMapEllipse';
+import MissionMapFirstCircle from './MissionMapFirstCircle/MissionMapFirstCircle';
+import MissionMapCircle from './MissionMapCircle/MissionMapCircle';
 
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -18,184 +21,138 @@ import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampS
 import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
 
-import { PatchResponse } from '../../../store/Type/Mission/missionMapComplete';
+import { MissionMapResponse } from '../../../store/Type/Mission/missionMapComplete';
 
 interface Props {
   /**
    * 스탬프 개수
    */
-  stampCnt: number;
-
-  /**
-   * 오늘의 미션 성공 개수
-   */
-  todayMissionCnt: number;
+  stampCnt: number | undefined;
 }
 
-const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
-  const handleRewardClick = async () => {
-    try {
-      const response = await instance.patch<PatchResponse>(
-        '/data/mission/missionMapCompleteData.json',
-        {}
-      );
-      console.log(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+const MissionMapContent: React.FC<Props> = ({ stampCnt }) => {
   return (
     <div className={styles.wrapMissionMap}>
       <div className={styles.first}>
-        <StampFinishedImage />
+        <MissionMapFirstCircle
+          stampCnt={stampCnt}
+          standardNumber1={0}
+          standardNumber2={1}
+          standardNumber3={5}
+          standardNumber4={6}
+        />
       </div>
+
       <div className={styles.firstEllipse}>
-        {stampCnt >= 1 ? (
-          <EllipseHorizonImage stroke={colors.mainPurple} />
-        ) : (
-          <EllipseHorizonImage stroke={colors.white} />
-        )}
+        {/* stampCnt가 6 이상일 때 */}
+        <MissionMapEllipse
+          stampCnt={stampCnt}
+          standardNumber={6}
+          ellipseType={2}
+        />
       </div>
+
       <div className={styles.second}>
-        {stampCnt > 1 ? (
-          <StampFinishedImage />
-        ) : (
-          <>
-            <StampNowImage width={80} height={80} />
-            <div className={styles.gaugeWrapper}>
-              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
-              <GaugeImage width={50} height={6} />
-            </div>
-          </>
-        )}
+        <MissionMapCircle
+          stampCnt={stampCnt}
+          standardNumber1={6}
+          standardNumber2={10}
+          standardNumber3={11}
+        />
       </div>
+
       <div className={styles.secondEllipse}>
-        {stampCnt >= 2 ? (
-          <EllipseRightUImage stroke={colors.mainPurple} />
-        ) : (
-          <EllipseRightUImage stroke={colors.white} />
-        )}
+        {/* stampCnt가 11 이상일 때 */}
+        <MissionMapEllipse
+          stampCnt={stampCnt}
+          standardNumber={11}
+          ellipseType={3}
+        />
       </div>
+
       <div className={styles.third}>
-        {stampCnt > 2 ? (
-          <StampFinishedImage />
-        ) : stampCnt === 2 ? (
-          <>
-            <StampNowImage width={80} height={80} />
-            <div className={styles.gaugeWrapper}>
-              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
-              <GaugeImage width={50} height={6} />
-            </div>
-          </>
-        ) : (
-          <StampNoBadgeImage width={80} height={80} />
-        )}
+        <MissionMapCircle
+          stampCnt={stampCnt}
+          standardNumber1={11}
+          standardNumber2={15}
+          standardNumber3={16}
+        />
       </div>
+
       <div className={styles.thirdEllipse}>
-        {stampCnt >= 3 ? (
-          <EllipseHorizonImage stroke={colors.mainPurple} />
-        ) : (
-          <EllipseHorizonImage stroke={colors.white} />
-        )}
+        {/* stampCnt가 16 이상일 때 */}
+        <MissionMapEllipse
+          stampCnt={stampCnt}
+          standardNumber={16}
+          ellipseType={2}
+        />
       </div>
+
       <div className={styles.fourth}>
-        {stampCnt > 3 ? (
-          <StampFinishedImage />
-        ) : stampCnt === 3 ? (
-          <>
-            <StampNowImage width={80} height={80} />
-            <div className={styles.gaugeWrapper}>
-              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
-              <GaugeImage width={50} height={6} />
-            </div>
-          </>
-        ) : (
-          <StampNoBadgeImage width={80} height={80} />
-        )}
+        <MissionMapCircle
+          stampCnt={stampCnt}
+          standardNumber1={16}
+          standardNumber2={20}
+          standardNumber3={21}
+        />
       </div>
       <div className={styles.fourthEllipse}>
-        {stampCnt >= 4 ? (
-          <EllipseLeftUImage stroke={colors.mainPurple} />
-        ) : (
-          <EllipseLeftUImage stroke={colors.white} />
-        )}
+        {/* stampCnt가 21 이상일 때 */}
+        <MissionMapEllipse
+          stampCnt={stampCnt}
+          standardNumber={21}
+          ellipseType={1}
+        />
       </div>
       <div className={styles.fifth}>
-        {stampCnt > 4 ? (
-          <StampFinishedImage />
-        ) : stampCnt === 4 ? (
-          <>
-            <StampNowImage width={80} height={80} />
-            <div className={styles.gaugeWrapper}>
-              <div className={styles.gaugeNumber}>{todayMissionCnt}/5</div>
-              <GaugeImage width={50} height={6} />
-            </div>
-          </>
-        ) : (
-          <StampNoBadgeImage width={80} height={80} />
-        )}
+        <MissionMapCircle
+          stampCnt={stampCnt}
+          standardNumber1={21}
+          standardNumber2={25}
+          standardNumber3={26}
+        />
       </div>
+
       <div className={styles.fifthEllipse}>
-        {stampCnt === 5 ? (
-          <EllipseHorizonImage stroke={colors.mainPurple} />
-        ) : (
-          <EllipseHorizonImage stroke={colors.white} />
-        )}
+        {/* stampCnt가 26 이상일 때 */}
+        <MissionMapEllipse
+          stampCnt={stampCnt}
+          standardNumber={26}
+          ellipseType={2}
+        />
       </div>
-      <div className={styles.final}>
-        {stampCnt === 5 ? (
-          <>
-            <StampNoStarImage />
-            <div className={styles.finalReward}>
-              <RewardImage
-                width={26}
-                height={26}
-                fill={colors.white}
-                stroke={colors.white}
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <StampNoStarWhiteImage />
-            <div className={styles.finalReward}>
-              <RewardImage
-                width={26}
-                height={26}
-                fill={colors.subPurpleLight}
-                stroke={colors.subPurpleLight}
-              />
-            </div>
-            <div className={styles.finalButton}>
-              <Button
-                size="small"
-                label="최종 보상 받기"
-                textColor="sub-purple-light"
-                borderRadius="large"
-              />
-            </div>
-          </>
-        )}
-      </div>
-      <div className={styles.finalButton}>
-        {stampCnt === 5 ? (
-          <Button
-            size="small"
-            label="최종 보상 받기"
-            textColor="sub-purple-light"
-            onClick={handleRewardClick}
+
+      {stampCnt === 30 ? (
+        <div className={styles.final}>
+          <StampNoStarImage />
+          <div className={styles.finalReward}>
+            <RewardImage
+              width={26}
+              height={26}
+              fill={colors.white}
+              stroke={colors.white}
+            />
+          </div>
+          <div className={styles.finalButton}>
+            <Button
+              size="small"
+              label="최종 보상 받기"
+              textColor="sub-purple-light"
+              borderRadius="large"
+            />
+          </div>
+          <div className={styles.finalButtonText}>*스타벅스 2만원권</div>
+        </div>
+      ) : (
+        <div className={styles.final}>
+          <MissionMapCircle
+            stampCnt={stampCnt}
+            standardNumber1={26}
+            standardNumber2={29}
+            standardNumber3={30}
           />
-        ) : (
-          <Button
-            size="small"
-            label="최종 보상 받기"
-            textColor="sub-purple-light"
-            disabled={true}
-          />
-        )}
-      </div>
-      <div className={styles.finalButtonText}>*스타벅스 2만원권</div>
+        </div>
+      )}
     </div>
   );
 };

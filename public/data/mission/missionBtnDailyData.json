@@ -1,0 +1,10 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "content": "MOCU앱 출석하기",
+    "possibleGetReward": false
+  },
+  "messages": "요청에 성공하였습니다."
+}

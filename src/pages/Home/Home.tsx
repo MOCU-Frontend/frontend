@@ -46,7 +46,7 @@ const Home = () => {
   const nowUserLocation = useStore((state) => state.nowUserLocation);
 
   useEffect(() => {
-    if (window.notifiMsg) {
+    if (window.notifiMsg !== undefined) {
       alert(window.notifiMsg);
     }
   }, [window.notifiMsg]);

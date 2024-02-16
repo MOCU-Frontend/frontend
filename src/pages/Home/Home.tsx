@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Home.module.css';
 import { ReactComponent as MapIcon } from '../../assets/icon/map.svg';
 import { ReactComponent as ProfileIcon } from '../../assets/icon/profile.svg';
@@ -18,7 +18,11 @@ import { colors } from '../../styles/colors';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
-
+declare global {
+  interface Window {
+    notifiMsg: string | undefined;
+  }
+}
 const Home = () => {
   const navigate = useNavigate();
   const [adItemArr, setAdItemArr] = useState([
@@ -40,6 +44,13 @@ const Home = () => {
     });
   };
   const nowUserLocation = useStore((state) => state.nowUserLocation);
+
+  useEffect(() => {
+    if (window.notifiMsg) {
+      alert(window.notifiMsg);
+    }
+  }, [window.notifiMsg]);
+
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader

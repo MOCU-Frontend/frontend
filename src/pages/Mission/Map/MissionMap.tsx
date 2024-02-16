@@ -11,40 +11,27 @@ import { colors } from '../../../styles/colors';
 import instance from '../../../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 
-import { MissionMapResponse } from '../../../store/Type/Mission/missionMapComplete';
+import { fetchMissionMapGetData } from './../../../apis/mission/fetchMissionMapGetData';
+import { fetchMissionMapCompleteData } from './../../../apis/mission/fetchMissionMapCompleteData';
 
 const MissionMap = () => {
   const navigate = useNavigate();
 
-  // 미션 맵 페이지 조회 API
-  const fetchMissionMapData = async () => {
-    try {
-      const response = await instance.patch<MissionMapResponse>(
-        // 더미 데이터
-        '/data/mission/missionMapCompleteData.json'
-
-        // 실제 연결
-        // '/mission/mission-map/userId=1'
-      );
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
+  // fetchMissionMapGetData
   const {
-    data: MissionMapData,
-    isLoading: isMissionMapDataLoading,
-    isError: isMissionMapDataError,
+    data: MissionMapGetData,
+    isLoading: isMissionMapGetDataLoading,
+    isError: isMissionMapGetDataError,
   } = useQuery({
-    queryKey: ['missionMapData'],
-    queryFn: () => fetchMissionMapData(),
+    queryKey: ['missionMapGetData'],
+    queryFn: () => fetchMissionMapGetData(),
   });
 
+  // fetchMissionMapCompleteData
+  // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
+
   // 스탬프 개수
-  // const stampCnt = MissionMapData?.status;
-  const stampCnt = 30;
+  const stampCnt = MissionMapGetData?.numOfStamp;
 
   return (
     <div className={styles.wrapper}>
@@ -74,7 +61,9 @@ const MissionMap = () => {
 
         <div className={styles.wrapContentTitle}>
           <div>미션맵 완성까지</div>
-          <div>스탬프 {30 - stampCnt}개가 남았어요!</div>
+          <div>
+            스탬프 {stampCnt !== undefined && 30 - stampCnt}개가 남았어요!
+          </div>
         </div>
 
         <div className={styles.wrapContentSubTitle}>

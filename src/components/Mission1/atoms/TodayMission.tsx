@@ -5,9 +5,14 @@ import Button from '../../Button/Button';
 interface Props {
   content: string;
   status: string;
+  missionCompleteClick: () => void;
 }
 
-const TodayMission: React.FC<Props> = ({ content, status }: Props) => {
+const TodayMission: React.FC<Props> = ({
+  content,
+  status,
+  missionCompleteClick,
+}: Props) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.todayMissionText}>{content}</div>
@@ -17,6 +22,7 @@ const TodayMission: React.FC<Props> = ({ content, status }: Props) => {
           size="small"
           borderRadius="large"
           disabledBackgroundColor="sub-purple-light"
+          onClick={missionCompleteClick}
         />
       )}
 

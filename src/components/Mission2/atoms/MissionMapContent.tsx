@@ -21,8 +21,6 @@ import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampS
 import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
 
-import { MissionMapResponse } from '../../../store/Type/Mission/missionMapComplete';
-
 interface Props {
   /**
    * 스탬프 개수
@@ -31,6 +29,11 @@ interface Props {
 }
 
 const MissionMapContent: React.FC<Props> = ({ stampCnt }) => {
+  // 만약을 대비
+  if (stampCnt === undefined) {
+    stampCnt = 24;
+  }
+
   return (
     <div className={styles.wrapMissionMap}>
       <div className={styles.first}>

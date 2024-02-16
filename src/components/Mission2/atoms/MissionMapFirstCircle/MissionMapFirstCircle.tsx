@@ -49,25 +49,31 @@ const MissionMapFirstCircle: React.FC<Props> = ({
         standardNumber4 !== undefined && (
           <>
             {/* stampCnt가 0일때 */}
-            {stampCnt && stampCnt === standardNumber1 && <StampFinishedImage />}
+            {stampCnt === standardNumber1 && (
+              <>
+                <StampNoBadgeImage width={80} height={80} />
+                <div className={styles.gaugeWrapper}>
+                  <div className={styles.gaugeNumber}>{stampCnt}/30</div>
+                  <GaugeImage width={50} height={6} />
+                </div>
+              </>
+            )}
 
             {/* stampCnt가 1 이상 5 이하일 때 */}
 
-            {stampCnt &&
-              stampCnt >= standardNumber2 &&
-              stampCnt <= standardNumber3 && (
-                <>
-                  <StampNowImage width={80} height={80} />
+            {stampCnt >= standardNumber2 && stampCnt <= standardNumber3 && (
+              <>
+                <StampNowImage width={80} height={80} />
 
-                  <div className={styles.gaugeWrapper}>
-                    <div className={styles.gaugeNumber}>{stampCnt}/30</div>
-                    <GaugeImage width={50} height={6} />
-                  </div>
-                </>
-              )}
+                <div className={styles.gaugeWrapper}>
+                  <div className={styles.gaugeNumber}>{stampCnt}/30</div>
+                  <GaugeImage width={50} height={6} />
+                </div>
+              </>
+            )}
 
             {/* stampCnt가 6 이상일 때 */}
-            {stampCnt && stampCnt >= standardNumber4 && (
+            {stampCnt >= standardNumber4 && (
               <StampFinishedImage width={80} height={80} />
             )}
           </>

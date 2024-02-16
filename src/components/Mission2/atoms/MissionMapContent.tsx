@@ -2,6 +2,10 @@ import React from 'react';
 import styles from './MissionMapContent.module.css';
 import Button from '../../Button/Button';
 
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import instance from '../../../apis/instance';
+
 import { ReactComponent as StampNowImage } from '../../../assets/icon/stampStarBadgeMode.svg';
 import { ReactComponent as StampFinishedImage } from '../../../assets/icon/stampStarGradation.svg';
 import { ReactComponent as StampNoStarImage } from '../../../assets/icon/stampNoStarGradation.svg';
@@ -13,6 +17,8 @@ import { ReactComponent as RewardImage } from '../../../assets/icon/mapReward.sv
 import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampStarNoBadge.svg';
 import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
+
+import { PatchResponse } from '../../../store/Type/Mission/missionMapComplete';
 
 interface Props {
   /**
@@ -27,6 +33,18 @@ interface Props {
 }
 
 const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
+  const handleRewardClick = async () => {
+    try {
+      const response = await instance.patch<PatchResponse>(
+        '/data/mission/missionMapCompleteData.json',
+        {}
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className={styles.wrapMissionMap}>
       <div className={styles.first}>
@@ -166,6 +184,7 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, todayMissionCnt }) => {
             size="small"
             label="최종 보상 받기"
             textColor="sub-purple-light"
+            onClick={handleRewardClick}
           />
         ) : (
           <Button

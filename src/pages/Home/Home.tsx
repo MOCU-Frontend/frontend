@@ -18,11 +18,11 @@ import { colors } from '../../styles/colors';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
-declare global {
-  interface Window {
-    notifiMsg: string | undefined;
-  }
-}
+// declare global {
+//   interface Window {
+//     doSomething: () => void;
+//   }
+// }
 const Home = () => {
   const navigate = useNavigate();
   const [adItemArr, setAdItemArr] = useState([
@@ -44,13 +44,6 @@ const Home = () => {
     });
   };
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-
-  useEffect(() => {
-    if (window.notifiMsg !== undefined) {
-      alert(window.notifiMsg);
-    }
-  }, [window.notifiMsg]);
-
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader

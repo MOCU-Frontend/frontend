@@ -1,0 +1,5 @@
+@import '../../../../../styles/colorVars.css';
+.wholeWrapper {
+  background-color: var(--color-white);
+  padding: 0 10px;
+}

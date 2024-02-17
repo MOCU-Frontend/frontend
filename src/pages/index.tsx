@@ -38,6 +38,7 @@ import LocationSettingNow from './LocationSetting/now/LocationSettingNow';
 import LocationSettingSearch from './LocationSetting/search/LocationSettingSearch';
 import LocationSettingName from './LocationSetting/Name/LocationSettingName';
 import StoreDangolAdd from './Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd';
+import Login from './Login/Login';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -104,6 +105,10 @@ const Router = () => {
     {
       path: '/stamp',
       element: <Stamp />,
+    },
+    {
+      path: '/login',
+      element: <Login />,
     },
     {
       path: '/review/:storeId',

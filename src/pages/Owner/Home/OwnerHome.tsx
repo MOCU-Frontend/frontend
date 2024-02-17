@@ -9,11 +9,23 @@ import styles from './OwnerHome.module.css';
 import HomeHeader from '../../../components/Home/atoms/Header/HomeHeader';
 import OwnerHomeHelloContent from '../../../components/Owner/Home/atoms/Contents/Hello/OwnerHomeHelloContent';
 import ModalRequest from '../../../components/Modal/ModalRequest/ModalRequest';
-
+import ModalConfirm from '../../../components/Modal/ModalConfirm/ModalConfirm';
+import ModalAccum from '../../../components/Modal/ModalAccum/ModalAccum';
+declare global {
+  interface Window {
+    showCouponModal: () => void;
+    showAccumModal: () => void;
+  }
+}
 const OwnerHome: React.FC = () => {
   const navigate = useNavigate();
   const [isShowAccumModal, setIsShowAccumModal] = useState(false);
   const [isShowCouponModal, setIsShowCouponModal] = useState(false);
+  const [isShowUseCouponModal, setIsShowUseCouponModal] = useState(false);
+  const [isShowAccumCounterModal, setIsShowAccumCounterModal] = useState(false);
+  const [accumCounterNum, setAccumCounterNum] = useState(1);
+  window.showAccumModal = () => setIsShowAccumModal(true);
+  window.showCouponModal = () => setIsShowCouponModal(true);
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -59,7 +71,10 @@ const OwnerHome: React.FC = () => {
           sub2Text='장소: 서울시 광진구 아차산로 93'
           onClickNo={() => setIsShowAccumModal(false)}
           onClickX={() => setIsShowAccumModal(false)}
-          onClickYes={() => {}}
+          onClickYes={() => {
+            setIsShowAccumModal(false);
+            setIsShowAccumCounterModal(true);
+          }}
         />
       )}
       {isShowCouponModal && (
@@ -70,7 +85,35 @@ const OwnerHome: React.FC = () => {
           sub2Text='장소: 서울시 광진구 아차산로 93'
           onClickNo={() => setIsShowCouponModal(false)}
           onClickX={() => setIsShowCouponModal(false)}
-          onClickYes={() => {}}
+          onClickYes={() => {
+            setIsShowCouponModal(false);
+            setIsShowUseCouponModal(true);
+          }}
+        />
+      )}
+      {isShowUseCouponModal && (
+        <ModalConfirm
+          headerTitle='쿠폰 사용'
+          bodyText='모쿠님의 쿠폰을 사용합니다.'
+          subText='보상을 준비해주세요!'
+          informText='아이스 아메리카노 한 잔'
+          onClickNo={() => setIsShowUseCouponModal(false)}
+          onClickX={() => setIsShowUseCouponModal(false)}
+          onClickYes={() => setIsShowUseCouponModal(false)}
+        />
+      )}
+      {isShowAccumCounterModal && (
+        <ModalAccum
+          headerTitle='스탬프 적립'
+          bodyText='모쿠님의 스탬프 적립을 진행합니다.'
+          accumNum={accumCounterNum}
+          handleMinusAccumNum={() =>
+            setAccumCounterNum((prev) => (prev > 0 ? prev - 1 : 0))
+          }
+          handlePlusAccumNum={() => setAccumCounterNum((prev) => prev + 1)}
+          onClickNo={() => setIsShowAccumCounterModal(false)}
+          onClickX={() => setIsShowAccumCounterModal(false)}
+          onClickYes={() => setIsShowAccumCounterModal(false)}
         />
       )}
     </div>

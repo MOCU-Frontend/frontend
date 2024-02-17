@@ -1,0 +1,34 @@
+@import '../../../styles/colorVars.css';
+
+.bodySect {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  margin-top: 26.66px;
+  margin-bottom: 56px;
+}
+
+.modalTwoBtnsWrapper {
+  margin-bottom: 29px;
+}
+
+.counterSect {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 11.5px;
+}
+
+.counterNumCircle {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100%;
+  background-color: var(--color-main-purple);
+}

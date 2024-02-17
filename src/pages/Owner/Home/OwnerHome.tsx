@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeMenuFullBtn from '../../../components/Home/atoms/Button/MenuFullBtn/HomeMenuFullBtn';
 import { ReactComponent as ProfileIcon } from '../../../assets/icon/profileGradation.svg';
@@ -8,9 +8,12 @@ import { ReactComponent as StampIcon } from '../../../assets/icon/stampLine.svg'
 import styles from './OwnerHome.module.css';
 import HomeHeader from '../../../components/Home/atoms/Header/HomeHeader';
 import OwnerHomeHelloContent from '../../../components/Owner/Home/atoms/Contents/Hello/OwnerHomeHelloContent';
+import ModalRequest from '../../../components/Modal/ModalRequest/ModalRequest';
 
 const OwnerHome: React.FC = () => {
   const navigate = useNavigate();
+  const [isShowAccumModal, setIsShowAccumModal] = useState(false);
+  const [isShowCouponModal, setIsShowCouponModal] = useState(false);
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -48,6 +51,28 @@ const OwnerHome: React.FC = () => {
           Icon={StampIcon}
         />
       </main>
+      {isShowAccumModal && (
+        <ModalRequest
+          headerTitle='고객 요청'
+          bodyText='모쿠님의 적립 요청이 있습니다. 수락하시겠습니까?'
+          sub1Text='일시: 2023.12.16. 17:24'
+          sub2Text='장소: 서울시 광진구 아차산로 93'
+          onClickNo={() => setIsShowAccumModal(false)}
+          onClickX={() => setIsShowAccumModal(false)}
+          onClickYes={() => {}}
+        />
+      )}
+      {isShowCouponModal && (
+        <ModalRequest
+          headerTitle='고객 요청'
+          bodyText='모쿠님의 쿠폰 사용 요청이 있습니다. 수락하시겠습니까?'
+          sub1Text='일시: 2023.12.16. 17:24'
+          sub2Text='장소: 서울시 광진구 아차산로 93'
+          onClickNo={() => setIsShowCouponModal(false)}
+          onClickX={() => setIsShowCouponModal(false)}
+          onClickYes={() => {}}
+        />
+      )}
     </div>
   );
 };

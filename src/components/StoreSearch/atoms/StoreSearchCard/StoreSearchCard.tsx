@@ -26,6 +26,8 @@ interface Props {
    * 현 위치에서 몇 m 떨어져있는 지
    */
   distance?: number;
+
+  onClick?: () => void;
 }
 
 const StoreSearchCard: React.FC<Props> = ({
@@ -34,10 +36,11 @@ const StoreSearchCard: React.FC<Props> = ({
   title,
   couponCount,
   distance,
+  onClick,
 }: Props) => {
   return (
     <>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} onClick={onClick}>
         {couponMain && (
           <>
             <div className={styles.cardStoreInformation}>
@@ -45,7 +48,9 @@ const StoreSearchCard: React.FC<Props> = ({
               <div className={styles.cardSecondInfo}>{title}</div>
             </div>
 
-            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
+            <div className={styles.cardFarFrom}>
+              현 위치에서 {distance !== undefined && Math.round(distance)}M{' '}
+            </div>
           </>
         )}
 
@@ -62,7 +67,9 @@ const StoreSearchCard: React.FC<Props> = ({
               </div>
             </div>
 
-            <div className={styles.cardFarFrom}>현 위치에서 {distance}M </div>
+            <div className={styles.cardFarFrom}>
+              현 위치에서 {distance !== undefined && Math.round(distance)}M{' '}
+            </div>
           </>
         )}
       </div>

@@ -5,6 +5,12 @@
   "result": {
     "recentSearches": [
       {
+        "query": "yrys"
+      },
+      {
+        "query": "wtey"
+      },
+      {
         "query": "x"
       },
       {
@@ -12,18 +18,12 @@
       },
       {
         "query": "1"
-      },
-      {
-        "query": "2"
-      },
-      {
-        "query": "3"
       }
     ],
     "recentlyVisitedStoreInfoList": [
       {
         "storeName": "크림베이글 건대점",
-        "numOfStamp": 2,
+        "numOfStamp": 8,
         "numOfCouponAvailable": 0,
         "hasEvent": false,
         "distance": 250.57360275732424
@@ -38,8 +38,9 @@
     "dueDateStoreInfoList": [
       {
         "storeName": "크림베이글 건대점",
-        "numOfStamp": 2,
+        "numOfStamp": 8,
         "numOfCouponAvailable": 0,
+        "maxStamp": 10,
         "hasEvent": false,
         "distance": 250.57360275732424
       }
@@ -48,7 +49,8 @@
       {
         "storeName": "크림베이글 건대점",
         "hasEvent": false,
-        "mainImageUrl": "http://example.com/main_image.jpg"
+        "mainImageUrl": "http://example.com/main_image.jpg",
+        "distance": 250.57360275732424
       }
     ]
   },

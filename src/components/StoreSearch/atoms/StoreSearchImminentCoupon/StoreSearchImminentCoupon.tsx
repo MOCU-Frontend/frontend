@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './StoreSearchImminentCoupon.module.css';
 import StoreSearchCard from '../StoreSearchCard/StoreSearchCard';
 import { StoreInfo } from '../../../../store/Type/StoreSearch/storeSearch';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   dueDateStoreInfoList: StoreInfo[] | undefined;
@@ -10,6 +11,7 @@ interface Props {
 const StoreSearchImminentCoupon: React.FC<Props> = ({
   dueDateStoreInfoList,
 }) => {
+  const navigate = useNavigate();
   // 쿠폰 사용이 임박한 식당들 순으로 나열한 데이터
   const sortedData = dueDateStoreInfoList
     ?.filter((data: StoreInfo) => data.numOfStamp >= 1)
@@ -26,6 +28,7 @@ const StoreSearchImminentCoupon: React.FC<Props> = ({
             title={data.storeName}
             couponCount={data.numOfStamp}
             distance={data.distance}
+            onClick={() => navigate(`/store/${data.storeName}`)}
           />
         ))}
       </div>

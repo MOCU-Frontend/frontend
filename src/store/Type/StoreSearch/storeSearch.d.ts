@@ -30,4 +30,5 @@ export type StoreRecommendInfo = {
   storeName: string;
   hasEvent: boolean;
   mainImageUrl: string;
+  distance: number;
 };

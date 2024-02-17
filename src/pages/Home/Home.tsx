@@ -18,11 +18,7 @@ import { colors } from '../../styles/colors';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
-// declare global {
-//   interface Window {
-//     doSomething: () => void;
-//   }
-// }
+
 const Home = () => {
   const navigate = useNavigate();
   const [adItemArr, setAdItemArr] = useState([

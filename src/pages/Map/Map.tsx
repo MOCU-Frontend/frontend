@@ -18,6 +18,15 @@ import { colors } from '../../styles/colors';
 import useStore from '../../store/useStore';
 import MapSearchBtn from '../../components/Map/atoms/Button/Search/MapSearchBtn';
 
+// 필터 관련
+import {
+  initialMenuItemDataArr,
+  MenuItemData,
+  initialSectorFilterDataArr,
+} from '../../store/data/mapFilter';
+import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
+import BottomSheet from '../../components/BottomSheet/BottomSheet';
+
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
@@ -41,6 +50,89 @@ const Map: React.FC = () => {
   const [couponModalLevel, setCouponModalLevel] =
     useState<CouponModalLevel | null>(null);
   const [isRegularCustomer, setIsRegularCustomer] = useState(false);
+
+  // 필터 관련 코드
+
+  // mapJsonType 상태 관련 코드
+
+  const [mapJsonType, setMapJsonType] = useState(0);
+
+  // 첫번째 필터에서 무슨 타입을 골랐는지 저장하기 위해서 만든 상태
+  const [storeJsonType, setStoreJsonType] = useState(0);
+
+  // event 필터를 클릭했을 때
+  const handleClickEvent = () => {
+    setMapJsonType((prevType) => (prevType === 2 ? storeJsonType : 2));
+    console.log(mapJsonType);
+  };
+
+  // FilterBottomSheet를 보이게 하는지 상태관리
+  const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
+    useState(false);
+
+  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
+    initialMenuItemDataArr
+  );
+
+  const handleDragFilterBottomSheet = () => {
+    setIsFilterBottomSheetVisible(false);
+  };
+
+  const handleClickMenuBodyItem = (
+    menuIndex: number,
+    newIndex: number,
+    prevIndex?: number
+  ) => {
+    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
+      throw new Error('invalid newIndex!!');
+    if (
+      prevIndex !== undefined &&
+      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
+    )
+      throw new Error('invalid prevIndex!!');
+    setMenuItemDataArr((prev) => {
+      const copiedMenuItemDataArr = [...prev];
+      if (prevIndex !== undefined) {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
+          false;
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
+      } else {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
+          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
+      }
+      return copiedMenuItemDataArr;
+    });
+  };
+
+  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
+    setMenuItemDataArr((prev) => {
+      const copiedArr = [...prev];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[newIndex].isChecked = true;
+      return copiedArr;
+    });
+  };
+
+  // 필터를 클릭했을 때
+  const handleFilterSelectClick = (newIndex: number) => {
+    const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked menu item!!');
+
+    handleClickMenuItem(prevIndex, newIndex);
+
+    // 클릭한 필터에 따라 mapJsonType 설정
+    setMapJsonType(newIndex);
+    setStoreJsonType(newIndex);
+    console.log(mapJsonType);
+    setIsFilterBottomSheetVisible(true);
+  };
+
+  const selectedSectorFilterItem = menuItemDataArr[0].bodyDataArr.find(
+    (x) => x.isChecked
+  );
+
+  // FilterBottomSheet 코드 끝
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
@@ -134,20 +226,23 @@ const Map: React.FC = () => {
         {!isShowBottomSheet && (
           <div className={styles.filtersWrapper}>
             <CheckFilterSelect
+              isChecked={false}
+              label={
+                selectedSectorFilterItem
+                  ? selectedSectorFilterItem.title
+                  : 'no selected item!'
+              }
               border={1}
               borderColor="sub-purple-light"
-              label="업종 전체"
-              isChecked={false}
-              onClick={() => {}}
+              onClick={() => handleFilterSelectClick(0)}
             />
             <CheckFilter
               border={1}
               borderColor="sub-purple-light"
               label="이벤트 중"
-              isChecked={false}
+              isChecked={mapJsonType === 2}
+              onClick={handleClickEvent}
             />
-            <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
-            <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
           </div>
         )}
         {isShowSearchBtn && (
@@ -177,6 +272,25 @@ const Map: React.FC = () => {
           }}
         />
       )}
+
+      {isFilterBottomSheetVisible && (
+        <BottomSheet
+          onDragBottom={handleDragFilterBottomSheet}
+          onClickNotBottomSheet={handleDragFilterBottomSheet}
+        >
+          <SlideTabViewFilter
+            // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
+            menuItemDataArr={menuItemDataArr.filter(
+              (item, index) => index === 0 || index === 1
+            )}
+            handleCheckedDataIndex={handleClickMenuItem}
+            handleClickMenuBodyItem={handleClickMenuBodyItem}
+            onClickCompleteBtn={handleDragFilterBottomSheet}
+            // handleClickResetOptionBtn={handleClickResetOptionBtn}
+          />
+        </BottomSheet>
+      )}
+
       <MapStampModal
         stampModalLevel={stampModalLevel}
         setStampModalLevel={setStampModalLevel}

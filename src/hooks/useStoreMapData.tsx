@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import pinMapNormalImg from '../assets/icon/pinMapNormal.svg';
 import pinMapGiftImg from '../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../assets/icon/pinMapFire.svg';
@@ -11,6 +11,8 @@ import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 
 import { fetchMapStoreData } from '../apis/map/fetchMapStoreData';
+import { fetchMapCafeFilterData } from '../apis/map/fetchMapStoreData';
+import { fetchMapEventOnData } from '../apis/map/fetchMapStoreData';
 import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.

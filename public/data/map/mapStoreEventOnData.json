@@ -1,0 +1,35 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "storeId": 3,
+      "latitude": 37.546498,
+      "longitude": 127.073431,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": true
+    },
+    {
+      "storeId": 5,
+      "latitude": 37.542201,
+      "longitude": 127.071198,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 6,
+      "latitude": 37.540815,
+      "longitude": 127.069612,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

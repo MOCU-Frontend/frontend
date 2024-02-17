@@ -10,6 +10,9 @@ import {
 import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 
+import { fetchMapStoreData } from '../apis/map/fetchMapStoreData';
+import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
+
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
   map: naver.maps.Map | undefined,
@@ -17,19 +20,6 @@ export const useStoreMapData = (
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
-
-  // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
-  const fetchMapStoreMarkerData = async (
-    lat: number,
-    lng: number,
-    userId: number
-  ) => {
-    const response = await instance.get<MapStoreMarkerResponse>(
-      '/data/map/mapStoreMarkerDummyData.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
   // 그 결과를 `storeMapMarkerData`에 저장합니다.
@@ -41,15 +31,6 @@ export const useStoreMapData = (
     queryKey: ['mapStoreMarker'],
     queryFn: () => fetchMapStoreMarkerData(1, 5, 4),
   });
-
-  // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
-  const fetchMapStoreData = async (userId: number, storeId: number) => {
-    const response = await instance.get<MapStoreResponse>(
-      '/data/map/mapStoreDummyData.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
   const [selectedStoreId, setSelectedStoreId] = useState<number | undefined>();

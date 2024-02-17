@@ -2,17 +2,70 @@
   "code": 1000,
   "status": 200,
   "message": "요청에 성공하였습니다.",
-  "result": {
-    "storeName": "장인닭갈비 건대",
-    "mainImageUrl": "http://example.com/main_image.jpg",
-    "category": "음식점",
-    "dueDate": false,
-    "rating": 0,
-    "numOfStamp": 0,
-    "maxStamp": 10,
-    "numOfCouponAvailable": 0,
-    "reward": "닭갈비 1인분",
-    "event": null
-  },
+  "result": [
+    {
+      "storeId": 1,
+      "latitude": 37.540634,
+      "longitude": 127.070144,
+      "category": "음식점",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 2,
+      "latitude": 37.547092,
+      "longitude": 127.073398,
+      "category": "음식점",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": true
+    },
+    {
+      "storeId": 3,
+      "latitude": 37.546498,
+      "longitude": 127.073431,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": true
+    },
+    {
+      "storeId": 4,
+      "latitude": 37.54349,
+      "longitude": 127.069875,
+      "category": "초밥",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 5,
+      "latitude": 37.542201,
+      "longitude": 127.071198,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 6,
+      "latitude": 37.540815,
+      "longitude": 127.069612,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 7,
+      "latitude": 37.540941,
+      "longitude": 127.068447,
+      "category": "빙수",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": false
+    }
+  ],
   "messages": "요청에 성공하였습니다."
 }

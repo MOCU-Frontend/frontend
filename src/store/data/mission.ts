@@ -37,6 +37,6 @@ export const MissionTitleData: MissionTitle[] = [
 export const MissionCntData: MissionCnt[] = [
   {
     todayMissionCnt: 4,
-    stampCnt: 3,
+    stampCnt: 5,
   },
 ];

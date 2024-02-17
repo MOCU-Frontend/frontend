@@ -1,0 +1,12 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "numOfStamp": 0,
+    "reward": "스타벅스 2만원권",
+    "createdDate": "2024-02-14 16:34",
+    "status": "not-done"
+  },
+  "messages": "요청에 성공하였습니다."
+}

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styles from './MissionToday.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import TodayMission from '../../../components/Mission1/atoms/TodayMission';
+import { fetchMissionPageData } from '../../../apis/mission/fetchMissionPageData';
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../styles/colors';
@@ -10,35 +11,55 @@ import { ReactComponent as ArrowRightSmallImage } from '../../../assets/icon/arr
 import { ReactComponent as InformationImage } from '../../../assets/icon/information.svg';
 import { ReactComponent as CoupongageImage } from '../../../assets/icon/couponGage.svg';
 
-import instance from '../../../apis/instance';
 import { useQuery } from '@tanstack/react-query';
-
-import {
-  MissionResponse,
-  MissionData,
-} from '../../../store/Type/Mission/mission';
+import { useMutation } from '@tanstack/react-query';
+import { fetchMissionBtnPatchData } from '../../../apis/mission/fetchMissionBtnPatchData';
+import { fetchMissionMapGetData } from '../../../apis/mission/fetchMissionMapGetData';
+import { fetchStampUserData } from '../../../apis/stamp/fetchStampUserData';
 
 const MissionToday = () => {
   const navigate = useNavigate();
 
-  const fetchMissionData = async () => {
-    const response = await instance.get<MissionResponse>(
-      '/data/mission/missionDummyData-01.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
-
-  // `useQuery`를 사용하여 `fetchMissionData` 함수를 호출하고,
-  // 그 결과를 `storeMissionData`에 저장합니다.
+  // fetchMissionPageData
   const {
     data: storeMissionData,
     isLoading: isMissionDataLoading,
     isError: isMissionDataError,
   } = useQuery({
     queryKey: ['missionData'],
-    queryFn: () => fetchMissionData(),
+    queryFn: () => fetchMissionPageData(),
   });
+
+  // fetchMissionMapGetData
+  const {
+    data: MissionMapGetData,
+    isLoading: isMissionMapGetDataLoading,
+    isError: isMissionMapGetDataError,
+  } = useQuery({
+    queryKey: ['missionMapGetData'],
+    queryFn: () => fetchMissionMapGetData(),
+  });
+
+  // fetchMissionBtnPatchData
+  // '미션 완료하기' 버튼 요청 처리
+
+  // const missionBtnMutation = useMutation(fetchMissionBtnPatchData);
+
+  // '미션 완료하기' 버튼 클릭 시 호출
+  const handleCompleteMissionClick = () => {
+    // missionBtnMutation.mutate({
+    //   todayMissionId: someTodayMissionId,
+    //   userId: someUserId,
+    // }, {
+    //   onSuccess: (data) => {
+    //     if (data.result.content === "이미 2개의 미션 스탬프를 획득하였습니다.") {
+    //     console.log(data.result.content); // "이미 2개의 미션 스탬프를 획득하였습니다."가 출력됩니다.
+    //   } else if (data.result.content === "MOCU앱 출석하기") {
+    // });
+  };
+
+  // 스탬프 개수
+  const stampCnt = MissionMapGetData?.numOfStamp;
 
   return (
     <div className={styles.wrapper}>
@@ -93,7 +114,8 @@ const MissionToday = () => {
         <div className={styles.wrapMissionList}>
           <div className={styles.wrapCurrentState}>
             <div className={styles.currentStateText}>
-              다음 스탬프 획득까지 미션 4개 남았습니다.
+              다음 스탬프 획득까지 미션{' '}
+              {stampCnt !== undefined && 5 - (stampCnt % 5)}개 남았습니다.
             </div>
             <CoupongageImage width={180} height={16} />
           </div>
@@ -104,6 +126,7 @@ const MissionToday = () => {
                 key={mission.todayMissionId}
                 content={mission.content}
                 status={mission.status}
+                missionCompleteClick={handleCompleteMissionClick}
               />
             ))}
         </div>

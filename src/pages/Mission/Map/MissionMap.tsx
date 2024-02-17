@@ -7,10 +7,31 @@ import { ReactComponent as HourglassImage } from '../../../assets/icon/hourGlass
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../styles/colors';
-import { MissionCntData } from '../../../store/data/mission';
+
+import instance from '../../../apis/instance';
+import { useQuery } from '@tanstack/react-query';
+
+import { fetchMissionMapGetData } from './../../../apis/mission/fetchMissionMapGetData';
+import { fetchMissionMapCompleteData } from './../../../apis/mission/fetchMissionMapCompleteData';
 
 const MissionMap = () => {
   const navigate = useNavigate();
+
+  // fetchMissionMapGetData
+  const {
+    data: MissionMapGetData,
+    isLoading: isMissionMapGetDataLoading,
+    isError: isMissionMapGetDataError,
+  } = useQuery({
+    queryKey: ['missionMapGetData'],
+    queryFn: () => fetchMissionMapGetData(),
+  });
+
+  // fetchMissionMapCompleteData
+  // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
+
+  // 스탬프 개수
+  const stampCnt = MissionMapGetData?.numOfStamp;
 
   return (
     <div className={styles.wrapper}>
@@ -40,13 +61,15 @@ const MissionMap = () => {
 
         <div className={styles.wrapContentTitle}>
           <div>미션맵 완성까지</div>
-          <div>스탬프 {MissionCntData[0].stampCnt}개가 남았어요!</div>
+          <div>
+            스탬프 {stampCnt !== undefined && 30 - stampCnt}개가 남았어요!
+          </div>
         </div>
 
         <div className={styles.wrapContentSubTitle}>
           <InformationImage width={14} height={14} fill={colors.grey} />
           <div className={styles.wrapContentSubTitleText}>
-            오늘의 미션 5개를 수행하면 스탬프 1개가 채워져요.
+            오늘의 미션 2개를 수행하면 스탬프 1개가 채워져요.
           </div>
         </div>
 
@@ -56,10 +79,7 @@ const MissionMap = () => {
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
           <div className={styles.wrapMapPicture}>
-            <MissionMapContent
-              stampCnt={MissionCntData[0].stampCnt}
-              todayMissionCnt={MissionCntData[0].todayMissionCnt}
-            />
+            <MissionMapContent stampCnt={stampCnt} />
           </div>
         </div>
       </div>

@@ -9,21 +9,23 @@ export type FilterListWithId = {
   id: number;
 };
 
-export const initialSectorFilterDataArr: FilterList[] = [
+export const initialSectorFilterDataArr: FilterListWithId[] = [
   {
     title: '업종 전체',
     isChecked: true,
+    id: 0,
   },
   {
     title: '카페',
     isChecked: false,
+    id: 1,
   },
 ];
 
 export type MenuItemData = {
   title: string;
   isChecked: boolean;
-  bodyDataArr: FilterList[];
+  bodyDataArr: FilterListWithId[];
 };
 
 export const initialMenuItemDataArr: MenuItemData[] = [

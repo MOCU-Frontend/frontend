@@ -10,8 +10,8 @@ export const useMap = (
   useEffect(() => {
     if (!scriptError && !scriptLoading && mapContainerRef.current) {
       const defaultCenter: naver.maps.LatLng = new naver.maps.LatLng(
-        37.3595704,
-        127.105399
+        37.540634,
+        127.070144
       );
       setMap(
         new naver.maps.Map(mapContainerRef.current, {

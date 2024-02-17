@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import CheckFilter from '../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
@@ -54,17 +54,10 @@ const Map: React.FC = () => {
   // 필터 관련 코드
 
   // mapJsonType 상태 관련 코드
-
   const [mapJsonType, setMapJsonType] = useState(0);
 
   // 첫번째 필터에서 무슨 타입을 골랐는지 저장하기 위해서 만든 상태
   const [storeJsonType, setStoreJsonType] = useState(0);
-
-  // event 필터를 클릭했을 때
-  const handleClickEvent = () => {
-    setMapJsonType((prevType) => (prevType === 2 ? storeJsonType : 2));
-    console.log(mapJsonType);
-  };
 
   // FilterBottomSheet를 보이게 하는지 상태관리
   const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
@@ -101,6 +94,21 @@ const Map: React.FC = () => {
         copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
           !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
       }
+
+      // 업종 전체가 선택되어 있으면 MapJsonType이 0이다.
+      if (copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 0) {
+        setStoreJsonType(0);
+        setMapJsonType(0);
+      }
+
+      // 카페가 선택되어 있으면 MapJsonType이 0이다.
+      else if (
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 1
+      ) {
+        setStoreJsonType(1);
+        setMapJsonType(1);
+      }
+
       return copiedMenuItemDataArr;
     });
   };
@@ -120,13 +128,19 @@ const Map: React.FC = () => {
     if (prevIndex === -1) throw new Error('no checked menu item!!');
 
     handleClickMenuItem(prevIndex, newIndex);
-
-    // 클릭한 필터에 따라 mapJsonType 설정
-    setMapJsonType(newIndex);
-    setStoreJsonType(newIndex);
-    console.log(mapJsonType);
     setIsFilterBottomSheetVisible(true);
   };
+
+  // event 필터를 클릭했을 때
+  // event filter가 on이면 mapJsonType가 2, off가 되면 아까 필터에서 저장해놨던 mapJsonType으로 바뀐다.
+  const handleClickEvent = () => {
+    setMapJsonType((prevType) => (prevType === 2 ? storeJsonType : 2));
+  };
+
+  // useEffect를 사용하여 상태가 업데이트될 때 로그 출력
+  useEffect(() => {
+    console.log(mapJsonType);
+  }, [mapJsonType]);
 
   const selectedSectorFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
@@ -153,7 +167,8 @@ const Map: React.FC = () => {
 
   const { storeMarkerArr, selectedStoreData } = useStoreMapData(
     map,
-    handleShowBottomSheet
+    handleShowBottomSheet,
+    mapJsonType
   );
 
   const navigate = useNavigate();
@@ -206,20 +221,23 @@ const Map: React.FC = () => {
           {isShowBottomSheet && (
             <div className={styles.filtersInHeaderWrapper}>
               <CheckFilterSelect
+                isChecked={false}
+                label={
+                  selectedSectorFilterItem
+                    ? selectedSectorFilterItem.title
+                    : 'no selected item!'
+                }
                 border={1}
                 borderColor="sub-purple-light"
-                label="업종 전체"
-                isChecked={false}
-                onClick={() => {}}
+                onClick={() => handleFilterSelectClick(0)}
               />
               <CheckFilter
                 border={1}
                 borderColor="sub-purple-light"
                 label="이벤트 중"
-                isChecked={false}
+                isChecked={mapJsonType === 2}
+                onClick={handleClickEvent}
               />
-              <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
-              <CheckFilter label="쿠폰 사용 임박" isChecked={true} />
             </div>
           )}
         </HeaderBackBtn>

@@ -13,3 +13,35 @@ export const fetchMapStoreMarkerData = async (
   console.log(response);
   return response.data.result;
 };
+
+export const fetchMapCafeFilterData = async (
+  lat: number,
+  lng: number,
+  userId: number
+) => {
+  const response = await instance.get<MapStoreMarkerResponse>(
+    // 더미 데이터
+    '/data/map/mapStoreCafeFilterData.json'
+
+    // 실제 연결
+    // 'http://localhost:9000/map/userId=1?latitude=37.5404257&longitude=127.072090&eventOption=false&dueDateOption=false&categoryOption=카페'
+  );
+  console.log(response);
+  return response.data.result;
+};
+
+export const fetchMapEventOnData = async (
+  lat: number,
+  lng: number,
+  userId: number
+) => {
+  const response = await instance.get<MapStoreMarkerResponse>(
+    // 더미 데이터
+    '/data/map/mapStoreEventOnData.json'
+
+    // 실제 연결
+    // 'http://localhost:9000/map/userId=1?latitude=37.5404257&longitude=127.072090&eventOption=true&dueDateOption=false&categoryOption=업종 '
+  );
+  console.log(response);
+  return response.data.result;
+};

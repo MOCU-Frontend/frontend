@@ -1,34 +1,13 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import instance from '../apis/instance';
+import { fetchOwnerStoreData } from '../apis/owner/inform';
 
 import {
-  OwnerStoreData,
-  OwnerStoreDataResponse,
   OwnerStorePatchRequestData,
   OwnerStorePostRequestData,
 } from '../store/Type/Owner/owner';
 
 export const useOwnerStoreData = (storeId?: number) => {
-  //   const fetchOwnerStoreData = async (storeId: number) => {
-  //     try {
-  //       const response = await axios.get(
-  //         'http://localhost:3000/data/owner/owner-store-data-dummy.json'
-  //       );
-  //       const data: OwnerStoreDataResponse = response.data;
-  //       return data.result;
-  //     } catch (error) {
-  //       throw new Error('OwnerStore data error');
-  //     }
-  //   };
-
-  const fetchOwnerStoreData = async (storeId: number) => {
-    const response = await instance.get<OwnerStoreDataResponse>(
-      '/data/owner/owner-store-data-dummy.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
   const {
     data: ownerStoreData,
     isLoading: isOwnerStoreDataLoading,
@@ -40,15 +19,19 @@ export const useOwnerStoreData = (storeId?: number) => {
   });
   const ownerStoreDataPatchMutation = useMutation({
     mutationFn: (newData: OwnerStorePatchRequestData) => {
-      return axios.patch('/ownerStoreData', newData);
+      return axios.patch('/owner/store-edit', newData);
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      console.log('ownerStoreDataPatchMutation success!');
+    },
   });
   const ownerStoreDataPostMutation = useMutation({
     mutationFn: (newData: OwnerStorePostRequestData) => {
-      return axios.post('/ownerStoreData', newData);
+      return axios.post('/owner/store-register', newData);
     },
-    onSuccess: () => {},
+    onSuccess: () => {
+      console.log('ownerStoreDataPostMutation success!');
+    },
   });
   return {
     ownerStoreData,

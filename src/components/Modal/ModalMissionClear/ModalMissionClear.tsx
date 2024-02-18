@@ -15,7 +15,7 @@ interface Props {
 const ModalMissionClear: React.FC<Props> = ({
   bodyText,
   subText,
-  time = 15,
+  time = 2,
   onEndTimer,
 }: Props) => {
   const [cnt, setCnt] = useState(0);

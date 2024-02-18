@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import pinMapNormalImg from '../assets/icon/pinMapNormal.svg';
 import pinMapGiftImg from '../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../assets/icon/pinMapFire.svg';
@@ -9,27 +9,24 @@ import {
 } from '../store/Type/Map/map';
 import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { fetchMapStoreData } from '../apis/map/fetchMapStoreData';
+import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
+import { fetchMapCafeFilterData } from '../apis/map/fetchMapStoreMarkerData';
+import { fetchMapEventOnData } from '../apis/map/fetchMapStoreMarkerData';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
   map: naver.maps.Map | undefined,
-  handleClickMarker: () => void
+  handleClickMarker: () => void,
+  mapJsonType: number
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
-  // `fetchMapStoreMarkerData`는 지도에 표시될 마커 데이터를 API에서 가져오는 함수입니다.
-  const fetchMapStoreMarkerData = async (
-    lat: number,
-    lng: number,
-    userId: number
-  ) => {
-    const response = await instance.get<MapStoreMarkerResponse>(
-      '/data/map/mapStoreMarkerDummyData.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
+  // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
+  // 그 결과를 `storeMapMarkerData`에 저장합니다.
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
   // 그 결과를 `storeMapMarkerData`에 저장합니다.
@@ -38,18 +35,20 @@ export const useStoreMapData = (
     isLoading: isStoreMapMarkerDataLoading,
     isError: isStoreMapMarkerDataError,
   } = useQuery({
-    queryKey: ['mapStoreMarker'],
-    queryFn: () => fetchMapStoreMarkerData(1, 5, 4),
+    queryKey: ['mapStoreMarker', mapJsonType],
+    queryFn: () => {
+      switch (mapJsonType) {
+        case 0:
+          return fetchMapStoreMarkerData(1, 5, 4);
+        case 1:
+          return fetchMapCafeFilterData(1, 5, 4);
+        case 2:
+          return fetchMapEventOnData(1, 5, 4);
+        default:
+          return fetchMapStoreMarkerData(1, 5, 4);
+      }
+    },
   });
-
-  // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
-  const fetchMapStoreData = async (userId: number, storeId: number) => {
-    const response = await instance.get<MapStoreResponse>(
-      '/data/map/mapStoreDummyData.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
   const [selectedStoreId, setSelectedStoreId] = useState<number | undefined>();
@@ -68,8 +67,14 @@ export const useStoreMapData = (
   });
 
   useEffect(() => {
+    // 기존의 마커를 모두 제거합니다.
+    storeMarkerArr.forEach((marker) => marker.setMap(null));
+    setStoreMarkerArr([]);
+
     if (map && storeMapMarkerData) {
       storeMapMarkerData.forEach((storeData, index) => {
+        console.log(storeData.latitude);
+        console.log(storeData.longitude);
         const imgUrl = storeData.hasEvent
           ? pinMapFireImg
           : storeData.dueDate
@@ -80,6 +85,7 @@ export const useStoreMapData = (
             storeData.latitude,
             storeData.longitude
           ),
+
           map: map,
           icon: imgUrl,
         });
@@ -92,7 +98,7 @@ export const useStoreMapData = (
         });
       });
     }
-  }, [map]);
+  }, [map, mapJsonType, storeMapMarkerData]);
 
   return { storeMarkerArr, selectedStoreData, storeMapMarkerData };
 };

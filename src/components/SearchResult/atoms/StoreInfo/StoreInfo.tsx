@@ -27,6 +27,12 @@ interface Props {
    * 거리
    */
   distance?: number;
+
+  /**
+   * 평점
+   */
+  rating: number;
+
   /**
    * 클릭시 스토어 detail 페이지로 이동하게
    */
@@ -42,6 +48,7 @@ const StoreInfo: React.FC<Props> = ({
   couponCount,
   achieve,
   distance,
+  rating,
   onClickStoreDetailBtn,
   onClickCouponeBtn,
 }: Props) => {
@@ -62,7 +69,7 @@ const StoreInfo: React.FC<Props> = ({
         </div>
 
         <div className={styles.storeWrapStar}>
-          <StarGageBar width={54} height={10} score={3.8} />
+          <StarGageBar width={54} height={10} score={rating} />
         </div>
       </div>
 

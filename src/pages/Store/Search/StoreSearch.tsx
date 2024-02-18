@@ -17,16 +17,9 @@ import StoreSearchRecommend from '../../../components/StoreSearch/atoms/StoreSea
 import { useRecentSearchWord } from '../../../hooks/useRecentSearchWord';
 import HomeAdSlideStatus from '../../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import SlideMenuEventBodyTab from '../../../components/SlideMenu/atoms/BodyTab/Event/SlideMenuEventBodyTab';
+import { fetchStoreSearchData } from '../../../apis/storeSearch/fetchStoreSearchData';
 
 const StoreSearch = () => {
-  const fetchStoreSearchData = async () => {
-    const response = await instance.get<storeSearchResponse>(
-      '/data/storeSearch/storeSearchData-exist.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
-
   const {
     data: storeSearchData,
     isLoading: isStoreSearchDataLoading,
@@ -84,10 +77,12 @@ const StoreSearch = () => {
           </div>
         </div>
         <StoreSearchImminentCoupon
-          dueDateStoreInfoList={storeSearchData?.dueDateStoreInfoList}
+          dueDateStoreInfoList={storeSearchData?.result.dueDateStoreInfoList}
         />
         <StoreSearchRecommend
-          recommendStoreInfoList={storeSearchData?.recommendStoreInfoList}
+          recommendStoreInfoList={
+            storeSearchData?.result.recommendStoreInfoList
+          }
         />
       </div>
     </div>

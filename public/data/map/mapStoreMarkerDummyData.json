@@ -4,28 +4,67 @@
   "message": "요청에 성공하였습니다.",
   "result": [
     {
-      "storeId": 2,
-      "latitude": 37.541716,
-      "longitude": 127.06976,
-      "category": "베이커리",
-      "hasEvent": false,
-      "dueDate": false
-    },
-    {
-      "storeId": 3,
-      "latitude": 37.54158,
-      "longitude": 127.070982,
-      "category": "카페",
-      "hasEvent": true,
-      "dueDate": false
-    },
-    {
-      "storeId": 4,
+      "storeId": 1,
       "latitude": 37.540634,
       "longitude": 127.070144,
       "category": "음식점",
       "hasEvent": false,
-      "dueDate": false
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 2,
+      "latitude": 37.547092,
+      "longitude": 127.073398,
+      "category": "음식점",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": true
+    },
+    {
+      "storeId": 3,
+      "latitude": 37.546498,
+      "longitude": 127.073431,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": true
+    },
+    {
+      "storeId": 4,
+      "latitude": 37.54349,
+      "longitude": 127.069875,
+      "category": "초밥",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 5,
+      "latitude": 37.542201,
+      "longitude": 127.071198,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 6,
+      "latitude": 37.540815,
+      "longitude": 127.069612,
+      "category": "카페",
+      "hasEvent": true,
+      "dueDate": false,
+      "visited": false
+    },
+    {
+      "storeId": 7,
+      "latitude": 37.540941,
+      "longitude": 127.068447,
+      "category": "빙수",
+      "hasEvent": false,
+      "dueDate": false,
+      "visited": false
     }
   ],
   "messages": "요청에 성공하였습니다."

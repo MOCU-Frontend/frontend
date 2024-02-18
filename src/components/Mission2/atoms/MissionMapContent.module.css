@@ -121,7 +121,7 @@
 }
 
 .gaugeNumber {
-  color: var(--color-main_purple, #6e75e8);
+  color: #ffd79a;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

@@ -26,9 +26,29 @@ interface Props {
    * 스탬프 개수
    */
   stampCnt: number | undefined;
+
+  /**
+   * 보상
+   */
+  reward: String | undefined;
+
+  /**
+   * 보상 버튼을 눌렀을 때
+   */
+  handleRewardClick: () => void;
+
+  /**
+   * rewardGet
+   */
+  rewardGet: boolean;
 }
 
-const MissionMapContent: React.FC<Props> = ({ stampCnt }) => {
+const MissionMapContent: React.FC<Props> = ({
+  stampCnt,
+  reward,
+  handleRewardClick,
+  rewardGet,
+}) => {
   // 만약을 대비
   if (stampCnt === undefined) {
     stampCnt = 24;
@@ -142,9 +162,10 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt }) => {
               label="최종 보상 받기"
               textColor="sub-purple-light"
               borderRadius="large"
+              onClick={handleRewardClick}
             />
           </div>
-          <div className={styles.finalButtonText}>*스타벅스 2만원권</div>
+          <div className={styles.finalButtonText}>{reward}</div>
         </div>
       ) : (
         <div className={styles.final}>

@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './MissionToday.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import TodayMission from '../../../components/Mission1/atoms/TodayMission';
 import { fetchMissionPageData } from '../../../apis/mission/fetchMissionPageData';
+import axios from 'axios';
 
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../styles/colors';
@@ -16,6 +17,9 @@ import { useMutation } from '@tanstack/react-query';
 import { fetchMissionBtnPatchData } from '../../../apis/mission/fetchMissionBtnPatchData';
 import { fetchMissionMapGetData } from '../../../apis/mission/fetchMissionMapGetData';
 import { fetchStampUserData } from '../../../apis/stamp/fetchStampUserData';
+import { missionBtnResponse } from '../../../store/Type/Mission/missionBtnResponse';
+import { MissionResponse } from '../../../store/Type/Mission/mission';
+import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
 
 const MissionToday = () => {
   const navigate = useNavigate();
@@ -43,19 +47,34 @@ const MissionToday = () => {
   // fetchMissionBtnPatchData
   // '미션 완료하기' 버튼 요청 처리
 
-  // const missionBtnMutation = useMutation(fetchMissionBtnPatchData);
+  const [patchData, setPatchData] = useState<missionBtnResponse | undefined>();
 
-  // '미션 완료하기' 버튼 클릭 시 호출
-  const handleCompleteMissionClick = () => {
-    // missionBtnMutation.mutate({
-    //   todayMissionId: someTodayMissionId,
-    //   userId: someUserId,
-    // }, {
-    //   onSuccess: (data) => {
-    //     if (data.result.content === "이미 2개의 미션 스탬프를 획득하였습니다.") {
-    //     console.log(data.result.content); // "이미 2개의 미션 스탬프를 획득하였습니다."가 출력됩니다.
-    //   } else if (data.result.content === "MOCU앱 출석하기") {
-    // });
+  const missionBtnMutation = useMutation({
+    mutationFn: (newData: { todayMissionId: number; userId: number }) => {
+      return axios.patch('/mission/today-mission/done', newData);
+    },
+    onSuccess: (res) => {
+      const data: missionBtnResponse = res.data;
+      setPatchData(data);
+    },
+  });
+
+  const [missionCompleted, setMissionCompleted] = useState<boolean>(false);
+
+  const handleCompleteMissionClick = (
+    todayMissionId: number,
+    userId: number
+  ) => {
+    if (
+      patchData?.result.content !== '이미 2개의 미션 스탬프를 획득하였습니다.'
+    ) {
+      setMissionCompleted(true);
+    }
+
+    missionBtnMutation.mutate({
+      todayMissionId: todayMissionId,
+      userId: userId,
+    });
   };
 
   // 스탬프 개수
@@ -126,11 +145,23 @@ const MissionToday = () => {
                 key={mission.todayMissionId}
                 content={mission.content}
                 status={mission.status}
-                missionCompleteClick={handleCompleteMissionClick}
+                missionCompleteClick={() =>
+                  handleCompleteMissionClick(mission.todayMissionId, 1)
+                }
+                patchData={patchData}
               />
             ))}
         </div>
       </div>
+
+      {missionCompleted && patchData && (
+        <ModalMissionClear
+          bodyText="오늘의 미션 수행 완료"
+          subText={patchData.result.content}
+          time={2}
+          onEndTimer={() => setMissionCompleted(false)}
+        />
+      )}
     </div>
   );
 };

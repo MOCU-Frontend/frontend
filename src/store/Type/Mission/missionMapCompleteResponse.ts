@@ -1,4 +1,4 @@
-export type StoreSearchResultResponse = {
+export type MissionMapCompleteResponse = {
   code: number;
   status: number;
   message: string;
@@ -7,10 +7,5 @@ export type StoreSearchResultResponse = {
 };
 
 export type Result = {
-  name: string;
   reward: string;
-  distance: number;
-  rating: number;
-  maxStamp: number;
-  numOfStamp: number;
 };

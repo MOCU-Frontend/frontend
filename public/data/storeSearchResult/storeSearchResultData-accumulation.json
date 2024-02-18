@@ -1,0 +1,56 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "name": "카페온더플랜건대점",
+      "reward": "아우디 R8 스파이더",
+      "distance": 645.7876733205377,
+      "rating": 4.7,
+      "maxStamp": 15,
+      "numOfStamp": 13
+    },
+    {
+      "name": "행복한연탄구이",
+      "reward": "음료",
+      "distance": 4013.902200107365,
+      "rating": 4.8,
+      "maxStamp": 10,
+      "numOfStamp": 7
+    },
+    {
+      "name": "시홍쓰",
+      "reward": "박수",
+      "distance": 744.3978399754758,
+      "rating": 4.9,
+      "maxStamp": 10,
+      "numOfStamp": 5
+    },
+    {
+      "name": "왕소구이",
+      "reward": "페라리 488",
+      "distance": 768.7582121724315,
+      "rating": 4.7,
+      "maxStamp": 10,
+      "numOfStamp": 3
+    },
+    {
+      "name": "현이네고기국수",
+      "reward": "람보르기니 아벤타도르 svj",
+      "distance": 587.3224816137239,
+      "rating": 4.8,
+      "maxStamp": 10,
+      "numOfStamp": 0
+    },
+    {
+      "name": "가츠시",
+      "reward": "멕라렌 720s",
+      "distance": 817.9298349429184,
+      "rating": 5,
+      "maxStamp": 10,
+      "numOfStamp": 0
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

@@ -5,6 +5,7 @@ export type MapStoreMarkerData = {
   category: string;
   hasEvent: boolean;
   dueDate: boolean;
+  visited: boolean;
 };
 
 export type MapStoreMarkerResponse = {

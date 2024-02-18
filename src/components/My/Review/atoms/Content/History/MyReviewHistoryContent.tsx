@@ -10,27 +10,17 @@ import MyReviewHistory from '../../../History/MyReviewHistory';
 import axios from 'axios';
 import { MyReviewwHistoryDataResponse } from '../../../../../../store/Type/My/ReviewHistory/MyReviewHistory';
 import { useQuery } from '@tanstack/react-query';
+import { fetchMyReviewHistoryData } from '../../../../../../apis/my/review/history';
 interface Props {}
 
 const MyReviewHistoryContent: React.FC<Props> = ({}: Props) => {
-  const fetchMyReviewHistoryData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/my/review/history/my-review-history-data-dummy.json'
-      );
-      const data: MyReviewwHistoryDataResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('MyReviewwHistory data error');
-    }
-  };
   const {
     data: myReviewwHistoryData,
     isLoading: isMyReviewwHistoryDataLoading,
     isError: isMyReviewwHistoryDataError,
   } = useQuery({
     queryKey: ['MyReviewwHistory'],
-    queryFn: () => fetchMyReviewHistoryData(),
+    queryFn: () => fetchMyReviewHistoryData(5),
   });
   return (
     <div className={styles.wholeWrapper}>

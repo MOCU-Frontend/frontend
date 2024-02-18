@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { fetchMyReviewNewData } from '../../../../../../apis/my/review/new';
 import { MyReviewwNewDataResponse } from '../../../../../../store/Type/My/ReviewNew/MyReviewNew';
 import SlideMenuReviewNewBodyTab from '../../../../../SlideMenu/atoms/BodyTab/ReviewNew/SlideMenuReviewNewBodyTab';
 import MyReviewSlideStatus from '../../SlideStatus/MyReviewSlideStatus';
@@ -10,24 +11,13 @@ import styles from './MyReviewNewContent.module.css';
 interface Props {}
 
 const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
-  const fetchMyReviewNewData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/my/review/new/my-review-new-data-dummy.json'
-      );
-      const data: MyReviewwNewDataResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('OwnerStore data error');
-    }
-  };
   const {
     data: MyReviewNewData,
     isLoading: isMyReviewNewDataLoading,
     isError: isMyReviewNewDataError,
   } = useQuery({
     queryKey: ['MyReviewNew'],
-    queryFn: () => fetchMyReviewNewData(),
+    queryFn: () => fetchMyReviewNewData(5),
   });
   const [reviewArr, setReviewArr] = useState(
     MyReviewNewData

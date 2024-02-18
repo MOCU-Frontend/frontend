@@ -39,6 +39,8 @@ const MissionMapContent: React.FC<Props> = ({ stampCnt, reward }) => {
     stampCnt = 24;
   }
 
+  stampCnt = 24;
+
   return (
     <div className={styles.wrapMissionMap}>
       <div className={styles.first}>

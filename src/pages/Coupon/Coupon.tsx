@@ -8,6 +8,8 @@ import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/Stor
 import CouponBottomSheet from '../../components/Coupon/atoms/BottomSheet/CouponBottomSheet';
 import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampModal';
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
+import { useQuery } from '@tanstack/react-query';
+import { fetchMyCouponData } from '../../apis/my/coupon/myCoupon';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -73,27 +75,14 @@ const Coupon = () => {
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
   };
-
-  const [couponStoreDataArr, setCouponStoreDataArr] = useState([
-    {
-      title: '카페롱',
-      couponCount: 8,
-      achieve: '바닐라 마카롱',
-      distance: 100,
-    },
-    {
-      title: '드로잉레시피',
-      couponCount: 10,
-      achieve: '오븐 스파게티',
-      distance: 100,
-    },
-    {
-      title: '크림베이글 건대점',
-      couponCount: 9,
-      achieve: '아이스 아메리카노 한 잔',
-      distance: 100,
-    },
-  ]);
+  const {
+    data: myCouponData,
+    isLoading: isMyCouponDataLoading,
+    isError: isMyCouponDataError,
+  } = useQuery({
+    queryKey: ['MyCoupon'],
+    queryFn: () => fetchMyCouponData(5),
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -123,23 +112,25 @@ const Coupon = () => {
       </div>
 
       <div className={styles.couponStoreInfoWrapper}>
-        {couponStoreDataArr.map((data, index) => (
-          <StoreInfoInStamp
-            key={data.title + index}
-            title={data.title}
-            couponCount={data.couponCount}
-            achieve={data.achieve}
-            distance={data.distance}
-            onClickCouponBtn={() => {
-              setCouponModalLevel('confirm');
-            }}
-            onClickStoreDetailBtn={() => {
-              setSelectedStoreInform(storeMapData[0]);
-              setIsShowBottomSheet(true);
-            }}
-            onClickMapBtn={() => navigate('/map')}
-          />
-        ))}
+        {myCouponData &&
+          myCouponData.map((data, index) => (
+            <StoreInfoInStamp
+              key={data.name + index}
+              title={data.name}
+              couponCount={data.numOfStamp}
+              achieve={data.reward}
+              // TODO: 거리계산
+              distance={100}
+              onClickCouponBtn={() => {
+                setCouponModalLevel('confirm');
+              }}
+              onClickStoreDetailBtn={() => {
+                setSelectedStoreInform(storeMapData[0]);
+                setIsShowBottomSheet(true);
+              }}
+              onClickMapBtn={() => navigate('/map')}
+            />
+          ))}
       </div>
       {isShowBottomSheet && selectedStoreInform && (
         <CouponBottomSheet

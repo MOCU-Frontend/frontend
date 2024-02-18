@@ -16,6 +16,7 @@ interface Props {
   nameText: string;
   timeText: string;
   bodyText: string;
+  handleReportReview: (reviewId: number, onSuccess: () => void) => void;
   bodyTextLengthLimit?: number;
 }
 
@@ -26,6 +27,7 @@ const StoreReview: React.FC<Props> = ({
   timeText,
   bodyText,
   bodyTextLengthLimit = 50,
+  handleReportReview,
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
   const [isReporting, setIsReporting] = useState(false);
@@ -61,8 +63,10 @@ const StoreReview: React.FC<Props> = ({
               onClickNo={() => setReportLevel(undefined)}
               onClickX={() => setReportLevel(undefined)}
               onClickYes={() => {
-                setReportLevel('success');
-                setTimeout(() => setReportLevel(undefined), 2000);
+                handleReportReview(5, () => {
+                  setReportLevel('success');
+                  setTimeout(() => setReportLevel(undefined), 2000);
+                });
               }}
               reportedUserName='윤**'
             />,

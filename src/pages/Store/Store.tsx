@@ -8,38 +8,42 @@ import StoreStampContent from '../../components/Store/atoms/Contents/Stamp/Store
 import StoreAccumBtn from '../../components/Store/atoms/Button/Accum/StoreAccumBtn';
 import StoreScoreContent from '../../components/Store/atoms/Contents/Score/StoreScoreContent';
 import StoreReviewContent from '../../components/Store/atoms/Contents/Review/StoreReviewContent';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import FullBtn from '../../components/Button/FullBtn/FullBtn';
 import storeImg from '../../assets/imgs/storeExample.png';
 
-import instance from '../../apis/instance';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  StoreDetailResponse,
-  StoreDetailData,
-} from '../../store/Type/StoreDetail/storeDetail';
+import { fetchStoreDetailData } from '../../apis/store/store';
+import { ReviewReportRequestData } from '../../store/Type/Review/review';
+import axios from 'axios';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
-
-  const fetchStoreDetailData = async () => {
-    const response = await instance.get<StoreDetailResponse>(
-      'data/storeDetail/storeDetail-sortByRate.json'
-    );
-    console.log(response);
-    return response.data.result;
-  };
-
+  const { storeId } = useParams();
   const {
     data: storeDetailData,
     isLoading: isStoreDetailDataLoading,
     isError: isStoreDetailError,
   } = useQuery({
     queryKey: ['StoreDetailData'],
-    queryFn: () => fetchStoreDetailData(),
+    queryFn: () =>
+      fetchStoreDetailData(storeId ? parseInt(storeId) : 1, 5, true, true, 0),
+    enabled: !!storeId,
   });
+
+  const reviewReportMutation = useMutation({
+    mutationFn: (newData: ReviewReportRequestData) => {
+      return axios.post('/review/correct-my-review', newData);
+    },
+    onSuccess: () => {
+      console.log('신고 완료');
+    },
+  });
+
+  const handleReportReview = (reviewId: number, onSuccess: () => void) => {
+    reviewReportMutation.mutate({ reviewId }, { onSuccess });
+  };
 
   const [isExistReview, setIsExistReview] = useState(true);
   return (
@@ -56,7 +60,7 @@ const Store: React.FC = () => {
           </div>
         </HeaderBackBtn>
       </div>
-      <img src={storeImg} alt="" className={styles.imgDummyBox} />
+      <img src={storeImg} alt='' className={styles.imgDummyBox} />
       <div className={styles.topContentBox}>
         <div className={styles.infoWrapper}>
           <StoreInfoContent
@@ -81,13 +85,14 @@ const Store: React.FC = () => {
         </div>
         <StoreReviewContent
           reviews={storeDetailData && storeDetailData?.reviews}
+          handleReportReview={handleReportReview}
         />
       </div>
       {isExistReview && (
         <div className={styles.fullBtnWrapper}>
           <FullBtn
             onClick={() => navigate('/review/11')}
-            label="리뷰 작성 (1일 남음)"
+            label='리뷰 작성 (1일 남음)'
           />
         </div>
       )}

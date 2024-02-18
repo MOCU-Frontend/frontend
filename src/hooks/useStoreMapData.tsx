@@ -11,10 +11,10 @@ import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { fetchMapStoreData } from '../apis/map/fetchMapStoreData';
 import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
 import { fetchMapCafeFilterData } from '../apis/map/fetchMapStoreMarkerData';
 import { fetchMapEventOnData } from '../apis/map/fetchMapStoreMarkerData';
+import { fetchMapStoreData } from './../apis/map/fetchMapStoreData';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (

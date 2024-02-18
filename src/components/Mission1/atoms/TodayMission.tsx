@@ -18,7 +18,7 @@ const TodayMission: React.FC<Props> = ({
 }: Props) => {
   const isButtonDisabled =
     patchData?.result.content === '이미 2개의 버튼을 완료하였습니다';
-  const buttonLabel = isButtonDisabled ? '미션 완료하기' : '적립 완료';
+  const buttonLabel = isButtonDisabled ? '미션 완료하기' : '미션 완료 하기';
 
   return (
     <div className={styles.wrapper}>

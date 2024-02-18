@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './MissionMap.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MissionMapContent from '../../../components/Mission2/atoms/MissionMapContent';
@@ -16,6 +16,8 @@ import { fetchMissionMapCompleteData } from './../../../apis/mission/fetchMissio
 import axios from 'axios';
 import { MissionMapCompleteResponse } from '../../../store/Type/Mission/missionMapCompleteResponse';
 
+import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+
 const MissionMap = () => {
   const navigate = useNavigate();
 
@@ -31,8 +33,19 @@ const MissionMap = () => {
 
   // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
+  // const stampCnt = 30;
 
-  const [reward, setReward] = useState<String>('스타벅스 2만원권');
+  const [reward, setReward] = useState<string>('스타벅스 2만원권');
+
+  const [rewardGet, setRewardGet] = useState<boolean>(false);
+
+  const handleRewardClick = () => {
+    missionMapCompleteMutation.mutate({
+      // 임시 userId
+      userId: 1,
+    });
+    setRewardGet(true);
+  };
 
   // fetchMissionMapCompleteData
   // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
@@ -45,14 +58,6 @@ const MissionMap = () => {
       setReward(res.data.result.reward);
     },
   });
-
-  // 스탬프 개수가 30개 이상이면
-  if (stampCnt !== undefined && stampCnt >= 30) {
-    missionMapCompleteMutation.mutate({
-      // 임시 userId
-      userId: 1,
-    });
-  }
 
   return (
     <div className={styles.wrapper}>
@@ -100,10 +105,23 @@ const MissionMap = () => {
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
           <div className={styles.wrapMapPicture}>
-            <MissionMapContent stampCnt={stampCnt} reward={reward} />
+            <MissionMapContent
+              stampCnt={stampCnt}
+              reward={reward}
+              handleRewardClick={handleRewardClick}
+              rewardGet={rewardGet}
+            />
           </div>
         </div>
       </div>
+      {rewardGet === true && (
+        <ModalMissionClear
+          bodyText="미션맵 최종 보상 받기 완료!"
+          subText={reward}
+          time={2}
+          onEndTimer={() => setRewardGet(false)}
+        />
+      )}
     </div>
   );
 };

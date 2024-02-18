@@ -1,5 +1,7 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { fetchOwnerCouponData } from '../../../apis/owner/coupon';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
@@ -28,13 +30,16 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
       return copiedArr;
     });
   };
-  const [couponData, setCouponData] = useState([
-    { isDangol: true, userName: '민초', accumText: '10/10', couponNum: 6 },
-    { isDangol: true, userName: '모쿠', accumText: '10/10', couponNum: 2 },
-    { isDangol: false, userName: '송희', accumText: '9/10', couponNum: 2 },
-    { isDangol: true, userName: '빵돌이', accumText: '6/10', couponNum: 10 },
-    { isDangol: false, userName: '도토리', accumText: '5/10', couponNum: 6 },
-  ]);
+
+  const {
+    data: ownerCouponData,
+    isLoading: isOwnerCouponDataLoading,
+    isError: isOwnerCouponDataError,
+  } = useQuery({
+    queryKey: ['OwnerCoupon'],
+    queryFn: () => fetchOwnerCouponData(5, '적립 많은 순'),
+  });
+
   return (
     <div>
       <HeaderBackBtn
@@ -68,15 +73,16 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
           onClick={() => {}}
         />
       </div>
-      {couponData.map((data, index) => (
-        <OwnerCouponItem
-          key={data.userName + index}
-          isDangol={data.isDangol}
-          userName={data.userName}
-          accumText={data.accumText}
-          couponNum={data.couponNum}
-        />
-      ))}
+      {ownerCouponData &&
+        ownerCouponData.map((data, index) => (
+          <OwnerCouponItem
+            key={data.userName + index}
+            isDangol={false}
+            userName={data.userName}
+            accumText={`${data.numOfStamp}/${data.maxStamp}`}
+            couponNum={data.useCount}
+          />
+        ))}
     </div>
   );
 };

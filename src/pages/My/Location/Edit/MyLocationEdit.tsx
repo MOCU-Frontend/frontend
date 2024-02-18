@@ -11,6 +11,12 @@ import { ReactComponent as CompanyIcon } from '../../../../assets/icon/company.s
 import { ReactComponent as SchoolIcon } from '../../../../assets/icon/school.svg';
 import { ReactComponent as MarkerIcon } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import MyLocationEditSeeMapBtn from '../../../../components/My/Location/Edit/atoms/Buttons/SeeMap/MyLocationEditSeeMapBtn';
+import { useMutation } from '@tanstack/react-query';
+import {
+  AddressPatchRequest,
+  AddressPatchResponse,
+} from '../../../../store/Type/Address/address';
+import axios from 'axios';
 type LocSetData = {
   name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -26,6 +32,7 @@ const MyLocationEdit: React.FC = () => {
     { name: '학교', Icon: SchoolIcon, isChecked: false },
     { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
+  const checkedLocSetData = locSetDataArr.find((x) => x.isChecked);
   const handleClickLocSetBtn = (index: number) => {
     if (!locSetDataArr[index]) throw new Error('invalid index!');
     setLocSetDataArr((prevArr) => {
@@ -51,6 +58,20 @@ const MyLocationEdit: React.FC = () => {
   };
 
   const navigate = useNavigate();
+  const userId = 5;
+  const addressPatchMutation = useMutation({
+    mutationFn: (newData: AddressPatchRequest) => {
+      return axios.patch(
+        `/users/${userId}/modify-address/${locationId}`,
+        newData
+      );
+    },
+    onSuccess: (res) => {
+      const data: AddressPatchResponse = res.data;
+      console.log(data);
+      navigate('/');
+    },
+  });
   return (
     <>
       <HeaderBackBtn
@@ -76,7 +97,20 @@ const MyLocationEdit: React.FC = () => {
         <MyLocationEditSeeMapBtn onClick={() => navigate('/my/location/now')} />
       </div>
       <div className={styles.fullBtnWrapper}>
-        <FullBtn label='수정 완료하기' onClick={() => {}} />
+        {/* TODO: 주소 수정에서 주소 받아오기 추가 */}
+        <FullBtn
+          label='수정 완료하기'
+          onClick={() => {
+            if (checkedLocSetData) {
+              addressPatchMutation.mutate({
+                name: checkedLocSetData.etcName || checkedLocSetData.name,
+                address: '서울 광진구 능동로 69',
+                latitude: '37.54160960160775',
+                longitude: '127.07875583744614',
+              });
+            }
+          }}
+        />
       </div>
     </>
   );

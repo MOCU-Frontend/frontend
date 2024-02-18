@@ -18,6 +18,8 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
+import { useQuery } from '@tanstack/react-query';
+import { fetchMyPageData } from '../../apis/my/myPage';
 type RewardData = {
   date: string;
   storeName: string;
@@ -53,6 +55,14 @@ const rewardDataArr: RewardData[] = [
 
 const My: React.FC = () => {
   const navigate = useNavigate();
+  const {
+    data: myPageData,
+    isLoading: isMyPageDataLoading,
+    isError: isMyPageDataError,
+  } = useQuery({
+    queryKey: ['MyPage'],
+    queryFn: () => fetchMyPageData(5),
+  });
   const [adItemArr, setAdItemArr] = useState([
     { adId: 1, isChecked: true },
     { adId: 2, isChecked: false },
@@ -92,13 +102,13 @@ const My: React.FC = () => {
         <div className={styles.quickMenusWrapper}>
           <MyQuickMenu
             titleText='쿠폰'
-            num={4}
+            num={myPageData ? myPageData.usableCoupon : 0}
             Icon={CouponGradationIcon}
             onClick={() => navigate('/coupon')}
           />
           <MyQuickMenu
             titleText='단골'
-            num={2}
+            num={myPageData ? myPageData.availableFavoriteCount : 0}
             Icon={MyStoreGradationIcon}
             onClick={() => navigate('/store/dangol')}
           />
@@ -118,16 +128,17 @@ const My: React.FC = () => {
           onClick={() => navigate('/reward/history')}
           gap={12}
         >
-          <MyMainContentSubText text='한 달 동안 총 5개의 혜택을 받았어요!' />
+          {/* TODO: 혜택 연동 */}
+          <MyMainContentSubText text={'한 달 동안 총 5개의 혜택을 받았어요!'} />
           <MyRewardStampsContent rewardDataArr={rewardDataArr} />
         </MyMainNormalHeaderWrapper>
         <MyReviewContent
-          possibleReviewNum={1}
+          possibleReviewNum={myPageData ? myPageData.availableReviewCount : 0}
           onClick={() => navigate('review')}
         />
         <MyMissionContent
           onClick={() => navigate('/mission/map')}
-          accumStampNum={8}
+          accumStampNum={myPageData ? myPageData.missionStampCount : 0}
           wholeStampNum={10}
         />
         <div className={styles.bodyTabWrapper}>

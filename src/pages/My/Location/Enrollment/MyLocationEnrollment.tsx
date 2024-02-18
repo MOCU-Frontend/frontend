@@ -40,28 +40,14 @@ const MyLocationEnrollment: React.FC = () => {
     Address | undefined
   >();
 
-  // const handleSearchLocation = (locText: string) => {
-  //   fetch(
-  //     `https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&page=1&size=10&query=${locText}`,
-  //     {
-  //       method: 'GET',
-  //       headers: { Authorization: process.env.REACT_APP_KAKAO_AK || '' },
-  //     }
-  //   )
-  //     .then((response) => {
-  //       if (response.ok === true) {
-  //         return response.json();
-  //       }
-  //       throw new Error('에러 발생!');
-  //     })
-  //     .then((data) => {
-  //       setAddressSearchWholeData(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
-
   const handleSearchLocation = (locText: string) => {
-    fetch('http://localhost:3000/data/address-dummy-02.json')
+    fetch(
+      `https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&page=1&size=10&query=${locText}`,
+      {
+        method: 'GET',
+        headers: { Authorization: process.env.REACT_APP_KAKAO_AK || '' },
+      }
+    )
       .then((response) => {
         if (response.ok === true) {
           return response.json();
@@ -73,6 +59,20 @@ const MyLocationEnrollment: React.FC = () => {
       })
       .catch((error) => console.error(error));
   };
+
+  // const handleSearchLocation = (locText: string) => {
+  //   fetch('http://localhost:3000/data/address-dummy-02.json')
+  //     .then((response) => {
+  //       if (response.ok === true) {
+  //         return response.json();
+  //       }
+  //       throw new Error('에러 발생!');
+  //     })
+  //     .then((data) => {
+  //       setAddressSearchWholeData(data);
+  //     })
+  //     .catch((error) => console.error(error));
+  // };
 
   const [detailLocation, setDetailLocation] = useState('');
   const [locSetDataArr, setLocSetDataArr] = useState<LocSetData[]>([

@@ -65,7 +65,7 @@ const StoreReview: React.FC<Props> = ({
               onClickYes={() => {
                 handleReportReview(5, () => {
                   setReportLevel('success');
-                  setReportLevel(undefined);
+                  setTimeout(() => setReportLevel(undefined), 2000);
                 });
               }}
               reportedUserName='윤**'

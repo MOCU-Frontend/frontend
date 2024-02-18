@@ -9,11 +9,7 @@ import OwnerInformEditBtn from '../../../components/Owner/Inform/Button/Edit/Own
 import OwnerInformInfoContent from '../../../components/Owner/Inform/atoms/Contents/Info/OwnerInformInfoContent';
 import OwnerInformLocContent from '../../../components/Owner/Inform/atoms/Contents/Loc/OwnerInformLocContent';
 import OwnerInformBasicSecContent from '../../../components/Owner/Inform/atoms/Contents/BasicSec/OwnerInformBasicSecContent';
-import OwnerInformSubSecsContent from '../../../components/Owner/Inform/atoms/Contents/SubSecs/OwnerInformSubSecsContent';
 import OwnerInformMenuSecContent from '../../../components/Owner/Inform/atoms/Contents/MenuSec/OwnerInformMenuSecContent';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { OwnerStoreDataResponse } from '../../../store/Type/Owner/owner';
 import { useOwnerStoreData } from '../../../hooks/useOwnerStoreData';
 
 interface Props {}

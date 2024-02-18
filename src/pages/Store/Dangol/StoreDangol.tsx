@@ -17,11 +17,31 @@ import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filte
 import StoreInfoInStamp from '../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
 import { FilterList } from '../../../store/data/stamp';
+import { fetchDangolData } from '../../../apis/dangol/dangol';
+import { useQuery } from '@tanstack/react-query';
 
 interface Props {}
 
 const StoreDangol: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const {
+    data: dangolData,
+    isLoading: isDangolDataLoading,
+    isError: isDangolDataError,
+  } = useQuery({
+    queryKey: ['Dangol'],
+    queryFn: () =>
+      fetchDangolData(
+        5,
+        '최신순',
+        '식당',
+        false,
+        false,
+        37.53939427920637,
+        127.07278389250759,
+        0
+      ),
+  });
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
@@ -185,18 +205,20 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
       </div>
 
       <div className={styles.wrapContent}>
-        {couponStoreDataArr.map((data, index) => (
-          <StoreInfoInStamp
-            key={data.title + index}
-            title={data.title}
-            couponCount={data.couponCount}
-            achieve={data.achieve}
-            distance={data.distance}
-            onClickCouponBtn={() => {}}
-            onClickStoreDetailBtn={() => {}}
-            onClickMapBtn={() => navigate('/map')}
-          />
-        ))}
+        {dangolData &&
+          dangolData.storeList.map((data, index) => (
+            <StoreInfoInStamp
+              key={data.name + index}
+              title={data.name}
+              couponCount={data.numOfStamp}
+              // TODO: 전체 스탬프 개수 추가하기
+              achieve={data.reward}
+              distance={data.distance}
+              onClickCouponBtn={() => {}}
+              onClickStoreDetailBtn={() => {}}
+              onClickMapBtn={() => navigate('/map')}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

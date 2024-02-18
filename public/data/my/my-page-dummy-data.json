@@ -1,0 +1,19 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "usableCoupon": 0,
+    "availableFavoriteCount": 0,
+    "currentAddress": "서울특별시 동대문구 사가정로 65",
+    "recentCouponUsage": [
+      {
+        "benefit": "음료",
+        "storeName": "행복한연탄구이"
+      }
+    ],
+    "availableReviewCount": 1,
+    "missionStampCount": 0
+  },
+  "messages": "요청에 성공하였습니다."
+}

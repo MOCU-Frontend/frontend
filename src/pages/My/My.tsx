@@ -18,40 +18,26 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
-type RewardData = {
-  date: string;
-  storeName: string;
-  menu: string;
-  menuNum: number;
-};
-const rewardDataArr: RewardData[] = [
-  {
-    date: '23.11.16',
-    storeName: '카페 23 정릉점',
-    menu: '아메리카노',
-    menuNum: 1,
-  },
-  {
-    date: '23.11.16',
-    storeName: '카페 23 정릉점',
-    menu: '아메리카노',
-    menuNum: 1,
-  },
-  {
-    date: '23.11.16',
-    storeName: '카페 23 정릉점',
-    menu: '아메리카노',
-    menuNum: 1,
-  },
-  {
-    date: '23.11.16',
-    storeName: '카페 23 정릉점',
-    menu: '아메리카노',
-    menuNum: 1,
-  },
-];
+import { fetchMyPageData } from '../../apis/my/fetchMyPageData';
+import {
+  MyPageResponse,
+  RecentCouponUsage,
+} from '../../store/Type/My/myPageResponse';
+import { useQuery } from '@tanstack/react-query';
 
 const My: React.FC = () => {
+  // fetchMyPageData
+  const {
+    data: MyPageData,
+    isLoading: isMyPageDataLoading,
+    isError: isMyPageDataError,
+  } = useQuery({
+    queryKey: ['missionData'],
+
+    // userId 임시
+    queryFn: () => fetchMyPageData(1),
+  });
+
   const navigate = useNavigate();
   const [adItemArr, setAdItemArr] = useState([
     { adId: 1, isChecked: true },
@@ -86,50 +72,68 @@ const My: React.FC = () => {
         >
           <ProfileGradationIcon width={48} height={48} />
         </button>
-        <MyTopSection titleText='모쿠 님의 마이페이지' subText='@298370' />
+        <MyTopSection titleText="모쿠 님의 마이페이지" subText="@298370" />
       </div>
       <main className={styles.main}>
         <div className={styles.quickMenusWrapper}>
-          <MyQuickMenu
-            titleText='쿠폰'
-            num={4}
-            Icon={CouponGradationIcon}
-            onClick={() => navigate('/coupon')}
-          />
-          <MyQuickMenu
-            titleText='단골'
-            num={2}
-            Icon={MyStoreGradationIcon}
-            onClick={() => navigate('/store/dangol')}
-          />
-          <MyQuickMenu
-            titleText='선물함'
-            num={0}
-            Icon={GiftGradationIcon}
-            onClick={() => navigate('/gift/box')}
-          />
+          {MyPageData !== undefined && (
+            <>
+              <MyQuickMenu
+                titleText="쿠폰"
+                num={MyPageData.result.usableCoupon}
+                Icon={CouponGradationIcon}
+                onClick={() => navigate('/coupon')}
+              />
+              <MyQuickMenu
+                titleText="단골"
+                num={MyPageData.result.availableFavoriteCount}
+                Icon={MyStoreGradationIcon}
+                onClick={() => navigate('/store/dangol')}
+              />
+              <MyQuickMenu
+                titleText="선물함"
+                num={0}
+                Icon={GiftGradationIcon}
+                onClick={() => navigate('/gift/box')}
+              />
+            </>
+          )}
         </div>
         <MyLocationContent
           locationText={nowUserLocation.address}
           onClick={() => navigate('location')}
         />
         <MyMainNormalHeaderWrapper
-          headerText='최근 혜택 사용 내역'
+          headerText="최근 혜택 사용 내역"
           onClick={() => navigate('/reward/history')}
           gap={12}
         >
-          <MyMainContentSubText text='한 달 동안 총 5개의 혜택을 받았어요!' />
-          <MyRewardStampsContent rewardDataArr={rewardDataArr} />
+          {MyPageData && (
+            <>
+              <MyMainContentSubText
+                text={`한 달 동안 총 ${MyPageData.result.recentCouponUsage.length}개의 혜택을 받았어요!`}
+              />
+
+              <MyRewardStampsContent
+                rewardDataArr={MyPageData.result.recentCouponUsage}
+              />
+            </>
+          )}
         </MyMainNormalHeaderWrapper>
-        <MyReviewContent
-          possibleReviewNum={1}
-          onClick={() => navigate('review')}
-        />
-        <MyMissionContent
-          onClick={() => navigate('/mission/map')}
-          accumStampNum={8}
-          wholeStampNum={10}
-        />
+        {MyPageData && (
+          <MyReviewContent
+            possibleReviewNum={MyPageData.result.availableReviewCount}
+            onClick={() => navigate('review')}
+          />
+        )}
+        {MyPageData && (
+          <MyMissionContent
+            onClick={() => navigate('/mission/map')}
+            accumStampNum={MyPageData.result.missionStampCount}
+            wholeStampNum={10}
+          />
+        )}
+
         <div className={styles.bodyTabWrapper}>
           <SlideMenuAdBodyTab
             menuItemDataArr={adItemArr}
@@ -143,7 +147,7 @@ const My: React.FC = () => {
           </div>
         </div>
       </main>
-      <HomeBottomNavigation nowPage='my' />
+      <HomeBottomNavigation nowPage="my" />
       <Outlet />
     </div>
   );

@@ -1,6 +1,7 @@
 import React from 'react';
 import MyRewardStampContent from '../RewardStamp/MyRewardStampContent';
 import styles from './MyRewardStampsContent.module.css';
+import { RecentCouponUsage } from '../../../../../store/Type/My/myPageResponse';
 type RewardData = {
   date: string;
   storeName: string;
@@ -8,7 +9,7 @@ type RewardData = {
   menuNum: number;
 };
 interface Props {
-  rewardDataArr: RewardData[];
+  rewardDataArr: RecentCouponUsage[];
 }
 
 const MyRewardStampsContent: React.FC<Props> = ({ rewardDataArr }: Props) => {
@@ -16,11 +17,11 @@ const MyRewardStampsContent: React.FC<Props> = ({ rewardDataArr }: Props) => {
     <div className={styles.wrapper}>
       {rewardDataArr.map((data, index) => (
         <MyRewardStampContent
-          key={data.storeName + data.date + index}
-          dateText={data.date}
+          key={data.storeName + index}
+          // dateText={data.date}
           storeName={data.storeName}
-          menuNum={data.menuNum}
-          menuText={data.menu}
+          // menuNum={data.menuNum}
+          menuText={data.benefit}
         />
       ))}
     </div>

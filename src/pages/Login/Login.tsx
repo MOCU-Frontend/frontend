@@ -4,6 +4,7 @@ import { ReactComponent as LogoText } from '../../assets/icon/logoText.svg';
 import { ReactComponent as KakaoLoginBtnIcon } from '../../assets/icon/kakaoLoginBtn.svg';
 import { colors } from '../../styles/colors';
 import LoginSubTitleBox from '../../components/Login/atoms/TitleBox/Sub/LoginSubTitleBox';
+import { Link } from 'react-router-dom';
 
 const Login: React.FC = () => {
   return (
@@ -16,9 +17,12 @@ const Login: React.FC = () => {
           <div className={styles.titleBoxWrapper}>
             <LoginSubTitleBox text='간편로그인' />
           </div>
-          <button className={styles.btnWrapper} onClick={() => {}}>
+          <Link
+            className={styles.btnWrapper}
+            to={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${'http://localhost:3000/login/oauth'}&response_type=code`}
+          >
             <KakaoLoginBtnIcon />
-          </button>
+          </Link>
         </div>
       </main>
     </>
@@ -26,3 +30,5 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+
+// 로그아웃 https://kauth.kakao.com/oauth/logout?logout_redirect_uri=http://localhost:3000/logout&client_id=399f271d0e69923b6b6207c1b98718e7

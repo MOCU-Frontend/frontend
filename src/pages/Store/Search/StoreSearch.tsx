@@ -77,10 +77,12 @@ const StoreSearch = () => {
           </div>
         </div>
         <StoreSearchImminentCoupon
-          dueDateStoreInfoList={storeSearchData?.dueDateStoreInfoList}
+          dueDateStoreInfoList={storeSearchData?.result.dueDateStoreInfoList}
         />
         <StoreSearchRecommend
-          recommendStoreInfoList={storeSearchData?.recommendStoreInfoList}
+          recommendStoreInfoList={
+            storeSearchData?.result.recommendStoreInfoList
+          }
         />
       </div>
     </div>

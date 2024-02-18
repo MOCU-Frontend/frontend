@@ -21,24 +21,15 @@ import { useRecentSearchWord } from '../../../../hooks/useRecentSearchWord';
 
 import {
   StoreSearchResultResponse,
-  StoreSearchResultData,
+  Result,
 } from '../../../../store/Type/StoreSearchResult/storeSearchResult';
+
+import { fetchStoreSearchResultData } from './../../../../apis/storeSearchResult/fetchStoreSearchResultData';
+import useStore from '../../../../store/useStore';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
   const { searchWord } = useParams();
-
-  const fetchStoreSearchResultData = async () => {
-    try {
-      const response = await axios.get(
-        'http://localhost:3000/data/storeSearchResult/storeSearchResultData-sortByRate.json'
-      );
-      const data: StoreSearchResultResponse = response.data;
-      return data.result;
-    } catch (error) {
-      throw new Error('StoreSearchResult data error');
-    }
-  };
 
   const {
     data: storeSearchResultData,
@@ -46,7 +37,20 @@ const StoreSearchResult = () => {
     isError: isStoreSearchResultError,
   } = useQuery({
     queryKey: ['StoreSearchResultData'],
-    queryFn: () => fetchStoreSearchResultData(),
+    queryFn: () =>
+      fetchStoreSearchResultData(
+        5,
+        37.53939427920637,
+        127.07278389250759,
+        searchWord,
+        selectedArrangeFilterItem !== undefined
+          ? selectedArrangeFilterItem.title
+          : '거리순',
+        false,
+        false,
+        false,
+        0
+      ),
   });
 
   // BottomSheet를 보이게 하는지 상태관리
@@ -207,17 +211,20 @@ const StoreSearchResult = () => {
       </div>
 
       <div className={styles.wrapContent}>
-        {storeSearchResultData && (
-          <StoreInfo
-            title={storeSearchResultData.storeName}
-            couponCount={storeSearchResultData.numOfStamp}
-            achieve={storeSearchResultData.reward}
-            onClickCouponeBtn={() => {}}
-            onClickStoreDetailBtn={() =>
-              navigate(`/store/${storeSearchResultData.storeName}`)
-            }
-          />
-        )}
+        {storeSearchResultData &&
+          Array.isArray(storeSearchResultData) &&
+          storeSearchResultData.map((result: Result, index: number) => (
+            <StoreInfo
+              key={index}
+              title={result.name}
+              couponCount={result.numOfStamp}
+              achieve={result.reward}
+              distance={Math.round(result.distance)}
+              rating={result.rating}
+              onClickCouponeBtn={() => {}}
+              onClickStoreDetailBtn={() => navigate(`/store/${result.name}`)}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

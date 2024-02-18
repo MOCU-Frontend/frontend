@@ -7,5 +7,5 @@ export const fetchStoreSearchData = async () => {
     '/data/storeSearch/storeSearchData-exist.json'
   );
   console.log(response);
-  return response.data.result;
+  return response.data;
 };

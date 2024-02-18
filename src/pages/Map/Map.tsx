@@ -101,7 +101,7 @@ const Map: React.FC = () => {
         setMapJsonType(0);
       }
 
-      // 카페가 선택되어 있으면 MapJsonType이 0이다.
+      // 카페가 선택되어 있으면 MapJsonType이 1이다.
       else if (
         copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 1
       ) {

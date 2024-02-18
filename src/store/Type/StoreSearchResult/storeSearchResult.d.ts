@@ -2,26 +2,15 @@ export type StoreSearchResultResponse = {
   code: number;
   status: number;
   message: string;
-  result: StoreSearchResultData;
+  result: Result;
   messages: string;
 };
 
-export type StoreSearchResultData = {
-  storeImages: string[];
-  category: string;
-  storeName: string;
-  numOfStamp: number;
-  numOfCouponAvailable: number;
-  maxStamp: number;
-  reward: string;
-  rating: number;
-  reviews: Review[];
-};
-
-type Review = {
+export type Result = {
   name: string;
-  userImage: null | string;
-  rate: number;
-  content: string;
-  modifiedDate: null | string;
+  reward: string;
+  distance: number;
+  rating: number;
+  maxStamp: number;
+  numOfStamp: number;
 };

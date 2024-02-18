@@ -43,20 +43,21 @@ const MissionToday = () => {
   // fetchMissionBtnPatchData
   // '미션 완료하기' 버튼 요청 처리
 
-  // const missionBtnMutation = useMutation(fetchMissionBtnPatchData);
+  // const missionBtnMutation = useMutation({
+  //  mutationFn: (newData: ));
 
-  // '미션 완료하기' 버튼 클릭 시 호출
-  const handleCompleteMissionClick = () => {
-    // missionBtnMutation.mutate({
-    //   todayMissionId: someTodayMissionId,
-    //   userId: someUserId,
-    // }, {
-    //   onSuccess: (data) => {
-    //     if (data.result.content === "이미 2개의 미션 스탬프를 획득하였습니다.") {
-    //     console.log(data.result.content); // "이미 2개의 미션 스탬프를 획득하였습니다."가 출력됩니다.
-    //   } else if (data.result.content === "MOCU앱 출석하기") {
-    // });
-  };
+  // // '미션 완료하기' 버튼 클릭 시 호출
+  // const handleCompleteMissionClick = () => {
+  //   missionBtnMutation.mutate({
+  //     todayMissionId: someTodayMissionId,
+  //     userId: someUserId,
+  //   }, {
+  //     onSuccess: (data) => {
+  //       if (data.result.content === "이미 2개의 미션 스탬프를 획득하였습니다.") {
+  //       console.log(data.result.content); // "이미 2개의 미션 스탬프를 획득하였습니다."가 출력됩니다.
+  //     } else if (data.result.content === "MOCU앱 출석하기") {
+  //   });
+  // };
 
   // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
@@ -126,7 +127,8 @@ const MissionToday = () => {
                 key={mission.todayMissionId}
                 content={mission.content}
                 status={mission.status}
-                missionCompleteClick={handleCompleteMissionClick}
+                missionCompleteClick={() => {}}
+                // missionCompleteClick={handleCompleteMissionClick}
               />
             ))}
         </div>

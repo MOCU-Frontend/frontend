@@ -1,13 +1,11 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
-import MyLocationSettingBtn from '../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationEditLinkBtn from '../../components/MyLocation/atoms/Btn/EditLink/MyLocationEditLinkBtn';
 import MyLocationListFilter from '../../components/MyLocation/atoms/ListFilter/MyLocationListFilter';
 import BodyTitleText from '../../components/Text/BodyTitleText/BodyTitleText';
 import { useUserLocation } from '../../hooks/useUserLocation';
 import useStore from '../../store/useStore';
-import { colors } from '../../styles/colors';
 import styles from './MyLocation.module.css';
 
 const MyLocation: React.FC = () => {
@@ -16,7 +14,6 @@ const MyLocation: React.FC = () => {
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const { locationArr, setLocationArr } = useUserLocation(nowUserLocation);
   const setNowUserLocation = useStore((state) => state.setNowUserLocation);
-
   const handleClickListFilter = (index: number) => {
     if (!locationArr[index]) throw new Error('invalid index!!');
     if (locationArr.findIndex((x) => x.isChecked) === -1)

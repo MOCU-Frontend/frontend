@@ -20,6 +20,12 @@ import { ReactComponent as CompanyIcon } from '../../../../assets/icon/company.s
 import { ReactComponent as SchoolIcon } from '../../../../assets/icon/school.svg';
 import { ReactComponent as MarkerIcon } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import useStore from '../../../../store/useStore';
+import { useMutation } from '@tanstack/react-query';
+import {
+  AddressPostRequest,
+  AddressPostResponse,
+} from '../../../../store/Type/Address/address';
+import axios from 'axios';
 type LocSetData = {
   name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -81,6 +87,7 @@ const MyLocationEnrollment: React.FC = () => {
     { name: '학교', Icon: SchoolIcon, isChecked: false },
     { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
+  const checkedLocSetData = locSetDataArr.find((x) => x.isChecked);
   const handleClickLocSetBtn = (index: number) => {
     if (!locSetDataArr[index]) throw new Error('invalid index!');
     setLocSetDataArr((prevArr) => {
@@ -105,7 +112,17 @@ const MyLocationEnrollment: React.FC = () => {
     });
   };
   const nowAddress = useStore((state) => state.nowAddress);
-
+  const userId = 5;
+  const addressPostMutation = useMutation({
+    mutationFn: (newData: AddressPostRequest) => {
+      return axios.patch(`/users/${userId}/address/register`, newData);
+    },
+    onSuccess: (res) => {
+      const data: AddressPostResponse = res.data;
+      console.log(data);
+      navigate('/');
+    },
+  });
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -186,7 +203,24 @@ const MyLocationEnrollment: React.FC = () => {
             />
           </div>
           <div className={styles.fullBtnWrapper}>
-            <FullBtn label='등록 완료하기' onClick={() => {}} />
+            <FullBtn
+              label='등록 완료하기'
+              onClick={() => {
+                if (checkedLocSetData && selectedAddressData) {
+                  addressPostMutation.mutate({
+                    name: checkedLocSetData.etcName || checkedLocSetData.name,
+                    address: detailLocation
+                      ? (selectedAddressData.road ||
+                          selectedAddressData.jibun) +
+                        ' ' +
+                        detailLocation
+                      : selectedAddressData.road || selectedAddressData.jibun,
+                    latitude: '37.54160960160775',
+                    longitude: '127.07875583744614',
+                  });
+                }
+              }}
+            />
           </div>
         </>
       )}

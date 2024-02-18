@@ -1,0 +1,18 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "mainImageUrl": null,
+      "name": "행복한연탄구이",
+      "maxStamp": 10,
+      "numOfStamp": 0,
+      "reward": "음료",
+      "latitude": 37.573051,
+      "longitude": 127.056323,
+      "event": null
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

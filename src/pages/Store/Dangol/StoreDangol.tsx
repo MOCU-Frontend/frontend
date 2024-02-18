@@ -17,10 +17,27 @@ import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filte
 import StoreInfoInStamp from '../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
 import { FilterList } from '../../../store/data/stamp';
+import { fetchUserDangolData } from '../../../apis/user/fetchUserDangolData';
+import {
+  userDangolResponse,
+  Result,
+} from '../../../store/Type/User/userDangol';
+import { useQuery } from '@tanstack/react-query';
 
 interface Props {}
 
 const StoreDangol: React.FC<Props> = ({}: Props) => {
+  const {
+    data: userDangolData,
+    isLoading: isuserDangolDataLoading,
+    isError: isuserDangolDataError,
+  } = useQuery({
+    queryKey: ['storeSearchData'],
+
+    // 임시로
+    queryFn: () => fetchUserDangolData(1, 37.5404257, 127.07209),
+  });
+
   const navigate = useNavigate();
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleDragBottom = () => {
@@ -30,26 +47,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
     initialMenuItemDataArr
   );
-  const [couponStoreDataArr, setCouponStoreDataArr] = useState([
-    {
-      title: '카페롱',
-      couponCount: 8,
-      achieve: '바닐라 마카롱',
-      distance: 100,
-    },
-    {
-      title: '드로잉레시피',
-      couponCount: 10,
-      achieve: '오븐 스파게티',
-      distance: 100,
-    },
-    {
-      title: '크림베이글 건대점',
-      couponCount: 9,
-      achieve: '아이스 아메리카노 한 잔',
-      distance: 100,
-    },
-  ]);
+
   const handleClickMenuBodyItem = (
     menuIndex: number,
     newIndex: number,
@@ -130,7 +128,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle='단골 가게'
+        headerTitle="단골 가게"
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -141,7 +139,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
       </HeaderBackBtn>
       <div className={styles.seeMoreBtnWrapper}>
         <StoreDangolSeeMoreBtn
-          btnText='단골로 설정 가능한 가게 2'
+          btnText={`단골로 설정 가능한 가게 ${userDangolData?.length}`}
           onClick={() => navigate('add')}
         />
       </div>
@@ -155,7 +153,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='main-purple'
+          borderColor="main-purple"
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(0)}
         />
@@ -167,7 +165,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='main-purple'
+          borderColor="main-purple"
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(1)}
         />
@@ -178,25 +176,28 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor='main-purple'
+            borderColor="main-purple"
             onClick={() => handleOptionClick(data.id)}
           />
         ))}
       </div>
 
       <div className={styles.wrapContent}>
-        {couponStoreDataArr.map((data, index) => (
-          <StoreInfoInStamp
-            key={data.title + index}
-            title={data.title}
-            couponCount={data.couponCount}
-            achieve={data.achieve}
-            distance={data.distance}
-            onClickCouponBtn={() => {}}
-            onClickStoreDetailBtn={() => {}}
-            onClickMapBtn={() => navigate('/map')}
-          />
-        ))}
+        {userDangolData !== undefined &&
+          userDangolData.map((data: Result, index: number) => (
+            <StoreInfoInStamp
+              key={data.storeName + index}
+              title={data.storeName}
+              couponCount={data.numOfStamp}
+              achieve={data.reward}
+              distance={Math.round(data.distance)}
+              onClickCouponBtn={() => {}}
+              onClickStoreDetailBtn={() => {
+                navigate(`/store/${data.storeName}`);
+              }}
+              onClickMapBtn={() => navigate('/map')}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

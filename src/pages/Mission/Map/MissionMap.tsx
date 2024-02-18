@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './MissionMap.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MissionMapContent from '../../../components/Mission2/atoms/MissionMapContent';
@@ -9,10 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../styles/colors';
 
 import instance from '../../../apis/instance';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { fetchMissionMapGetData } from './../../../apis/mission/fetchMissionMapGetData';
 import { fetchMissionMapCompleteData } from './../../../apis/mission/fetchMissionMapCompleteData';
+import axios from 'axios';
+import { MissionMapCompleteResponse } from '../../../store/Type/Mission/missionMapCompleteResponse';
 
 const MissionMap = () => {
   const navigate = useNavigate();
@@ -27,11 +29,30 @@ const MissionMap = () => {
     queryFn: () => fetchMissionMapGetData(),
   });
 
-  // fetchMissionMapCompleteData
-  // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
-
   // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
+
+  const [reward, setReward] = useState<String>('스타벅스 2만원권');
+
+  // fetchMissionMapCompleteData
+  // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
+  const missionMapCompleteMutation = useMutation({
+    mutationFn: (newData: { userId: number }) => {
+      return axios.patch('/mission/mission-map/complete', newData);
+    },
+    onSuccess: (res) => {
+      const data: MissionMapCompleteResponse = res.data;
+      setReward(res.data.result.reward);
+    },
+  });
+
+  // 스탬프 개수가 30개 이상이면
+  if (stampCnt !== undefined && stampCnt >= 30) {
+    missionMapCompleteMutation.mutate({
+      // 임시 userId
+      userId: 1,
+    });
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -79,7 +100,7 @@ const MissionMap = () => {
             <div className={styles.leftTimeText}>12일 3시간 후 종료</div>
           </div>
           <div className={styles.wrapMapPicture}>
-            <MissionMapContent stampCnt={stampCnt} />
+            <MissionMapContent stampCnt={stampCnt} reward={reward} />
           </div>
         </div>
       </div>

@@ -1,0 +1,15 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": [
+    {
+      "userImage": null,
+      "userName": "이성진",
+      "numOfStamp": 0,
+      "maxStamp": 10,
+      "useCount": 0
+    }
+  ],
+  "messages": "요청에 성공하였습니다."
+}

@@ -37,7 +37,7 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
     isError: isOwnerCouponDataError,
   } = useQuery({
     queryKey: ['OwnerCoupon'],
-    queryFn: () => fetchOwnerCouponData(5, '적립 많은 순'),
+    queryFn: () => fetchOwnerCouponData(5, false, '적립 많은 순'),
   });
 
   return (
@@ -77,7 +77,7 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
         ownerCouponData.map((data, index) => (
           <OwnerCouponItem
             key={data.userName + index}
-            isDangol={false}
+            isDangol={data.regular}
             userName={data.userName}
             accumText={`${data.numOfStamp}/${data.maxStamp}`}
             couponNum={data.useCount}

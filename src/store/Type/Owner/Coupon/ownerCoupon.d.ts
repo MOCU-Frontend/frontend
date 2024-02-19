@@ -4,6 +4,7 @@ export type OwnerCouponData = {
   numOfStamp: number;
   maxStamp: number;
   useCount: number;
+  regular: boolean;
 };
 export type OwnerCouponDataResponse = {
   code: number;

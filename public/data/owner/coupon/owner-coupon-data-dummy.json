@@ -5,10 +5,11 @@
   "result": [
     {
       "userImage": null,
-      "userName": "이성진",
-      "numOfStamp": 0,
+      "userName": "noh",
+      "numOfStamp": 1,
       "maxStamp": 10,
-      "useCount": 0
+      "useCount": 0,
+      "regular": true
     }
   ],
   "messages": "요청에 성공하였습니다."

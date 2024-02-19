@@ -5,23 +5,14 @@
   "result": [
     {
       "mainImageUrl": "http://example.com/main_image.jpg",
-      "storeName": "스타벅스 건대점",
+      "name": "설빙 건대지점",
+      "maxStamp": 10,
       "numOfStamp": 1,
-      "maxStamp": 10,
-      "numOfCouponAvailable": 0,
-      "reward": "초코라떼 한 잔",
-      "rating": 5,
-      "distance": 161.29987834105938
-    },
-    {
-      "mainImageUrl": "http://example.com/main_image.jpg",
-      "storeName": "크림베이글 건대점",
-      "numOfStamp": 8,
-      "maxStamp": 10,
-      "numOfCouponAvailable": 0,
-      "reward": "아이스 아메리카노 한 잔",
-      "rating": 3.1,
-      "distance": 250.57360275732424
+      "reward": "초코 빙수",
+      "latitude": 37.540941,
+      "longitude": 127.068447,
+      "event": null,
+      "rating": 3
     }
   ],
   "messages": "요청에 성공하였습니다."

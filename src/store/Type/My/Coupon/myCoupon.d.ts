@@ -1,12 +1,12 @@
 export type MyCouponData = {
   mainImageUrl: string | null;
-  name: string;
-  maxStamp: number;
+  storeName: string;
   numOfStamp: number;
+  maxStamp: number;
+  numOfCouponAvailable: number;
   reward: string;
-  latitude: number;
-  longitude: number;
-  event: string | null;
+  rating: number;
+  distance: number;
 };
 export type MyCouponDataResponse = {
   code: number;

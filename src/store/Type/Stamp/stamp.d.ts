@@ -7,12 +7,13 @@ export type StampResponse = {
 };
 
 export type StampData = {
-  mainImageUrl: string;
-  storeName: string;
-  numOfStamp: number;
+  mainImageUrl: string | null;
+  name: string;
   maxStamp: number;
-  numOfCouponAvailable: number;
+  numOfStamp: number;
   reward: string;
+  latitude: number;
+  longitude: number;
+  event: string | null;
   rating: number;
-  distance: number;
 };

@@ -81,7 +81,7 @@ const Coupon = () => {
     isError: isMyCouponDataError,
   } = useQuery({
     queryKey: ['MyCoupon'],
-    queryFn: () => fetchMyCouponData(5),
+    queryFn: () => fetchMyCouponData(5, 37.3696718, 127.136404),
   });
 
   return (
@@ -115,12 +115,11 @@ const Coupon = () => {
         {myCouponData &&
           myCouponData.map((data, index) => (
             <StoreInfoInStamp
-              key={data.name + index}
-              title={data.name}
+              key={data.storeName + index}
+              title={data.storeName}
               couponCount={data.numOfStamp}
               achieve={data.reward}
-              // TODO: 거리계산
-              distance={100}
+              distance={Math.floor(data.distance)}
               onClickCouponBtn={() => {
                 setCouponModalLevel('confirm');
               }}

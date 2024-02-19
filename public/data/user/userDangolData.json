@@ -1,0 +1,19 @@
+{
+  "code": 1000,
+  "status": 200,
+  "message": "요청에 성공하였습니다.",
+  "result": {
+    "availableCount": 1,
+    "storeList": [
+      {
+        "mainImageUrl": null,
+        "name": "시홍쓰",
+        "numOfStamp": 0,
+        "maxStamp": 10,
+        "reward": "박수",
+        "distance": 744
+      }
+    ]
+  },
+  "messages": "요청에 성공하였습니다."
+}

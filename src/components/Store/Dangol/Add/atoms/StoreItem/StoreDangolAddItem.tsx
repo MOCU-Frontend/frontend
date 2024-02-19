@@ -12,7 +12,8 @@ interface Props {
   distance: number;
   onClickStoreDetailBtn: () => void;
   onClickCheckBox: () => void;
-  isChecked: boolean;
+  index: number;
+  selectedStoreIndex: number;
 }
 
 const StoreDangolAddItem: React.FC<Props> = ({
@@ -21,7 +22,8 @@ const StoreDangolAddItem: React.FC<Props> = ({
   achieve,
   distance,
   onClickStoreDetailBtn,
-  isChecked,
+  index,
+  selectedStoreIndex,
   onClickCheckBox,
 }) => {
   return (
@@ -52,7 +54,7 @@ const StoreDangolAddItem: React.FC<Props> = ({
 
       <div className={styles.rightWrapper}>
         <StoreDangolAddCheckBox
-          isChecked={isChecked}
+          isChecked={index === selectedStoreIndex}
           onClick={onClickCheckBox}
         />
         <div className={styles.distanceWrapper}>
@@ -62,7 +64,9 @@ const StoreDangolAddItem: React.FC<Props> = ({
             stroke={colors.greyLight02}
             fill={colors.white}
           />
-          <div className={styles.storeDistanceText}>{distance}m</div>
+          <div className={styles.storeDistanceText}>
+            {Math.round(distance)}m
+          </div>
         </div>
       </div>
     </div>

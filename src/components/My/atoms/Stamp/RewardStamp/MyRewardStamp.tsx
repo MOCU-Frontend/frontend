@@ -6,23 +6,23 @@ import MyStampeDateText from '../../Text/StampDate/MyStampeDateText';
 import MyStampMenuText from '../../Text/StampMenu/MyStampMenuText';
 import MyStampMenuNumText from '../../Text/StampNum/MyStampMenuNumText';
 interface Props {
-  dateText: string;
+  // dateText: string;
   menuText: string;
-  menuNum: number;
+  // menuNum: number;
 }
 
 const MyRewardStamp: React.FC<Props> = ({
-  dateText,
-  menuNum,
+  // dateText,
+  // menuNum,
   menuText,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <StampStarIcon width={66} height={66} color={colors.subPurpleLight} />
       <div className={styles.textsWrapper}>
-        <MyStampeDateText text={dateText} />
+        {/* <MyStampeDateText text={dateText} /> */}
         <MyStampMenuText text={menuText} />
-        <MyStampMenuNumText text={`${menuNum}잔`} />
+        {/* <MyStampMenuNumText text={`${menuNum}잔`} /> */}
       </div>
     </div>
   );

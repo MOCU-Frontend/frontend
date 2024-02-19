@@ -16,18 +16,17 @@ import BottomSheet from '../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StoreInfoInStamp from '../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
-import { FilterList } from '../../../store/data/stamp';
-import { fetchDangolData } from '../../../apis/dangol/dangol';
 import { useQuery } from '@tanstack/react-query';
+import { StoreList } from '../../../store/Type/User/userDangolResponse';
+import { fetchDangolData } from '../../../apis/dangol/dangol';
 
 interface Props {}
 
 const StoreDangol: React.FC<Props> = ({}: Props) => {
-  const navigate = useNavigate();
   const {
-    data: dangolData,
-    isLoading: isDangolDataLoading,
-    isError: isDangolDataError,
+    data: userDangolData,
+    isLoading: isuserDangolDataLoading,
+    isError: isuserDangolDataError,
   } = useQuery({
     queryKey: ['Dangol'],
     queryFn: () =>
@@ -42,6 +41,9 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
         0
       ),
   });
+
+  const navigate = useNavigate();
+
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
@@ -50,26 +52,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
     initialMenuItemDataArr
   );
-  const [couponStoreDataArr, setCouponStoreDataArr] = useState([
-    {
-      title: '카페롱',
-      couponCount: 8,
-      achieve: '바닐라 마카롱',
-      distance: 100,
-    },
-    {
-      title: '드로잉레시피',
-      couponCount: 10,
-      achieve: '오븐 스파게티',
-      distance: 100,
-    },
-    {
-      title: '크림베이글 건대점',
-      couponCount: 9,
-      achieve: '아이스 아메리카노 한 잔',
-      distance: 100,
-    },
-  ]);
+
   const handleClickMenuBodyItem = (
     menuIndex: number,
     newIndex: number,
@@ -160,10 +143,12 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
         </div>
       </HeaderBackBtn>
       <div className={styles.seeMoreBtnWrapper}>
-        <StoreDangolSeeMoreBtn
-          btnText='단골로 설정 가능한 가게 2'
-          onClick={() => navigate('add')}
-        />
+        {userDangolData !== undefined && (
+          <StoreDangolSeeMoreBtn
+            btnText={`단골로 설정 가능한 가게 ${userDangolData.availableCount}`}
+            onClick={() => navigate('add')}
+          />
+        )}
       </div>
 
       <div className={styles.filtersWrapper}>
@@ -205,17 +190,18 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
       </div>
 
       <div className={styles.wrapContent}>
-        {dangolData &&
-          dangolData.storeList.map((data, index) => (
+        {userDangolData !== undefined &&
+          userDangolData.storeList.map((data: StoreList, index: number) => (
             <StoreInfoInStamp
               key={data.name + index}
               title={data.name}
               couponCount={data.numOfStamp}
-              // TODO: 전체 스탬프 개수 추가하기
               achieve={data.reward}
-              distance={data.distance}
+              distance={Math.round(data.distance)}
               onClickCouponBtn={() => {}}
-              onClickStoreDetailBtn={() => {}}
+              onClickStoreDetailBtn={() => {
+                navigate(`/store/${data.name}`);
+              }}
               onClickMapBtn={() => navigate('/map')}
             />
           ))}

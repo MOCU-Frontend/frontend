@@ -41,6 +41,10 @@ import StoreDangolAdd from './Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd';
 import Login from './Login/Login';
 import LoginOauth from './Login/Oauth/LoginOauth';
 import Logout from './Logout/Logout';
+import UserLogin from './Login/user/Login';
+import UserLoginOauth from './Login/user/Oauth/LoginOauth';
+import OwnerLogin from './Login/owner/Login';
+import OwnerLoginOauth from './Login/owner/Oauth/LoginOauth';
 
 const Router = () => {
   const router = createBrowserRouter([
@@ -115,8 +119,20 @@ const Router = () => {
     {
       path: '/login',
       children: [
-        { path: '', element: <Login /> },
-        { path: 'oauth', element: <LoginOauth /> },
+        {
+          path: 'user',
+          children: [
+            { path: '', element: <UserLogin /> },
+            { path: 'oauth', element: <UserLoginOauth /> },
+          ],
+        },
+        {
+          path: 'owner',
+          children: [
+            { path: '', element: <OwnerLogin /> },
+            { path: 'oauth', element: <OwnerLoginOauth /> },
+          ],
+        },
       ],
     },
     {

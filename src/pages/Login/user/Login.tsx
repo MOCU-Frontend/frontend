@@ -6,7 +6,7 @@ import { colors } from '../../../styles/colors';
 import LoginSubTitleBox from '../../../components/Login/atoms/TitleBox/Sub/LoginSubTitleBox';
 import { Link } from 'react-router-dom';
 
-const Login: React.FC = () => {
+const UserLogin: React.FC = () => {
   return (
     <>
       <div className={styles.logoWrapper}>
@@ -29,6 +29,6 @@ const Login: React.FC = () => {
   );
 };
 
-export default Login;
+export default UserLogin;
 
 // 로그아웃 https://kauth.kakao.com/oauth/logout?logout_redirect_uri=http://localhost:3000/logout&client_id=399f271d0e69923b6b6207c1b98718e7

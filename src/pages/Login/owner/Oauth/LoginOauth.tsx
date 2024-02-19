@@ -21,7 +21,7 @@ declare global {
     deviceToken: string | undefined;
   }
 }
-const LoginOauth: React.FC<Props> = ({}: Props) => {
+const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
   const error = searchParams.get('error');
@@ -71,5 +71,5 @@ const LoginOauth: React.FC<Props> = ({}: Props) => {
   return <div className={styles.wholeWrapper}>redirect..</div>;
 };
 
-export default LoginOauth;
+export default OwnerLoginOauth;
 //

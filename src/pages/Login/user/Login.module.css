@@ -1,4 +1,4 @@
-@import '../../styles/colorVars.css';
+@import '../../../styles/colorVars.css';
 .logoWrapper {
   width: 100%;
   display: flex;

@@ -31,27 +31,11 @@ const StoreSearchResult = () => {
   const navigate = useNavigate();
   const { searchWord } = useParams();
 
-  const {
-    data: storeSearchResultData,
-    isLoading: isStoreSearchResultDataLoading,
-    isError: isStoreSearchResultError,
-  } = useQuery({
-    queryKey: ['StoreSearchResultData'],
-    queryFn: () =>
-      fetchStoreSearchResultData(
-        5,
-        37.53939427920637,
-        127.07278389250759,
-        searchWord,
-        selectedArrangeFilterItem !== undefined
-          ? selectedArrangeFilterItem.title
-          : '거리순',
-        false,
-        false,
-        false,
-        0
-      ),
-  });
+  const [savingOption, setSavingOption] = useState<boolean>(false);
+  const [notVisitedOption, setNotVisitedOption] = useState<boolean>(false);
+  const [eventOption, setEventOption] = useState<boolean>(false);
+  const [couponImminentOption, setCouponImminentOption] =
+    useState<boolean>(false);
 
   // BottomSheet를 보이게 하는지 상태관리
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
@@ -117,30 +101,29 @@ const StoreSearchResult = () => {
       const item = optionDataArr.find((x) => x.id === id);
       if (item) {
         item.isChecked = !item.isChecked;
+        if (item.title === '이벤트 중') {
+          setEventOption(item.isChecked);
+        } else if (item.title === '적립 진행 중만') {
+          setSavingOption(item.isChecked);
+        } else if (item.title === '쿠폰 사용 임박') {
+          setCouponImminentOption(item.isChecked);
+        } else if (item.title === '안 가본 곳만') {
+          setNotVisitedOption(item.isChecked);
+        }
       }
       return copiedArr;
     });
   };
 
+  // 정렬
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   );
+
+  // 업종
   const selectedSectorFilterItem = menuItemDataArr[1].bodyDataArr.find(
     (x) => x.isChecked
   );
-
-  // const handleClickResetOptionBtn = (menuIndex: number) => {
-  //   if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-  //   if (menuItemDataArr[menuIndex].bodyType === 'filter')
-  //     throw new Error('can reset only in option type!!');
-  //   setMenuItemDataArr((prevArr) => {
-  //     const copiedArr = [...prevArr];
-  //     copiedArr[menuIndex].bodyDataArr.forEach((item) => {
-  //       item.isChecked = false;
-  //     });
-  //     return copiedArr;
-  //   });
-  // };
 
   const { handleAddSearchKeyword } = useRecentSearchWord();
 
@@ -155,6 +138,37 @@ const StoreSearchResult = () => {
     ...checkedOptionDataArr,
     ...uncheckedOptionDataArr,
   ];
+
+  const {
+    data: storeSearchResultData,
+    isLoading: isStoreSearchResultDataLoading,
+    isError: isStoreSearchResultError,
+  } = useQuery({
+    queryKey: [
+      'StoreSearchResultData',
+      searchWord,
+      selectedArrangeFilterItem,
+      savingOption,
+      notVisitedOption,
+      couponImminentOption,
+      eventOption,
+      selectedSectorFilterItem,
+    ],
+    queryFn: () =>
+      fetchStoreSearchResultData(
+        1,
+        37.53939427920637,
+        127.07278389250759,
+        searchWord,
+        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
+        savingOption,
+        notVisitedOption,
+        couponImminentOption,
+        eventOption,
+        0,
+        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체'
+      ),
+  });
 
   return (
     <div className={styles.wrapper}>

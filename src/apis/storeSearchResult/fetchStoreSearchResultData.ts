@@ -9,13 +9,14 @@ export const fetchStoreSearchResultData = async (
   sort?: string,
   savingOption?: boolean,
   notVisitedOption?: boolean,
+  couponImminentOption?: boolean,
   eventOption?: boolean,
   page?: number,
   category?: string
 ) => {
   const response = await instance.get<StoreSearchResultResponse>(
     // 더미 데이터
-    '/data/storeSearchResult/SearchResultData-rate.json'
+    '/data/storeSearchResult/storeSearchResultData-rate.json'
 
     // 실제 연결
     // '/store/search-result?userId=`${userId}`&query=`${searchWord}`&sort=`${sort}`&category=`${category}`&savingOption=f`${savingOption}`&notVisitiedOption=`${notVisitiedOption}`&couponImminentOption=`${couponImminentOPtion}`&eventOption=`${eventOption}`&userLatitude=`${userLatitude}`&userLongitude=`${userLongitude}`&page=0

@@ -78,14 +78,20 @@ const Coupon = () => {
   };
 
   const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   const {
     data: myCouponData,
     isLoading: isMyCouponDataLoading,
     isError: isMyCouponDataError,
   } = useQuery({
     queryKey: ['MyCoupon'],
-    queryFn: () => fetchMyCouponData(userId || '', 37.3696718, 127.136404),
-    enabled: !!userId,
+    queryFn: () =>
+      fetchMyCouponData(
+        userId || '',
+        nowUserLocation?.latitude || 0,
+        nowUserLocation?.longitude || 0
+      ),
+    enabled: !!userId && !!nowUserLocation,
   });
 
   return (

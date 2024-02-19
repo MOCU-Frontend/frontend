@@ -82,28 +82,26 @@ const My: React.FC = () => {
       </div>
       <main className={styles.main}>
         <div className={styles.quickMenusWrapper}>
-          {MyPageData !== undefined && (
-            <>
-              <MyQuickMenu
-                titleText='쿠폰'
-                num={MyPageData.result.usableCoupon}
-                Icon={CouponGradationIcon}
-                onClick={() => navigate('/coupon')}
-              />
-              <MyQuickMenu
-                titleText='단골'
-                num={MyPageData.result.availableFavoriteCount}
-                Icon={MyStoreGradationIcon}
-                onClick={() => navigate('/store/dangol')}
-              />
-              <MyQuickMenu
-                titleText='선물함'
-                num={0}
-                Icon={GiftGradationIcon}
-                onClick={() => navigate('/gift/box')}
-              />
-            </>
-          )}
+          <>
+            <MyQuickMenu
+              titleText='쿠폰'
+              num={MyPageData ? MyPageData.result.usableCoupon : 0}
+              Icon={CouponGradationIcon}
+              onClick={() => navigate('/coupon')}
+            />
+            <MyQuickMenu
+              titleText='단골'
+              num={MyPageData ? MyPageData.result.availableFavoriteCount : 0}
+              Icon={MyStoreGradationIcon}
+              onClick={() => navigate('/store/dangol')}
+            />
+            <MyQuickMenu
+              titleText='선물함'
+              num={0}
+              Icon={GiftGradationIcon}
+              onClick={() => navigate('/gift/box')}
+            />
+          </>
         </div>
         <MyLocationContent
           locationText={nowUserLocation ? nowUserLocation.address : '위치 없음'}
@@ -114,31 +112,33 @@ const My: React.FC = () => {
           onClick={() => navigate('/reward/history')}
           gap={12}
         >
-          {MyPageData && (
-            <>
-              <MyMainContentSubText
-                text={`한 달 동안 총 ${MyPageData.result.recentCouponUsage.length}개의 혜택을 받았어요!`}
-              />
+          <>
+            <MyMainContentSubText
+              text={`한 달 동안 총 ${
+                MyPageData ? MyPageData.result.recentCouponUsage.length : 0
+              }개의 혜택을 받았어요!`}
+            />
 
-              <MyRewardStampsContent
-                rewardDataArr={MyPageData.result.recentCouponUsage}
-              />
-            </>
-          )}
+            <MyRewardStampsContent
+              rewardDataArr={
+                MyPageData ? MyPageData.result.recentCouponUsage : []
+              }
+            />
+          </>
         </MyMainNormalHeaderWrapper>
-        {MyPageData && (
-          <MyReviewContent
-            possibleReviewNum={MyPageData.result.availableReviewCount}
-            onClick={() => navigate('review')}
-          />
-        )}
-        {MyPageData && (
-          <MyMissionContent
-            onClick={() => navigate('/mission/map')}
-            accumStampNum={MyPageData.result.missionStampCount}
-            wholeStampNum={30}
-          />
-        )}
+
+        <MyReviewContent
+          possibleReviewNum={
+            MyPageData ? MyPageData.result.availableReviewCount : 0
+          }
+          onClick={() => navigate('review')}
+        />
+
+        <MyMissionContent
+          onClick={() => navigate('/mission/map')}
+          accumStampNum={MyPageData ? MyPageData.result.missionStampCount : 0}
+          wholeStampNum={30}
+        />
 
         <div className={styles.bodyTabWrapper}>
           <SlideMenuAdBodyTab

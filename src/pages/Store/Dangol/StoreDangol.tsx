@@ -8,6 +8,7 @@ import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilte
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import {
   FilterListWithId,
+  initialDangolMenuItemDataArr,
   initialMenuItemDataArr,
   initialOptionDataArr,
   MenuItemData,
@@ -35,8 +36,8 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
     queryFn: () =>
       fetchDangolData(
         userId || '',
-        '최신순',
-        '식당',
+        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '최신순',
+        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체',
         false,
         false,
         nowUserLocation?.latitude || 37.5404257,
@@ -54,7 +55,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   };
 
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialMenuItemDataArr
+    initialDangolMenuItemDataArr
   );
 
   const handleClickMenuBodyItem = (

@@ -2,7 +2,7 @@ import { MyCouponDataResponse } from '../../../store/Type/My/Coupon/myCoupon';
 import instance from '../../instance';
 
 export const fetchMyCouponData = async (
-  userId: number,
+  userId: string,
   lat: number,
   lng: number
 ) => {

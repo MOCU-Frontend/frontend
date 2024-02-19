@@ -4,10 +4,10 @@ import instance from '../instance';
 export const fetchStampUserData = async (userId: number, storeId: number) => {
   const response = await instance.post(
     // 더미데이터
-    '/data/stamp/stampUserPost.json',
+    // '/data/stamp/stampUserPost.json',
 
     // 실제 연결
-    // 'http://localhost:9000/stamp/request',
+    '/stamp/request',
 
     // POST 요청의 body
     {

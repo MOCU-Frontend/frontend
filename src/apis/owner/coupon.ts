@@ -8,9 +8,9 @@ export const fetchOwnerCouponData = async (
 ) => {
   const response = await instance.get<OwnerCouponDataResponse>(
     // 더미데이터
-    '/data/owner/coupon/owner-coupon-data-dummy.json'
+    // '/data/owner/coupon/owner-coupon-data-dummy.json'
     // 실제 연결
-    //`http://localhost:9000/owner/${ownerId}/stamp-of-customer?isCustomerRegular=${isCustomerRegular}&sort=${sort}`
+    `/owner/${ownerId}/stamp-of-customer?isCustomerRegular=${isCustomerRegular}&sort=${sort}`
   );
   console.log(response);
   return response.data.result;

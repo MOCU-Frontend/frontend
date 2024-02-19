@@ -10,9 +10,9 @@ export const fetchStoreDetailData = async (
 ) => {
   const response = await instance.get<StoreDetailResponse>(
     // 더미 데이터
-    'data/storeDetail/store-detail-dummy-data.json'
+    // 'data/storeDetail/store-detail-dummy-data.json'
     //원래
-    //`http://localhost:9000/store/detail?storeId=${storeId}
+    `/store/detail?storeId=${storeId}
     //&userId=${userId}&rateSort=${rateSort}&timeSort=${timeSort}&page=${page}`
   );
   console.log(response);

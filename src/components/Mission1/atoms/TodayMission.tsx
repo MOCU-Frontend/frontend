@@ -20,7 +20,9 @@ const TodayMission: React.FC<Props> = ({
   const navigate = useNavigate();
 
   const missionStartClick = () => {
-    if (content === '리뷰 남기기') {
+    if (content === '리뷰 작성하기') {
+      // 리뷰 페이지로 이동
+      navigate('/my/review');
     } else if (content === '쿠폰 사용하기') {
       // 쿠폰 페이지로 이동
       navigate('/coupon');

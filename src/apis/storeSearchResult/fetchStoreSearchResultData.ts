@@ -16,10 +16,10 @@ export const fetchStoreSearchResultData = async (
 ) => {
   const response = await instance.get<StoreSearchResultResponse>(
     // 더미 데이터
-    '/data/storeSearchResult/storeSearchResultData-rate.json'
+    // '/data/storeSearchResult/storeSearchResultData-rate.json'
 
     // 실제 연결
-    // '/store/search-result?userId=`${userId}`&query=`${searchWord}`&sort=`${sort}`&category=`${category}`&savingOption=f`${savingOption}`&notVisitiedOption=`${notVisitiedOption}`&couponImminentOption=`${couponImminentOPtion}`&eventOption=`${eventOption}`&userLatitude=`${userLatitude}`&userLongitude=`${userLongitude}`&page=0
+    `/store/search-result?userId=${userId}&query=${query}&sort=${sort}&category=${category}&savingOption=${savingOption}&notVisitiedOption=${notVisitedOption}&couponImminentOption=${couponImminentOption}&eventOption=${eventOption}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
   );
   console.log(response);
   return response.data.result;

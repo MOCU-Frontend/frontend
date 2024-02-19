@@ -5,10 +5,10 @@ import { MapStoreResponse } from '../../store/Type/Map/map';
 export const fetchMapStoreData = async (userId: number, storeId: number) => {
   const response = await instance.get<MapStoreResponse>(
     // 더미 데이터
-    '/data/map/mapStoreDummyData.json'
+    // '/data/map/mapStoreDummyData.json'
 
     // 실제 연결
-    // '/map/userId=1?latitude=37.5404257&longitude=127.072090&eventOption=false&dueDateOption=false&categoryOption=업종 전체'
+    `/map/store-info?userId=${userId}&storeId=${storeId}`
   );
   console.log(response);
   return response.data.result;

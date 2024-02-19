@@ -12,10 +12,10 @@ export const fetchOwnerRequestData = async (
   try {
     const response = await instance.get<OwnerRequestDataResponse>(
       // 더미데이터
-      '/data/owner/request/owner-request-data-dummy.json'
+      // '/data/owner/request/owner-request-data-dummy.json'
 
       // 실제 연결
-      // `http://localhost:9000/owner/store-request/${storeId}?notAcceptRequest=${notAcceptRequest}
+      `/owner/store-request/${storeId}?notAcceptRequest=${notAcceptRequest}
       // &bothRequest=${bothRequest}&rewardRequest=${rewardRequest}&stampRequest=${stampRequest}&page=${page}`
     );
     console.log(response);

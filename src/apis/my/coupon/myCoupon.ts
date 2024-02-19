@@ -10,7 +10,7 @@ export const fetchMyCouponData = async (
     // 더미데이터
     // '/data/my/coupon/my-coupon-dummy-data.json'
     // 실제 연결
-    `/stamp/stores-around/${userId}?latitude=${lat}&longitude=${lng}`
+    `/stamp/stores-around/userId=${userId}?latitude=${lat}&longitude=${lng}`
   );
   console.log(response);
   return response.data.result;

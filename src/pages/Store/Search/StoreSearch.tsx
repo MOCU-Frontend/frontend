@@ -32,6 +32,8 @@ const StoreSearch = () => {
     enabled: !!userId,
   });
 
+  console.log(storeSearchData);
+
   const {
     searchKeywordDataArr,
     handleDeleteSearchKeyword,

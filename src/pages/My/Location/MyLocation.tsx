@@ -7,6 +7,7 @@ import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
 import MyLocationLocEditContent from '../../../components/My/Location/atoms/Content/LocEdit/MyLocationLocEditContent';
 import BodyTitleText from '../../../components/Text/BodyTitleText/BodyTitleText';
+import { useUserLocation } from '../../../hooks/useUserLocation';
 import useStore from '../../../store/useStore';
 import { colors } from '../../../styles/colors';
 import styles from './MyLocation.module.css';
@@ -16,14 +17,8 @@ interface Props {}
 const MyLocation: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
   const nowAddress = useStore((state) => state.nowAddress);
-  const {
-    data: AddressData,
-    isLoading: isAddressDataLoading,
-    isError: isAddressDataError,
-  } = useQuery({
-    queryKey: ['AddressData'],
-    queryFn: () => fetchAddressData(5),
-  });
+
+  const { locationArr, setLocationArr } = useUserLocation();
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -46,8 +41,8 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
             color={colors.mainPurple}
           />
         </div>
-        {AddressData &&
-          AddressData.map((data, index) => (
+        {locationArr &&
+          locationArr.map((data, index) => (
             <MyLocationLocEditContent
               key={data.name + index}
               titleText={data.name}

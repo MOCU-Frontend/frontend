@@ -6,27 +6,37 @@
     {
       "addressId": 1,
       "name": "집",
-      "address": "서울특별시 동대문구 사가정로 65"
+      "address": "서울특별시 동대문구 사가정로 65",
+      "latitude": 26.4661,
+      "longitude": 126.6848
     },
     {
       "addressId": 2,
       "name": "학교",
-      "address": "대한민국 서울특별시 광진구 능동로 120"
+      "address": "대한민국 서울특별시 광진구 능동로 120",
+      "latitude": 26.4661,
+      "longitude": 126.6848
     },
     {
       "addressId": 3,
       "name": "학교1",
-      "address": "대한민국 서울특별시 광진구 능동로 120"
+      "address": "대한민국 서울특별시 광진구 능동로 120",
+      "latitude": 26.4661,
+      "longitude": 126.6848
     },
     {
       "addressId": 4,
       "name": "학교2",
-      "address": "대한민국 서울특별시 광진구 능동로 120"
+      "address": "대한민국 서울특별시 광진구 능동로 120",
+      "latitude": 26.4661,
+      "longitude": 126.6848
     },
     {
       "addressId": 5,
       "name": "학교3",
-      "address": "대한민국 서울특별시 광진구 능동로 120"
+      "address": "대한민국 서울특별시 광진구 능동로 120",
+      "latitude": 26.4661,
+      "longitude": 126.6848
     }
   ],
   "messages": "요청에 성공하였습니다."

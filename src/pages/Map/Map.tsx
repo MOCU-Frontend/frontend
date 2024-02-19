@@ -206,13 +206,13 @@ const Map: React.FC = () => {
         }
       >
         <HeaderBackBtn
-          headerPaddingSize="checkFilter"
+          headerPaddingSize='checkFilter'
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
           {!isShowBottomSheet && (
             <MapHeaderSelect
-              text={nowUserLocation.name}
+              text={nowUserLocation ? nowUserLocation.name : '위치 없음'}
               onClick={() => navigate('/mylocation')}
               color={colors.mainPurple}
               size={'medium'}
@@ -228,13 +228,13 @@ const Map: React.FC = () => {
                     : 'no selected item!'
                 }
                 border={1}
-                borderColor="sub-purple-light"
+                borderColor='sub-purple-light'
                 onClick={() => handleFilterSelectClick(0)}
               />
               <CheckFilter
                 border={1}
-                borderColor="sub-purple-light"
-                label="이벤트 중"
+                borderColor='sub-purple-light'
+                label='이벤트 중'
                 isChecked={mapJsonType === 2}
                 onClick={handleClickEvent}
               />
@@ -251,13 +251,13 @@ const Map: React.FC = () => {
                   : 'no selected item!'
               }
               border={1}
-              borderColor="sub-purple-light"
+              borderColor='sub-purple-light'
               onClick={() => handleFilterSelectClick(0)}
             />
             <CheckFilter
               border={1}
-              borderColor="sub-purple-light"
-              label="이벤트 중"
+              borderColor='sub-purple-light'
+              label='이벤트 중'
               isChecked={mapJsonType === 2}
               onClick={handleClickEvent}
             />

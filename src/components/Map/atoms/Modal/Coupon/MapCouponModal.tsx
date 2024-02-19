@@ -3,6 +3,11 @@ import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
 import ModalDone from '../../../../Modal/ModalDone/ModalDone';
 import ModalWaiting from '../../../../Modal/ModalWaiting/ModalWaiting';
 
+declare global {
+  interface Window {
+    isCouponAccepted: boolean | undefined;
+  }
+}
 interface Props {
   couponModalLevel: CouponModalLevel | null;
   setCouponModalLevel: React.Dispatch<
@@ -30,7 +35,9 @@ const MapCouponModal: React.FC<Props> = ({
 
   useEffect(() => {
     if (couponModalLevel === 'waiting') {
-      handleRequestCoupon(() => setCouponModalLevel('done'));
+      if (window.isCouponAccepted) {
+        setCouponModalLevel('done');
+      }
     } else if (couponModalLevel === 'done') {
       setTimeout(() => {
         if (isRegularCustomer) {
@@ -51,7 +58,9 @@ const MapCouponModal: React.FC<Props> = ({
           subText='크림베이글 건대점'
           informText='아이스 아메리카노 한 잔'
           onClickNo={handleCancelModal}
-          onClickYes={() => setCouponModalLevel('waiting')}
+          onClickYes={() => {
+            handleRequestCoupon(() => setCouponModalLevel('waiting'));
+          }}
           onClickX={handleCancelModal}
         />
       );

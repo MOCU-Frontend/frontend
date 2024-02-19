@@ -8,9 +8,12 @@ import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/Stor
 import CouponBottomSheet from '../../components/Coupon/atoms/BottomSheet/CouponBottomSheet';
 import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampModal';
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetchMyCouponData } from '../../apis/my/coupon/myCoupon';
 import useStore from '../../store/useStore';
+import instance from '../../apis/instance';
+import { userStampRequestData } from '../../store/Type/Stamp/stampRequest';
+import { userCouponRequestData } from '../../store/Type/My/Coupon/couponRequest';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -94,6 +97,38 @@ const Coupon = () => {
     enabled: !!userId && !!nowUserLocation,
   });
 
+  const userStampMutation = useMutation({
+    mutationFn: (newData: userStampRequestData) => {
+      return instance.patch('/stamp/request', newData);
+    },
+    onSuccess: () => {
+      console.log('userStampMutation success!');
+    },
+  });
+
+  const handleRequestStamp = (onSuccess: () => void) => {
+    userStampMutation.mutate(
+      { userId: userId ? parseInt(userId) : 1, storeId: 1 },
+      { onSuccess }
+    );
+  };
+
+  const userCouponMutation = useMutation({
+    mutationFn: (newData: userCouponRequestData) => {
+      return instance.patch('/coupon/request', newData);
+    },
+    onSuccess: () => {
+      console.log('userCouponMutation success!');
+    },
+  });
+
+  const handleRequestCoupon = (onSuccess: () => void) => {
+    userCouponMutation.mutate(
+      { userId: userId ? parseInt(userId) : 1, storeId: 1 },
+      { onSuccess }
+    );
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
@@ -162,6 +197,7 @@ const Coupon = () => {
         setStampModalLevel={setStampModalLevel}
         onCancelModal={() => {}}
         onClickDoneModalRightBtn={() => navigate(`/review/${12}`)}
+        handleRequestStamp={handleRequestStamp}
       />
       <MapCouponModal
         couponModalLevel={couponModalLevel}
@@ -169,6 +205,7 @@ const Coupon = () => {
         onCancelModal={() => {}}
         isRegularCustomer={isRegularCustomer}
         handleRegularCustomer={() => setIsRegularCustomer(true)}
+        handleRequestCoupon={handleRequestCoupon}
       />
     </div>
   );

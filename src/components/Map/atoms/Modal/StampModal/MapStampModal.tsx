@@ -2,7 +2,11 @@ import React, { useEffect } from 'react';
 import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
 import ModalDone from '../../../../Modal/ModalDone/ModalDone';
 import ModalWaiting from '../../../../Modal/ModalWaiting/ModalWaiting';
-
+declare global {
+  interface Window {
+    isStampAccepted: boolean | undefined;
+  }
+}
 interface Props {
   stampModalLevel: ModalLevel | null;
   setStampModalLevel: React.Dispatch<React.SetStateAction<ModalLevel | null>>;
@@ -25,7 +29,9 @@ const MapStampModal: React.FC<Props> = ({
   };
   useEffect(() => {
     if (stampModalLevel === 'waiting') {
-      handleRequestStamp(() => setStampModalLevel('done'));
+      if (window.isStampAccepted) {
+        setStampModalLevel('done');
+      }
     }
   }, [stampModalLevel]);
   switch (stampModalLevel) {
@@ -37,7 +43,9 @@ const MapStampModal: React.FC<Props> = ({
           subText='크림베이글 건대점'
           informText='현재 9/10'
           onClickNo={handleCancelModal}
-          onClickYes={() => setStampModalLevel('waiting')}
+          onClickYes={() =>
+            handleRequestStamp(() => setStampModalLevel('waiting'))
+          }
           onClickX={handleCancelModal}
         />
       );

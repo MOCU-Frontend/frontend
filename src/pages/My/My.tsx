@@ -73,26 +73,26 @@ const My: React.FC = () => {
         >
           <ProfileGradationIcon width={48} height={48} />
         </button>
-        <MyTopSection titleText="모쿠 님의 마이페이지" subText="@298370" />
+        <MyTopSection titleText='모쿠 님의 마이페이지' subText='@298370' />
       </div>
       <main className={styles.main}>
         <div className={styles.quickMenusWrapper}>
           {MyPageData !== undefined && (
             <>
               <MyQuickMenu
-                titleText="쿠폰"
+                titleText='쿠폰'
                 num={MyPageData.result.usableCoupon}
                 Icon={CouponGradationIcon}
                 onClick={() => navigate('/coupon')}
               />
               <MyQuickMenu
-                titleText="단골"
+                titleText='단골'
                 num={MyPageData.result.availableFavoriteCount}
                 Icon={MyStoreGradationIcon}
                 onClick={() => navigate('/store/dangol')}
               />
               <MyQuickMenu
-                titleText="선물함"
+                titleText='선물함'
                 num={0}
                 Icon={GiftGradationIcon}
                 onClick={() => navigate('/gift/box')}
@@ -101,11 +101,11 @@ const My: React.FC = () => {
           )}
         </div>
         <MyLocationContent
-          locationText={nowUserLocation.address}
+          locationText={nowUserLocation ? nowUserLocation.address : '위치 없음'}
           onClick={() => navigate('location')}
         />
         <MyMainNormalHeaderWrapper
-          headerText="최근 혜택 사용 내역"
+          headerText='최근 혜택 사용 내역'
           onClick={() => navigate('/reward/history')}
           gap={12}
         >
@@ -148,7 +148,7 @@ const My: React.FC = () => {
           </div>
         </div>
       </main>
-      <HomeBottomNavigation nowPage="my" />
+      <HomeBottomNavigation nowPage='my' />
       <Outlet />
     </div>
   );

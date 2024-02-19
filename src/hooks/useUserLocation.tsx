@@ -2,8 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 import { fetchAddressData } from '../apis/address/address';
 import { UserLocation } from '../store/data/nowUserLocation';
+import useStore from '../store/useStore';
 
-export const useUserLocation = (nowUserLocation: UserLocation) => {
+export const useUserLocation = () => {
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
+  const setNowUserLocation = useStore((state) => state.setNowUserLocation);
   const {
     data: AddressData,
     isLoading: isAddressDataLoading,
@@ -12,30 +15,31 @@ export const useUserLocation = (nowUserLocation: UserLocation) => {
     queryKey: ['AddressData'],
     queryFn: () => fetchAddressData(5),
   });
+
   const userLocationArr = AddressData
     ? AddressData.map((data, index) => {
-        return { ...data, isChecked: index === 0, id: index };
+        return { ...data, isChecked: index === 0 };
       })
     : [];
-  const checkedLocationIdx = userLocationArr.findIndex((x) => x.isChecked);
-  const nowLocationIdx = userLocationArr.findIndex(
-    (x) => x.name === nowUserLocation.name
-  );
-  const copiedArr = [...userLocationArr];
-  copiedArr[checkedLocationIdx] &&
-    (copiedArr[checkedLocationIdx].isChecked = false);
-  copiedArr[checkedLocationIdx] && (copiedArr[nowLocationIdx].isChecked = true);
-  const [locationArr, setLocationArr] = useState<UserLocation[]>(copiedArr);
+
   useEffect(() => {
-    if (AddressData) {
+    if (!nowUserLocation && userLocationArr.length > 0) {
+      setNowUserLocation(userLocationArr[0]);
+    }
+  }, [nowUserLocation, AddressData]);
+
+  const [locationArr, setLocationArr] =
+    useState<UserLocation[]>(userLocationArr);
+  useEffect(() => {
+    if (AddressData && nowUserLocation) {
       const userLocationArr = AddressData
         ? AddressData.map((data, index) => {
-            return { ...data, isChecked: index === 0, id: index };
+            return { ...data, isChecked: index === 0 };
           })
         : [];
       const checkedLocationIdx = userLocationArr.findIndex((x) => x.isChecked);
       const nowLocationIdx = userLocationArr.findIndex(
-        (x) => x.name === nowUserLocation.name
+        (x) => x.addressId === nowUserLocation.addressId
       );
       if (checkedLocationIdx === -1) throw new Error('invalid userLocaionArr');
       if (nowLocationIdx === -1) throw new Error('invalid nowUserLocation');
@@ -44,6 +48,6 @@ export const useUserLocation = (nowUserLocation: UserLocation) => {
       copiedArr[nowLocationIdx].isChecked = true;
       setLocationArr(copiedArr);
     }
-  }, [AddressData]);
+  }, [AddressData, nowUserLocation]);
   return { locationArr, setLocationArr };
 };

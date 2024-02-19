@@ -18,8 +18,10 @@ import { colors } from '../../styles/colors';
 import SlideMenuAdBodyTab from '../../components/SlideMenu/atoms/BodyTab/Ad/SlideMenuAdBodyTab';
 import HomeAdSlideStatus from '../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import useStore from '../../store/useStore';
+import { useUserLocation } from '../../hooks/useUserLocation';
 
 const Home = () => {
+  const {} = useUserLocation();
   const navigate = useNavigate();
   const [adItemArr, setAdItemArr] = useState([
     { adId: 1, isChecked: true },
@@ -56,7 +58,7 @@ const Home = () => {
         />
         <HomeLocationSec
           titleText='모쿠님의 현재위치'
-          bodyText={nowUserLocation.name}
+          bodyText={nowUserLocation ? nowUserLocation.name : '위치 없음'}
           onClickLoc={() => navigate('/mylocation')}
         />
       </div>

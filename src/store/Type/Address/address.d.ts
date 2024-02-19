@@ -2,6 +2,8 @@ export type AddressGetData = {
   addressId: number;
   name: string;
   address: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type AddressGetDataResponse = {
@@ -15,15 +17,15 @@ export type AddressGetDataResponse = {
 export type AddressPostRequest = {
   name: string;
   address: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type AddressPatchRequest = {
   name: string;
   address: string;
-  latitude: string;
-  longitude: string;
+  latitude: number;
+  longitude: number;
 };
 
 export type AddressSimplePatchRequest = {

@@ -23,7 +23,7 @@ const StoreSearchHeader: React.FC<Props> = ({
     <div className={styles.headerWrapper}>
       <div className={styles.mapHeaderSelectWrapper}>
         <MapHeaderSelect
-          text={nowUserLocation.name}
+          text={nowUserLocation ? nowUserLocation.name : '현재 위치 없음'}
           onClick={() => navigate('/mylocation')}
           color={colors.black}
           size={'small'}
@@ -31,11 +31,11 @@ const StoreSearchHeader: React.FC<Props> = ({
       </div>
 
       <HeaderBackBtn
-        headerPaddingSize="search"
+        headerPaddingSize='search'
         onClickBackBtn={() => navigate(-1)}
         children={
           <SearchBar
-            placeholder="찾고 싶은 가게를 검색해 보세요"
+            placeholder='찾고 싶은 가게를 검색해 보세요'
             onClickSearchBtn={(value) => {
               if (value) {
                 handleAddSearchKeyword({ title: value });

@@ -215,8 +215,8 @@ const MyLocationEnrollment: React.FC = () => {
                         ' ' +
                         detailLocation
                       : selectedAddressData.road || selectedAddressData.jibun,
-                    latitude: '37.54160960160775',
-                    longitude: '127.07875583744614',
+                    latitude: 37.54160960160775,
+                    longitude: 127.07875583744614,
                   });
                 }
               }}

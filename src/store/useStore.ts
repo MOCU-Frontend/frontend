@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-import { UserLocation, userLocationArr } from './data/nowUserLocation';
+import { UserLocation } from './data/nowUserLocation';
 
 interface State {
   example: string;
   nowAddress: Address | undefined;
   setNowAddress: (newAddress: Address) => void;
-  nowUserLocation: UserLocation;
+  nowUserLocation: UserLocation | undefined;
   setNowUserLocation: (newUserLocation: UserLocation) => void;
   userId: string | undefined;
 }
@@ -16,14 +16,11 @@ type Address = {
   buildingName: string | undefined;
 };
 
-const nowUserLocation = userLocationArr.find((x) => x.isChecked);
-if (!nowUserLocation) throw new Error('no nowUserLocation data');
-
 const useStore = create<State>((set) => ({
   example: 'example',
   nowAddress: undefined,
   setNowAddress: (newAddress) => set({ nowAddress: newAddress }),
-  nowUserLocation,
+  nowUserLocation: undefined,
   setNowUserLocation: (newUserLocation) =>
     set({ nowUserLocation: newUserLocation }),
   userId: undefined,

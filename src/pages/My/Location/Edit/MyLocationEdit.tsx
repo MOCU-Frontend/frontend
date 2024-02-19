@@ -105,8 +105,8 @@ const MyLocationEdit: React.FC = () => {
               addressPatchMutation.mutate({
                 name: checkedLocSetData.etcName || checkedLocSetData.name,
                 address: '서울 광진구 능동로 69',
-                latitude: '37.54160960160775',
-                longitude: '127.07875583744614',
+                latitude: 37.54160960160775,
+                longitude: 127.07875583744614,
               });
             }
           }}

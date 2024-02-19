@@ -53,11 +53,17 @@ const Map: React.FC = () => {
 
   // 필터 관련 코드
 
-  // mapJsonType 상태 관련 코드
-  const [mapJsonType, setMapJsonType] = useState(0);
+  // mapApiGet 상태 관련 코드
+  const [mapApiGet, setMapApiGet] = useState<boolean>(false);
 
-  // 첫번째 필터에서 무슨 타입을 골랐는지 저장하기 위해서 만든 상태
-  const [storeJsonType, setStoreJsonType] = useState(0);
+  // event가 켜져있는지 안켜져 있는지
+  const [eventOption, setEventOption] = useState<boolean>(false);
+
+  // 쿠폰 사용 임박인지 아닌지
+  const [dueDateOption, setDueDateOption] = useState<boolean>(false);
+
+  // 카테고리 옵션
+  const [categoryOption, setCategoryOption] = useState<string>('업종 전체');
 
   // FilterBottomSheet를 보이게 하는지 상태관리
   const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
@@ -95,18 +101,18 @@ const Map: React.FC = () => {
           !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
       }
 
-      // 업종 전체가 선택되어 있으면 MapJsonType이 0이다.
+      // 업종 전체가 선택되어 있으면 mapApiGet이 0이다.
       if (copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 0) {
-        setStoreJsonType(0);
-        setMapJsonType(0);
+        setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+        setCategoryOption('업종 전체');
       }
 
-      // 카페가 선택되어 있으면 MapJsonType이 1이다.
+      // 카페가 선택되어 있을 때
       else if (
         copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 1
       ) {
-        setStoreJsonType(1);
-        setMapJsonType(1);
+        setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+        setCategoryOption('카페');
       }
 
       return copiedMenuItemDataArr;
@@ -132,15 +138,20 @@ const Map: React.FC = () => {
   };
 
   // event 필터를 클릭했을 때
-  // event filter가 on이면 mapJsonType가 2, off가 되면 아까 필터에서 저장해놨던 mapJsonType으로 바뀐다.
   const handleClickEvent = () => {
-    setMapJsonType((prevType) => (prevType === 2 ? storeJsonType : 2));
+    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+    setEventOption((prevEventOption) => !prevEventOption);
+  };
+
+  const handleClickDueDate = () => {
+    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+    setDueDateOption((prevEventOption) => !prevEventOption);
   };
 
   // useEffect를 사용하여 상태가 업데이트될 때 로그 출력
   useEffect(() => {
-    console.log(mapJsonType);
-  }, [mapJsonType]);
+    console.log(mapApiGet);
+  }, [mapApiGet]);
 
   const selectedSectorFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
@@ -168,7 +179,10 @@ const Map: React.FC = () => {
   const { storeMarkerArr, selectedStoreData } = useStoreMapData(
     map,
     handleShowBottomSheet,
-    mapJsonType
+    mapApiGet,
+    eventOption,
+    dueDateOption,
+    categoryOption
   );
 
   const navigate = useNavigate();
@@ -206,13 +220,13 @@ const Map: React.FC = () => {
         }
       >
         <HeaderBackBtn
-          headerPaddingSize="checkFilter"
+          headerPaddingSize='checkFilter'
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
           {!isShowBottomSheet && (
             <MapHeaderSelect
-              text={nowUserLocation.name}
+              text={nowUserLocation ? nowUserLocation.name : '위치 없음'}
               onClick={() => navigate('/mylocation')}
               color={colors.mainPurple}
               size={'medium'}
@@ -228,15 +242,22 @@ const Map: React.FC = () => {
                     : 'no selected item!'
                 }
                 border={1}
-                borderColor="sub-purple-light"
+                borderColor='sub-purple-light'
                 onClick={() => handleFilterSelectClick(0)}
               />
               <CheckFilter
                 border={1}
-                borderColor="sub-purple-light"
-                label="이벤트 중"
-                isChecked={mapJsonType === 2}
+                borderColor='sub-purple-light'
+                label='이벤트 중'
+                isChecked={eventOption}
                 onClick={handleClickEvent}
+              />
+              <CheckFilter
+                border={1}
+                borderColor='sub-purple-light'
+                label='쿠폰 사용 임박'
+                isChecked={dueDateOption}
+                onClick={handleClickDueDate}
               />
             </div>
           )}
@@ -251,15 +272,22 @@ const Map: React.FC = () => {
                   : 'no selected item!'
               }
               border={1}
-              borderColor="sub-purple-light"
+              borderColor='sub-purple-light'
               onClick={() => handleFilterSelectClick(0)}
             />
             <CheckFilter
               border={1}
-              borderColor="sub-purple-light"
-              label="이벤트 중"
-              isChecked={mapJsonType === 2}
+              borderColor='sub-purple-light'
+              label='이벤트 중'
+              isChecked={eventOption}
               onClick={handleClickEvent}
+            />
+            <CheckFilter
+              border={1}
+              borderColor='sub-purple-light'
+              label='쿠폰 사용 임박'
+              isChecked={dueDateOption}
+              onClick={handleClickDueDate}
             />
           </div>
         )}

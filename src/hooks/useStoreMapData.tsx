@@ -12,15 +12,17 @@ import { useQuery } from '@tanstack/react-query';
 import { useQueryClient } from '@tanstack/react-query';
 
 import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
-import { fetchMapCafeFilterData } from '../apis/map/fetchMapStoreMarkerData';
-import { fetchMapEventOnData } from '../apis/map/fetchMapStoreMarkerData';
+
 import { fetchMapStoreData } from './../apis/map/fetchMapStoreData';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
   map: naver.maps.Map | undefined,
   handleClickMarker: () => void,
-  mapJsonType: number
+  mapApiGet: boolean,
+  eventOption: boolean,
+  dueDateOption: boolean,
+  categoryOption: string
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
@@ -35,19 +37,16 @@ export const useStoreMapData = (
     isLoading: isStoreMapMarkerDataLoading,
     isError: isStoreMapMarkerDataError,
   } = useQuery({
-    queryKey: ['mapStoreMarker', mapJsonType],
-    queryFn: () => {
-      switch (mapJsonType) {
-        case 0:
-          return fetchMapStoreMarkerData(1, 5, 4);
-        case 1:
-          return fetchMapCafeFilterData(1, 5, 4);
-        case 2:
-          return fetchMapEventOnData(1, 5, 4);
-        default:
-          return fetchMapStoreMarkerData(1, 5, 4);
-      }
-    },
+    queryKey: ['mapStoreMarker', mapApiGet],
+    queryFn: () =>
+      fetchMapStoreMarkerData(
+        1,
+        37.5404257,
+        127.07209,
+        eventOption,
+        dueDateOption,
+        categoryOption
+      ),
   });
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
@@ -72,7 +71,7 @@ export const useStoreMapData = (
     setStoreMarkerArr([]);
 
     if (map && storeMapMarkerData) {
-      storeMapMarkerData.forEach((storeData, index) => {
+      storeMapMarkerData.forEach((storeData) => {
         console.log(storeData.latitude);
         console.log(storeData.longitude);
         const imgUrl = storeData.hasEvent
@@ -98,7 +97,7 @@ export const useStoreMapData = (
         });
       });
     }
-  }, [map, mapJsonType, storeMapMarkerData]);
+  }, [map, mapApiGet, storeMapMarkerData]);
 
   return { storeMarkerArr, selectedStoreData, storeMapMarkerData };
 };

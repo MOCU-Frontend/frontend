@@ -12,7 +12,7 @@ const MyLocation: React.FC = () => {
   const navigate = useNavigate();
 
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const { locationArr, setLocationArr } = useUserLocation(nowUserLocation);
+  const { locationArr, setLocationArr } = useUserLocation();
   const setNowUserLocation = useStore((state) => state.setNowUserLocation);
   const handleClickListFilter = (index: number) => {
     if (!locationArr[index]) throw new Error('invalid index!!');
@@ -35,7 +35,7 @@ const MyLocation: React.FC = () => {
       />
       <main className={styles.main}>
         <BodyTitleText
-          text={`모쿠님은 현재 ${nowUserLocation.name}에 있어요.`}
+          text={`모쿠님은 현재 ${nowUserLocation?.name}에 있어요.`}
           color='navy'
         />
         <div className={styles.editLinkBtnWrapper}>

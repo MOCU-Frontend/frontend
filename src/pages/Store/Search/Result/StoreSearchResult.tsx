@@ -140,6 +140,7 @@ const StoreSearchResult = () => {
   ];
 
   const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
 
   const {
     data: storeSearchResultData,
@@ -159,8 +160,8 @@ const StoreSearchResult = () => {
     queryFn: () =>
       fetchStoreSearchResultData(
         userId || '',
-        37.53939427920637,
-        127.07278389250759,
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         searchWord,
         selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
         savingOption,
@@ -170,7 +171,7 @@ const StoreSearchResult = () => {
         0,
         selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체'
       ),
-    enabled: !!userId,
+    enabled: !!userId && !!nowUserLocation,
   });
 
   return (

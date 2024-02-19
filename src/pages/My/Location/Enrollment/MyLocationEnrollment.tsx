@@ -112,7 +112,7 @@ const MyLocationEnrollment: React.FC = () => {
     });
   };
   const nowAddress = useStore((state) => state.nowAddress);
-  const userId = 5;
+  const userId = useStore((state) => state.userId);
   const addressPostMutation = useMutation({
     mutationFn: (newData: AddressPostRequest) => {
       return axios.patch(`/users/${userId}/address/register`, newData);

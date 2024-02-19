@@ -43,7 +43,7 @@ const MissionToday = () => {
   const [patchData, setPatchData] = useState<missionBtnResponse | undefined>();
 
   const missionBtnMutation = useMutation({
-    mutationFn: (newData: { todayMissionId: number; userId: number }) => {
+    mutationFn: (newData: { todayMissionId: number; userId: string }) => {
       return axios.patch('/mission/today-mission/done', newData);
     },
     onSuccess: (res) => {
@@ -57,7 +57,7 @@ const MissionToday = () => {
 
   const handleCompleteMissionClick = (
     todayMissionId: number,
-    userId: number
+    userId: string
   ) => {
     if (
       patchData?.result.content !== '이미 2개의 미션 스탬프를 획득하였습니다.'
@@ -67,7 +67,7 @@ const MissionToday = () => {
 
     missionBtnMutation.mutate({
       todayMissionId: todayMissionId,
-      userId: userId,
+      userId,
     });
   };
 
@@ -151,7 +151,10 @@ const MissionToday = () => {
                 content={mission.content}
                 status={mission.status}
                 missionCompleteClick={() =>
-                  handleCompleteMissionClick(mission.todayMissionId, 1)
+                  handleCompleteMissionClick(
+                    mission.todayMissionId,
+                    userId || ''
+                  )
                 }
                 patchData={patchData}
               />

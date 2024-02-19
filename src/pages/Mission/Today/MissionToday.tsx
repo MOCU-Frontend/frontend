@@ -20,9 +20,11 @@ import { fetchStampUserData } from '../../../apis/stamp/fetchStampUserData';
 import { missionBtnResponse } from '../../../store/Type/Mission/missionBtnResponse';
 import { MissionResponse } from '../../../store/Type/Mission/mission';
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+import useStore from '../../../store/useStore';
 
 const MissionToday = () => {
   const navigate = useNavigate();
+  const userId = useStore((state) => state.userId);
 
   // fetchMissionMapGetData
   const {
@@ -31,7 +33,8 @@ const MissionToday = () => {
     isError: isMissionMapGetDataError,
   } = useQuery({
     queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(),
+    queryFn: () => fetchMissionMapGetData(userId || ''),
+    enabled: !!userId,
   });
 
   // fetchMissionBtnPatchData
@@ -78,7 +81,8 @@ const MissionToday = () => {
     isError: isMissionDataError,
   } = useQuery({
     queryKey: ['missionData', missionCompleted],
-    queryFn: () => fetchMissionPageData(),
+    queryFn: () => fetchMissionPageData(userId || ''),
+    enabled: !!userId,
   });
 
   return (
@@ -86,9 +90,9 @@ const MissionToday = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate('/')}
         />
       </div>
@@ -157,7 +161,7 @@ const MissionToday = () => {
 
       {missionCompleted && patchData && (
         <ModalMissionClear
-          bodyText="오늘의 미션 수행 완료"
+          bodyText='오늘의 미션 수행 완료'
           subText={patchData.result.content}
           time={2}
           onEndTimer={() => setMissionCompleted(false)}

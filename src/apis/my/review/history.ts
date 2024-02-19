@@ -1,7 +1,7 @@
 import { MyReviewwHistoryDataResponse } from '../../../store/Type/My/ReviewHistory/MyReviewHistory';
 import instance from '../../instance';
 
-export const fetchMyReviewHistoryData = async (userId: number) => {
+export const fetchMyReviewHistoryData = async (userId: string) => {
   const response = await instance.get<MyReviewwHistoryDataResponse>(
     // 더미데이터
     // '/data/my/review/history/my-review-history-data-dummy.json'

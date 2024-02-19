@@ -37,7 +37,7 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
     isError: isOwnerCouponDataError,
   } = useQuery({
     queryKey: ['OwnerCoupon'],
-    queryFn: () => fetchOwnerCouponData(5, false, '적립 많은 순'),
+    queryFn: () => fetchOwnerCouponData('1', false, '적립 많은 순'),
   });
 
   return (

@@ -139,6 +139,8 @@ const StoreSearchResult = () => {
     ...uncheckedOptionDataArr,
   ];
 
+  const userId = useStore((state) => state.userId);
+
   const {
     data: storeSearchResultData,
     isLoading: isStoreSearchResultDataLoading,
@@ -156,7 +158,7 @@ const StoreSearchResult = () => {
     ],
     queryFn: () =>
       fetchStoreSearchResultData(
-        1,
+        userId || '',
         37.53939427920637,
         127.07278389250759,
         searchWord,
@@ -168,13 +170,14 @@ const StoreSearchResult = () => {
         0,
         selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체'
       ),
+    enabled: !!userId,
   });
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 가게를 검색해 보세요"
+          placeholder='찾고 싶은 가게를 검색해 보세요'
           onClickBackBtn={() => navigate(-1)}
           onClickSearchBtn={(value: string) => {
             if (value) {
@@ -195,7 +198,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(0)}
         />
         <CheckFilterSelect
@@ -206,7 +209,7 @@ const StoreSearchResult = () => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="sub-purple-light"
+          borderColor='sub-purple-light'
           onClick={() => handleFilterSelectClick(1)}
         />
 
@@ -216,7 +219,7 @@ const StoreSearchResult = () => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="sub-purple-light"
+            borderColor='sub-purple-light'
             onClick={() => {
               handleOptionClick(data.id);
             }}

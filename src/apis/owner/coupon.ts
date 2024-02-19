@@ -2,7 +2,7 @@ import { OwnerCouponDataResponse } from './../../store/Type/Owner/Coupon/ownerCo
 import instance from '../instance';
 
 export const fetchOwnerCouponData = async (
-  ownerId: number,
+  ownerId: string,
   isCustomerRegular: boolean,
   sort: '적립 많은 순' | '쿠폰 사용 많은 순' | '최근 방문 순'
 ) => {

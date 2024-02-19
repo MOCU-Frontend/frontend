@@ -3,6 +3,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { fetchMyReviewNewData } from '../../../../../../apis/my/review/new';
 import { MyReviewwNewDataResponse } from '../../../../../../store/Type/My/ReviewNew/MyReviewNew';
+import useStore from '../../../../../../store/useStore';
 import SlideMenuReviewNewBodyTab from '../../../../../SlideMenu/atoms/BodyTab/ReviewNew/SlideMenuReviewNewBodyTab';
 import MyReviewSlideStatus from '../../SlideStatus/MyReviewSlideStatus';
 import MyReviewDoneContent from '../Done/MyReviewDoneContent';
@@ -11,13 +12,15 @@ import styles from './MyReviewNewContent.module.css';
 interface Props {}
 
 const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
+  const userId = useStore((state) => state.userId);
   const {
     data: MyReviewNewData,
     isLoading: isMyReviewNewDataLoading,
     isError: isMyReviewNewDataError,
   } = useQuery({
     queryKey: ['MyReviewNew'],
-    queryFn: () => fetchMyReviewNewData(5),
+    queryFn: () => fetchMyReviewNewData(userId || ''),
+    enabled: !!userId,
   });
   const [reviewArr, setReviewArr] = useState(
     MyReviewNewData

@@ -27,6 +27,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const My: React.FC = () => {
   // fetchMyPageData
+  const userId = useStore((state) => state.userId);
   const {
     data: MyPageData,
     isLoading: isMyPageDataLoading,
@@ -35,7 +36,8 @@ const My: React.FC = () => {
     queryKey: ['MyPage'],
 
     // userId 임시
-    queryFn: () => fetchMyPageData(1),
+    queryFn: () => fetchMyPageData(userId || ''),
+    enabled: !!userId,
   });
 
   const navigate = useNavigate();

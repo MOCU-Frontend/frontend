@@ -22,6 +22,7 @@
     ],
     "recentlyVisitedStoreInfoList": [
       {
+        "storeId": 1,
         "storeName": "크림베이글 건대점",
         "numOfStamp": 8,
         "numOfCouponAvailable": 0,
@@ -31,12 +32,14 @@
     ],
     "storeInEventInfoList": [
       {
+        "storeId": 2,
         "storeName": "스타벅스 건대점",
         "mainImageUrl": "http://example.com/main_image.jpg"
       }
     ],
     "dueDateStoreInfoList": [
       {
+        "storeId": 1,
         "storeName": "크림베이글 건대점",
         "numOfStamp": 8,
         "numOfCouponAvailable": 0,
@@ -47,6 +50,7 @@
     ],
     "recommendStoreInfoList": [
       {
+        "storeId": 1,
         "storeName": "크림베이글 건대점",
         "hasEvent": false,
         "mainImageUrl": "http://example.com/main_image.jpg",

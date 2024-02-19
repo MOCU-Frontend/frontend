@@ -10,3 +10,12 @@ export type TokenLoginResponseData = {
     expiresIn: number;
   };
 };
+export type OwnerTokenLoginResponseData = {
+  ownerId: number;
+  authTokens: {
+    accessToken: string;
+    refreshToken: string;
+    grantType: 'Bearer';
+    expiresIn: number;
+  };
+};

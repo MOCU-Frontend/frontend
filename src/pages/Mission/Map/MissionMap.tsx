@@ -40,12 +40,11 @@ const MissionMap = () => {
 
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
 
+  const [rewardGet, setRewardGet] = useState<boolean>(false);
 
   const [status, setStatus] = useState<string | undefined>(
     MissionMapGetData?.status
   );
-
-
 
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
@@ -64,7 +63,6 @@ const MissionMap = () => {
     onSuccess: (res) => {
       const data: MissionMapCompleteResponse = res.data;
       setReward(res.data.result.reward);
-      setStatus(res.data.result.status);
     },
   });
 
@@ -73,9 +71,9 @@ const MissionMap = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor='white'
-          headerTitle='미션'
-          headerTitleColor='white'
+          backBtnColor="white"
+          headerTitle="미션"
+          headerTitleColor="white"
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -126,7 +124,7 @@ const MissionMap = () => {
       </div>
       {rewardGet === true && (
         <ModalMissionClear
-          bodyText='미션맵 최종 보상 받기 완료!'
+          bodyText="미션맵 최종 보상 받기 완료!"
           subText={reward}
           time={2}
           onEndTimer={() => setRewardGet(false)}

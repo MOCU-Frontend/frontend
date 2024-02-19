@@ -8,7 +8,7 @@ export const fetchMissionPageData = async (userId: string) => {
     // '/data/mission/missionDummyData-01.json'
 
     // 실제 연결
-    `/mission/today-mission/${userId}`
+    `/mission/today-mission/userId=${userId}`
   );
   console.log(response);
   return response.data.result;

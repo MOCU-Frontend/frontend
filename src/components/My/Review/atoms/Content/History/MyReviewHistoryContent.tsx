@@ -11,16 +11,19 @@ import axios from 'axios';
 import { MyReviewwHistoryDataResponse } from '../../../../../../store/Type/My/ReviewHistory/MyReviewHistory';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMyReviewHistoryData } from '../../../../../../apis/my/review/history';
+import useStore from '../../../../../../store/useStore';
 interface Props {}
 
 const MyReviewHistoryContent: React.FC<Props> = ({}: Props) => {
+  const userId = useStore((state) => state.userId);
   const {
     data: myReviewwHistoryData,
     isLoading: isMyReviewwHistoryDataLoading,
     isError: isMyReviewwHistoryDataError,
   } = useQuery({
     queryKey: ['MyReviewwHistory'],
-    queryFn: () => fetchMyReviewHistoryData(5),
+    queryFn: () => fetchMyReviewHistoryData(userId || ''),
+    enabled: !!userId,
   });
   return (
     <div className={styles.wholeWrapper}>

@@ -27,6 +27,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const My: React.FC = () => {
   // fetchMyPageData
+  const userId = useStore((state) => state.userId);
   const {
     data: MyPageData,
     isLoading: isMyPageDataLoading,
@@ -35,7 +36,8 @@ const My: React.FC = () => {
     queryKey: ['MyPage'],
 
     // userId 임시
-    queryFn: () => fetchMyPageData(1),
+    queryFn: () => fetchMyPageData(userId || ''),
+    enabled: !!userId,
   });
 
   const navigate = useNavigate();
@@ -58,6 +60,8 @@ const My: React.FC = () => {
       return copiedArr;
     });
   };
+  console.log(MyPageData && MyPageData.result.missionStampCount);
+
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (
     <div className={styles.wholeWrapper}>
@@ -131,7 +135,7 @@ const My: React.FC = () => {
           <MyMissionContent
             onClick={() => navigate('/mission/map')}
             accumStampNum={MyPageData.result.missionStampCount}
-            wholeStampNum={10}
+            wholeStampNum={30}
           />
         )}
 

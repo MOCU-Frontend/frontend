@@ -20,10 +20,16 @@ import { fetchStampUserData } from '../../../apis/stamp/fetchStampUserData';
 import { missionBtnResponse } from '../../../store/Type/Mission/missionBtnResponse';
 import { MissionResponse } from '../../../store/Type/Mission/mission';
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+
 import MapGageBar from '../../../components/Map/atoms/GageBar/MapGageBar';
+
+import useStore from '../../../store/useStore';
+import instance from '../../../apis/instance';
+
 
 const MissionToday = () => {
   const navigate = useNavigate();
+  const userId = useStore((state) => state.userId);
 
   // fetchMissionMapGetData
   const {
@@ -32,7 +38,8 @@ const MissionToday = () => {
     isError: isMissionMapGetDataError,
   } = useQuery({
     queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(),
+    queryFn: () => fetchMissionMapGetData(userId || ''),
+    enabled: !!userId,
   });
 
   // fetchMissionBtnPatchData
@@ -41,8 +48,8 @@ const MissionToday = () => {
   const [patchData, setPatchData] = useState<missionBtnResponse | undefined>();
 
   const missionBtnMutation = useMutation({
-    mutationFn: (newData: { todayMissionId: number; userId: number }) => {
-      return axios.patch('/mission/today-mission/done', newData);
+    mutationFn: (newData: { todayMissionId: number; userId: string }) => {
+      return instance.patch('/mission/today-mission/done', newData);
     },
     onSuccess: (res) => {
       const data: missionBtnResponse = res.data;
@@ -55,7 +62,7 @@ const MissionToday = () => {
 
   const handleCompleteMissionClick = (
     todayMissionId: number,
-    userId: number
+    userId: string
   ) => {
     if (
       patchData?.result.content !== '이미 2개의 미션 스탬프를 획득하였습니다.'
@@ -65,7 +72,7 @@ const MissionToday = () => {
 
     missionBtnMutation.mutate({
       todayMissionId: todayMissionId,
-      userId: userId,
+      userId,
     });
   };
 
@@ -79,7 +86,8 @@ const MissionToday = () => {
     isError: isMissionDataError,
   } = useQuery({
     queryKey: ['missionData', missionCompleted],
-    queryFn: () => fetchMissionPageData(),
+    queryFn: () => fetchMissionPageData(userId || ''),
+    enabled: !!userId,
   });
 
   return (
@@ -87,9 +95,9 @@ const MissionToday = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate('/')}
         />
       </div>
@@ -152,7 +160,10 @@ const MissionToday = () => {
                 content={mission.content}
                 status={mission.status}
                 missionCompleteClick={() =>
-                  handleCompleteMissionClick(mission.todayMissionId, 1)
+                  handleCompleteMissionClick(
+                    mission.todayMissionId,
+                    userId || ''
+                  )
                 }
                 patchData={patchData}
               />
@@ -162,7 +173,7 @@ const MissionToday = () => {
 
       {missionCompleted && patchData && (
         <ModalMissionClear
-          bodyText="오늘의 미션 수행 완료"
+          bodyText='오늘의 미션 수행 완료'
           subText={patchData.result.content}
           time={2}
           onEndTimer={() => setMissionCompleted(false)}

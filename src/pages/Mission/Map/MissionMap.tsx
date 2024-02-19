@@ -17,10 +17,12 @@ import axios from 'axios';
 import { MissionMapCompleteResponse } from '../../../store/Type/Mission/missionMapCompleteResponse';
 
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+import useStore from '../../../store/useStore';
 
 const MissionMap = () => {
   const navigate = useNavigate();
 
+  const userId = useStore((state) => state.userId);
   // fetchMissionMapGetData
   const {
     data: MissionMapGetData,
@@ -28,7 +30,8 @@ const MissionMap = () => {
     isError: isMissionMapGetDataError,
   } = useQuery({
     queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(),
+    queryFn: () => fetchMissionMapGetData(userId || ''),
+    enabled: !!userId,
   });
 
   // 스탬프 개수
@@ -37,16 +40,17 @@ const MissionMap = () => {
 
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
 
+
   const [status, setStatus] = useState<string | undefined>(
     MissionMapGetData?.status
   );
 
-  const [rewardGet, setRewardGet] = useState<boolean>(false);
+
 
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
       // 임시 userId
-      userId: 1,
+      userId: userId || '',
     });
     setRewardGet(true);
   };
@@ -54,8 +58,8 @@ const MissionMap = () => {
   // fetchMissionMapCompleteData
   // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
   const missionMapCompleteMutation = useMutation({
-    mutationFn: (newData: { userId: number }) => {
-      return axios.patch('/mission/mission-map/complete', newData);
+    mutationFn: (newData: { userId: string }) => {
+      return instance.patch('/mission/mission-map/complete', newData);
     },
     onSuccess: (res) => {
       const data: MissionMapCompleteResponse = res.data;
@@ -69,9 +73,9 @@ const MissionMap = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -122,7 +126,7 @@ const MissionMap = () => {
       </div>
       {rewardGet === true && (
         <ModalMissionClear
-          bodyText="미션맵 최종 보상 받기 완료!"
+          bodyText='미션맵 최종 보상 받기 완료!'
           subText={reward}
           time={2}
           onEndTimer={() => setRewardGet(false)}

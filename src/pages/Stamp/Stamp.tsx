@@ -15,13 +15,14 @@ import {
   initialOptionDataArr,
 } from '../../store/data/searchResult';
 import { fetchStampData } from '../../apis/stamp/stamp';
+import useStore from '../../store/useStore';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const Stamp = () => {
   const navigate = useNavigate();
-
+  const userId = useStore((state) => state.userId);
   // useQuery에서 사용
   const {
     data: StampData,
@@ -29,7 +30,8 @@ const Stamp = () => {
     isError: isStoreStampError,
   } = useQuery({
     queryKey: ['StampData'],
-    queryFn: () => fetchStampData(5),
+    queryFn: () => fetchStampData(userId || ''),
+    enabled: !!userId,
   });
 
   const [isCouponModalVisible, setIsCouponModalVisible] = useState(false);

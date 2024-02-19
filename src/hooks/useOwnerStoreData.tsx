@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import instance from '../apis/instance';
 import { fetchOwnerStoreData } from '../apis/owner/inform';
 
 import {
@@ -19,7 +20,7 @@ export const useOwnerStoreData = (storeId?: number) => {
   });
   const ownerStoreDataPatchMutation = useMutation({
     mutationFn: (newData: OwnerStorePatchRequestData) => {
-      return axios.patch('/owner/store-edit', newData);
+      return instance.patch('/owner/store-edit', newData);
     },
     onSuccess: () => {
       console.log('ownerStoreDataPatchMutation success!');
@@ -27,7 +28,7 @@ export const useOwnerStoreData = (storeId?: number) => {
   });
   const ownerStoreDataPostMutation = useMutation({
     mutationFn: (newData: OwnerStorePostRequestData) => {
-      return axios.post('/owner/store-register', newData);
+      return instance.post('/owner/store-register', newData);
     },
     onSuccess: () => {
       console.log('ownerStoreDataPostMutation success!');

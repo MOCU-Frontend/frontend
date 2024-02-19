@@ -65,6 +65,9 @@ const Map: React.FC = () => {
   // 카테고리 옵션
   const [categoryOption, setCategoryOption] = useState<string>('업종 전체');
 
+  // 가본 곳만 옵션
+  const [isVisitedOption, setIsVisitedOption] = useState<boolean>(false);
+
   // FilterBottomSheet를 보이게 하는지 상태관리
   const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
     useState(false);
@@ -148,6 +151,11 @@ const Map: React.FC = () => {
     setDueDateOption((prevEventOption) => !prevEventOption);
   };
 
+  const handleClickIsVisited = () => {
+    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+    setIsVisitedOption((prevEventOption) => !prevEventOption);
+  };
+
   // useEffect를 사용하여 상태가 업데이트될 때 로그 출력
   useEffect(() => {
     console.log(mapApiGet);
@@ -182,7 +190,8 @@ const Map: React.FC = () => {
     mapApiGet,
     eventOption,
     dueDateOption,
-    categoryOption
+    categoryOption,
+    isVisitedOption
   );
 
   const navigate = useNavigate();
@@ -220,7 +229,7 @@ const Map: React.FC = () => {
         }
       >
         <HeaderBackBtn
-          headerPaddingSize='checkFilter'
+          headerPaddingSize="checkFilter"
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
@@ -242,20 +251,27 @@ const Map: React.FC = () => {
                     : 'no selected item!'
                 }
                 border={1}
-                borderColor='sub-purple-light'
+                borderColor="sub-purple-light"
                 onClick={() => handleFilterSelectClick(0)}
               />
               <CheckFilter
                 border={1}
-                borderColor='sub-purple-light'
-                label='이벤트 중'
+                borderColor="sub-purple-light"
+                label="이벤트 중"
                 isChecked={eventOption}
                 onClick={handleClickEvent}
               />
               <CheckFilter
                 border={1}
-                borderColor='sub-purple-light'
-                label='쿠폰 사용 임박'
+                borderColor="sub-purple-light"
+                label="쿠폰 사용 임박"
+                isChecked={dueDateOption}
+                onClick={handleClickDueDate}
+              />
+              <CheckFilter
+                border={1}
+                borderColor="sub-purple-light"
+                label="가본 곳만"
                 isChecked={dueDateOption}
                 onClick={handleClickDueDate}
               />
@@ -272,22 +288,29 @@ const Map: React.FC = () => {
                   : 'no selected item!'
               }
               border={1}
-              borderColor='sub-purple-light'
+              borderColor="sub-purple-light"
               onClick={() => handleFilterSelectClick(0)}
             />
             <CheckFilter
               border={1}
-              borderColor='sub-purple-light'
-              label='이벤트 중'
+              borderColor="sub-purple-light"
+              label="이벤트 중"
               isChecked={eventOption}
               onClick={handleClickEvent}
             />
             <CheckFilter
               border={1}
-              borderColor='sub-purple-light'
-              label='쿠폰 사용 임박'
+              borderColor="sub-purple-light"
+              label="쿠폰 사용 임박"
               isChecked={dueDateOption}
               onClick={handleClickDueDate}
+            />
+            <CheckFilter
+              border={1}
+              borderColor="sub-purple-light"
+              label="가본 곳만"
+              isChecked={isVisitedOption}
+              onClick={handleClickIsVisited}
             />
           </div>
         )}

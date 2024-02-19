@@ -14,6 +14,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
 
 import { fetchMapStoreData } from './../apis/map/fetchMapStoreData';
+import useStore from '../store/useStore';
 
 // `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
@@ -22,10 +23,14 @@ export const useStoreMapData = (
   mapApiGet: boolean,
   eventOption: boolean,
   dueDateOption: boolean,
-  categoryOption: string
+  categoryOption: string,
+  isVisitedOption: boolean
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
+
+  const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
   // 그 결과를 `storeMapMarkerData`에 저장합니다.
@@ -40,13 +45,15 @@ export const useStoreMapData = (
     queryKey: ['mapStoreMarker', mapApiGet],
     queryFn: () =>
       fetchMapStoreMarkerData(
-        1,
-        37.5404257,
-        127.07209,
+        userId || '',
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         eventOption,
         dueDateOption,
-        categoryOption
+        categoryOption,
+        isVisitedOption
       ),
+    enabled: !!userId && !!nowUserLocation,
   });
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
@@ -61,8 +68,8 @@ export const useStoreMapData = (
     isError: isSelectedStoreError,
   } = useQuery({
     queryKey: ['selectedMapStore', selectedStoreId],
-    queryFn: () => fetchMapStoreData(1, selectedStoreId || 5),
-    enabled: !!selectedStoreId,
+    queryFn: () => fetchMapStoreData(userId || '', selectedStoreId || 5),
+    enabled: !!selectedStoreId && !!userId,
   });
 
   useEffect(() => {

@@ -14,8 +14,10 @@ const StoreSearchImminentCoupon: React.FC<Props> = ({
   const navigate = useNavigate();
   // 쿠폰 사용이 임박한 식당들 순으로 나열한 데이터
   const sortedData = dueDateStoreInfoList
-    ?.filter((data: StoreInfo) => data.numOfStamp >= 1)
-    .sort((a, b) => b.numOfStamp - a.numOfStamp);
+    ? dueDateStoreInfoList
+        ?.filter((data: StoreInfo) => data.numOfStamp >= 1)
+        .sort((a, b) => b.numOfStamp - a.numOfStamp)
+    : [];
 
   return (
     <div className={styles.contentRecent}>

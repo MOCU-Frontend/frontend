@@ -22,6 +22,8 @@ import {
 import axios from 'axios';
 import { userDangolDeleteResponse } from '../../../../../store/Type/User/userDangolDeleteResponse';
 import { UserDangolAddResponse } from '../../../../../store/Type/User/userDangolAddResponse';
+import useStore from '../../../../../store/useStore';
+import instance from '../../../../../apis/instance';
 
 interface Props {}
 
@@ -29,7 +31,8 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   // 아무것도 선택하지 않으면 -1,
   // 선택하면 selectedStoreIndex는 index가 된다.
   const [selectedStoreIndex, setSelectedStoreIndex] = useState<number>(-1);
-
+  const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   const {
     data: userDangolData,
     isLoading: isuserDangolDataLoading,
@@ -38,12 +41,18 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
     queryKey: ['userDangolData'],
 
     // 임시로
-    queryFn: () => fetchUserDangolPossibleData(1, 37.5404257, 127.07209),
+    queryFn: () =>
+      fetchUserDangolPossibleData(
+        userId || '',
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209
+      ),
+    enabled: !!userId && !!nowUserLocation,
   });
 
   const DangolDeleteMutation = useMutation({
-    mutationFn: (newData: { userId: number; storeId: number }) => {
-      return axios.patch('/users/my-storelist/add-new/delete', newData);
+    mutationFn: (newData: { userId: string; storeId: number }) => {
+      return instance.patch('/users/my-storelist/add-new/delete', newData);
     },
     onSuccess: (res) => {
       const data: userDangolDeleteResponse = res.data;
@@ -51,7 +60,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
     },
   });
 
-  const handleDangolDeleteClick = (userId: number, storeId: number) => {
+  const handleDangolDeleteClick = (userId: string, storeId: number) => {
     DangolDeleteMutation.mutate({
       storeId: storeId,
       userId: userId,
@@ -61,11 +70,11 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
 
   const DangolAddMutation = useMutation({
     mutationFn: (newData: {
-      userId: number;
+      userId: string;
       storeId: number;
       request: boolean;
     }) => {
-      return axios.patch('/users/regular-request', newData);
+      return instance.patch('/users/regular-request', newData);
     },
     onSuccess: (res) => {
       const data: UserDangolAddResponse = res.data;
@@ -74,7 +83,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   });
 
   const handleDangolAddClick = (
-    userId: number,
+    userId: string,
     storeId: number,
     request: boolean
   ) => {
@@ -96,7 +105,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle="단골 가게"
+        headerTitle='단골 가게'
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -107,7 +116,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       </HeaderBackBtn>
       <div className={styles.titleWrapper}>
         <BodyTitleText
-          text="단골로 설정할 가게를 선택하여 설정을 완료해주세요."
+          text='단골로 설정할 가게를 선택하여 설정을 완료해주세요.'
           color={colors.navy}
         />
       </div>
@@ -130,7 +139,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
               distance={data.distance}
               onClickCheckBox={() => handleClickDangolStoreCheckBox(index)}
               onClickStoreDetailBtn={() => {
-                handleDangolAddClick(1, data.storeId, true);
+                handleDangolAddClick(userId || '', data.storeId, true);
               }}
             />
           ))}
@@ -138,10 +147,10 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       <div className={styles.fullBtnWrapper}>
         {userDangolData && (
           <FullBtn
-            label="단골로 설정"
+            label='단골로 설정'
             onClick={() =>
               handleDangolAddClick(
-                1,
+                userId || '',
                 userDangolData[selectedStoreIndex].storeId,
                 true
               )
@@ -152,17 +161,17 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       </div>
       {isShowModalDelete && userDangolData && (
         <ModalDelete
-          bodyText="선택하신 가게를 정말 삭제할까요?"
+          bodyText='선택하신 가게를 정말 삭제할까요?'
           subText={userDangolData[selectedStoreIndex].storeName}
           nextText={`다음 혜택: ${userDangolData[selectedStoreIndex].reward}`}
-          informText="*15초 후 자동으로 이전 메인 페이지로 돌아갑니다."
-          headerTitle=""
+          informText='*15초 후 자동으로 이전 메인 페이지로 돌아갑니다.'
+          headerTitle=''
           onClickNo={() => setIsShowModalDelete(false)}
           onClickX={() => setIsShowModalDelete(false)}
           onClickYes={() =>
             handleDangolDeleteClick(
               // userId 임시
-              1,
+              userId || '',
               userDangolData[selectedStoreIndex].storeId
             )
           }
@@ -170,11 +179,11 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       )}
       {isShowModalDangol && (
         <ModalCompleteDangol
-          headerTitle=""
-          bodyText="단골설정 완료!"
-          informText="*15초 후 자동으로 이전 페이지로 돌아갑니다."
+          headerTitle=''
+          bodyText='단골설정 완료!'
+          informText='*15초 후 자동으로 이전 페이지로 돌아갑니다.'
           onClickBtn={() => setIsShowModalDangol(false)}
-          btnLabel="내 단골 가게 확인하기"
+          btnLabel='내 단골 가게 확인하기'
           onClickX={() => setIsShowModalDangol(false)}
         />
       )}

@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import instance from '../../apis/instance';
 import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
 import ReviewBtnContent from '../../components/Review/atoms/Contents/Btn/ReviewBtnContent';
 import ReviewInformContent from '../../components/Review/atoms/Contents/Inform/ReviewInformContent';
@@ -15,14 +16,16 @@ import {
   ReviewPostResponse,
   ReviewReportRequestData,
 } from '../../store/Type/Review/review';
+import useStore from '../../store/useStore';
 import styles from './Review.module.css';
 
 const Review: React.FC = () => {
   const navigate = useNavigate();
   const [reviewText, setReviewText] = useState('');
+  const userId = useStore((state) => state.userId);
   const reviewPostMutation = useMutation({
     mutationFn: (newData: ReviewPostRequestData) => {
-      return axios.post('/review', newData);
+      return instance.post('/review', newData);
     },
     onSuccess: (res) => {
       const data: ReviewPostResponse = res.data;
@@ -32,7 +35,7 @@ const Review: React.FC = () => {
 
   const reviewPatchMutation = useMutation({
     mutationFn: (newData: ReviewPatchRequestData) => {
-      return axios.post('/review/correct-my-review', newData);
+      return instance.patch('/review/correct-my-review', newData);
     },
     onSuccess: (res) => {
       const data: ReviewPatchResponse = res.data;
@@ -64,7 +67,7 @@ const Review: React.FC = () => {
           onClickConfirmBtn={() => {
             if (reviewText.length > 20) {
               reviewPostMutation.mutate({
-                userId: 5,
+                userId: userId || '',
                 storeId: 5,
                 rate: 4,
                 content: reviewText,

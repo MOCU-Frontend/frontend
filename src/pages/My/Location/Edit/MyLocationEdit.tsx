@@ -17,6 +17,8 @@ import {
   AddressPatchResponse,
 } from '../../../../store/Type/Address/address';
 import axios from 'axios';
+import useStore from '../../../../store/useStore';
+import instance from '../../../../apis/instance';
 type LocSetData = {
   name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -58,10 +60,10 @@ const MyLocationEdit: React.FC = () => {
   };
 
   const navigate = useNavigate();
-  const userId = 5;
+  const userId = useStore((state) => state.userId);
   const addressPatchMutation = useMutation({
     mutationFn: (newData: AddressPatchRequest) => {
-      return axios.patch(
+      return instance.patch(
         `/users/${userId}/modify-address/${locationId}`,
         newData
       );
@@ -105,8 +107,8 @@ const MyLocationEdit: React.FC = () => {
               addressPatchMutation.mutate({
                 name: checkedLocSetData.etcName || checkedLocSetData.name,
                 address: '서울 광진구 능동로 69',
-                latitude: 37.54160960160775,
-                longitude: 127.07875583744614,
+                latitude: 37.541609601,
+                longitude: 127.07875583,
               });
             }
           }}

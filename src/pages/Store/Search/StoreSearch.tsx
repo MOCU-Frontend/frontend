@@ -18,16 +18,21 @@ import { useRecentSearchWord } from '../../../hooks/useRecentSearchWord';
 import HomeAdSlideStatus from '../../../components/Home/atoms/SlideStatus/Ad/HomeAdSlideStatus';
 import SlideMenuEventBodyTab from '../../../components/SlideMenu/atoms/BodyTab/Event/SlideMenuEventBodyTab';
 import { fetchStoreSearchData } from '../../../apis/storeSearch/fetchStoreSearchData';
+import useStore from '../../../store/useStore';
 
 const StoreSearch = () => {
+  const userId = useStore((state) => state.userId);
   const {
     data: storeSearchData,
     isLoading: isStoreSearchDataLoading,
     isError: isStoreSearchDataError,
   } = useQuery({
     queryKey: ['storeSearchData'],
-    queryFn: () => fetchStoreSearchData(1, 1, 1),
+    queryFn: () => fetchStoreSearchData(userId || '', 1, 1),
+    enabled: !!userId,
   });
+
+  console.log(storeSearchData);
 
   const {
     searchKeywordDataArr,

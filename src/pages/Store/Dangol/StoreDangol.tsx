@@ -19,10 +19,13 @@ import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/Se
 import { useQuery } from '@tanstack/react-query';
 import { StoreList } from '../../../store/Type/User/userDangolResponse';
 import { fetchDangolData } from '../../../apis/dangol/dangol';
+import useStore from '../../../store/useStore';
 
 interface Props {}
 
 const StoreDangol: React.FC<Props> = ({}: Props) => {
+  const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   const {
     data: userDangolData,
     isLoading: isuserDangolDataLoading,
@@ -31,15 +34,16 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
     queryKey: ['Dangol'],
     queryFn: () =>
       fetchDangolData(
-        1,
+        userId || '',
         '최신순',
         '식당',
         false,
         false,
-        37.53939427920637,
-        127.07278389250759,
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         0
       ),
+    enabled: !!userId && !!nowUserLocation,
   });
 
   const navigate = useNavigate();
@@ -133,7 +137,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle="단골 가게"
+        headerTitle='단골 가게'
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -160,7 +164,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="main-purple"
+          borderColor='main-purple'
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(0)}
         />
@@ -172,7 +176,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="main-purple"
+          borderColor='main-purple'
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(1)}
         />
@@ -183,7 +187,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="main-purple"
+            borderColor='main-purple'
             onClick={() => handleOptionClick(data.id)}
           />
         ))}

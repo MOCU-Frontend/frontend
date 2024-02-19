@@ -2,7 +2,7 @@ import instance from '../instance';
 import { userDangolPossibleResponse } from '../../store/Type/User/userDangolPossible';
 
 export const fetchUserDangolPossibleData = async (
-  userId: number,
+  userId: string,
   userLatitude: number,
   userLongitude: number
 ) => {

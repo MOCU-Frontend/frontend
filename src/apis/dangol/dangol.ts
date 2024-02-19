@@ -2,7 +2,7 @@ import { DangolDataResponse } from '../../store/Type/Dangol/Dangol';
 import instance from '../instance';
 
 export const fetchDangolData = async (
-  userId: number,
+  userId: string,
   sort: string,
   category: string,
   isEventTrue: boolean,

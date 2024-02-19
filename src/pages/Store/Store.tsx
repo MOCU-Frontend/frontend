@@ -17,10 +17,12 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { fetchStoreDetailData } from '../../apis/store/store';
 import { ReviewReportRequestData } from '../../store/Type/Review/review';
 import axios from 'axios';
+import useStore from '../../store/useStore';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
   const { storeId } = useParams();
+  const userId = useStore((state) => state.userId);
   const {
     data: storeDetailData,
     isLoading: isStoreDetailDataLoading,
@@ -28,8 +30,14 @@ const Store: React.FC = () => {
   } = useQuery({
     queryKey: ['StoreDetailData'],
     queryFn: () =>
-      fetchStoreDetailData(storeId ? parseInt(storeId) : 1, 5, true, true, 0),
-    enabled: !!storeId,
+      fetchStoreDetailData(
+        storeId ? parseInt(storeId) : 1,
+        userId || '',
+        true,
+        true,
+        0
+      ),
+    enabled: !!storeId && !!userId,
   });
 
   const reviewReportMutation = useMutation({

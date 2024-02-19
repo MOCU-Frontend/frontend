@@ -1,7 +1,7 @@
 import instance from '../instance';
 
 // 스탬프 적립 요청 처리 API
-export const fetchStampUserData = async (userId: number, storeId: number) => {
+export const fetchStampUserData = async (userId: string, storeId: number) => {
   const response = await instance.post(
     // 더미데이터
     // '/data/stamp/stampUserPost.json',

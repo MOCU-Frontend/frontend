@@ -7,13 +7,15 @@ import useStore from '../store/useStore';
 export const useUserLocation = () => {
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const setNowUserLocation = useStore((state) => state.setNowUserLocation);
+  const userId = useStore((state) => state.userId);
   const {
     data: AddressData,
     isLoading: isAddressDataLoading,
     isError: isAddressDataError,
   } = useQuery({
     queryKey: ['AddressData'],
-    queryFn: () => fetchAddressData(5),
+    queryFn: () => fetchAddressData(userId || ''),
+    enabled: !!userId,
   });
 
   const userLocationArr = AddressData

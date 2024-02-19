@@ -2,7 +2,7 @@ import instance from '../instance';
 import { MapStoreResponse } from '../../store/Type/Map/map';
 
 // `fetchMapStoreData`는 선택된 상점의 데이터를 API에서 가져오는 함수입니다.
-export const fetchMapStoreData = async (userId: number, storeId: number) => {
+export const fetchMapStoreData = async (userId: string, storeId: number) => {
   const response = await instance.get<MapStoreResponse>(
     // 더미 데이터
     // '/data/map/mapStoreDummyData.json'

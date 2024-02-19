@@ -22,6 +22,7 @@ import {
 import axios from 'axios';
 import { userDangolDeleteResponse } from '../../../../../store/Type/User/userDangolDeleteResponse';
 import { UserDangolAddResponse } from '../../../../../store/Type/User/userDangolAddResponse';
+import useStore from '../../../../../store/useStore';
 
 interface Props {}
 
@@ -29,7 +30,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   // 아무것도 선택하지 않으면 -1,
   // 선택하면 selectedStoreIndex는 index가 된다.
   const [selectedStoreIndex, setSelectedStoreIndex] = useState<number>(-1);
-
+  const userId = useStore((state) => state.userId);
   const {
     data: userDangolData,
     isLoading: isuserDangolDataLoading,
@@ -38,7 +39,9 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
     queryKey: ['userDangolData'],
 
     // 임시로
-    queryFn: () => fetchUserDangolPossibleData(1, 37.5404257, 127.07209),
+    queryFn: () =>
+      fetchUserDangolPossibleData(userId || '', 37.5404257, 127.07209),
+    enabled: !!userId,
   });
 
   const DangolDeleteMutation = useMutation({
@@ -96,7 +99,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle="단골 가게"
+        headerTitle='단골 가게'
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -107,7 +110,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       </HeaderBackBtn>
       <div className={styles.titleWrapper}>
         <BodyTitleText
-          text="단골로 설정할 가게를 선택하여 설정을 완료해주세요."
+          text='단골로 설정할 가게를 선택하여 설정을 완료해주세요.'
           color={colors.navy}
         />
       </div>
@@ -138,7 +141,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       <div className={styles.fullBtnWrapper}>
         {userDangolData && (
           <FullBtn
-            label="단골로 설정"
+            label='단골로 설정'
             onClick={() =>
               handleDangolAddClick(
                 1,
@@ -152,11 +155,11 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       </div>
       {isShowModalDelete && userDangolData && (
         <ModalDelete
-          bodyText="선택하신 가게를 정말 삭제할까요?"
+          bodyText='선택하신 가게를 정말 삭제할까요?'
           subText={userDangolData[selectedStoreIndex].storeName}
           nextText={`다음 혜택: ${userDangolData[selectedStoreIndex].reward}`}
-          informText="*15초 후 자동으로 이전 메인 페이지로 돌아갑니다."
-          headerTitle=""
+          informText='*15초 후 자동으로 이전 메인 페이지로 돌아갑니다.'
+          headerTitle=''
           onClickNo={() => setIsShowModalDelete(false)}
           onClickX={() => setIsShowModalDelete(false)}
           onClickYes={() =>
@@ -170,11 +173,11 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       )}
       {isShowModalDangol && (
         <ModalCompleteDangol
-          headerTitle=""
-          bodyText="단골설정 완료!"
-          informText="*15초 후 자동으로 이전 페이지로 돌아갑니다."
+          headerTitle=''
+          bodyText='단골설정 완료!'
+          informText='*15초 후 자동으로 이전 페이지로 돌아갑니다.'
           onClickBtn={() => setIsShowModalDangol(false)}
-          btnLabel="내 단골 가게 확인하기"
+          btnLabel='내 단골 가게 확인하기'
           onClickX={() => setIsShowModalDangol(false)}
         />
       )}

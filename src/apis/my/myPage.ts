@@ -1,7 +1,7 @@
 import { MyPageDataResponse } from '../../store/Type/My/MyPage';
 import instance from '../instance';
 
-export const fetchMyPageData = async (userId: number) => {
+export const fetchMyPageData = async (userId: string) => {
   const response = await instance.get<MyPageDataResponse>(
     // 더미데이터
     // '/data/my/my-page-dummy-data.json'

@@ -2,7 +2,7 @@ import instance from '../instance';
 import { StoreSearchResultResponse } from '../../store/Type/StoreSearchResult/storeSearchResult';
 
 export const fetchStoreSearchResultData = async (
-  userId: number,
+  userId: string,
   userLatitude: number,
   userLongitude: number,
   query?: string,

@@ -9,11 +9,15 @@ import { Review } from '../../../../../store/Type/StoreDetail/storeDetail';
 interface Props {
   reviews: Review[] | undefined;
   handleReportReview: (reviewId: number, onSuccess: () => void) => void;
+  filterLabel: string;
+  onClickFilter: () => void;
 }
 
 const StoreReviewContent: React.FC<Props> = ({
   reviews,
   handleReportReview,
+  filterLabel,
+  onClickFilter,
 }: Props) => {
   return (
     <div className={styles.wholeWrapper}>
@@ -22,8 +26,8 @@ const StoreReviewContent: React.FC<Props> = ({
       </div>
       <div className={styles.filterWrapper}>
         <CheckFilterSelect
-          label='최신순'
-          onClick={() => {}}
+          label={filterLabel}
+          onClick={onClickFilter}
           isChecked={false}
         />
       </div>

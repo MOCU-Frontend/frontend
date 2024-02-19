@@ -182,6 +182,21 @@ export const initialSectorFilterDataArr: FilterList[] = [
   },
 ];
 
+export const initialOwnerRequestFilterDataArr: FilterList[] = [
+  {
+    title: '보상 적립 전체',
+    isChecked: true,
+  },
+  {
+    title: '보상 요청만',
+    isChecked: false,
+  },
+  {
+    title: '적립 요청만',
+    isChecked: false,
+  },
+];
+
 export const initialOptionDataArr = [
   {
     title: '이벤트 중',
@@ -266,5 +281,13 @@ export const initialOwnerCouponMenuItemDataArr: MenuItemData[] = [
     title: '정렬',
     isChecked: true,
     bodyDataArr: initialOwnerCouponArrangementFilterDataArr,
+  },
+];
+
+export const initialOwnerRequestMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '보상 적립 전체',
+    isChecked: true,
+    bodyDataArr: initialOwnerRequestFilterDataArr,
   },
 ];

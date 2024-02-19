@@ -40,6 +40,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   });
 
   const navigate = useNavigate();
+
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);

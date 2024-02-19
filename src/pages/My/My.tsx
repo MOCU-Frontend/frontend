@@ -32,13 +32,14 @@ const My: React.FC = () => {
     isLoading: isMyPageDataLoading,
     isError: isMyPageDataError,
   } = useQuery({
-    queryKey: ['missionData'],
+    queryKey: ['MyPage'],
 
     // userId 임시
     queryFn: () => fetchMyPageData(1),
   });
 
   const navigate = useNavigate();
+
   const [adItemArr, setAdItemArr] = useState([
     { adId: 1, isChecked: true },
     { adId: 2, isChecked: false },

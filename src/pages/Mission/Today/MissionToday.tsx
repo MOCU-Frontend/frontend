@@ -21,6 +21,7 @@ import { missionBtnResponse } from '../../../store/Type/Mission/missionBtnRespon
 import { MissionResponse } from '../../../store/Type/Mission/mission';
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
 import useStore from '../../../store/useStore';
+import instance from '../../../apis/instance';
 
 const MissionToday = () => {
   const navigate = useNavigate();
@@ -44,7 +45,7 @@ const MissionToday = () => {
 
   const missionBtnMutation = useMutation({
     mutationFn: (newData: { todayMissionId: number; userId: string }) => {
-      return axios.patch('/mission/today-mission/done', newData);
+      return instance.patch('/mission/today-mission/done', newData);
     },
     onSuccess: (res) => {
       const data: missionBtnResponse = res.data;

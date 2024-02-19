@@ -23,6 +23,7 @@ import axios from 'axios';
 import { userDangolDeleteResponse } from '../../../../../store/Type/User/userDangolDeleteResponse';
 import { UserDangolAddResponse } from '../../../../../store/Type/User/userDangolAddResponse';
 import useStore from '../../../../../store/useStore';
+import instance from '../../../../../apis/instance';
 
 interface Props {}
 
@@ -51,7 +52,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
 
   const DangolDeleteMutation = useMutation({
     mutationFn: (newData: { userId: string; storeId: number }) => {
-      return axios.patch('/users/my-storelist/add-new/delete', newData);
+      return instance.patch('/users/my-storelist/add-new/delete', newData);
     },
     onSuccess: (res) => {
       const data: userDangolDeleteResponse = res.data;
@@ -73,7 +74,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
       storeId: number;
       request: boolean;
     }) => {
-      return axios.patch('/users/regular-request', newData);
+      return instance.patch('/users/regular-request', newData);
     },
     onSuccess: (res) => {
       const data: UserDangolAddResponse = res.data;

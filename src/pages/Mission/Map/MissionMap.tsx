@@ -53,7 +53,7 @@ const MissionMap = () => {
   // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
   const missionMapCompleteMutation = useMutation({
     mutationFn: (newData: { userId: string }) => {
-      return axios.patch('/mission/mission-map/complete', newData);
+      return instance.patch('/mission/mission-map/complete', newData);
     },
     onSuccess: (res) => {
       const data: MissionMapCompleteResponse = res.data;

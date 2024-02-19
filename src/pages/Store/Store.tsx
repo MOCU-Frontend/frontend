@@ -18,6 +18,7 @@ import { fetchStoreDetailData } from '../../apis/store/store';
 import { ReviewReportRequestData } from '../../store/Type/Review/review';
 import axios from 'axios';
 import useStore from '../../store/useStore';
+import instance from '../../apis/instance';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ const Store: React.FC = () => {
 
   const reviewReportMutation = useMutation({
     mutationFn: (newData: ReviewReportRequestData) => {
-      return axios.post('/review/correct-my-review', newData);
+      return instance.post('/review/correct-my-review', newData);
     },
     onSuccess: () => {
       console.log('신고 완료');

@@ -26,6 +26,7 @@ import {
   AddressPostResponse,
 } from '../../../../store/Type/Address/address';
 import axios from 'axios';
+import instance from '../../../../apis/instance';
 type LocSetData = {
   name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -115,7 +116,7 @@ const MyLocationEnrollment: React.FC = () => {
   const userId = useStore((state) => state.userId);
   const addressPostMutation = useMutation({
     mutationFn: (newData: AddressPostRequest) => {
-      return axios.patch(`/users/${userId}/address/register`, newData);
+      return instance.post(`/users/${userId}/address/register`, newData);
     },
     onSuccess: (res) => {
       const data: AddressPostResponse = res.data;
@@ -215,8 +216,8 @@ const MyLocationEnrollment: React.FC = () => {
                         ' ' +
                         detailLocation
                       : selectedAddressData.road || selectedAddressData.jibun,
-                    latitude: 37.54160960160775,
-                    longitude: 127.07875583744614,
+                    latitude: 37.5416096016,
+                    longitude: 127.07875583,
                   });
                 }
               }}

@@ -9,7 +9,7 @@ export const fetchMissionMapGetData = async (userId: string) => {
       // '/data/mission/missionMapGetData.json'
 
       // 실제 연결
-      `/mission/mission-map/${userId}`
+      `/mission/mission-map/userId=${userId}`
     );
     console.log(response.data.result);
     return response.data.result;

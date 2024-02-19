@@ -14,11 +14,11 @@ import ModalDelete from '../../../../../components/Modal/ModalDelete/ModalDelete
 import ModalCompleteDangol from '../../../../../components/Modal/ModalCompleteDangol/ModalCompleteDangol';
 
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { fetchUserDangolData } from '../../../../../apis/user/fetchUserDangolData';
+import { fetchUserDangolPossibleData } from '../../../../../apis/user/fetchUserDangolPossibleData';
 import {
-  userDangolResponse,
+  userDangolPossibleResponse,
   Result,
-} from '../../../../../store/Type/User/userDangol';
+} from '../../../../../store/Type/User/userDangolPossible';
 import axios from 'axios';
 import { userDangolDeleteResponse } from '../../../../../store/Type/User/userDangolDeleteResponse';
 import { UserDangolAddResponse } from '../../../../../store/Type/User/userDangolAddResponse';
@@ -38,7 +38,7 @@ const StoreDangolAdd: React.FC<Props> = ({}: Props) => {
     queryKey: ['userDangolData'],
 
     // 임시로
-    queryFn: () => fetchUserDangolData(1, 37.5404257, 127.07209),
+    queryFn: () => fetchUserDangolPossibleData(1, 37.5404257, 127.07209),
   });
 
   const DangolDeleteMutation = useMutation({

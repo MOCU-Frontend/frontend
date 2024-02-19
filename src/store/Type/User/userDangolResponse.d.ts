@@ -1,18 +1,21 @@
-export type userDangolResponse = {
+export type UserDangolResponse = {
   code: number;
   status: number;
   message: string;
-  result: Result[];
+  result: Result;
   messages: string;
 };
 
 export type Result = {
-  storeId: number;
-  mainImageUrl: string;
-  storeName: string;
+  availableCount: number;
+  storeList: StoreList[];
+};
+
+export type StoreList = {
+  mainImageUrl?: any;
+  name: string;
   numOfStamp: number;
   maxStamp: number;
   reward: string;
-  rating: number;
   distance: number;
 };

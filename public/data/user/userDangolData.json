@@ -2,27 +2,18 @@
   "code": 1000,
   "status": 200,
   "message": "요청에 성공하였습니다.",
-  "result": [
-    {
-      "storeId": 3,
-      "mainImageUrl": "http://example.com/main_image.jpg",
-      "storeName": "애크로매틱 커피 어린이대공원",
-      "numOfStamp": 1,
-      "maxStamp": 10,
-      "reward": "아이스아메리카노 한 잔",
-      "rating": 0,
-      "distance": 685.4804014969045
-    },
-    {
-      "storeId": 4,
-      "mainImageUrl": "http://example.com/main_image.jpg",
-      "storeName": "예시2",
-      "numOfStamp": 2,
-      "maxStamp": 10,
-      "reward": "아이스아메리카노 한 잔",
-      "rating": 100,
-      "distance": 683.4804014969045
-    }
-  ],
+  "result": {
+    "availableCount": 1,
+    "storeList": [
+      {
+        "mainImageUrl": null,
+        "name": "시홍쓰",
+        "numOfStamp": 0,
+        "maxStamp": 10,
+        "reward": "박수",
+        "distance": 744
+      }
+    ]
+  },
   "messages": "요청에 성공하였습니다."
 }

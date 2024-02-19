@@ -46,7 +46,7 @@ interface Props {
   /**
    *
    */
-  isClicked: string;
+  status: string | undefined;
 }
 
 const MissionMapContent: React.FC<Props> = ({
@@ -54,7 +54,7 @@ const MissionMapContent: React.FC<Props> = ({
   reward,
   handleRewardClick,
   rewardGet,
-  isClicked,
+  status,
 }) => {
   // 만약을 대비
   if (stampCnt === undefined) {
@@ -170,7 +170,7 @@ const MissionMapContent: React.FC<Props> = ({
               textColor="sub-purple-light"
               borderRadius="large"
               onClick={handleRewardClick}
-              disabled={isClicked === 'done'}
+              disabled={status === 'done'}
             />
           </div>
           <div className={styles.finalButtonText}>{reward}</div>

@@ -37,7 +37,9 @@ const MissionMap = () => {
 
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
 
-  const [isClicked, setIsClicked] = useState<string>('not-done');
+  const [status, setStatus] = useState<string | undefined>(
+    MissionMapGetData?.status
+  );
 
   const [rewardGet, setRewardGet] = useState<boolean>(false);
 
@@ -58,7 +60,7 @@ const MissionMap = () => {
     onSuccess: (res) => {
       const data: MissionMapCompleteResponse = res.data;
       setReward(res.data.result.reward);
-      setIsClicked(res.data.result.status);
+      setStatus(res.data.result.status);
     },
   });
 
@@ -113,7 +115,7 @@ const MissionMap = () => {
               reward={reward}
               handleRewardClick={handleRewardClick}
               rewardGet={rewardGet}
-              isClicked={isClicked}
+              status={status}
             />
           </div>
         </div>

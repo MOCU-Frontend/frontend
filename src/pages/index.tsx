@@ -1,48 +1,80 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Home/Home';
-import Map from './Map/Map';
-import StoreSearch from './Store/Search/StoreSearch';
-import StoreSearchResult from './Store/Search/Result/StoreSearchResult';
-import Stamp from './Stamp/Stamp';
-import My from './My/My';
-import MyLocation from './My/Location/MyLocation';
-import MyLocationPage from './MyLocation/MyLocation';
-import MyNowLocation from './My/Location/Now/MyNowLocation';
-import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
-import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
-import Store from './Store/Store';
-import MissionToday from './Mission/Today/MissionToday';
-import MissionMap from './Mission/Map/MissionMap';
-import Review from './Review/Review';
-import Coupon from './Coupon/Coupon';
-import MyReview from './My/Review/MyReview';
-import OwnerHome from './Owner/Home/OwnerHome';
-import OwnerInform from './Owner/Inform/OwnerInform';
-import OwnerRequest from './Owner/Request/OwnerRequest';
-import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
-import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
-import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
-import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
-import Gift from './Gift/Gift';
-import GiftDetail from './Gift/GiftDetail/GiftDetail';
-import Advertisement from './Advertisement/Advertisement';
-import Alarm from './Alarm/Alarm';
-import Setting from './Setting/Setting';
-import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
-import GiftBox from './Gift/Box/GiftBox';
-import StoreDangol from './Store/Dangol/StoreDangol';
-import RewardHistory from './Reward/History/RewardHistory';
-import LocationSetting from './LocationSetting/LocationSetting';
-import LocationSettingNow from './LocationSetting/now/LocationSettingNow';
-import LocationSettingSearch from './LocationSetting/search/LocationSettingSearch';
-import LocationSettingName from './LocationSetting/Name/LocationSettingName';
-import StoreDangolAdd from './Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd';
-import Login from './Login/Login';
-import LoginOauth from './Login/Oauth/LoginOauth';
-import Logout from './Logout/Logout';
 
 const Router = () => {
+  // 동적 import
+  const Home = React.lazy(() => import('./Home/Home'));
+  const Map = React.lazy(() => import('./Map/Map'));
+  const StoreSearch = React.lazy(() => import('./Store/Search/StoreSearch'));
+  const StoreSearchResult = React.lazy(
+    () => import('./Store/Search/Result/StoreSearchResult')
+  );
+  const Stamp = React.lazy(() => import('./Stamp/Stamp'));
+  const My = React.lazy(() => import('./My/My'));
+  const MyLocation = React.lazy(() => import('./My/Location/MyLocation'));
+  const MyLocationPage = React.lazy(() => import('./MyLocation/MyLocation'));
+  const MyNowLocation = React.lazy(
+    () => import('./My/Location/Now/MyNowLocation')
+  );
+  const MyLocationEdit = React.lazy(
+    () => import('./My/Location/Edit/MyLocationEdit')
+  );
+  const MyLocationEnrollment = React.lazy(
+    () => import('./My/Location/Enrollment/MyLocationEnrollment')
+  );
+  const Store = React.lazy(() => import('./Store/Store'));
+  const MissionToday = React.lazy(() => import('./Mission/Today/MissionToday'));
+  const MissionMap = React.lazy(() => import('./Mission/Map/MissionMap'));
+  const Review = React.lazy(() => import('./Review/Review'));
+  const Coupon = React.lazy(() => import('./Coupon/Coupon'));
+  const MyReview = React.lazy(() => import('./My/Review/MyReview'));
+  const OwnerHome = React.lazy(() => import('./Owner/Home/OwnerHome'));
+  const OwnerInform = React.lazy(() => import('./Owner/Inform/OwnerInform'));
+  const OwnerRequest = React.lazy(() => import('./Owner/Request/OwnerRequest'));
+  const OwnerCoupon = React.lazy(() => import('./Owner/Coupon/OwnerCoupon'));
+  const OwnerInformEdit = React.lazy(
+    () => import('./Owner/Inform/Edit/OwnerInformEdit')
+  );
+  const OwnerInformRegister = React.lazy(
+    () => import('./Owner/Inform/Register/OwnerInformRegister')
+  );
+  const OwnerInformNoticeRegister = React.lazy(
+    () => import('./Owner/Inform/Notice/Register/OwnerInformNoticeRegister')
+  );
+  const Gift = React.lazy(() => import('./Gift/Gift'));
+  const GiftDetail = React.lazy(() => import('./Gift/GiftDetail/GiftDetail'));
+  const Advertisement = React.lazy(
+    () => import('./Advertisement/Advertisement')
+  );
+  const Alarm = React.lazy(() => import('./Alarm/Alarm'));
+  const Setting = React.lazy(() => import('./Setting/Setting'));
+  const MyProfileEdit = React.lazy(
+    () => import('./My/Profile/Edit/MyProfileEdit')
+  );
+  const GiftBox = React.lazy(() => import('./Gift/Box/GiftBox'));
+  const StoreDangol = React.lazy(() => import('./Store/Dangol/StoreDangol'));
+  const RewardHistory = React.lazy(
+    () => import('./Reward/History/RewardHistory')
+  );
+  const LocationSetting = React.lazy(
+    () => import('./LocationSetting/LocationSetting')
+  );
+  const LocationSettingNow = React.lazy(
+    () => import('./LocationSetting/now/LocationSettingNow')
+  );
+  const LocationSettingSearch = React.lazy(
+    () => import('./LocationSetting/search/LocationSettingSearch')
+  );
+  const LocationSettingName = React.lazy(
+    () => import('./LocationSetting/Name/LocationSettingName')
+  );
+  const StoreDangolAdd = React.lazy(
+    () => import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd')
+  );
+  const Login = React.lazy(() => import('./Login/Login'));
+  const LoginOauth = React.lazy(() => import('./Login/Oauth/LoginOauth'));
+  const Logout = React.lazy(() => import('./Logout/Logout'));
+
   const router = createBrowserRouter([
     {
       index: true,

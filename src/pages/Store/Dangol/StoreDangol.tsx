@@ -16,14 +16,9 @@ import BottomSheet from '../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StoreInfoInStamp from '../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
-import { FilterList } from '../../../store/data/stamp';
 import { useQuery } from '@tanstack/react-query';
-import { fetchUserDangolData } from '../../../apis/user/fetchUserDangolData';
-import {
-  UserDangolResponse,
-  Result,
-  StoreList,
-} from '../../../store/Type/User/userDangolResponse';
+import { StoreList } from '../../../store/Type/User/userDangolResponse';
+import { fetchDangolData } from '../../../apis/dangol/dangol';
 
 interface Props {}
 
@@ -33,10 +28,18 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
     isLoading: isuserDangolDataLoading,
     isError: isuserDangolDataError,
   } = useQuery({
-    queryKey: ['userDangolData'],
-
-    // 임시로
-    queryFn: () => fetchUserDangolData(1, 37.5404257, 127.07209),
+    queryKey: ['Dangol'],
+    queryFn: () =>
+      fetchDangolData(
+        5,
+        '최신순',
+        '식당',
+        false,
+        false,
+        37.53939427920637,
+        127.07278389250759,
+        0
+      ),
   });
 
   const navigate = useNavigate();
@@ -130,7 +133,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle="단골 가게"
+        headerTitle='단골 가게'
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -142,7 +145,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
       <div className={styles.seeMoreBtnWrapper}>
         {userDangolData !== undefined && (
           <StoreDangolSeeMoreBtn
-            btnText={`단골로 설정 가능한 가게 ${userDangolData.result.availableCount}`}
+            btnText={`단골로 설정 가능한 가게 ${userDangolData.availableCount}`}
             onClick={() => navigate('add')}
           />
         )}
@@ -157,7 +160,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="main-purple"
+          borderColor='main-purple'
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(0)}
         />
@@ -169,7 +172,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor="main-purple"
+          borderColor='main-purple'
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(1)}
         />
@@ -180,7 +183,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor="main-purple"
+            borderColor='main-purple'
             onClick={() => handleOptionClick(data.id)}
           />
         ))}
@@ -188,22 +191,20 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
 
       <div className={styles.wrapContent}>
         {userDangolData !== undefined &&
-          userDangolData.result.storeList.map(
-            (data: StoreList, index: number) => (
-              <StoreInfoInStamp
-                key={data.name + index}
-                title={data.name}
-                couponCount={data.numOfStamp}
-                achieve={data.reward}
-                distance={Math.round(data.distance)}
-                onClickCouponBtn={() => {}}
-                onClickStoreDetailBtn={() => {
-                  navigate(`/store/${data.name}`);
-                }}
-                onClickMapBtn={() => navigate('/map')}
-              />
-            )
-          )}
+          userDangolData.storeList.map((data: StoreList, index: number) => (
+            <StoreInfoInStamp
+              key={data.name + index}
+              title={data.name}
+              couponCount={data.numOfStamp}
+              achieve={data.reward}
+              distance={Math.round(data.distance)}
+              onClickCouponBtn={() => {}}
+              onClickStoreDetailBtn={() => {
+                navigate(`/store/${data.name}`);
+              }}
+              onClickMapBtn={() => navigate('/map')}
+            />
+          ))}
       </div>
 
       {isBottomSheetVisible && (

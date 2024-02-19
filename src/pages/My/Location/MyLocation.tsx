@@ -52,7 +52,7 @@ const MyLocation: React.FC<Props> = ({}: Props) => {
               key={data.name + index}
               titleText={data.name}
               locationText={data.address}
-              onClickBtn={() => navigate('5')}
+              onClickBtn={() => navigate(`${data.addressId}`)}
             />
           ))}
       </main>

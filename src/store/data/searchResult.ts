@@ -78,11 +78,11 @@ export const initialArrangementFilterDataArr: FilterList[] = [
     isChecked: true,
   },
   {
-    title: '적립률순',
+    title: '적립률 순',
     isChecked: false,
   },
   {
-    title: '별점 높은순',
+    title: '별점 높은 순',
     isChecked: false,
   },
   {

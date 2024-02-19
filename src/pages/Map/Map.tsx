@@ -184,16 +184,6 @@ const Map: React.FC = () => {
     }
   };
 
-  const { storeMarkerArr, selectedStoreData } = useStoreMapData(
-    map,
-    handleShowBottomSheet,
-    mapApiGet,
-    eventOption,
-    dueDateOption,
-    categoryOption,
-    isVisitedOption
-  );
-
   const navigate = useNavigate();
 
   const handleClickTargetBtn = () => {
@@ -203,6 +193,33 @@ const Map: React.FC = () => {
       throw new Error('no userLocation or Map!!');
     }
   };
+
+  const [mapCenterLat, setMapCenterLat] = useState<number>(0);
+  const [mapCenterLng, setMapCenterLng] = useState<number>(0);
+
+  const handleClickSearchBtn = () => {
+    if (map) {
+      // 지도의 중앙 위도와 경도 가져오기
+      setMapApiGet((prevMapApiGet) => !prevMapApiGet);
+      let mapCenter = map.getCenter() as naver.maps.LatLng;
+      console.log(mapCenter.lat());
+      console.log(mapCenter.lng());
+      setMapCenterLat(mapCenter.lat);
+      setMapCenterLng(mapCenter.lng);
+    }
+  };
+
+  const { storeMarkerArr, selectedStoreData } = useStoreMapData(
+    map,
+    handleShowBottomSheet,
+    mapApiGet,
+    eventOption,
+    dueDateOption,
+    categoryOption,
+    isVisitedOption,
+    mapCenterLat,
+    mapCenterLng
+  );
 
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
@@ -272,7 +289,7 @@ const Map: React.FC = () => {
                 border={1}
                 borderColor="sub-purple-light"
                 label="가본 곳만"
-                isChecked={dueDateOption}
+                isChecked={isVisitedOption}
                 onClick={handleClickDueDate}
               />
             </div>
@@ -316,7 +333,7 @@ const Map: React.FC = () => {
         )}
         {isShowSearchBtn && (
           <div className={styles.mapSearchBtnWrapper}>
-            <MapSearchBtn onClick={() => {}} />
+            <MapSearchBtn onClick={handleClickSearchBtn} />
           </div>
         )}
       </div>

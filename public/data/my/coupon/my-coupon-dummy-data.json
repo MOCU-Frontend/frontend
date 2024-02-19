@@ -4,14 +4,24 @@
   "message": "요청에 성공하였습니다.",
   "result": [
     {
-      "mainImageUrl": null,
-      "name": "행복한연탄구이",
+      "mainImageUrl": "http://example.com/main_image.jpg",
+      "storeName": "스타벅스 건대점",
+      "numOfStamp": 1,
       "maxStamp": 10,
-      "numOfStamp": 0,
-      "reward": "음료",
-      "latitude": 37.573051,
-      "longitude": 127.056323,
-      "event": null
+      "numOfCouponAvailable": 0,
+      "reward": "초코라떼 한 잔",
+      "rating": 5,
+      "distance": 161.29987834105938
+    },
+    {
+      "mainImageUrl": "http://example.com/main_image.jpg",
+      "storeName": "크림베이글 건대점",
+      "numOfStamp": 8,
+      "maxStamp": 10,
+      "numOfCouponAvailable": 0,
+      "reward": "아이스 아메리카노 한 잔",
+      "rating": 3.1,
+      "distance": 250.57360275732424
     }
   ],
   "messages": "요청에 성공하였습니다."

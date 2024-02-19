@@ -1,45 +1,26 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Stamp.module.css';
-import HeaderBackBtn from '../../components/HeaderBackBtn/HeaderBackBtn';
-import CheckFilter from '../../components/CheckFilter/CheckFilter';
-import CheckFilterSelect from '../../components/CheckFilter/Select/CheckFilterSelect';
 import StoreInfoInStamp from '../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StampHeaderFilter from '../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
 
-import { StampResponse, StampData } from '../../store/Type/Stamp/stamp';
-
-import instance from '../../apis/instance';
 import { useQuery } from '@tanstack/react-query';
-import axios, { AxiosResponse } from 'axios';
 
-import {
-  searchResultData,
-  initialMenuItemDataArr,
-  MenuItemData,
-  FilterList,
-} from '../../store/data/stamp';
+import { initialMenuItemDataArr, MenuItemData } from '../../store/data/stamp';
 import {
   FilterListWithId,
   initialOptionDataArr,
 } from '../../store/data/searchResult';
+import { fetchStampData } from '../../apis/stamp/stamp';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const Stamp = () => {
   const navigate = useNavigate();
-
-  const fetchStampData = async () => {
-    const response = await instance.get<StampResponse>(
-      '/data/stamp/stampPageData.json'
-    );
-    console.log(response);
-    return response.data;
-  };
 
   // useQuery에서 사용
   const {
@@ -48,7 +29,7 @@ const Stamp = () => {
     isError: isStoreStampError,
   } = useQuery({
     queryKey: ['StampData'],
-    queryFn: fetchStampData,
+    queryFn: () => fetchStampData(5),
   });
 
   const [isCouponModalVisible, setIsCouponModalVisible] = useState(false);
@@ -161,7 +142,7 @@ const Stamp = () => {
     <div className={styles.wrapper}>
       <StampHeaderFilter
         onBackBtnClick={() => navigate(-1)}
-        title="적립 현황"
+        title='적립 현황'
         selectedArrangeFilterItem={selectedArrangeFilterItem}
         selectedSectorFilterItem={selectedSectorFilterItem}
         filterItems={sortedOptionDataArr}
@@ -171,13 +152,14 @@ const Stamp = () => {
 
       <div className={styles.contentWrapper}>
         {StampData &&
-          StampData.result.map((data: StampData, index: number) => (
+          StampData.map((data, index: number) => (
             <StoreInfoInStamp
-              key={data.storeName + index}
-              title={data.storeName}
+              key={data.name + index}
+              title={data.name}
               couponCount={data.numOfStamp}
               achieve={data.reward}
-              distance={data.distance}
+              distance={500}
+              // TODO: 거리계산
               onClickCouponBtn={handleClickCouponBtn}
               onClickStoreDetailBtn={() => {}}
               onClickMapBtn={() => navigate('/map')}

@@ -10,6 +10,7 @@ interface Props {
   >;
   onCancelModal: () => void;
   isRegularCustomer: boolean;
+  handleRequestCoupon: (onSuccess: () => void) => void;
   handleRegularCustomer: () => void;
 }
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -19,6 +20,7 @@ const MapCouponModal: React.FC<Props> = ({
   setCouponModalLevel,
   onCancelModal,
   isRegularCustomer,
+  handleRequestCoupon,
   handleRegularCustomer,
 }: Props) => {
   const handleCancelModal = () => {
@@ -28,9 +30,7 @@ const MapCouponModal: React.FC<Props> = ({
 
   useEffect(() => {
     if (couponModalLevel === 'waiting') {
-      setTimeout(() => {
-        setCouponModalLevel('done');
-      }, 2000);
+      handleRequestCoupon(() => setCouponModalLevel('done'));
     } else if (couponModalLevel === 'done') {
       setTimeout(() => {
         if (isRegularCustomer) {

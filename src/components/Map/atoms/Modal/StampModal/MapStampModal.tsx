@@ -7,6 +7,7 @@ interface Props {
   stampModalLevel: ModalLevel | null;
   setStampModalLevel: React.Dispatch<React.SetStateAction<ModalLevel | null>>;
   onCancelModal: () => void;
+  handleRequestStamp: (onSuccess: () => void) => void;
   onClickDoneModalRightBtn?: () => void;
 }
 type ModalLevel = 'confirm' | 'waiting' | 'done';
@@ -15,6 +16,7 @@ const MapStampModal: React.FC<Props> = ({
   stampModalLevel,
   setStampModalLevel,
   onCancelModal,
+  handleRequestStamp,
   onClickDoneModalRightBtn,
 }: Props) => {
   const handleCancelModal = () => {
@@ -23,9 +25,7 @@ const MapStampModal: React.FC<Props> = ({
   };
   useEffect(() => {
     if (stampModalLevel === 'waiting') {
-      setTimeout(() => {
-        setStampModalLevel('done');
-      }, 2000);
+      handleRequestStamp(() => setStampModalLevel('done'));
     }
   }, [stampModalLevel]);
   switch (stampModalLevel) {

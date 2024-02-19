@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Loading from '../components/Loading/Loading';
 
 const Router = () => {
   // 동적 import
@@ -79,39 +80,72 @@ const Router = () => {
     {
       index: true,
       path: '/',
-      element: <Home />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Home />
+        </Suspense>
+      ),
     },
     {
       path: '/map',
-      element: <Map />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Map />
+        </Suspense>
+      ),
     },
     {
       path: '/ad',
       children: [
         {
           path: ':adId',
-          element: <Advertisement />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Advertisement />
+            </Suspense>
+          ),
         },
       ],
     },
     {
       path: '/alarm',
-      element: <Alarm />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Alarm />
+        </Suspense>
+      ),
     },
     {
       path: '/setting',
-      element: <Setting />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Setting />
+        </Suspense>
+      ),
     },
     {
       path: '/reward',
-      children: [{ path: 'history', element: <RewardHistory /> }],
+      children: [
+        {
+          path: 'history',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <RewardHistory />
+            </Suspense>
+          ),
+        },
+      ],
     },
     {
       path: '/store',
       children: [
         {
           path: ':storeId',
-          element: <Store />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Store />
+            </Suspense>
+          ),
         },
         {
           path: 'search',
@@ -119,56 +153,127 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: <StoreSearch />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <StoreSearch />
+                </Suspense>
+              ),
             },
             {
               path: ':searchWord',
-              element: <StoreSearchResult />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <StoreSearchResult />
+                </Suspense>
+              ),
             },
           ],
         },
         {
           path: 'dangol',
           children: [
-            { path: '', element: <StoreDangol /> },
-            { path: 'add', element: <StoreDangolAdd /> },
+            {
+              path: '',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <StoreDangol />
+                </Suspense>
+              ),
+            },
+            {
+              path: 'add',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <StoreDangolAdd />
+                </Suspense>
+              ),
+            },
           ],
         },
       ],
     },
     {
       path: '/stamp',
-      element: <Stamp />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Stamp />
+        </Suspense>
+      ),
     },
     {
       path: '/logout',
-      element: <Logout />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Logout />
+        </Suspense>
+      ),
     },
     {
       path: '/login',
       children: [
-        { path: '', element: <Login /> },
-        { path: 'oauth', element: <LoginOauth /> },
+        {
+          path: '',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Login />
+            </Suspense>
+          ),
+        },
+        {
+          path: 'oauth',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LoginOauth />
+            </Suspense>
+          ),
+        },
       ],
     },
     {
       path: '/review/:storeId',
-      element: <Review />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Review />
+        </Suspense>
+      ),
     },
     {
       path: '/gift',
       children: [
-        { index: true, path: '', element: <Gift /> },
+        {
+          index: true,
+          path: '',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <Gift />
+            </Suspense>
+          ),
+        },
         {
           path: ':cafeTitle/:foodTitle/:foodPrice',
-          element: <GiftDetail />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <GiftDetail />
+            </Suspense>
+          ),
         },
-        { path: 'box', element: <GiftBox /> },
+        {
+          path: 'box',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <GiftBox />
+            </Suspense>
+          ),
+        },
       ],
     },
     {
       path: '/coupon',
-      element: <Coupon />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <Coupon />
+        </Suspense>
+      ),
     },
     {
       path: '/mission',
@@ -176,11 +281,19 @@ const Router = () => {
         {
           index: true,
           path: 'today',
-          element: <MissionToday />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <MissionToday />
+            </Suspense>
+          ),
         },
         {
           path: 'map',
-          element: <MissionMap />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <MissionMap />
+            </Suspense>
+          ),
         },
       ],
     },
@@ -190,15 +303,32 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: <My />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <My />
+            </Suspense>
+          ),
         },
         {
           path: 'profile',
-          children: [{ path: 'edit', element: <MyProfileEdit /> }],
+          children: [
+            {
+              path: 'edit',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MyProfileEdit />
+                </Suspense>
+              ),
+            },
+          ],
         },
         {
           path: 'review',
-          element: <MyReview />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <MyReview />
+            </Suspense>
+          ),
         },
         {
           path: 'location',
@@ -206,35 +336,84 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: <MyLocation />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MyLocation />
+                </Suspense>
+              ),
             },
             {
               path: 'now',
-              element: <MyNowLocation />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MyNowLocation />
+                </Suspense>
+              ),
             },
             {
               path: ':locationId',
-              element: <MyLocationEdit />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MyLocationEdit />
+                </Suspense>
+              ),
             },
             {
               path: 'enrollment',
-              element: <MyLocationEnrollment />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MyLocationEnrollment />
+                </Suspense>
+              ),
             },
           ],
         },
       ],
     },
+
     {
       path: '/mylocation',
-      element: <MyLocationPage />,
+      element: (
+        <Suspense fallback={<Loading />}>
+          <MyLocationPage />
+        </Suspense>
+      ),
     },
     {
       path: '/locationsetting',
       children: [
-        { path: '', element: <LocationSetting /> },
-        { path: 'now', element: <LocationSettingNow /> },
-        { path: 'search', element: <LocationSettingSearch /> },
-        { path: 'name', element: <LocationSettingName /> },
+        {
+          path: '',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LocationSetting />
+            </Suspense>
+          ),
+        },
+        {
+          path: 'now',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LocationSettingNow />
+            </Suspense>
+          ),
+        },
+        {
+          path: 'search',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LocationSettingSearch />
+            </Suspense>
+          ),
+        },
+        {
+          path: 'name',
+          element: (
+            <Suspense fallback={<Loading />}>
+              <LocationSettingName />
+            </Suspense>
+          ),
+        },
       ],
     },
     {
@@ -243,24 +422,65 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: <OwnerHome />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <OwnerHome />
+            </Suspense>
+          ),
         },
         {
           path: 'inform',
           children: [
-            { index: true, path: '', element: <OwnerInform /> },
-            { path: 'edit', element: <OwnerInformEdit /> },
-            { path: 'register', element: <OwnerInformRegister /> },
-            { path: 'notice/register', element: <OwnerInformNoticeRegister /> },
+            {
+              index: true,
+              path: '',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <OwnerInform />
+                </Suspense>
+              ),
+            },
+            {
+              path: 'edit',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <OwnerInformEdit />
+                </Suspense>
+              ),
+            },
+            {
+              path: 'register',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <OwnerInformRegister />
+                </Suspense>
+              ),
+            },
+            {
+              path: 'notice/register',
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <OwnerInformNoticeRegister />
+                </Suspense>
+              ),
+            },
           ],
         },
         {
           path: 'request',
-          element: <OwnerRequest />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <OwnerRequest />
+            </Suspense>
+          ),
         },
         {
           path: 'coupon',
-          element: <OwnerCoupon />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <OwnerCoupon />
+            </Suspense>
+          ),
         },
       ],
     },

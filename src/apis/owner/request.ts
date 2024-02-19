@@ -15,7 +15,7 @@ export const fetchOwnerRequestData = async (
       // '/data/owner/request/owner-request-data-dummy.json'
 
       // 실제 연결
-      `/owner/store-request/${storeId}?notAcceptRequest=${notAcceptRequest}&bothRequest=${bothRequest}&rewardRequest=${rewardRequest}&stampRequest=${stampRequest}&page=${page}`
+      `/owner/store-request/storeId=${storeId}?notAcceptRequest=${notAcceptRequest}&bothRequest=${bothRequest}&rewardRequest=${rewardRequest}&stampRequest=${stampRequest}&page=${page}`
     );
     console.log(response);
     return response.data.result;

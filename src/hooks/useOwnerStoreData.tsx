@@ -15,7 +15,7 @@ export const useOwnerStoreData = (storeId?: number) => {
     isError: isOwnerStoreDataError,
   } = useQuery({
     queryKey: ['OwnerStore'],
-    queryFn: () => fetchOwnerStoreData(storeId || 5),
+    queryFn: () => fetchOwnerStoreData(storeId || 1),
     enabled: !!storeId,
   });
   const ownerStoreDataPatchMutation = useMutation({

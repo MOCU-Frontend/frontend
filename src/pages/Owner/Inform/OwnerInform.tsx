@@ -16,7 +16,7 @@ interface Props {}
 
 const OwnerInform: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
-  const { ownerStoreData } = useOwnerStoreData(5);
+  const { ownerStoreData } = useOwnerStoreData(1);
 
   return (
     <div className={styles.wholeWrapper}>

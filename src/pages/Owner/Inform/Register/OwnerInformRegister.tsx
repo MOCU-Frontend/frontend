@@ -13,10 +13,12 @@ import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
 import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
 import { OwnerStoreMenuData } from '../../../../store/Type/Owner/owner';
+import useStore from '../../../../store/useStore';
 import styles from './OwnerInformRegister.module.css';
 
 const OwnerInformRegister: React.FC = () => {
   const navigate = useNavigate();
+  const userId = useStore((state) => state.userId);
   const { ownerStoreDataPostMutation } = useOwnerStoreData();
   const [sangho, setSangho] = useState('');
   const [filterArr, setFilterArr] = useState([
@@ -126,7 +128,7 @@ const OwnerInformRegister: React.FC = () => {
               maxStamp > 0
             ) {
               ownerStoreDataPostMutation.mutate({
-                ownerId: 2,
+                ownerId: userId || '',
                 storeName: sangho,
                 category: checkedCategoryFilter.name,
                 address: '서울 광진구 아차산로 241 1층 106호',

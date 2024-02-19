@@ -6,7 +6,7 @@ export const fetchOwnerStoreData = async (storeId: number) => {
     // 더미데이터
     // '/data/owner/owner-store-data-dummy.json'
     // 실제 연결
-    `/owner/store-info/${storeId}`
+    `/owner/store-info/storeId=${storeId}`
   );
   console.log(response);
   return response.data.result;

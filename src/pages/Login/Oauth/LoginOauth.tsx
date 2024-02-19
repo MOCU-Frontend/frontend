@@ -2,6 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import instance from '../../../apis/instance';
 import {
   TokenLoginRequestData,
   TokenLoginResponseData,
@@ -17,7 +18,7 @@ const LoginOauth: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
   const loginMutation = useMutation({
     mutationFn: (newData: TokenLoginRequestData) => {
-      return axios.post('/api/auth/kakao', newData);
+      return instance.post('/api/auth/kakao', newData);
     },
     onSuccess: (res) => {
       const data: TokenLoginResponseData = res.data;

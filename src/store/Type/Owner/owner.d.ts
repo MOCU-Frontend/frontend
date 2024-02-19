@@ -17,7 +17,7 @@ export type OwnerStoreData = {
   event: string | null;
 };
 export type OwnerStorePostRequestData = {
-  ownerId: number;
+  ownerId: string;
   storeName: string;
   category: string;
   latitude: number;

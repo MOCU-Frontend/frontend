@@ -19,7 +19,7 @@ const OwnerRequest: React.FC<Props> = ({}: Props) => {
     isError: isOwnerRequestDataError,
   } = useQuery({
     queryKey: ['OwnerRequest'],
-    queryFn: () => fetchOwnerRequestData(5, true, true, true, true, 0),
+    queryFn: () => fetchOwnerRequestData(1, true, true, true, true, 0),
   });
 
   const navigate = useNavigate();

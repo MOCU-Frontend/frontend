@@ -61,6 +61,7 @@ const My: React.FC = () => {
     });
   };
   console.log(MyPageData && MyPageData.result.missionStampCount);
+  console.log(MyPageData && MyPageData.result.usableCoupon);
 
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   return (

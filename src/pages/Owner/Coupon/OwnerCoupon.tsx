@@ -7,6 +7,7 @@ import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilte
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import OwnerCouponItem from '../../../components/Owner/Coupon/atoms/Item/OwnerCouponItem';
 import SlideMenuTab from '../../../components/SlideMenu/atoms/MenuTab/SlideMenuTab';
+import useStore from '../../../store/useStore';
 import styles from './OwnerCoupon.module.css';
 type MenuData = {
   title: string;
@@ -16,6 +17,7 @@ interface Props {}
 
 const OwnerCoupon: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
+  const userId = useStore((state) => state.userId);
   const [menu, setMenu] = useState<MenuData[]>([
     { title: '현황리스트', isChecked: true },
     { title: '데이터차트', isChecked: false },
@@ -37,7 +39,7 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
     isError: isOwnerCouponDataError,
   } = useQuery({
     queryKey: ['OwnerCoupon'],
-    queryFn: () => fetchOwnerCouponData('1', false, '적립 많은 순'),
+    queryFn: () => fetchOwnerCouponData(userId || '', false, '적립 많은 순'),
   });
 
   return (

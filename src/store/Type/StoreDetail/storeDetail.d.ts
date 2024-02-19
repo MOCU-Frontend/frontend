@@ -19,6 +19,7 @@ export type StoreDetailData = {
 };
 
 export type Review = {
+  reviewId: number;
   name: string;
   userImage: null | string;
   rate: number;

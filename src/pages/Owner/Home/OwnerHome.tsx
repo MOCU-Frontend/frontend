@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HomeMenuFullBtn from '../../../components/Home/atoms/Button/MenuFullBtn/HomeMenuFullBtn';
 import { ReactComponent as ProfileIcon } from '../../../assets/icon/profileGradation.svg';
@@ -11,6 +11,9 @@ import OwnerHomeHelloContent from '../../../components/Owner/Home/atoms/Contents
 import ModalRequest from '../../../components/Modal/ModalRequest/ModalRequest';
 import ModalConfirm from '../../../components/Modal/ModalConfirm/ModalConfirm';
 import ModalAccum from '../../../components/Modal/ModalAccum/ModalAccum';
+import useStore from '../../../store/useStore';
+import { fetchOwnerStoreChangeData } from '../../../apis/owner/ownerStoreChange';
+import { useQuery } from '@tanstack/react-query';
 declare global {
   interface Window {
     showCouponModal: () => void;
@@ -19,6 +22,24 @@ declare global {
 }
 const OwnerHome: React.FC = () => {
   const navigate = useNavigate();
+
+  const ownerId = useStore((state) => state.userId);
+  const setStoreId = useStore((state) => state.setStoreId);
+  const {
+    data: ownerStoreChangeData,
+    isLoading: isOwnerStoreChangeDataLoading,
+    isError: isOwnerStoreChangeDataError,
+  } = useQuery({
+    queryKey: ['OwnerStoreChangeData'],
+    queryFn: () => fetchOwnerStoreChangeData(ownerId || ''),
+    enabled: !!ownerId,
+  });
+  useEffect(() => {
+    if (ownerStoreChangeData) {
+      setStoreId(ownerStoreChangeData.storeId);
+    }
+  }, [ownerStoreChangeData]);
+
   const [isShowAccumModal, setIsShowAccumModal] = useState(false);
   const [isShowCouponModal, setIsShowCouponModal] = useState(false);
   const [isShowUseCouponModal, setIsShowUseCouponModal] = useState(false);

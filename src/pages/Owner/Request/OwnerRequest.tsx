@@ -10,16 +10,20 @@ import OwnerRequestItem from '../../../components/Owner/Request/atoms/Item/Owner
 import { OwnerRequestDataResponse } from '../../../store/Type/Owner/Request/ownerRequest';
 import styles from './OwnerRequest.module.css';
 import { fetchOwnerRequestData } from '../../../apis/owner/request';
+import useStore from '../../../store/useStore';
 interface Props {}
 
 const OwnerRequest: React.FC<Props> = ({}: Props) => {
+  const storeId = useStore((state) => state.storeId);
   const {
     data: ownerRequestData,
     isLoading: isOwnerRequestDataLoading,
     isError: isOwnerRequestDataError,
   } = useQuery({
     queryKey: ['OwnerRequest'],
-    queryFn: () => fetchOwnerRequestData(1, true, true, true, true, 0),
+    queryFn: () =>
+      fetchOwnerRequestData(storeId || 0, true, true, true, true, 0),
+    enabled: !!storeId,
   });
 
   const navigate = useNavigate();

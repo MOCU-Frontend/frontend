@@ -1,6 +1,9 @@
 import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundaryProps } from 'react-error-boundary';
 import Loading from '../components/Loading/Loading';
+import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 
 const Router = () => {
   // 동적 import
@@ -81,17 +84,21 @@ const Router = () => {
       index: true,
       path: '/',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Home />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
       path: '/map',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Map />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Map />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -100,9 +107,11 @@ const Router = () => {
         {
           path: ':adId',
           element: (
-            <Suspense fallback={<Loading />}>
-              <Advertisement />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Advertisement />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -110,17 +119,21 @@ const Router = () => {
     {
       path: '/alarm',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Alarm />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Alarm />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
       path: '/setting',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Setting />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Setting />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -129,9 +142,11 @@ const Router = () => {
         {
           path: 'history',
           element: (
-            <Suspense fallback={<Loading />}>
-              <RewardHistory />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <RewardHistory />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -142,9 +157,11 @@ const Router = () => {
         {
           path: ':storeId',
           element: (
-            <Suspense fallback={<Loading />}>
-              <Store />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Store />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
@@ -154,17 +171,21 @@ const Router = () => {
               index: true,
               path: '',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <StoreSearch />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreSearch />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: ':searchWord',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <StoreSearchResult />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreSearchResult />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
           ],
@@ -175,17 +196,21 @@ const Router = () => {
             {
               path: '',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <StoreDangol />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreDangol />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'add',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <StoreDangolAdd />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreDangolAdd />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
           ],
@@ -195,17 +220,21 @@ const Router = () => {
     {
       path: '/stamp',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Stamp />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Stamp />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
       path: '/logout',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Logout />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Logout />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -214,17 +243,21 @@ const Router = () => {
         {
           path: '',
           element: (
-            <Suspense fallback={<Loading />}>
-              <Login />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Login />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'oauth',
           element: (
-            <Suspense fallback={<Loading />}>
-              <LoginOauth />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LoginOauth />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -232,9 +265,11 @@ const Router = () => {
     {
       path: '/review/:storeId',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Review />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Review />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -244,25 +279,31 @@ const Router = () => {
           index: true,
           path: '',
           element: (
-            <Suspense fallback={<Loading />}>
-              <Gift />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Gift />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: ':cafeTitle/:foodTitle/:foodPrice',
           element: (
-            <Suspense fallback={<Loading />}>
-              <GiftDetail />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <GiftDetail />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'box',
           element: (
-            <Suspense fallback={<Loading />}>
-              <GiftBox />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <GiftBox />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -270,9 +311,11 @@ const Router = () => {
     {
       path: '/coupon',
       element: (
-        <Suspense fallback={<Loading />}>
-          <Coupon />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Coupon />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -282,17 +325,21 @@ const Router = () => {
           index: true,
           path: 'today',
           element: (
-            <Suspense fallback={<Loading />}>
-              <MissionToday />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MissionToday />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'map',
           element: (
-            <Suspense fallback={<Loading />}>
-              <MissionMap />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MissionMap />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -304,9 +351,11 @@ const Router = () => {
           index: true,
           path: '',
           element: (
-            <Suspense fallback={<Loading />}>
-              <My />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <My />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
@@ -315,9 +364,11 @@ const Router = () => {
             {
               path: 'edit',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <MyProfileEdit />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyProfileEdit />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
           ],
@@ -325,9 +376,11 @@ const Router = () => {
         {
           path: 'review',
           element: (
-            <Suspense fallback={<Loading />}>
-              <MyReview />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MyReview />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
@@ -337,33 +390,41 @@ const Router = () => {
               index: true,
               path: '',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <MyLocation />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocation />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'now',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <MyNowLocation />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyNowLocation />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: ':locationId',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <MyLocationEdit />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocationEdit />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'enrollment',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <MyLocationEnrollment />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocationEnrollment />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
           ],
@@ -374,9 +435,11 @@ const Router = () => {
     {
       path: '/mylocation',
       element: (
-        <Suspense fallback={<Loading />}>
-          <MyLocationPage />
-        </Suspense>
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <MyLocationPage />
+          </Suspense>
+        </ErrorBoundary>
       ),
     },
     {
@@ -385,33 +448,41 @@ const Router = () => {
         {
           path: '',
           element: (
-            <Suspense fallback={<Loading />}>
-              <LocationSetting />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSetting />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'now',
           element: (
-            <Suspense fallback={<Loading />}>
-              <LocationSettingNow />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingNow />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'search',
           element: (
-            <Suspense fallback={<Loading />}>
-              <LocationSettingSearch />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingSearch />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'name',
           element: (
-            <Suspense fallback={<Loading />}>
-              <LocationSettingName />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingName />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],
@@ -423,9 +494,11 @@ const Router = () => {
           index: true,
           path: '',
           element: (
-            <Suspense fallback={<Loading />}>
-              <OwnerHome />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerHome />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
@@ -435,33 +508,41 @@ const Router = () => {
               index: true,
               path: '',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <OwnerInform />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInform />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'edit',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <OwnerInformEdit />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformEdit />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'register',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <OwnerInformRegister />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformRegister />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
             {
               path: 'notice/register',
               element: (
-                <Suspense fallback={<Loading />}>
-                  <OwnerInformNoticeRegister />
-                </Suspense>
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformNoticeRegister />
+                  </Suspense>
+                </ErrorBoundary>
               ),
             },
           ],
@@ -469,17 +550,21 @@ const Router = () => {
         {
           path: 'request',
           element: (
-            <Suspense fallback={<Loading />}>
-              <OwnerRequest />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerRequest />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
         {
           path: 'coupon',
           element: (
-            <Suspense fallback={<Loading />}>
-              <OwnerCoupon />
-            </Suspense>
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerCoupon />
+              </Suspense>
+            </ErrorBoundary>
           ),
         },
       ],

@@ -1,0 +1,83 @@
+@import '../../styles/colorVars.css';
+
+.wholeWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  position: absolute;
+  left: 0;
+  top: 0;
+  gap: 14px;
+  background-color: var(--color-map-red);
+}
+
+.loadingCircles {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 13px;
+}
+.loadingCircle {
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+}
+
+.loadingCircle1 {
+  background-color: #6e75e8;
+  animation: circle 500ms 0s infinite alternate;
+}
+.loadingCircle2 {
+  background-color: #a8acf1;
+  animation: circle 500ms 200ms infinite alternate;
+}
+.loadingCircle3 {
+  background-color: #d4d6f9;
+  animation: circle 500ms 400ms infinite alternate;
+}
+@keyframes circle {
+  from {
+    transform: translate(0, 0);
+  }
+  to {
+    transform: translate(0, -80%);
+  }
+}
+
+.errorWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f8d7da; /* light red */
+  border-color: #f5c6cb; /* darker red */
+  color: #721c24; /* dark red */
+  margin-top: 20px;
+  border-radius: 5px;
+}
+
+.errorText {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.resetButton {
+  padding: 10px 20px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #007bff; /* blue */
+  border-color: #007bff; /* blue */
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.resetButton:hover {
+  background-color: #0056b3; /* darker blue */
+  border-color: #0056b3; /* darker blue */
+}

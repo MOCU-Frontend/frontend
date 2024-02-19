@@ -140,6 +140,21 @@ export const initialReviewHistoryArrangementFilterDataArr: FilterList[] = [
   },
 ];
 
+export const initialOwnerCouponArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '적립 높은 순',
+    isChecked: true,
+  },
+  {
+    title: '쿠폰 사용 많은 순',
+    isChecked: false,
+  },
+  {
+    title: '최근 방문 순',
+    isChecked: false,
+  },
+];
+
 export const initialSectorFilterDataArr: FilterList[] = [
   {
     title: '전체',
@@ -243,5 +258,13 @@ export const initialReviewHistoryMenuItemDataArr: MenuItemData[] = [
     title: '정렬',
     isChecked: true,
     bodyDataArr: initialReviewHistoryArrangementFilterDataArr,
+  },
+];
+
+export const initialOwnerCouponMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialOwnerCouponArrangementFilterDataArr,
   },
 ];

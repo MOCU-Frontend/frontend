@@ -2,11 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchOwnerCouponData } from '../../../apis/owner/coupon';
+import BottomSheet from '../../../components/BottomSheet/BottomSheet';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import OwnerCouponItem from '../../../components/Owner/Coupon/atoms/Item/OwnerCouponItem';
 import SlideMenuTab from '../../../components/SlideMenu/atoms/MenuTab/SlideMenuTab';
+import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
+import { initialOwnerCouponMenuItemDataArr } from '../../../store/data/searchResult';
+import { MenuItemData } from '../../../store/data/stamp';
 import useStore from '../../../store/useStore';
 import styles from './OwnerCoupon.module.css';
 type MenuData = {
@@ -39,8 +43,73 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
     isError: isOwnerCouponDataError,
   } = useQuery({
     queryKey: ['OwnerCoupon'],
-    queryFn: () => fetchOwnerCouponData(userId || '', false, '적립 많은 순'),
+    queryFn: () =>
+      fetchOwnerCouponData(
+        userId || '',
+        isCheckedDangolOption,
+        selectedArrangeFilterItem
+          ? selectedArrangeFilterItem.title
+          : '적립 높은 순'
+      ),
   });
+  const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
+
+  const handleDragBottom = () => {
+    setIsBottomSheetVisible(false);
+  };
+
+  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
+    initialOwnerCouponMenuItemDataArr
+  );
+
+  const [isCheckedDangolOption, setIsCheckedDangolOption] = useState(false);
+
+  const handleClickMenuBodyItem = (
+    menuIndex: number,
+    newIndex: number,
+    prevIndex?: number
+  ) => {
+    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
+    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
+      throw new Error('invalid newIndex!!');
+    if (
+      prevIndex !== undefined &&
+      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
+    )
+      throw new Error('invalid prevIndex!!');
+    setMenuItemDataArr((prev) => {
+      const copiedMenuItemDataArr = [...prev];
+      if (prevIndex !== undefined) {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
+          false;
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
+      } else {
+        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
+          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
+      }
+      return copiedMenuItemDataArr;
+    });
+  };
+
+  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
+    setMenuItemDataArr((prev) => {
+      const copiedArr = [...prev];
+      copiedArr[prevIndex].isChecked = false;
+      copiedArr[newIndex].isChecked = true;
+      return copiedArr;
+    });
+  };
+
+  const handleFilterSelectClick = (newIndex: number) => {
+    const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked menu item!!');
+    handleClickMenuItem(prevIndex, newIndex);
+    setIsBottomSheetVisible(true);
+  };
+
+  const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
+    (x) => x.isChecked
+  ) as MenuItemData | undefined;
 
   return (
     <div>
@@ -60,19 +129,19 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
           label='단골만'
           backgroundColor='grey-light-00'
           textColor='grey-dark-01'
-          isChecked={false}
+          isChecked={isCheckedDangolOption}
           border={1}
           borderColor='grey-light-02'
-          onClick={() => {}}
+          onClick={() => setIsCheckedDangolOption((prev) => !prev)}
         />
         <CheckFilterSelect
-          label='적립 높은순'
+          label={selectedArrangeFilterItem?.title || '적립 높은 순'}
           backgroundColor='grey-light-00'
           textColor='grey-dark-01'
           isChecked={false}
           border={1}
           borderColor='grey-light-02'
-          onClick={() => {}}
+          onClick={() => handleFilterSelectClick(0)}
         />
       </div>
       {ownerCouponData &&
@@ -85,6 +154,21 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
             couponNum={data.useCount}
           />
         ))}
+      {isBottomSheetVisible && (
+        <BottomSheet
+          onDragBottom={handleDragBottom}
+          onClickNotBottomSheet={handleDragBottom}
+          children={
+            <SlideTabViewFilter
+              menuItemDataArr={menuItemDataArr}
+              handleCheckedDataIndex={handleClickMenuItem}
+              handleClickMenuBodyItem={handleClickMenuBodyItem}
+              // handleClickResetOptionBtn={handleClickResetOptionBtn}
+              onClickCompleteBtn={handleDragBottom}
+            />
+          }
+        ></BottomSheet>
+      )}
     </div>
   );
 };

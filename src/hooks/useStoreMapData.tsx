@@ -24,7 +24,9 @@ export const useStoreMapData = (
   eventOption: boolean,
   dueDateOption: boolean,
   categoryOption: string,
-  isVisitedOption: boolean
+  isVisitedOption: boolean,
+  mapCenterLat: number,
+  mapCenterLng: number
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
@@ -42,12 +44,12 @@ export const useStoreMapData = (
     isLoading: isStoreMapMarkerDataLoading,
     isError: isStoreMapMarkerDataError,
   } = useQuery({
-    queryKey: ['mapStoreMarker', mapApiGet],
+    queryKey: ['mapStoreMarker', mapApiGet, mapCenterLat, mapCenterLng],
     queryFn: () =>
       fetchMapStoreMarkerData(
         userId || '',
-        nowUserLocation?.latitude || 37.5404257,
-        nowUserLocation?.longitude || 127.07209,
+        mapCenterLat || nowUserLocation?.latitude || 37.5404257,
+        mapCenterLng || nowUserLocation?.longitude || 127.07209,
         eventOption,
         dueDateOption,
         categoryOption,
@@ -104,7 +106,7 @@ export const useStoreMapData = (
         });
       });
     }
-  }, [map, mapApiGet, storeMapMarkerData]);
+  }, [map, mapApiGet, storeMapMarkerData, mapCenterLat, mapCenterLng]);
 
   return { storeMarkerArr, selectedStoreData, storeMapMarkerData };
 };

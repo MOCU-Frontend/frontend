@@ -8,10 +8,10 @@ export const fetchMissionBtnPatchData = async (
 ) => {
   const response = await instance.patch<missionCompletePatch>(
     // 더미데이터
-    '/data/mission/missionCompletePatch.json'
+    // '/data/mission/missionCompletePatch.json'
 
     // 실제 연결
-    // 'http://localhost:9000/mission/today-mission/done'
+    '/mission/today-mission/done'
   );
   console.log(response);
   return response.data;

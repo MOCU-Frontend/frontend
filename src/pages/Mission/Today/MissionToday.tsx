@@ -24,16 +24,6 @@ import ModalMissionClear from '../../../components/Modal/ModalMissionClear/Modal
 const MissionToday = () => {
   const navigate = useNavigate();
 
-  // fetchMissionPageData
-  const {
-    data: storeMissionData,
-    isLoading: isMissionDataLoading,
-    isError: isMissionDataError,
-  } = useQuery({
-    queryKey: ['missionData'],
-    queryFn: () => fetchMissionPageData(),
-  });
-
   // fetchMissionMapGetData
   const {
     data: MissionMapGetData,
@@ -55,6 +45,7 @@ const MissionToday = () => {
     },
     onSuccess: (res) => {
       const data: missionBtnResponse = res.data;
+      console.log(data);
       setPatchData(data);
     },
   });
@@ -79,6 +70,16 @@ const MissionToday = () => {
 
   // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
+
+  // fetchMissionPageData
+  const {
+    data: storeMissionData,
+    isLoading: isMissionDataLoading,
+    isError: isMissionDataError,
+  } = useQuery({
+    queryKey: ['missionData', missionCompleted],
+    queryFn: () => fetchMissionPageData(),
+  });
 
   return (
     <div className={styles.wrapper}>

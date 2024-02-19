@@ -31,7 +31,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
     queryKey: ['Dangol'],
     queryFn: () =>
       fetchDangolData(
-        5,
+        1,
         '최신순',
         '식당',
         false,
@@ -133,7 +133,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
-        headerTitle='단골 가게'
+        headerTitle="단골 가게"
         onClickBackBtn={() => navigate(-1)}
       >
         <div className={styles.helpBtnWrapper}>
@@ -160,7 +160,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='main-purple'
+          borderColor="main-purple"
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(0)}
         />
@@ -172,7 +172,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
               : 'no selected item!'
           }
           border={1}
-          borderColor='main-purple'
+          borderColor="main-purple"
           arrowColor={colors.mainPurple}
           onClick={() => handleFilterSelectClick(1)}
         />
@@ -183,7 +183,7 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
             isChecked={data.isChecked}
             label={data.title}
             border={1}
-            borderColor='main-purple'
+            borderColor="main-purple"
             onClick={() => handleOptionClick(data.id)}
           />
         ))}

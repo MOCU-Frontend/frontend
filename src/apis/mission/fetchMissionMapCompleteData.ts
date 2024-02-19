@@ -6,10 +6,10 @@ export const fetchMissionMapCompleteData = async (userId: number) => {
   try {
     const response = await instance.patch<MissionMapCompletePatch>(
       // 더미 데이터
-      '/data/mission/missionMapCompleteData.json'
+      // '/data/mission/missionMapCompleteData.json'
 
       // 실제 연결
-      // '/mission/mission-map/userId=${userId}'
+      `/mission/mission-map/userId=${userId}`
     );
     console.log(response.data);
     return response.data;

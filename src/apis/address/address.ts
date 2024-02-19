@@ -5,10 +5,10 @@ import { AddressGetDataResponse } from '../../store/Type/Address/address';
 export const fetchAddressData = async (userId: number) => {
   const response = await instance.get<AddressGetDataResponse>(
     // 더미 데이터
-    '/data/address/address-dummy-data.json'
+    // '/data/address/address-dummy-data.json'
 
     // 실제 연결
-    // `http://localhost:9000/users/${userId}/address`
+    `/users/${userId}/address`
   );
   console.log(response);
   return response.data.result;

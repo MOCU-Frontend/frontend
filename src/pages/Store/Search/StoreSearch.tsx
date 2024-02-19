@@ -26,7 +26,7 @@ const StoreSearch = () => {
     isError: isStoreSearchDataError,
   } = useQuery({
     queryKey: ['storeSearchData'],
-    queryFn: () => fetchStoreSearchData(),
+    queryFn: () => fetchStoreSearchData(1, 1, 1),
   });
 
   const {

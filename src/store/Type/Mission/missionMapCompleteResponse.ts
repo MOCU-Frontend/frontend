@@ -8,4 +8,5 @@ export type MissionMapCompleteResponse = {
 
 export type Result = {
   reward: string;
+  status: string;
 };

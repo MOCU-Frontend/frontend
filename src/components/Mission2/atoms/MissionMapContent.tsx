@@ -20,6 +20,7 @@ import { ReactComponent as RewardImage } from '../../../assets/icon/mapReward.sv
 import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampStarNoBadge.svg';
 import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
+import MapGageBar from '../../Map/atoms/GageBar/MapGageBar';
 
 interface Props {
   /**
@@ -41,6 +42,11 @@ interface Props {
    * rewardGet
    */
   rewardGet: boolean;
+
+  /**
+   *
+   */
+  status: string | undefined;
 }
 
 const MissionMapContent: React.FC<Props> = ({
@@ -48,6 +54,7 @@ const MissionMapContent: React.FC<Props> = ({
   reward,
   handleRewardClick,
   rewardGet,
+  status,
 }) => {
   // 만약을 대비
   if (stampCnt === undefined) {
@@ -163,6 +170,7 @@ const MissionMapContent: React.FC<Props> = ({
               textColor="sub-purple-light"
               borderRadius="large"
               onClick={handleRewardClick}
+              disabled={status === 'done'}
             />
           </div>
           <div className={styles.finalButtonText}>{reward}</div>

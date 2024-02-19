@@ -20,8 +20,12 @@ import { fetchStampUserData } from '../../../apis/stamp/fetchStampUserData';
 import { missionBtnResponse } from '../../../store/Type/Mission/missionBtnResponse';
 import { MissionResponse } from '../../../store/Type/Mission/mission';
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+
+import MapGageBar from '../../../components/Map/atoms/GageBar/MapGageBar';
+
 import useStore from '../../../store/useStore';
 import instance from '../../../apis/instance';
+
 
 const MissionToday = () => {
   const navigate = useNavigate();
@@ -142,7 +146,11 @@ const MissionToday = () => {
               다음 스탬프 획득까지 미션{' '}
               {stampCnt !== undefined && 5 - (stampCnt % 5)}개 남았습니다.
             </div>
-            <CoupongageImage width={180} height={16} />
+            <div>
+              {stampCnt !== undefined && (
+                <MapGageBar ratio={(stampCnt % 5) * 20} />
+              )}
+            </div>
           </div>
 
           {Array.isArray(storeMissionData) &&

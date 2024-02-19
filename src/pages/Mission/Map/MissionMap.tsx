@@ -17,10 +17,12 @@ import axios from 'axios';
 import { MissionMapCompleteResponse } from '../../../store/Type/Mission/missionMapCompleteResponse';
 
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
+import useStore from '../../../store/useStore';
 
 const MissionMap = () => {
   const navigate = useNavigate();
 
+  const userId = useStore((state) => state.userId);
   // fetchMissionMapGetData
   const {
     data: MissionMapGetData,
@@ -28,7 +30,8 @@ const MissionMap = () => {
     isError: isMissionMapGetDataError,
   } = useQuery({
     queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(),
+    queryFn: () => fetchMissionMapGetData(userId || ''),
+    enabled: !!userId,
   });
 
   // 스탬프 개수
@@ -64,9 +67,9 @@ const MissionMap = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -116,7 +119,7 @@ const MissionMap = () => {
       </div>
       {rewardGet === true && (
         <ModalMissionClear
-          bodyText="미션맵 최종 보상 받기 완료!"
+          bodyText='미션맵 최종 보상 받기 완료!'
           subText={reward}
           time={2}
           onEndTimer={() => setRewardGet(false)}

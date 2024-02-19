@@ -16,7 +16,7 @@ export const fetchDangolData = async (
     // '/data/dangol/dangol-dummy-data.json'
 
     // 실제 연결
-    '/users/1/my-storelist?category=식당&sort=최신순&isEventTrue=false&isCouponUsable=false&userLatitude=37.53939427920637&userLongitude=127.07278389250759&page=0'
+    `/users/${userId}/my-storelist?category=${category}&sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=${page}`
   );
   console.log(response);
   return response.data.result;

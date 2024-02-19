@@ -8,14 +8,15 @@ export const fetchMapStoreMarkerData = async (
   longitude: number,
   eventOption: boolean,
   dueDateOption: boolean,
-  categoryOption: string
+  categoryOption: string,
+  isVisitedOption: boolean
 ) => {
   const response = await instance.get<MapStoreMarkerResponse>(
     // 더미 데이터
     // '/data/map/mapStoreMarkerDummyData.json'
 
     // 실제 연결
-    `/userId=${userId}?latitude=${latitude}&longitude=${longitude}&eventOption=${eventOption}&dueDateOption=${dueDateOption}&categoryOption=${categoryOption}`
+    `/userId=${userId}?latitude=${latitude}&longitude=${longitude}&eventOption=${eventOption}&dueDateOption=${dueDateOption}&categoryOption=${categoryOption}&visitOption=${isVisitedOption}`
   );
   console.log(response);
   return response.data.result;

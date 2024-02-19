@@ -49,3 +49,14 @@ export type OwnerStoreMenuData = {
   price: number;
   imageUrl: string;
 };
+
+export type OwnerStoreChangeData = {
+  storeId: number;
+};
+export type OwnerStoreChangeDataResponse = {
+  code: number;
+  status: number;
+  message: string;
+  messages: string;
+  result: OwnerStoreChangeData;
+};

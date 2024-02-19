@@ -11,6 +11,7 @@ import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
 import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
 import { OwnerStoreMenuData } from '../../../../store/Type/Owner/owner';
+import useStore from '../../../../store/useStore';
 import styles from './OwnerInformEdit.module.css';
 const basicFilterArr = [
   { name: '베이커리', isChecked: true },
@@ -21,7 +22,9 @@ const basicFilterArr = [
 ];
 const OwnerInformEdit: React.FC = () => {
   const navigate = useNavigate();
-  const { ownerStoreData, ownerStoreDataPatchMutation } = useOwnerStoreData(5);
+  const storeId = useStore((state) => state.storeId);
+  const { ownerStoreData, ownerStoreDataPatchMutation } =
+    useOwnerStoreData(storeId);
   const [sangho, setSangho] = useState(
     ownerStoreData ? ownerStoreData.storeName : ''
   );
@@ -135,10 +138,11 @@ const OwnerInformEdit: React.FC = () => {
               checkedCategoryFilter &&
               couponGift &&
               menuArr.length > 0 &&
-              maxStamp > 0
+              maxStamp > 0 &&
+              storeId
             ) {
               ownerStoreDataPatchMutation.mutate({
-                storeId: 2,
+                storeId: storeId,
                 storeName: sangho,
                 category: checkedCategoryFilter.name,
                 address: '서울 광진구 아차산로 241 1층 106호',
@@ -162,7 +166,8 @@ const OwnerInformEdit: React.FC = () => {
               checkedCategoryFilter &&
               couponGift &&
               menuArr.length > 0 &&
-              maxStamp > 0
+              maxStamp > 0 &&
+              storeId
             )
           }
         />

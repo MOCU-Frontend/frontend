@@ -11,12 +11,14 @@ import OwnerInformLocContent from '../../../components/Owner/Inform/atoms/Conten
 import OwnerInformBasicSecContent from '../../../components/Owner/Inform/atoms/Contents/BasicSec/OwnerInformBasicSecContent';
 import OwnerInformMenuSecContent from '../../../components/Owner/Inform/atoms/Contents/MenuSec/OwnerInformMenuSecContent';
 import { useOwnerStoreData } from '../../../hooks/useOwnerStoreData';
+import useStore from '../../../store/useStore';
 
 interface Props {}
 
 const OwnerInform: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
-  const { ownerStoreData } = useOwnerStoreData(1);
+  const storeId = useStore((state) => state.storeId);
+  const { ownerStoreData } = useOwnerStoreData(storeId);
 
   return (
     <div className={styles.wholeWrapper}>

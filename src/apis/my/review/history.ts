@@ -4,9 +4,9 @@ import instance from '../../instance';
 export const fetchMyReviewHistoryData = async (userId: number) => {
   const response = await instance.get<MyReviewwHistoryDataResponse>(
     // 더미데이터
-    '/data/my/review/history/my-review-history-data-dummy.json'
+    // '/data/my/review/history/my-review-history-data-dummy.json'
     // 실제 연결
-    //`http://localhost:9000/review/${userId}/my-review`
+    `/review/${userId}/my-review`
   );
   console.log(response);
   return response.data.result;

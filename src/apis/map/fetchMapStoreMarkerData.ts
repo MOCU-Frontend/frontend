@@ -12,8 +12,10 @@ export const fetchMapStoreMarkerData = async (
 ) => {
   const response = await instance.get<MapStoreMarkerResponse>(
     // 더미 데이터
-    '/data/map/mapStoreMarkerDummyData.json' // 실제 연결
-    // `/userId=${userId}?latitude=${latitude}&longitude=${longitude}&eventOption=${eventOption}&dueDateOption=${dueDateOption}&categoryOption=${categoryOption}`
+    // '/data/map/mapStoreMarkerDummyData.json'
+
+    // 실제 연결
+    `/userId=${userId}?latitude=${latitude}&longitude=${longitude}&eventOption=${eventOption}&dueDateOption=${dueDateOption}&categoryOption=${categoryOption}`
   );
   console.log(response);
   return response.data.result;

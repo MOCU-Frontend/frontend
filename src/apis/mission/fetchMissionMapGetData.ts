@@ -6,10 +6,10 @@ export const fetchMissionMapGetData = async () => {
   try {
     const response = await instance.get<MissionMapGetResponse>(
       // 더미 데이터
-      '/data/mission/missionMapGetData.json'
+      // '/data/mission/missionMapGetData.json'
 
       // 실제 연결
-      // http://localhost:9000/mission/mission-map/userId=1
+      '/mission/mission-map/userId=1'
     );
     console.log(response.data.result);
     return response.data.result;

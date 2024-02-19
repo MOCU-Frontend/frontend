@@ -8,10 +8,10 @@ export const fetchUserDangolPossibleData = async (
 ) => {
   const response = await instance.get<userDangolPossibleResponse>(
     // 더미 데이터
-    '/data/user/userDangolPossibleData.json'
+    // '/data/user/userDangolPossibleData.json'
 
     // 실제 데이터
-    // `/users/my-storelist/add-new/userId=${userId}?userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
+    `/users/my-storelist/add-new/userId=${userId}?userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
   );
   console.log(response);
   return response.data.result;

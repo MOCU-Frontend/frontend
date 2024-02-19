@@ -16,6 +16,7 @@
     "rating": 3.1,
     "reviews": [
       {
+        "reviewId": 1,
         "name": "noh",
         "userImage": null,
         "rate": 4,
@@ -23,6 +24,7 @@
         "modifiedDate": "2024-02-13 18:37"
       },
       {
+        "reviewId": 2,
         "name": "kim",
         "userImage": null,
         "rate": 3,
@@ -30,6 +32,7 @@
         "modifiedDate": null
       },
       {
+        "reviewId": 3,
         "name": "kim",
         "userImage": null,
         "rate": 3,
@@ -37,6 +40,7 @@
         "modifiedDate": "2024-02-14 04:32"
       },
       {
+        "reviewId": 4,
         "name": "noh",
         "userImage": null,
         "rate": 3,
@@ -44,6 +48,7 @@
         "modifiedDate": "2024-02-14 16:05"
       },
       {
+        "reviewId": 5,
         "name": "noh",
         "userImage": null,
         "rate": 3,

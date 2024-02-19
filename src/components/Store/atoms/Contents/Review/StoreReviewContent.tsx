@@ -28,16 +28,19 @@ const StoreReviewContent: React.FC<Props> = ({
         />
       </div>
       <div className={styles.reviewsWrapper}>
-        {reviews?.map((data, index) => (
-          <StoreReview
-            key={data.name + index}
-            nameText={data.name}
-            timeText={data.modifiedDate}
-            bodyText={data.content}
-            bodyTextLengthLimit={60}
-            handleReportReview={handleReportReview}
-          />
-        ))}
+        {reviews &&
+          reviews.map((data, index) => (
+            <StoreReview
+              id={data.reviewId}
+              key={data.name + index}
+              nameText={data.name}
+              timeText={data.modifiedDate}
+              bodyText={data.content}
+              rate={data.rate}
+              bodyTextLengthLimit={60}
+              handleReportReview={handleReportReview}
+            />
+          ))}
       </div>
     </div>
   );

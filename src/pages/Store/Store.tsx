@@ -64,15 +64,15 @@ const Store: React.FC = () => {
       <div className={styles.topContentBox}>
         <div className={styles.infoWrapper}>
           <StoreInfoContent
-            title={storeDetailData && storeDetailData?.storeName}
-            category={storeDetailData && storeDetailData?.category}
+            title={storeDetailData && storeDetailData.storeName}
+            category={storeDetailData && storeDetailData.category}
           />
         </div>
         <div className={styles.stampWrapper}>
           <StoreStampContent
-            numOfStamp={storeDetailData && storeDetailData?.numOfStamp}
-            maxStamp={storeDetailData && storeDetailData?.maxStamp}
-            reward={storeDetailData && storeDetailData?.reward}
+            numOfStamp={storeDetailData && storeDetailData.numOfStamp}
+            maxStamp={storeDetailData && storeDetailData.maxStamp}
+            reward={storeDetailData && storeDetailData.reward}
           />
         </div>
         <div className={styles.accumBtnWrapper}>
@@ -80,11 +80,11 @@ const Store: React.FC = () => {
         </div>
         <div className={styles.scoreWrapper}>
           <StoreScoreContent
-            rating={storeDetailData && storeDetailData?.rating}
+            rating={storeDetailData && storeDetailData.rating}
           />
         </div>
         <StoreReviewContent
-          reviews={storeDetailData && storeDetailData?.reviews}
+          reviews={storeDetailData && storeDetailData.reviews}
           handleReportReview={handleReportReview}
         />
       </div>

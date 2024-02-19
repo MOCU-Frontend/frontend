@@ -16,8 +16,10 @@ interface Props {
   nameText: string;
   timeText: string;
   bodyText: string;
+  id: number;
   handleReportReview: (reviewId: number, onSuccess: () => void) => void;
   bodyTextLengthLimit?: number;
+  rate: number;
 }
 
 type ReportLevel = 'reporting' | 'success' | undefined;
@@ -26,8 +28,10 @@ const StoreReview: React.FC<Props> = ({
   nameText,
   timeText,
   bodyText,
+  id,
   bodyTextLengthLimit = 50,
   handleReportReview,
+  rate,
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
   const [isReporting, setIsReporting] = useState(false);
@@ -45,7 +49,7 @@ const StoreReview: React.FC<Props> = ({
           <div className={styles.profileInformWrapper}>
             <StoreReviewNameText text={nameText} />
             <div className={styles.profileInformBottomWrapper}>
-              <StarGageBar width={54} height={10} score={4.3} />
+              <StarGageBar width={54} height={10} score={rate} />
               <StoreReviewTimeText text={timeText} />
             </div>
           </div>
@@ -63,7 +67,7 @@ const StoreReview: React.FC<Props> = ({
               onClickNo={() => setReportLevel(undefined)}
               onClickX={() => setReportLevel(undefined)}
               onClickYes={() => {
-                handleReportReview(5, () => {
+                handleReportReview(id, () => {
                   setReportLevel('success');
                   setTimeout(() => setReportLevel(undefined), 2000);
                 });

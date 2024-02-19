@@ -1,4 +1,5 @@
 export type AddressGetData = {
+  addressId: number;
   name: string;
   address: string;
 };

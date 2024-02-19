@@ -13,6 +13,7 @@ import { initialMenuItemDataArr, MenuItemData } from '../../store/data/stamp';
 import {
   FilterListWithId,
   initialOptionDataArr,
+  initialStampMenuItemDataArr,
 } from '../../store/data/searchResult';
 import { fetchStampData } from '../../apis/stamp/stamp';
 import useStore from '../../store/useStore';
@@ -30,7 +31,16 @@ const Stamp = () => {
     isError: isStoreStampError,
   } = useQuery({
     queryKey: ['StampData'],
-    queryFn: () => fetchStampData(userId || ''),
+    queryFn: () =>
+      fetchStampData(
+        userId || '',
+        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체',
+        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
+        false,
+        false,
+        false,
+        false
+      ),
     enabled: !!userId,
   });
 
@@ -60,7 +70,7 @@ const Stamp = () => {
   };
 
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialMenuItemDataArr
+    initialStampMenuItemDataArr
   );
 
   const handleClickMenuBodyItem = (

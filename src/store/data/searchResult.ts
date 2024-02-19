@@ -110,6 +110,36 @@ export const initialDangolArrangementFilterDataArr: FilterList[] = [
   },
 ];
 
+export const initialStampArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '최신순',
+    isChecked: true,
+  },
+  {
+    title: '적립 많은 순',
+    isChecked: false,
+  },
+  {
+    title: '별점 높은 순',
+    isChecked: false,
+  },
+  {
+    title: '거리순',
+    isChecked: false,
+  },
+];
+
+export const initialReviewHistoryArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '최신순',
+    isChecked: true,
+  },
+  {
+    title: '별점 높은 순',
+    isChecked: false,
+  },
+];
+
 export const initialSectorFilterDataArr: FilterList[] = [
   {
     title: '전체',
@@ -193,5 +223,25 @@ export const initialDangolMenuItemDataArr: MenuItemData[] = [
     title: '업종',
     isChecked: false,
     bodyDataArr: initialSectorFilterDataArr,
+  },
+];
+
+export const initialStampMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialStampArrangementFilterDataArr,
+  },
+  {
+    title: '업종',
+    isChecked: false,
+    bodyDataArr: initialSectorFilterDataArr,
+  },
+];
+export const initialReviewHistoryMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialReviewHistoryArrangementFilterDataArr,
   },
 ];

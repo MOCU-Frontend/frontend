@@ -22,7 +22,8 @@ export const useStoreMapData = (
   mapApiGet: boolean,
   eventOption: boolean,
   dueDateOption: boolean,
-  categoryOption: string
+  categoryOption: string,
+  isVisitedOption: boolean
 ) => {
   // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
@@ -45,7 +46,8 @@ export const useStoreMapData = (
         127.07209,
         eventOption,
         dueDateOption,
-        categoryOption
+        categoryOption,
+        isVisitedOption
       ),
   });
 

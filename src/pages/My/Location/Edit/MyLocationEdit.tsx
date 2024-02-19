@@ -17,6 +17,7 @@ import {
   AddressPatchResponse,
 } from '../../../../store/Type/Address/address';
 import axios from 'axios';
+import useStore from '../../../../store/useStore';
 type LocSetData = {
   name: '집' | '회사' | '학교' | '기타';
   Icon: React.FC<React.SVGProps<SVGSVGElement>>;
@@ -58,7 +59,7 @@ const MyLocationEdit: React.FC = () => {
   };
 
   const navigate = useNavigate();
-  const userId = 5;
+  const userId = useStore((state) => state.userId);
   const addressPatchMutation = useMutation({
     mutationFn: (newData: AddressPatchRequest) => {
       return axios.patch(

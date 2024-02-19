@@ -30,6 +30,7 @@ export const useStoreMapData = (
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
   const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
   // 그 결과를 `storeMapMarkerData`에 저장합니다.
@@ -45,14 +46,14 @@ export const useStoreMapData = (
     queryFn: () =>
       fetchMapStoreMarkerData(
         userId || '',
-        37.5404257,
-        127.07209,
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         eventOption,
         dueDateOption,
         categoryOption,
         isVisitedOption
       ),
-    enabled: !!userId,
+    enabled: !!userId && !!nowUserLocation,
   });
 
   // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.

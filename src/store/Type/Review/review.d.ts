@@ -26,7 +26,7 @@ export type ReviewPatchResponse = {
 };
 
 export type ReviewPostRequestData = {
-  userId: number;
+  userId: string;
   storeId: number;
   rate: number;
   content: string;

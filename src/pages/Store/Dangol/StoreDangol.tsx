@@ -25,6 +25,7 @@ interface Props {}
 
 const StoreDangol: React.FC<Props> = ({}: Props) => {
   const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   const {
     data: userDangolData,
     isLoading: isuserDangolDataLoading,
@@ -38,11 +39,11 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
         '식당',
         false,
         false,
-        37.53939427920637,
-        127.07278389250759,
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         0
       ),
-    enabled: !!userId,
+    enabled: !!userId && !!nowUserLocation,
   });
 
   const navigate = useNavigate();

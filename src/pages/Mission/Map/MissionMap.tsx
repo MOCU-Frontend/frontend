@@ -39,13 +39,12 @@ const MissionMap = () => {
   // const stampCnt = 30;
 
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
-
   const [rewardGet, setRewardGet] = useState<boolean>(false);
 
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
       // 임시 userId
-      userId: 1,
+      userId: userId || '',
     });
     setRewardGet(true);
   };
@@ -53,7 +52,7 @@ const MissionMap = () => {
   // fetchMissionMapCompleteData
   // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
   const missionMapCompleteMutation = useMutation({
-    mutationFn: (newData: { userId: number }) => {
+    mutationFn: (newData: { userId: string }) => {
       return axios.patch('/mission/mission-map/complete', newData);
     },
     onSuccess: (res) => {

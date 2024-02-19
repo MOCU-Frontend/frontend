@@ -15,11 +15,13 @@ import {
   ReviewPostResponse,
   ReviewReportRequestData,
 } from '../../store/Type/Review/review';
+import useStore from '../../store/useStore';
 import styles from './Review.module.css';
 
 const Review: React.FC = () => {
   const navigate = useNavigate();
   const [reviewText, setReviewText] = useState('');
+  const userId = useStore((state) => state.userId);
   const reviewPostMutation = useMutation({
     mutationFn: (newData: ReviewPostRequestData) => {
       return axios.post('/review', newData);
@@ -64,7 +66,7 @@ const Review: React.FC = () => {
           onClickConfirmBtn={() => {
             if (reviewText.length > 20) {
               reviewPostMutation.mutate({
-                userId: 5,
+                userId: userId || '',
                 storeId: 5,
                 rate: 4,
                 content: reviewText,

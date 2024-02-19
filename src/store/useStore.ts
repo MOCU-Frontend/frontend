@@ -7,6 +7,7 @@ interface State {
   setNowAddress: (newAddress: Address) => void;
   nowUserLocation: UserLocation | undefined;
   setNowUserLocation: (newUserLocation: UserLocation) => void;
+  userId: string | undefined;
 }
 
 type Address = {
@@ -22,6 +23,7 @@ const useStore = create<State>((set) => ({
   nowUserLocation: undefined,
   setNowUserLocation: (newUserLocation) =>
     set({ nowUserLocation: newUserLocation }),
+  userId: undefined,
 }));
 
 export default useStore;

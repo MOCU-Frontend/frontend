@@ -10,6 +10,7 @@ import MapStampModal from '../../components/Map/atoms/Modal/StampModal/MapStampM
 import MapCouponModal from '../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMyCouponData } from '../../apis/my/coupon/myCoupon';
+import useStore from '../../store/useStore';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -75,13 +76,22 @@ const Coupon = () => {
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
   };
+
+  const userId = useStore((state) => state.userId);
+  const nowUserLocation = useStore((state) => state.nowUserLocation);
   const {
     data: myCouponData,
     isLoading: isMyCouponDataLoading,
     isError: isMyCouponDataError,
   } = useQuery({
     queryKey: ['MyCoupon'],
-    queryFn: () => fetchMyCouponData(5, 37.3696718, 127.136404),
+    queryFn: () =>
+      fetchMyCouponData(
+        userId || '',
+        nowUserLocation?.latitude || 0,
+        nowUserLocation?.longitude || 0
+      ),
+    enabled: !!userId && !!nowUserLocation,
   });
 
   return (

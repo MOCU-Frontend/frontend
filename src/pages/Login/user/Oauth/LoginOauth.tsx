@@ -44,13 +44,15 @@ const UserLoginOauth: React.FC<Props> = ({}: Props) => {
     },
     onSuccess: (res) => {
       const data: TokenLoginResponseData = res.data;
+      console.log(data.userId);
+
+      setUserId(`${data.userId}`);
       if (data && window.deviceId && window.deviceToken) {
-        setUserId(`${data.userId}`);
-        saveTokenMutation.mutate({
-          userId: data.userId,
-          deviceId: window.deviceId,
-          deviceToken: window.deviceToken,
-        });
+        // saveTokenMutation.mutate({
+        //   userId: data.userId,
+        //   deviceId: window.deviceId,
+        //   deviceToken: window.deviceToken,
+        // });
       }
       console.log(data);
     },

@@ -11,7 +11,7 @@ export type TokenLoginResponseData = {
   };
 };
 export type OwnerTokenLoginResponseData = {
-  ownerId: number;
+  userId: number;
   authTokens: {
     accessToken: string;
     refreshToken: string;

@@ -46,9 +46,9 @@ const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
     onSuccess: (res) => {
       const data: OwnerTokenLoginResponseData = res.data;
       if (data && window.deviceId && window.deviceToken) {
-        setUserId(`${data.ownerId}`);
+        setUserId(`${data.userId}`);
         saveTokenMutation.mutate({
-          ownerId: data.ownerId,
+          ownerId: data.userId,
           deviceId: window.deviceId,
           deviceToken: window.deviceToken,
         });

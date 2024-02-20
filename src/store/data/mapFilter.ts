@@ -15,10 +15,31 @@ export const initialSectorFilterDataArr: FilterListWithId[] = [
     isChecked: true,
     id: 0,
   },
+
+  {
+    title: '음식점',
+    isChecked: false,
+    id: 1,
+  },
   {
     title: '카페',
     isChecked: false,
-    id: 1,
+    id: 2,
+  },
+  {
+    title: '베이커리',
+    isChecked: false,
+    id: 3,
+  },
+  {
+    title: '주류',
+    isChecked: false,
+    id: 4,
+  },
+  {
+    title: '기타',
+    isChecked: false,
+    id: 5,
   },
 ];
 

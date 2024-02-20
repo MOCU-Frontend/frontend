@@ -78,7 +78,26 @@ export const initialArrangementFilterDataArr: FilterList[] = [
     isChecked: true,
   },
   {
-    title: '적립률 순',
+    title: '적립률순',
+    isChecked: false,
+  },
+  {
+    title: '별점 높은순',
+    isChecked: false,
+  },
+  {
+    title: '리뷰 많은순',
+    isChecked: false,
+  },
+];
+
+export const initialDangolArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '최신순',
+    isChecked: true,
+  },
+  {
+    title: '적립 많은 순',
     isChecked: false,
   },
   {
@@ -86,7 +105,52 @@ export const initialArrangementFilterDataArr: FilterList[] = [
     isChecked: false,
   },
   {
-    title: '리뷰 많은 순',
+    title: '거리순',
+    isChecked: false,
+  },
+];
+
+export const initialStampArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '최신순',
+    isChecked: true,
+  },
+  {
+    title: '적립 많은 순',
+    isChecked: false,
+  },
+  {
+    title: '별점 높은 순',
+    isChecked: false,
+  },
+  {
+    title: '거리순',
+    isChecked: false,
+  },
+];
+
+export const initialReviewHistoryArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '최신순',
+    isChecked: true,
+  },
+  {
+    title: '별점 높은 순',
+    isChecked: false,
+  },
+];
+
+export const initialOwnerCouponArrangementFilterDataArr: FilterList[] = [
+  {
+    title: '적립 높은 순',
+    isChecked: true,
+  },
+  {
+    title: '쿠폰 사용 많은 순',
+    isChecked: false,
+  },
+  {
+    title: '최근 방문 순',
     isChecked: false,
   },
 ];
@@ -114,6 +178,21 @@ export const initialSectorFilterDataArr: FilterList[] = [
   },
   {
     title: '기타',
+    isChecked: false,
+  },
+];
+
+export const initialOwnerRequestFilterDataArr: FilterList[] = [
+  {
+    title: '보상 적립 전체',
+    isChecked: true,
+  },
+  {
+    title: '보상 요청만',
+    isChecked: false,
+  },
+  {
+    title: '적립 요청만',
     isChecked: false,
   },
 ];
@@ -162,5 +241,53 @@ export const initialMenuItemDataArr: MenuItemData[] = [
     title: '업종',
     isChecked: false,
     bodyDataArr: initialSectorFilterDataArr,
+  },
+];
+export const initialDangolMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialDangolArrangementFilterDataArr,
+  },
+  {
+    title: '업종',
+    isChecked: false,
+    bodyDataArr: initialSectorFilterDataArr,
+  },
+];
+
+export const initialStampMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialStampArrangementFilterDataArr,
+  },
+  {
+    title: '업종',
+    isChecked: false,
+    bodyDataArr: initialSectorFilterDataArr,
+  },
+];
+export const initialReviewHistoryMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialReviewHistoryArrangementFilterDataArr,
+  },
+];
+
+export const initialOwnerCouponMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '정렬',
+    isChecked: true,
+    bodyDataArr: initialOwnerCouponArrangementFilterDataArr,
+  },
+];
+
+export const initialOwnerRequestMenuItemDataArr: MenuItemData[] = [
+  {
+    title: '보상 적립 전체',
+    isChecked: true,
+    bodyDataArr: initialOwnerRequestFilterDataArr,
   },
 ];

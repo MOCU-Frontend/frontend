@@ -17,12 +17,12 @@ const StoreSearchRecommend: React.FC<Props> = ({ recommendStoreInfoList }) => {
       <div className={styles.storeSearchCardWrapper}>
         {recommendStoreInfoList?.map((data, index) => (
           <StoreSearchCard
-            key={index}
+            key={data.storeId + index}
             couponMain={false}
             eventOn={data.hasEvent}
             title={data.storeName}
             distance={data.distance}
-            onClick={() => navigate(`/store/${data.storeName}`)}
+            onClick={() => navigate(`/store/${data.storeId}`)}
           />
         ))}
       </div>

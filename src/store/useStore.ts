@@ -10,6 +10,7 @@ interface State {
   userId: string | undefined;
   storeId: number | undefined;
   setStoreId: (newStoreId: number) => void;
+  setUserId: (newUserId: string) => void;
 }
 
 type Address = {
@@ -28,6 +29,7 @@ const useStore = create<State>((set) => ({
   userId: '1',
   storeId: undefined,
   setStoreId: (newStoreId) => set({ storeId: newStoreId }),
+  setUserId: (newUserId) => set({ userId: newUserId }),
 }));
 
 export default useStore;

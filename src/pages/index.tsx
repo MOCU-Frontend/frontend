@@ -75,8 +75,14 @@ const Router = () => {
   const StoreDangolAdd = React.lazy(
     () => import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd')
   );
-  const Login = React.lazy(() => import('./Login/Login'));
-  const LoginOauth = React.lazy(() => import('./Login/Oauth/LoginOauth'));
+  const UserLogin = React.lazy(() => import('./Login/user/Login'));
+  const OwnerLogin = React.lazy(() => import('./Login/owner/Login'));
+  const UserLoginOauth = React.lazy(
+    () => import('./Login/user/Oauth/LoginOauth')
+  );
+  const OwnerLoginOauth = React.lazy(
+    () => import('./Login/owner/Oauth/LoginOauth')
+  );
   const Logout = React.lazy(() => import('./Logout/Logout'));
 
   const router = createBrowserRouter([
@@ -241,24 +247,54 @@ const Router = () => {
       path: '/login',
       children: [
         {
-          path: '',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <Login />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          path: 'user',
+          children: [
+            {
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <UserLogin />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'oauth',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <UserLoginOauth />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+          ],
         },
         {
-          path: 'oauth',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <LoginOauth />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          path: 'owner',
+          children: [
+            {
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerLogin />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'oauth',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerLoginOauth />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+          ],
         },
       ],
     },

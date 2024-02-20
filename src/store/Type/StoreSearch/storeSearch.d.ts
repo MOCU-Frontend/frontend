@@ -14,6 +14,7 @@ export type storeSearchData = {
 };
 
 export type StoreInfo = {
+  storeId: number;
   storeName: string;
   numOfStamp: number;
   numOfCouponAvailable: number;
@@ -22,11 +23,13 @@ export type StoreInfo = {
 };
 
 export type StoreEventInfo = {
+  storeId: number;
   storeName: string;
   mainImageUrl: string;
 };
 
 export type StoreRecommendInfo = {
+  storeId: number;
   storeName: string;
   hasEvent: boolean;
   mainImageUrl: string;

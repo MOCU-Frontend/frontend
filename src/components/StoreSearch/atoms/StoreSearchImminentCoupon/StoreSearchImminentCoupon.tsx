@@ -26,12 +26,12 @@ const StoreSearchImminentCoupon: React.FC<Props> = ({
       <div className={styles.storeSearchCardWrapper}>
         {sortedData?.map((data, index) => (
           <StoreSearchCard
-            key={index}
+            key={data.storeId + index}
             couponMain={true}
             title={data.storeName}
             couponCount={data.numOfStamp}
             distance={data.distance}
-            onClick={() => navigate(`/store/${data.storeName}`)}
+            onClick={() => navigate(`/store/${data.storeId}`)}
           />
         ))}
       </div>

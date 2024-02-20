@@ -4,7 +4,7 @@ import instance from '../instance';
 export const fetchOwnerCouponData = async (
   ownerId: string,
   isCustomerRegular: boolean,
-  sort: '적립 많은 순' | '쿠폰 사용 많은 순' | '최근 방문 순'
+  sort: string
 ) => {
   const response = await instance.get<OwnerCouponDataResponse>(
     // 더미데이터

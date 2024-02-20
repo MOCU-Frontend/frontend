@@ -26,6 +26,10 @@ import {
 } from '../../store/data/mapFilter';
 import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import BottomSheet from '../../components/BottomSheet/BottomSheet';
+import { useMutation } from '@tanstack/react-query';
+import { userStampRequestData } from '../../store/Type/Stamp/stampRequest';
+import instance from '../../apis/instance';
+import { userCouponRequestData } from '../../store/Type/My/Coupon/couponRequest';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -234,6 +238,39 @@ const Map: React.FC = () => {
   const [isShowSearchBtn, setIsShowSearchBtn] = useState(true);
 
   const nowUserLocation = useStore((state) => state.nowUserLocation);
+  const userId = useStore((state) => state.userId);
+
+  const userStampMutation = useMutation({
+    mutationFn: (newData: userStampRequestData) => {
+      return instance.patch('/stamp/request', newData);
+    },
+    onSuccess: () => {
+      console.log('userStampMutation success!');
+    },
+  });
+
+  const handleRequestStamp = (onSuccess: () => void) => {
+    userStampMutation.mutate(
+      { userId: userId ? parseInt(userId) : 1, storeId: 1 },
+      { onSuccess }
+    );
+  };
+
+  const userCouponMutation = useMutation({
+    mutationFn: (newData: userCouponRequestData) => {
+      return instance.patch('/coupon/request', newData);
+    },
+    onSuccess: () => {
+      console.log('userCouponMutation success!');
+    },
+  });
+
+  const handleRequestCoupon = (onSuccess: () => void) => {
+    userCouponMutation.mutate(
+      { userId: userId ? parseInt(userId) : 1, storeId: 1 },
+      { onSuccess }
+    );
+  };
 
   if (scriptError) return <p>Map Error!</p>;
   if (scriptLoading) return <div className={styles.wrapper}>map loading..</div>;
@@ -246,7 +283,7 @@ const Map: React.FC = () => {
         }
       >
         <HeaderBackBtn
-          headerPaddingSize="checkFilter"
+          headerPaddingSize='checkFilter'
           onClickBackBtn={() => navigate(-1)}
           backBtnGap={isShowBottomSheet ? 24 : 11.5}
         >
@@ -268,27 +305,27 @@ const Map: React.FC = () => {
                     : 'no selected item!'
                 }
                 border={1}
-                borderColor="sub-purple-light"
+                borderColor='sub-purple-light'
                 onClick={() => handleFilterSelectClick(0)}
               />
               <CheckFilter
                 border={1}
-                borderColor="sub-purple-light"
-                label="이벤트 중"
+                borderColor='sub-purple-light'
+                label='이벤트 중'
                 isChecked={eventOption}
                 onClick={handleClickEvent}
               />
               <CheckFilter
                 border={1}
-                borderColor="sub-purple-light"
-                label="쿠폰 사용 임박"
+                borderColor='sub-purple-light'
+                label='쿠폰 사용 임박'
                 isChecked={dueDateOption}
                 onClick={handleClickDueDate}
               />
               <CheckFilter
                 border={1}
-                borderColor="sub-purple-light"
-                label="가본 곳만"
+                borderColor='sub-purple-light'
+                label='가본 곳만'
                 isChecked={isVisitedOption}
                 onClick={handleClickDueDate}
               />
@@ -305,27 +342,27 @@ const Map: React.FC = () => {
                   : 'no selected item!'
               }
               border={1}
-              borderColor="sub-purple-light"
+              borderColor='sub-purple-light'
               onClick={() => handleFilterSelectClick(0)}
             />
             <CheckFilter
               border={1}
-              borderColor="sub-purple-light"
-              label="이벤트 중"
+              borderColor='sub-purple-light'
+              label='이벤트 중'
               isChecked={eventOption}
               onClick={handleClickEvent}
             />
             <CheckFilter
               border={1}
-              borderColor="sub-purple-light"
-              label="쿠폰 사용 임박"
+              borderColor='sub-purple-light'
+              label='쿠폰 사용 임박'
               isChecked={dueDateOption}
               onClick={handleClickDueDate}
             />
             <CheckFilter
               border={1}
-              borderColor="sub-purple-light"
-              label="가본 곳만"
+              borderColor='sub-purple-light'
+              label='가본 곳만'
               isChecked={isVisitedOption}
               onClick={handleClickIsVisited}
             />
@@ -380,6 +417,7 @@ const Map: React.FC = () => {
       <MapStampModal
         stampModalLevel={stampModalLevel}
         setStampModalLevel={setStampModalLevel}
+        handleRequestStamp={handleRequestStamp}
         onCancelModal={() => {
           if (map) {
             map.setSize(
@@ -394,6 +432,7 @@ const Map: React.FC = () => {
       <MapCouponModal
         couponModalLevel={couponModalLevel}
         setCouponModalLevel={setCouponModalLevel}
+        handleRequestCoupon={handleRequestCoupon}
         onCancelModal={() => {
           if (map) {
             map.setSize(

@@ -7,15 +7,18 @@ import BottomSheet from '../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StampHeaderFilter from '../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
 
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { initialMenuItemDataArr, MenuItemData } from '../../store/data/stamp';
 import {
   FilterListWithId,
   initialOptionDataArr,
+  initialStampMenuItemDataArr,
 } from '../../store/data/searchResult';
 import { fetchStampData } from '../../apis/stamp/stamp';
 import useStore from '../../store/useStore';
+import { userCouponRequestData } from '../../store/Type/My/Coupon/couponRequest';
+import instance from '../../apis/instance';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -30,7 +33,16 @@ const Stamp = () => {
     isError: isStoreStampError,
   } = useQuery({
     queryKey: ['StampData'],
-    queryFn: () => fetchStampData(userId || ''),
+    queryFn: () =>
+      fetchStampData(
+        userId || '',
+        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체',
+        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
+        false,
+        false,
+        false,
+        false
+      ),
     enabled: !!userId,
   });
 
@@ -60,7 +72,7 @@ const Stamp = () => {
   };
 
   const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialMenuItemDataArr
+    initialStampMenuItemDataArr
   );
 
   const handleClickMenuBodyItem = (
@@ -140,6 +152,22 @@ const Stamp = () => {
     ...uncheckedOptionDataArr,
   ];
 
+  const userCouponMutation = useMutation({
+    mutationFn: (newData: userCouponRequestData) => {
+      return instance.patch('/coupon/request', newData);
+    },
+    onSuccess: () => {
+      console.log('userCouponMutation success!');
+    },
+  });
+
+  const handleRequestCoupon = (onSuccess: () => void) => {
+    userCouponMutation.mutate(
+      { userId: userId ? parseInt(userId) : 1, storeId: 1 },
+      { onSuccess }
+    );
+  };
+
   return (
     <div className={styles.wrapper}>
       <StampHeaderFilter
@@ -192,6 +220,7 @@ const Stamp = () => {
           setCouponModalLevel={setCouponModalLevel}
           onCancelModal={handleCloseCouponModal}
           isRegularCustomer={false}
+          handleRequestCoupon={handleRequestCoupon}
           handleRegularCustomer={handleRegularCustomer}
         />
       )}

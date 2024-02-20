@@ -13,11 +13,16 @@ import ModalConfirm from '../../../components/Modal/ModalConfirm/ModalConfirm';
 import ModalAccum from '../../../components/Modal/ModalAccum/ModalAccum';
 import useStore from '../../../store/useStore';
 import { fetchOwnerStoreChangeData } from '../../../apis/owner/ownerStoreChange';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import instance from '../../../apis/instance';
+import { ownerStampRequestData } from '../../../store/Type/Stamp/stampRequest';
+import { ownerCouponRequestData } from '../../../store/Type/My/Coupon/couponRequest';
 declare global {
   interface Window {
     showCouponModal: () => void;
     showAccumModal: () => void;
+    couponRequestId: number | undefined;
+    stampRequestId: number | undefined;
   }
 }
 const OwnerHome: React.FC = () => {
@@ -47,6 +52,54 @@ const OwnerHome: React.FC = () => {
   const [accumCounterNum, setAccumCounterNum] = useState(1);
   window.showAccumModal = () => setIsShowAccumModal(true);
   window.showCouponModal = () => setIsShowCouponModal(true);
+
+  const ownerStampMutation = useMutation({
+    mutationFn: (newData: ownerStampRequestData) => {
+      return instance.patch('/stamp/owner-accept', newData);
+    },
+    onSuccess: () => {
+      console.log('ownerStampMutation success!');
+    },
+  });
+
+  const handleRequestStamp = (
+    numOfStamp: number,
+    stampRequestId: number,
+    onSuccess: () => void
+  ) => {
+    ownerStampMutation.mutate(
+      {
+        userId: ownerId ? parseInt(ownerId) : 1,
+        storeId: ownerStoreChangeData ? ownerStoreChangeData.storeId : 1,
+        stampRequestId,
+        numOfStamp,
+      },
+      { onSuccess }
+    );
+  };
+
+  const ownerCouponMutation = useMutation({
+    mutationFn: (newData: ownerCouponRequestData) => {
+      return instance.patch('/coupon/owner-accept', newData);
+    },
+    onSuccess: () => {
+      console.log('ownerCouponMutation success!');
+    },
+  });
+
+  const handleRequestCoupon = (
+    couponRequestId: number,
+    onSuccess: () => void
+  ) => {
+    ownerCouponMutation.mutate(
+      {
+        userId: ownerId ? parseInt(ownerId) : 1,
+        storeId: ownerStoreChangeData ? ownerStoreChangeData.storeId : 1,
+        couponRequestId,
+      },
+      { onSuccess }
+    );
+  };
   return (
     <div className={styles.wholeWrapper}>
       <HomeHeader
@@ -120,7 +173,13 @@ const OwnerHome: React.FC = () => {
           informText='아이스 아메리카노 한 잔'
           onClickNo={() => setIsShowUseCouponModal(false)}
           onClickX={() => setIsShowUseCouponModal(false)}
-          onClickYes={() => setIsShowUseCouponModal(false)}
+          onClickYes={() => {
+            if (window.couponRequestId) {
+              handleRequestCoupon(window.couponRequestId, () =>
+                setIsShowUseCouponModal(false)
+              );
+            }
+          }}
         />
       )}
       {isShowAccumCounterModal && (
@@ -134,7 +193,13 @@ const OwnerHome: React.FC = () => {
           handlePlusAccumNum={() => setAccumCounterNum((prev) => prev + 1)}
           onClickNo={() => setIsShowAccumCounterModal(false)}
           onClickX={() => setIsShowAccumCounterModal(false)}
-          onClickYes={() => setIsShowAccumCounterModal(false)}
+          onClickYes={() => {
+            if (window.stampRequestId && accumCounterNum > 0) {
+              handleRequestStamp(accumCounterNum, window.stampRequestId, () =>
+                setIsShowAccumCounterModal(false)
+              );
+            }
+          }}
         />
       )}
     </div>

@@ -5,6 +5,7 @@ import { ReactComponent as StampNowImage } from '../../../../assets/icon/stampSt
 import { ReactComponent as GaugeImage } from '../../../../assets/icon/couponGage.svg';
 import { ReactComponent as StampNoBadgeImage } from '../../../../assets/icon/stampStarNoBadge.svg';
 import { ReactComponent as StampFinishedImage } from '../../../../assets/icon/stampStarGradation.svg';
+import MissionGaugeBar from '../MissionGaugeBar/MissionGaugeBar';
 
 interface Props {
   /**
@@ -50,7 +51,7 @@ const MissionMapCircle: React.FC<Props> = ({
                 <StampNowImage width={80} height={80} />
                 <div className={styles.gaugeWrapper}>
                   <div className={styles.gaugeNumber}>{stampCnt}/30</div>
-                  <GaugeImage width={50} height={6} />
+                  <MissionGaugeBar ratio={(stampCnt / 30) * 100} />
                 </div>
               </>
             ) : (

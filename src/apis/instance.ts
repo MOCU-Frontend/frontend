@@ -6,7 +6,7 @@ const instance = axios.create({
   // baseURL: 'http://localhost:3000',
 
   // 실제 연결
-  baseURL: 'http://172.30.1.21:9000',
+  baseURL: 'http://192.168.86.109:9000',
 });
 
 // 요청 인터셉터

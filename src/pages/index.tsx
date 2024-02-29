@@ -1,89 +1,174 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Home from './Home/Home';
-import Map from './Map/Map';
-import StoreSearch from './Store/Search/StoreSearch';
-import StoreSearchResult from './Store/Search/Result/StoreSearchResult';
-import Stamp from './Stamp/Stamp';
-import My from './My/My';
-import MyLocation from './My/Location/MyLocation';
-import MyLocationPage from './MyLocation/MyLocation';
-import MyNowLocation from './My/Location/Now/MyNowLocation';
-import MyLocationEdit from './My/Location/Edit/MyLocationEdit';
-import MyLocationEnrollment from './My/Location/Enrollment/MyLocationEnrollment';
-import Store from './Store/Store';
-import MissionToday from './Mission/Today/MissionToday';
-import MissionMap from './Mission/Map/MissionMap';
-import Review from './Review/Review';
-import Coupon from './Coupon/Coupon';
-import MyReview from './My/Review/MyReview';
-import OwnerHome from './Owner/Home/OwnerHome';
-import OwnerInform from './Owner/Inform/OwnerInform';
-import OwnerRequest from './Owner/Request/OwnerRequest';
-import OwnerCoupon from './Owner/Coupon/OwnerCoupon';
-import OwnerInformEdit from './Owner/Inform/Edit/OwnerInformEdit';
-import OwnerInformRegister from './Owner/Inform/Register/OwnerInformRegister';
-import OwnerInformNoticeRegister from './Owner/Inform/Notice/Register/OwnerInformNoticeRegister';
-import Gift from './Gift/Gift';
-import GiftDetail from './Gift/GiftDetail/GiftDetail';
-import Advertisement from './Advertisement/Advertisement';
-import Alarm from './Alarm/Alarm';
-import Setting from './Setting/Setting';
-import MyProfileEdit from './My/Profile/Edit/MyProfileEdit';
-import GiftBox from './Gift/Box/GiftBox';
-import StoreDangol from './Store/Dangol/StoreDangol';
-import RewardHistory from './Reward/History/RewardHistory';
-import LocationSetting from './LocationSetting/LocationSetting';
-import LocationSettingNow from './LocationSetting/now/LocationSettingNow';
-import LocationSettingSearch from './LocationSetting/search/LocationSettingSearch';
-import LocationSettingName from './LocationSetting/Name/LocationSettingName';
-import StoreDangolAdd from './Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd';
-import Login from './Login/Login';
-import LoginOauth from './Login/Oauth/LoginOauth';
-import Logout from './Logout/Logout';
-import UserLogin from './Login/user/Login';
-import UserLoginOauth from './Login/user/Oauth/LoginOauth';
-import OwnerLogin from './Login/owner/Login';
-import OwnerLoginOauth from './Login/owner/Oauth/LoginOauth';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorBoundaryProps } from 'react-error-boundary';
+import Loading from '../components/Loading/Loading';
+import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 
 const Router = () => {
+  // 동적 import
+  const Home = React.lazy(() => import('./Home/Home'));
+  const Map = React.lazy(() => import('./Map/Map'));
+  const StoreSearch = React.lazy(() => import('./Store/Search/StoreSearch'));
+  const StoreSearchResult = React.lazy(
+    () => import('./Store/Search/Result/StoreSearchResult')
+  );
+  const Stamp = React.lazy(() => import('./Stamp/Stamp'));
+  const My = React.lazy(() => import('./My/My'));
+  const MyLocation = React.lazy(() => import('./My/Location/MyLocation'));
+  const MyLocationPage = React.lazy(() => import('./MyLocation/MyLocation'));
+  const MyNowLocation = React.lazy(
+    () => import('./My/Location/Now/MyNowLocation')
+  );
+  const MyLocationEdit = React.lazy(
+    () => import('./My/Location/Edit/MyLocationEdit')
+  );
+  const MyLocationEnrollment = React.lazy(
+    () => import('./My/Location/Enrollment/MyLocationEnrollment')
+  );
+  const Store = React.lazy(() => import('./Store/Store'));
+  const MissionToday = React.lazy(() => import('./Mission/Today/MissionToday'));
+  const MissionMap = React.lazy(() => import('./Mission/Map/MissionMap'));
+  const Review = React.lazy(() => import('./Review/Review'));
+  const Coupon = React.lazy(() => import('./Coupon/Coupon'));
+  const MyReview = React.lazy(() => import('./My/Review/MyReview'));
+  const OwnerHome = React.lazy(() => import('./Owner/Home/OwnerHome'));
+  const OwnerInform = React.lazy(() => import('./Owner/Inform/OwnerInform'));
+  const OwnerRequest = React.lazy(() => import('./Owner/Request/OwnerRequest'));
+  const OwnerCoupon = React.lazy(() => import('./Owner/Coupon/OwnerCoupon'));
+  const OwnerInformEdit = React.lazy(
+    () => import('./Owner/Inform/Edit/OwnerInformEdit')
+  );
+  const OwnerInformRegister = React.lazy(
+    () => import('./Owner/Inform/Register/OwnerInformRegister')
+  );
+  const OwnerInformNoticeRegister = React.lazy(
+    () => import('./Owner/Inform/Notice/Register/OwnerInformNoticeRegister')
+  );
+  const Gift = React.lazy(() => import('./Gift/Gift'));
+  const GiftDetail = React.lazy(() => import('./Gift/GiftDetail/GiftDetail'));
+  const Advertisement = React.lazy(
+    () => import('./Advertisement/Advertisement')
+  );
+  const Alarm = React.lazy(() => import('./Alarm/Alarm'));
+  const Setting = React.lazy(() => import('./Setting/Setting'));
+  const MyProfileEdit = React.lazy(
+    () => import('./My/Profile/Edit/MyProfileEdit')
+  );
+  const GiftBox = React.lazy(() => import('./Gift/Box/GiftBox'));
+  const StoreDangol = React.lazy(() => import('./Store/Dangol/StoreDangol'));
+  const RewardHistory = React.lazy(
+    () => import('./Reward/History/RewardHistory')
+  );
+  const LocationSetting = React.lazy(
+    () => import('./LocationSetting/LocationSetting')
+  );
+  const LocationSettingNow = React.lazy(
+    () => import('./LocationSetting/now/LocationSettingNow')
+  );
+  const LocationSettingSearch = React.lazy(
+    () => import('./LocationSetting/search/LocationSettingSearch')
+  );
+  const LocationSettingName = React.lazy(
+    () => import('./LocationSetting/Name/LocationSettingName')
+  );
+  const StoreDangolAdd = React.lazy(
+    () => import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd')
+  );
+  const UserLogin = React.lazy(() => import('./Login/user/Login'));
+  const OwnerLogin = React.lazy(() => import('./Login/owner/Login'));
+  const UserLoginOauth = React.lazy(
+    () => import('./Login/user/Oauth/LoginOauth')
+  );
+  const OwnerLoginOauth = React.lazy(
+    () => import('./Login/owner/Oauth/LoginOauth')
+  );
+  const Logout = React.lazy(() => import('./Logout/Logout'));
+
   const router = createBrowserRouter([
     {
       index: true,
       path: '/',
-      element: <Home />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/map',
-      element: <Map />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Map />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/ad',
       children: [
         {
           path: ':adId',
-          element: <Advertisement />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Advertisement />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
       ],
     },
     {
       path: '/alarm',
-      element: <Alarm />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Alarm />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/setting',
-      element: <Setting />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Setting />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/reward',
-      children: [{ path: 'history', element: <RewardHistory /> }],
+      children: [
+        {
+          path: 'history',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <RewardHistory />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
+      ],
     },
     {
       path: '/store',
       children: [
         {
           path: ':storeId',
-          element: <Store />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Store />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'search',
@@ -91,30 +176,72 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: <StoreSearch />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreSearch />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
             {
               path: ':searchWord',
-              element: <StoreSearchResult />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreSearchResult />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
           ],
         },
         {
           path: 'dangol',
           children: [
-            { path: '', element: <StoreDangol /> },
-            { path: 'add', element: <StoreDangolAdd /> },
+            {
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreDangol />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'add',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <StoreDangolAdd />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
       ],
     },
     {
       path: '/stamp',
-      element: <Stamp />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Stamp />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/logout',
-      element: <Logout />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Logout />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/login',
@@ -122,37 +249,110 @@ const Router = () => {
         {
           path: 'user',
           children: [
-            { path: '', element: <UserLogin /> },
-            { path: 'oauth', element: <UserLoginOauth /> },
+            {
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <UserLogin />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'oauth',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <UserLoginOauth />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
         {
           path: 'owner',
           children: [
-            { path: '', element: <OwnerLogin /> },
-            { path: 'oauth', element: <OwnerLoginOauth /> },
+            {
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerLogin />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'oauth',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerLoginOauth />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
       ],
     },
     {
       path: '/review/:storeId',
-      element: <Review />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Review />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/gift',
       children: [
-        { index: true, path: '', element: <Gift /> },
+        {
+          index: true,
+          path: '',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <Gift />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
         {
           path: ':cafeTitle/:foodTitle/:foodPrice',
-          element: <GiftDetail />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <GiftDetail />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
-        { path: 'box', element: <GiftBox /> },
+        {
+          path: 'box',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <GiftBox />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
       ],
     },
     {
       path: '/coupon',
-      element: <Coupon />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <Coupon />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/mission',
@@ -160,11 +360,23 @@ const Router = () => {
         {
           index: true,
           path: 'today',
-          element: <MissionToday />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MissionToday />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'map',
-          element: <MissionMap />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MissionMap />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
       ],
     },
@@ -174,15 +386,38 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: <My />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <My />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'profile',
-          children: [{ path: 'edit', element: <MyProfileEdit /> }],
+          children: [
+            {
+              path: 'edit',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyProfileEdit />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+          ],
         },
         {
           path: 'review',
-          element: <MyReview />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <MyReview />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'location',
@@ -190,35 +425,102 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: <MyLocation />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocation />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
             {
               path: 'now',
-              element: <MyNowLocation />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyNowLocation />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
             {
               path: ':locationId',
-              element: <MyLocationEdit />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocationEdit />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
             {
               path: 'enrollment',
-              element: <MyLocationEnrollment />,
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <MyLocationEnrollment />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
             },
           ],
         },
       ],
     },
+
     {
       path: '/mylocation',
-      element: <MyLocationPage />,
+      element: (
+        <ErrorBoundary FallbackComponent={ErrorAlert}>
+          <Suspense fallback={<Loading />}>
+            <MyLocationPage />
+          </Suspense>
+        </ErrorBoundary>
+      ),
     },
     {
       path: '/locationsetting',
       children: [
-        { path: '', element: <LocationSetting /> },
-        { path: 'now', element: <LocationSettingNow /> },
-        { path: 'search', element: <LocationSettingSearch /> },
-        { path: 'name', element: <LocationSettingName /> },
+        {
+          path: '',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSetting />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: 'now',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingNow />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: 'search',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingSearch />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
+        {
+          path: 'name',
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <LocationSettingName />
+              </Suspense>
+            </ErrorBoundary>
+          ),
+        },
       ],
     },
     {
@@ -227,24 +529,79 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: <OwnerHome />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerHome />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'inform',
           children: [
-            { index: true, path: '', element: <OwnerInform /> },
-            { path: 'edit', element: <OwnerInformEdit /> },
-            { path: 'register', element: <OwnerInformRegister /> },
-            { path: 'notice/register', element: <OwnerInformNoticeRegister /> },
+            {
+              index: true,
+              path: '',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInform />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'edit',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformEdit />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'register',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformRegister />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
+            {
+              path: 'notice/register',
+              element: (
+                <ErrorBoundary FallbackComponent={ErrorAlert}>
+                  <Suspense fallback={<Loading />}>
+                    <OwnerInformNoticeRegister />
+                  </Suspense>
+                </ErrorBoundary>
+              ),
+            },
           ],
         },
         {
           path: 'request',
-          element: <OwnerRequest />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerRequest />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
         {
           path: 'coupon',
-          element: <OwnerCoupon />,
+          element: (
+            <ErrorBoundary FallbackComponent={ErrorAlert}>
+              <Suspense fallback={<Loading />}>
+                <OwnerCoupon />
+              </Suspense>
+            </ErrorBoundary>
+          ),
         },
       ],
     },

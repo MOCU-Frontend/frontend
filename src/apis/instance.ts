@@ -6,7 +6,7 @@ const instance = axios.create({
   // baseURL: 'http://localhost:3000',
 
   // 실제 연결
-  baseURL: 'http://192.168.86.109:9000',
+  baseURL: 'http://192.168.105.112:9000',
 });
 
 // 요청 인터셉터
@@ -28,7 +28,9 @@ instance.interceptors.response.use(
   },
   (error) => {
     // 응답 에러 처리
-    throw new Error(' data error');
+    console.log(error);
+
+    throw new Error(error);
   }
 );
 

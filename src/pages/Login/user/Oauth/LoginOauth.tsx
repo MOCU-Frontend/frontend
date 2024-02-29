@@ -28,33 +28,20 @@ const UserLoginOauth: React.FC<Props> = ({}: Props) => {
   const navigate = useNavigate();
   const saveTokenMutation = useMutation({
     mutationFn: (newData: UserTokenSaveRequestData) => {
-      return instance.post('/api/auth/register/owner-push-token', newData);
+      return instance.post('/api/auth/register/user-push-token', newData);
     },
     onSuccess: (res) => {
       const data: UserTokenSaveResponseData = res.data;
       if (data) {
         navigate('/');
       }
+      alert(data);
       console.log(data);
     },
   });
   const loginMutation = useMutation({
     mutationFn: (newData: TokenLoginRequestData) => {
       return instance.post('/api/auth/kakao/user', newData);
-    },
-    onSuccess: (res) => {
-      const data: TokenLoginResponseData = res.data;
-      console.log(data.userId);
-
-      setUserId(`${data.userId}`);
-      if (data && window.deviceId && window.deviceToken) {
-        // saveTokenMutation.mutate({
-        //   userId: data.userId,
-        //   deviceId: window.deviceId,
-        //   deviceToken: window.deviceToken,
-        // });
-      }
-      console.log(data);
     },
   });
   if (error) {
@@ -63,9 +50,29 @@ const UserLoginOauth: React.FC<Props> = ({}: Props) => {
   }
   useEffect(() => {
     if (code) {
-      loginMutation.mutate({
-        authorizationCode: code,
-      });
+      loginMutation.mutate(
+        {
+          authorizationCode: code,
+        },
+        {
+          onSuccess: (res) => {
+            const data: TokenLoginResponseData = res.data;
+            console.log(data.userId);
+            setUserId(`${data.userId}`);
+            const deviceId = localStorage.getItem('deviceId');
+            const deviceToken = localStorage.getItem('deviceToken');
+            alert(deviceId + '다음' + deviceToken);
+            if (data && deviceId && deviceToken) {
+              saveTokenMutation.mutate({
+                userId: data.userId,
+                deviceId: deviceId,
+                deviceToken: deviceToken,
+              });
+            }
+            console.log(data);
+          },
+        }
+      );
     }
   }, [code]);
 

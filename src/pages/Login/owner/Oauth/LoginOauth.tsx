@@ -43,18 +43,6 @@ const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
     mutationFn: (newData: TokenLoginRequestData) => {
       return instance.post('/api/auth/kakao/owner', newData);
     },
-    onSuccess: (res) => {
-      const data: OwnerTokenLoginResponseData = res.data;
-      if (data && window.deviceId && window.deviceToken) {
-        setUserId(`${data.userId}`);
-        saveTokenMutation.mutate({
-          ownerId: data.userId,
-          deviceId: window.deviceId,
-          deviceToken: window.deviceToken,
-        });
-      }
-      console.log(data);
-    },
   });
   if (error) {
     console.log(error);
@@ -62,9 +50,29 @@ const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
   }
   useEffect(() => {
     if (code) {
-      loginMutation.mutate({
-        authorizationCode: code,
-      });
+      loginMutation.mutate(
+        {
+          authorizationCode: code,
+        },
+        {
+          onSuccess: (res) => {
+            const data: OwnerTokenLoginResponseData = res.data;
+            console.log(data.userId);
+            setUserId(`${data.userId}`);
+            const deviceId = localStorage.getItem('deviceId');
+            const deviceToken = localStorage.getItem('deviceToken');
+            alert(deviceId + '다음' + deviceToken);
+            if (data && deviceId && deviceToken) {
+              saveTokenMutation.mutate({
+                ownerId: data.userId,
+                deviceId: deviceId,
+                deviceToken: deviceToken,
+              });
+            }
+            console.log(data);
+          },
+        }
+      );
     }
   }, [code]);
 

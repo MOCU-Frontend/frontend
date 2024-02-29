@@ -30,7 +30,7 @@
     "web-vitals": "^2.1.4",
     "zustand": "^4.4.7"
   },
-  "proxy": "http://172.30.1.21:9000",
+  "proxy": "http://192.168.105.112:9000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

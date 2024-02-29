@@ -123,6 +123,9 @@ const MyLocationEnrollment: React.FC = () => {
       console.log(data);
       navigate('/');
     },
+    onError: (err) => {
+      // alert(err);
+    },
   });
   return (
     <div className={styles.wholeWrapper}>

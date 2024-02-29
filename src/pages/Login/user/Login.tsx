@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Login.module.css';
 import { ReactComponent as LogoText } from '../../../assets/icon/logoText.svg';
 import { ReactComponent as KakaoLoginBtnIcon } from '../../../assets/icon/kakaoLoginBtn.svg';
@@ -7,6 +7,10 @@ import LoginSubTitleBox from '../../../components/Login/atoms/TitleBox/Sub/Login
 import { Link } from 'react-router-dom';
 
 const UserLogin: React.FC = () => {
+  useEffect(() => {
+    localStorage.setItem('deviceId', window.deviceId || '');
+    localStorage.setItem('deviceToken', window.deviceToken || '');
+  }, []);
   return (
     <>
       <div className={styles.logoWrapper}>
@@ -19,7 +23,7 @@ const UserLogin: React.FC = () => {
           </div>
           <Link
             className={styles.btnWrapper}
-            to={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${'http://localhost:3000/login/user/oauth'}&response_type=code`}
+            to={`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${'http://192.168.86.180:3000/login/user/oauth'}&response_type=code`}
           >
             <KakaoLoginBtnIcon />
           </Link>

@@ -108,7 +108,7 @@ const My: React.FC = () => {
           onClick={() => navigate('location')}
         />
         <MyMainNormalHeaderWrapper
-          headerText='최근 혜택 사용 내역'
+          headerText='최근 혜택 사용 내역 '
           onClick={() => navigate('/reward/history')}
           gap={12}
         >

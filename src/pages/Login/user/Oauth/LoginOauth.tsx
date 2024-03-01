@@ -79,5 +79,4 @@ const UserLoginOauth: React.FC<Props> = ({}: Props) => {
   return <div className={styles.wholeWrapper}>redirect..</div>;
 };
 
-export default UserLoginOauth;
-//
+export { UserLoginOauth as Component };

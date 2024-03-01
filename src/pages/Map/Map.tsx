@@ -450,4 +450,4 @@ const Map: React.FC = () => {
   );
 };
 
-export default Map;
+export { Map as Component };

@@ -14,4 +14,4 @@ const GiftBox: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default GiftBox;
+export { GiftBox as Component };

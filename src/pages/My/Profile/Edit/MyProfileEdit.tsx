@@ -17,4 +17,4 @@ const MyProfileEdit: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default MyProfileEdit;
+export { MyProfileEdit as Component };

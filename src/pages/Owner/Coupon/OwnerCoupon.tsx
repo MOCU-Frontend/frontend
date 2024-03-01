@@ -173,4 +173,4 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default OwnerCoupon;
+export { OwnerCoupon as Component };

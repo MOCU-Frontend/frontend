@@ -90,4 +90,4 @@ const LocationSetting: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default LocationSetting;
+export { LocationSetting as Component };

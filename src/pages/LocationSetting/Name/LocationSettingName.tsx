@@ -83,4 +83,4 @@ const LocationSettingName: React.FC = () => {
   );
 };
 
-export default LocationSettingName;
+export { LocationSettingName as Component };

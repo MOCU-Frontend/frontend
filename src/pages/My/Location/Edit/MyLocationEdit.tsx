@@ -118,4 +118,4 @@ const MyLocationEdit: React.FC = () => {
   );
 };
 
-export default MyLocationEdit;
+export { MyLocationEdit as Component };

@@ -26,7 +26,6 @@ import MapGageBar from '../../../components/Map/atoms/GageBar/MapGageBar';
 import useStore from '../../../store/useStore';
 import instance from '../../../apis/instance';
 
-
 const MissionToday = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
@@ -183,4 +182,4 @@ const MissionToday = () => {
   );
 };
 
-export default MissionToday;
+export { MissionToday as Component };

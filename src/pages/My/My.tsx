@@ -159,4 +159,4 @@ const My: React.FC = () => {
   );
 };
 
-export default My;
+export { My as Component };

@@ -14,4 +14,4 @@ const Alarm: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default Alarm;
+export { Alarm as Component };

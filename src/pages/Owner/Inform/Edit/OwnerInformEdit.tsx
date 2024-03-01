@@ -176,4 +176,4 @@ const OwnerInformEdit: React.FC = () => {
   );
 };
 
-export default OwnerInformEdit;
+export { OwnerInformEdit as Component };

@@ -228,4 +228,4 @@ const Stamp = () => {
   );
 };
 
-export default Stamp;
+export { Stamp as Component };

@@ -142,4 +142,4 @@ const MyNowLocation: React.FC = () => {
   );
 };
 
-export default MyNowLocation;
+export { MyNowLocation as Component };

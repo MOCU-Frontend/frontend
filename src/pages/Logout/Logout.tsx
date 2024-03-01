@@ -6,4 +6,4 @@ const Logout: React.FC<Props> = ({}: Props) => {
   return <div>logout..</div>;
 };
 
-export default Logout;
+export { Logout as Component };

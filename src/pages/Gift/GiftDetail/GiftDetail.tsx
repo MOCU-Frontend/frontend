@@ -29,7 +29,7 @@ const GiftDetail = () => {
         <HeaderBackBtn
           backBtnColor={colors.black}
           onClickBackBtn={() => navigate('/gift')}
-          headerTitle="선물하기"
+          headerTitle='선물하기'
           headerTitleColor={colors.black}
         >
           <div className={styles.shareBtnWrapper}>
@@ -75,7 +75,7 @@ const GiftDetail = () => {
               <MapIcon
                 width={24}
                 height={24}
-                fill="none"
+                fill='none'
                 stroke={colors.greyDark00}
               />
               <div className={styles.giftInfoText}>지도로 찾기</div>
@@ -154,10 +154,10 @@ const GiftDetail = () => {
       )}
 
       <div className={styles.wrapGiftBtn}>
-        <FullBtn label="선물하기" />
+        <FullBtn label='선물하기' />
       </div>
     </div>
   );
 };
 
-export default GiftDetail;
+export { GiftDetail as Component };

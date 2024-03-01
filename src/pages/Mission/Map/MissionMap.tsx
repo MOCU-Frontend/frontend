@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './MissionMap.module.css';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import MissionMapContent from '../../../components/Mission2/atoms/MissionMapContent';
@@ -12,8 +12,6 @@ import instance from '../../../apis/instance';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { fetchMissionMapGetData } from './../../../apis/mission/fetchMissionMapGetData';
-import { fetchMissionMapCompleteData } from './../../../apis/mission/fetchMissionMapCompleteData';
-import axios from 'axios';
 import { MissionMapCompleteResponse } from '../../../store/Type/Mission/missionMapCompleteResponse';
 
 import ModalMissionClear from '../../../components/Modal/ModalMissionClear/ModalMissionClear';
@@ -24,11 +22,7 @@ const MissionMap = () => {
 
   const userId = useStore((state) => state.userId);
   // fetchMissionMapGetData
-  const {
-    data: MissionMapGetData,
-    isLoading: isMissionMapGetDataLoading,
-    isError: isMissionMapGetDataError,
-  } = useQuery({
+  const { data: MissionMapGetData } = useQuery({
     queryKey: ['missionMapGetData'],
     queryFn: () => fetchMissionMapGetData(userId || ''),
     enabled: !!userId,
@@ -71,9 +65,9 @@ const MissionMap = () => {
       <div className={styles.wrapHeader}>
         <HeaderBackBtn
           backBtnSize={24}
-          backBtnColor="white"
-          headerTitle="미션"
-          headerTitleColor="white"
+          backBtnColor='white'
+          headerTitle='미션'
+          headerTitleColor='white'
           onClickBackBtn={() => navigate(-1)}
         />
       </div>
@@ -124,7 +118,7 @@ const MissionMap = () => {
       </div>
       {rewardGet === true && (
         <ModalMissionClear
-          bodyText="미션맵 최종 보상 받기 완료!"
+          bodyText='미션맵 최종 보상 받기 완료!'
           subText={reward}
           time={2}
           onEndTimer={() => setRewardGet(false)}
@@ -134,4 +128,4 @@ const MissionMap = () => {
   );
 };
 
-export default MissionMap;
+export { MissionMap as Component };

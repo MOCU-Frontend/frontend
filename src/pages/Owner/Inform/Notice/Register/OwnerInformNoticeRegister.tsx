@@ -29,4 +29,4 @@ const OwnerInformNoticeRegister: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default OwnerInformNoticeRegister;
+export { OwnerInformNoticeRegister as Component };

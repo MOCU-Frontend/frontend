@@ -1,5 +1,4 @@
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import instance from '../../apis/instance';
@@ -14,7 +13,6 @@ import {
   ReviewPatchResponse,
   ReviewPostRequestData,
   ReviewPostResponse,
-  ReviewReportRequestData,
 } from '../../store/Type/Review/review';
 import useStore from '../../store/useStore';
 import styles from './Review.module.css';
@@ -81,4 +79,4 @@ const Review: React.FC = () => {
   );
 };
 
-export default Review;
+export { Review as Component };

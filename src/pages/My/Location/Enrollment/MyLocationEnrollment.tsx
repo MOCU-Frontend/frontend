@@ -232,4 +232,4 @@ const MyLocationEnrollment: React.FC = () => {
   );
 };
 
-export default MyLocationEnrollment;
+export { MyLocationEnrollment as Component };

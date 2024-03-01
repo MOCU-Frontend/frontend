@@ -44,4 +44,4 @@ const MyReview: React.FC = () => {
   );
 };
 
-export default MyReview;
+export { MyReview as Component };

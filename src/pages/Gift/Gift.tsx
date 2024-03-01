@@ -133,4 +133,4 @@ const Gift = () => {
   );
 };
 
-export default Gift;
+export { Gift as Component };

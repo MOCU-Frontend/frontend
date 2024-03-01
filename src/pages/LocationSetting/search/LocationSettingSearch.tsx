@@ -153,4 +153,4 @@ const LocationSettingSearch: React.FC = () => {
   );
 };
 
-export default LocationSettingSearch;
+export { LocationSettingSearch as Component };

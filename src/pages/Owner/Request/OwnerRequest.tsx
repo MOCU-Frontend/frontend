@@ -166,4 +166,4 @@ const OwnerRequest: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default OwnerRequest;
+export { OwnerRequest as Component };

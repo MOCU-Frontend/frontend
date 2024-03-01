@@ -79,5 +79,4 @@ const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
   return <div className={styles.wholeWrapper}>redirect..</div>;
 };
 
-export default OwnerLoginOauth;
-//
+export { OwnerLoginOauth as Component };

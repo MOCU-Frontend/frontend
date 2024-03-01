@@ -129,4 +129,4 @@ const LocationSettingNow: React.FC = () => {
   );
 };
 
-export default LocationSettingNow;
+export { LocationSettingNow as Component };

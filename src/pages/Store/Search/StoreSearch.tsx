@@ -94,4 +94,4 @@ const StoreSearch = () => {
   );
 };
 
-export default StoreSearch;
+export { StoreSearch as Component };

@@ -17,4 +17,4 @@ const RewardHistory: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default RewardHistory;
+export { RewardHistory as Component };

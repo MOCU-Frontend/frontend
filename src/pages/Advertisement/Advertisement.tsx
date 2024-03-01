@@ -14,4 +14,4 @@ const Advertisement: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default Advertisement;
+export { Advertisement as Component };

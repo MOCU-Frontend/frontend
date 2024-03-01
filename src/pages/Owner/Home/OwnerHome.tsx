@@ -206,4 +206,4 @@ const OwnerHome: React.FC = () => {
   );
 };
 
-export default OwnerHome;
+export { OwnerHome as Component };

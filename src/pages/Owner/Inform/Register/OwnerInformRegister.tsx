@@ -161,4 +161,4 @@ const OwnerInformRegister: React.FC = () => {
   );
 };
 
-export default OwnerInformRegister;
+export { OwnerInformRegister as Component };

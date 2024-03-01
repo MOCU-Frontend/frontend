@@ -211,4 +211,4 @@ const Coupon = () => {
   );
 };
 
-export default Coupon;
+export { Coupon as Component };

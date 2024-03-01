@@ -266,4 +266,4 @@ const StoreSearchResult = () => {
   );
 };
 
-export default StoreSearchResult;
+export { StoreSearchResult as Component };

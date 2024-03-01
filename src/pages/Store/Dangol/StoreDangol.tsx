@@ -229,4 +229,4 @@ const StoreDangol: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default StoreDangol;
+export { StoreDangol as Component };

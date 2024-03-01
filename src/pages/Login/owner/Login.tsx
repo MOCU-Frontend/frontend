@@ -33,6 +33,6 @@ const OwnerLogin: React.FC = () => {
   );
 };
 
-export default OwnerLogin;
+export { OwnerLogin as Component };
 
 // 로그아웃 https://kauth.kakao.com/oauth/logout?logout_redirect_uri=http://localhost:3000/logout&client_id=399f271d0e69923b6b6207c1b98718e7

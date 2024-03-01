@@ -1,159 +1,44 @@
 import React, { Suspense } from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { ErrorBoundary } from 'react-error-boundary';
-import { ErrorBoundaryProps } from 'react-error-boundary';
-import Loading from '../components/Loading/Loading';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
+import Loading from '../components/Loading/Loading';
 
 const Router = () => {
-  // 동적 import
-  const Home = React.lazy(() => import('./Home/Home'));
-  const Map = React.lazy(() => import('./Map/Map'));
-  const StoreSearch = React.lazy(() => import('./Store/Search/StoreSearch'));
-  const StoreSearchResult = React.lazy(
-    () => import('./Store/Search/Result/StoreSearchResult')
-  );
-  const Stamp = React.lazy(() => import('./Stamp/Stamp'));
-  const My = React.lazy(() => import('./My/My'));
-  const MyLocation = React.lazy(() => import('./My/Location/MyLocation'));
-  const MyLocationPage = React.lazy(() => import('./MyLocation/MyLocation'));
-  const MyNowLocation = React.lazy(
-    () => import('./My/Location/Now/MyNowLocation')
-  );
-  const MyLocationEdit = React.lazy(
-    () => import('./My/Location/Edit/MyLocationEdit')
-  );
-  const MyLocationEnrollment = React.lazy(
-    () => import('./My/Location/Enrollment/MyLocationEnrollment')
-  );
-  const Store = React.lazy(() => import('./Store/Store'));
-  const MissionToday = React.lazy(() => import('./Mission/Today/MissionToday'));
-  const MissionMap = React.lazy(() => import('./Mission/Map/MissionMap'));
-  const Review = React.lazy(() => import('./Review/Review'));
-  const Coupon = React.lazy(() => import('./Coupon/Coupon'));
-  const MyReview = React.lazy(() => import('./My/Review/MyReview'));
-  const OwnerHome = React.lazy(() => import('./Owner/Home/OwnerHome'));
-  const OwnerInform = React.lazy(() => import('./Owner/Inform/OwnerInform'));
-  const OwnerRequest = React.lazy(() => import('./Owner/Request/OwnerRequest'));
-  const OwnerCoupon = React.lazy(() => import('./Owner/Coupon/OwnerCoupon'));
-  const OwnerInformEdit = React.lazy(
-    () => import('./Owner/Inform/Edit/OwnerInformEdit')
-  );
-  const OwnerInformRegister = React.lazy(
-    () => import('./Owner/Inform/Register/OwnerInformRegister')
-  );
-  const OwnerInformNoticeRegister = React.lazy(
-    () => import('./Owner/Inform/Notice/Register/OwnerInformNoticeRegister')
-  );
-  const Gift = React.lazy(() => import('./Gift/Gift'));
-  const GiftDetail = React.lazy(() => import('./Gift/GiftDetail/GiftDetail'));
-  const Advertisement = React.lazy(
-    () => import('./Advertisement/Advertisement')
-  );
-  const Alarm = React.lazy(() => import('./Alarm/Alarm'));
-  const Setting = React.lazy(() => import('./Setting/Setting'));
-  const MyProfileEdit = React.lazy(
-    () => import('./My/Profile/Edit/MyProfileEdit')
-  );
-  const GiftBox = React.lazy(() => import('./Gift/Box/GiftBox'));
-  const StoreDangol = React.lazy(() => import('./Store/Dangol/StoreDangol'));
-  const RewardHistory = React.lazy(
-    () => import('./Reward/History/RewardHistory')
-  );
-  const LocationSetting = React.lazy(
-    () => import('./LocationSetting/LocationSetting')
-  );
-  const LocationSettingNow = React.lazy(
-    () => import('./LocationSetting/now/LocationSettingNow')
-  );
-  const LocationSettingSearch = React.lazy(
-    () => import('./LocationSetting/search/LocationSettingSearch')
-  );
-  const LocationSettingName = React.lazy(
-    () => import('./LocationSetting/Name/LocationSettingName')
-  );
-  const StoreDangolAdd = React.lazy(
-    () => import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd')
-  );
-  const UserLogin = React.lazy(() => import('./Login/user/Login'));
-  const OwnerLogin = React.lazy(() => import('./Login/owner/Login'));
-  const UserLoginOauth = React.lazy(
-    () => import('./Login/user/Oauth/LoginOauth')
-  );
-  const OwnerLoginOauth = React.lazy(
-    () => import('./Login/owner/Oauth/LoginOauth')
-  );
-  const Logout = React.lazy(() => import('./Logout/Logout'));
-
   const router = createBrowserRouter([
     {
       index: true,
       path: '/',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Home />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Home/Home'),
     },
+    { path: 'test', lazy: () => import('./Test/Test') },
     {
       path: '/map',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Map />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Map/Map'),
     },
     {
       path: '/ad',
       children: [
         {
           path: ':adId',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <Advertisement />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Advertisement/Advertisement'),
         },
       ],
     },
     {
       path: '/alarm',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Alarm />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Alarm/Alarm'),
     },
     {
       path: '/setting',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Setting />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Setting/Setting'),
     },
     {
       path: '/reward',
       children: [
         {
           path: 'history',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <RewardHistory />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Reward/History/RewardHistory'),
         },
       ],
     },
@@ -162,13 +47,7 @@ const Router = () => {
       children: [
         {
           path: ':storeId',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <Store />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Store/Store'),
         },
         {
           path: 'search',
@@ -176,23 +55,11 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <StoreSearch />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Store/Search/StoreSearch'),
             },
             {
               path: ':searchWord',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <StoreSearchResult />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Store/Search/Result/StoreSearchResult'),
             },
           ],
         },
@@ -201,23 +68,12 @@ const Router = () => {
           children: [
             {
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <StoreDangol />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Store/Dangol/StoreDangol'),
             },
             {
               path: 'add',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <StoreDangolAdd />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () =>
+                import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd'),
             },
           ],
         },
@@ -225,23 +81,11 @@ const Router = () => {
     },
     {
       path: '/stamp',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Stamp />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Stamp/Stamp'),
     },
     {
       path: '/logout',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Logout />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Logout/Logout'),
     },
     {
       path: '/login',
@@ -251,23 +95,11 @@ const Router = () => {
           children: [
             {
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <UserLogin />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Login/user/Login'),
             },
             {
               path: 'oauth',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <UserLoginOauth />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Login/user/Oauth/LoginOauth'),
             },
           ],
         },
@@ -276,23 +108,11 @@ const Router = () => {
           children: [
             {
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerLogin />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Login/owner/Login'),
             },
             {
               path: 'oauth',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerLoginOauth />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Login/owner/Oauth/LoginOauth'),
             },
           ],
         },
@@ -300,13 +120,7 @@ const Router = () => {
     },
     {
       path: '/review/:storeId',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Review />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Review/Review'),
     },
     {
       path: '/gift',
@@ -314,45 +128,21 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <Gift />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Gift/Gift'),
         },
         {
           path: ':cafeTitle/:foodTitle/:foodPrice',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <GiftDetail />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Gift/GiftDetail/GiftDetail'),
         },
         {
           path: 'box',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <GiftBox />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Gift/Box/GiftBox'),
         },
       ],
     },
     {
       path: '/coupon',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <Coupon />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./Coupon/Coupon'),
     },
     {
       path: '/mission',
@@ -360,23 +150,11 @@ const Router = () => {
         {
           index: true,
           path: 'today',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <MissionToday />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Mission/Today/MissionToday'),
         },
         {
           path: 'map',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <MissionMap />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Mission/Map/MissionMap'),
         },
       ],
     },
@@ -386,38 +164,20 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <My />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./My/My'),
         },
         {
           path: 'profile',
           children: [
             {
               path: 'edit',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <MyProfileEdit />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./My/Profile/Edit/MyProfileEdit'),
             },
           ],
         },
         {
           path: 'review',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <MyReview />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./My/Review/MyReview'),
         },
         {
           path: 'location',
@@ -425,43 +185,20 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <MyLocation />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./My/Location/MyLocation'),
             },
             {
               path: 'now',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <MyNowLocation />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./My/Location/Now/MyNowLocation'),
             },
             {
               path: ':locationId',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <MyLocationEdit />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./My/Location/Edit/MyLocationEdit'),
             },
             {
               path: 'enrollment',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <MyLocationEnrollment />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () =>
+                import('./My/Location/Enrollment/MyLocationEnrollment'),
             },
           ],
         },
@@ -470,56 +207,26 @@ const Router = () => {
 
     {
       path: '/mylocation',
-      element: (
-        <ErrorBoundary FallbackComponent={ErrorAlert}>
-          <Suspense fallback={<Loading />}>
-            <MyLocationPage />
-          </Suspense>
-        </ErrorBoundary>
-      ),
+      lazy: () => import('./MyLocation/MyLocation'),
     },
     {
       path: '/locationsetting',
       children: [
         {
           path: '',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <LocationSetting />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./LocationSetting/LocationSetting'),
         },
         {
           path: 'now',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <LocationSettingNow />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./LocationSetting/now/LocationSettingNow'),
         },
         {
           path: 'search',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <LocationSettingSearch />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./LocationSetting/search/LocationSettingSearch'),
         },
         {
           path: 'name',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <LocationSettingName />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./LocationSetting/Name/LocationSettingName'),
         },
       ],
     },
@@ -529,13 +236,7 @@ const Router = () => {
         {
           index: true,
           path: '',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <OwnerHome />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Owner/Home/OwnerHome'),
         },
         {
           path: 'inform',
@@ -543,71 +244,44 @@ const Router = () => {
             {
               index: true,
               path: '',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerInform />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Owner/Inform/OwnerInform'),
             },
             {
               path: 'edit',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerInformEdit />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Owner/Inform/Edit/OwnerInformEdit'),
             },
             {
               path: 'register',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerInformRegister />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () => import('./Owner/Inform/Register/OwnerInformRegister'),
             },
             {
               path: 'notice/register',
-              element: (
-                <ErrorBoundary FallbackComponent={ErrorAlert}>
-                  <Suspense fallback={<Loading />}>
-                    <OwnerInformNoticeRegister />
-                  </Suspense>
-                </ErrorBoundary>
-              ),
+              lazy: () =>
+                import(
+                  './Owner/Inform/Notice/Register/OwnerInformNoticeRegister'
+                ),
             },
           ],
         },
         {
           path: 'request',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <OwnerRequest />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Owner/Request/OwnerRequest'),
         },
         {
           path: 'coupon',
-          element: (
-            <ErrorBoundary FallbackComponent={ErrorAlert}>
-              <Suspense fallback={<Loading />}>
-                <OwnerCoupon />
-              </Suspense>
-            </ErrorBoundary>
-          ),
+          lazy: () => import('./Owner/Coupon/OwnerCoupon'),
         },
       ],
     },
   ]);
 
-  return <RouterProvider router={router} />;
+  return (
+    <ErrorBoundary FallbackComponent={ErrorAlert}>
+      <Suspense fallback={<Loading />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </ErrorBoundary>
+  );
 };
 
 export default Router;

@@ -76,4 +76,4 @@ const OwnerInform: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default OwnerInform;
+export { OwnerInform as Component };

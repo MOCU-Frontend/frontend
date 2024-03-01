@@ -14,4 +14,4 @@ const Setting: React.FC<Props> = ({}: Props) => {
   );
 };
 
-export default Setting;
+export { Setting as Component };

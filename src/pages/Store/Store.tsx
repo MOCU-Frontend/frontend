@@ -190,4 +190,4 @@ const Store: React.FC = () => {
   );
 };
 
-export default Store;
+export { Store as Component };

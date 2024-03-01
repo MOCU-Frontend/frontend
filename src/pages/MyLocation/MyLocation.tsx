@@ -57,4 +57,4 @@ const MyLocation: React.FC = () => {
   );
 };
 
-export default MyLocation;
+export { MyLocation as Component };

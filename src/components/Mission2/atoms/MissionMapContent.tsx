@@ -4,23 +4,9 @@ import Button from '../../Button/Button';
 import MissionMapEllipse from './MissionMapEllipse/MissionMapEllipse';
 import MissionMapFirstCircle from './MissionMapFirstCircle/MissionMapFirstCircle';
 import MissionMapCircle from './MissionMapCircle/MissionMapCircle';
-
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import instance from '../../../apis/instance';
-
-import { ReactComponent as StampNowImage } from '../../../assets/icon/stampStarBadgeMode.svg';
-import { ReactComponent as StampFinishedImage } from '../../../assets/icon/stampStarGradation.svg';
 import { ReactComponent as StampNoStarImage } from '../../../assets/icon/stampNoStarGradation.svg';
-import { ReactComponent as StampNoStarWhiteImage } from '../../../assets/icon/stampNoStarGradationWhite.svg';
-import { ReactComponent as EllipseHorizonImage } from '../../../assets/icon/mapEllipseHorizon.svg';
-import { ReactComponent as EllipseRightUImage } from '../../../assets/icon/mapEllipseRightU.svg';
-import { ReactComponent as EllipseLeftUImage } from '../../../assets/icon/mapEllipseLeftU.svg';
 import { ReactComponent as RewardImage } from '../../../assets/icon/mapReward.svg';
-import { ReactComponent as StampNoBadgeImage } from '../../../assets/icon/stampStarNoBadge.svg';
-import { ReactComponent as GaugeImage } from '../../../assets/icon/couponGage.svg';
 import { colors } from '../../../styles/colors';
-import MapGageBar from '../../Map/atoms/GageBar/MapGageBar';
 
 interface Props {
   /**
@@ -165,10 +151,10 @@ const MissionMapContent: React.FC<Props> = ({
           </div>
           <div className={styles.finalButton}>
             <Button
-              size="small"
-              label="최종 보상 받기"
-              textColor="sub-purple-light"
-              borderRadius="large"
+              size='small'
+              label='최종 보상 받기'
+              textColor='sub-purple-light'
+              borderRadius='large'
               onClick={handleRewardClick}
               disabled={status === 'done'}
             />

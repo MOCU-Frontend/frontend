@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
 import styles from './Advertisement.module.css';
 
-interface Props {}
-
-const Advertisement: React.FC<Props> = ({}: Props) => {
+const Advertisement = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>

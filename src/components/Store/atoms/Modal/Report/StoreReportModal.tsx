@@ -1,6 +1,5 @@
 import React from 'react';
 import ModalConfirm from '../../../../Modal/ModalConfirm/ModalConfirm';
-import styles from './StoreReportModal.module.css';
 
 interface Props {
   onClickYes: () => void;

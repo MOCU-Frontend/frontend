@@ -13,9 +13,7 @@ import OwnerInformMenuSecContent from '../../../components/Owner/Inform/atoms/Co
 import { useOwnerStoreData } from '../../../hooks/useOwnerStoreData';
 import useStore from '../../../store/useStore';
 
-interface Props {}
-
-const OwnerInform: React.FC<Props> = ({}: Props) => {
+const OwnerInform = () => {
   const navigate = useNavigate();
   const storeId = useStore((state) => state.storeId);
   const { ownerStoreData } = useOwnerStoreData(storeId);

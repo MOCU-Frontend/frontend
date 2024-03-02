@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './Loading.module.css';
 import { ReactComponent as Logo } from '../../assets/icon/logo01.svg';
 
-interface Props {}
-
-const Loading: React.FC<Props> = ({}: Props) => {
+const Loading = () => {
   return (
     <div className={styles.wholeWrapper}>
       <Logo width={88} height={84} />

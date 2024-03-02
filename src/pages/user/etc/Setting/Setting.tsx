@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
 import styles from './Setting.module.css';
 
-interface Props {}
-
-const Setting: React.FC<Props> = ({}: Props) => {
+const Setting = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>

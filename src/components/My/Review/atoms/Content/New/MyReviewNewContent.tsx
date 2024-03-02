@@ -1,23 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { fetchMyReviewNewData } from '../../../../../../apis/my/review/new';
-import { MyReviewwNewDataResponse } from '../../../../../../store/Type/My/ReviewNew/MyReviewNew';
 import useStore from '../../../../../../store/useStore';
 import SlideMenuReviewNewBodyTab from '../../../../../SlideMenu/atoms/BodyTab/ReviewNew/SlideMenuReviewNewBodyTab';
 import MyReviewSlideStatus from '../../SlideStatus/MyReviewSlideStatus';
 import MyReviewDoneContent from '../Done/MyReviewDoneContent';
 import styles from './MyReviewNewContent.module.css';
 
-interface Props {}
-
-const MyReviewNewContent: React.FC<Props> = ({}: Props) => {
+const MyReviewNewContent = () => {
   const userId = useStore((state) => state.userId);
-  const {
-    data: MyReviewNewData,
-    isLoading: isMyReviewNewDataLoading,
-    isError: isMyReviewNewDataError,
-  } = useQuery({
+  const { data: MyReviewNewData } = useQuery({
     queryKey: ['MyReviewNew'],
     queryFn: () => fetchMyReviewNewData(userId || ''),
     enabled: !!userId,

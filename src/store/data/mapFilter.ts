@@ -1,8 +1,3 @@
-type FilterList = {
-  title: string;
-  isChecked: boolean;
-};
-
 export type FilterListWithId = {
   title: string;
   isChecked: boolean;

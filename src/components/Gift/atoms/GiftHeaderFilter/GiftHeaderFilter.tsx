@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './GiftHeaderFilter.module.css';
 
 import SearchBarHeader from '../../../SearchBar/SearchBarHeader/SearchBarHeader';
@@ -56,7 +56,7 @@ const GiftHeaderFilter: React.FC<Props> = ({
     <div className={styles.headerFilterWrapper}>
       <div className={styles.headerWrapper}>
         <SearchBarHeader
-          placeholder="찾고 싶은 선물을 검색해보세요"
+          placeholder='찾고 싶은 선물을 검색해보세요'
           onClickBackBtn={onBackBtnClick}
           onClickSearchBtn={onSearchBtnClick}
         />

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './StoreReview.module.css';
 import { ReactComponent as ProfileIcon } from '../../../../assets/icon/profile.svg';
-import { ReactComponent as StarGageBarIcon } from '../../../../assets/icon/starGageBarRegular.svg';
 import { colors } from '../../../../styles/colors';
 import StoreReviewNameText from '../Text/ReviewName/StoreReviewNameText';
 import StoreReviewTimeText from '../Text/ReviewTime/StoreReviewTimeText';
@@ -34,7 +33,6 @@ const StoreReview: React.FC<Props> = ({
   rate,
 }: Props) => {
   const [isShowFullBodyText, setIsShowFullBodyText] = useState(false);
-  const [isReporting, setIsReporting] = useState(false);
   const [reportLevel, setReportLevel] = useState<ReportLevel>();
   return (
     <div className={styles.wholeWrapper}>

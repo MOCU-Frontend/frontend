@@ -2,9 +2,7 @@ import React from 'react';
 import OwnerCouponDangolText from '../../Text/Dangol/OwnerCouponDangolText';
 import styles from './OwnerCouponDangolBadge.module.css';
 
-interface Props {}
-
-const OwnerCouponDangolBadge: React.FC<Props> = ({}: Props) => {
+const OwnerCouponDangolBadge = () => {
   return (
     <div className={styles.wholeWrapper}>
       <OwnerCouponDangolText text='단골' />

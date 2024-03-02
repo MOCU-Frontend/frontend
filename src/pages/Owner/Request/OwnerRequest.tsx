@@ -1,13 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import instance from '../../../apis/instance';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import OwnerRequestItem from '../../../components/Owner/Request/atoms/Item/OwnerRequestItem';
-import { OwnerRequestDataResponse } from '../../../store/Type/Owner/Request/ownerRequest';
 import styles from './OwnerRequest.module.css';
 import { fetchOwnerRequestData } from '../../../apis/owner/request';
 import useStore from '../../../store/useStore';
@@ -15,15 +12,10 @@ import { initialOwnerRequestMenuItemDataArr } from '../../../store/data/searchRe
 import { MenuItemData } from '../../../store/data/stamp';
 import BottomSheet from '../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
-interface Props {}
 
-const OwnerRequest: React.FC<Props> = ({}: Props) => {
+const OwnerRequest = () => {
   const storeId = useStore((state) => state.storeId);
-  const {
-    data: ownerRequestData,
-    isLoading: isOwnerRequestDataLoading,
-    isError: isOwnerRequestDataError,
-  } = useQuery({
+  const { data: ownerRequestData } = useQuery({
     queryKey: ['OwnerRequest'],
     queryFn: () =>
       fetchOwnerRequestData(

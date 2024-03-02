@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import styles from './GiftBox.module.css';
 
-interface Props {}
-
-const GiftBox: React.FC<Props> = ({}: Props) => {
+const GiftBox = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>

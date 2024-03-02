@@ -5,7 +5,6 @@ import ModalTwoBtns from '../atoms/Btn/TwoBtns/ModalTwoBtns';
 import ModalHeader from '../atoms/Header/ModalHeader';
 import ModalBodyText from '../atoms/Text/BodyText/ModalBodyText';
 import ModalCounterNumText from '../atoms/Text/CounterNum/ModalCounterNumText';
-import ModalSubText from '../atoms/Text/SubText/ModalSubText';
 import styles from './ModalAccum.module.css';
 interface Props {
   headerTitle: string;

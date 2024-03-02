@@ -27,11 +27,7 @@ const Store: React.FC = () => {
   const navigate = useNavigate();
   const { storeId } = useParams();
   const userId = useStore((state) => state.userId);
-  const {
-    data: storeDetailData,
-    isLoading: isStoreDetailDataLoading,
-    isError: isStoreDetailError,
-  } = useQuery({
+  const { data: storeDetailData } = useQuery({
     queryKey: ['StoreDetailData'],
     queryFn: () =>
       fetchStoreDetailData(
@@ -117,7 +113,7 @@ const Store: React.FC = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
-  const [isExistReview, setIsExistReview] = useState(true);
+  const [isExistReview] = useState(true);
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>

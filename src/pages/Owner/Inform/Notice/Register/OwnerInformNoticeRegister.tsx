@@ -5,9 +5,8 @@ import styles from './OwnerInformNoticeRegister.module.css';
 import { ReactComponent as LogoIcon } from '../../../../../assets/icon/logo01.svg';
 import FullBtn from '../../../../../components/Button/FullBtn/FullBtn';
 import { useNavigate } from 'react-router-dom';
-interface Props {}
 
-const OwnerInformNoticeRegister: React.FC<Props> = ({}: Props) => {
+const OwnerInformNoticeRegister = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>

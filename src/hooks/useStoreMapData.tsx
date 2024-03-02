@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import pinMapNormalImg from '../assets/icon/pinMapNormal.svg';
 import pinMapGiftImg from '../assets/icon/pinMapGift.svg';
 import pinMapFireImg from '../assets/icon/pinMapFire.svg';
-import axios from 'axios';
-import {
-  MapStoreMarkerResponse,
-  MapStoreResponse,
-} from '../store/Type/Map/map';
-import instance from '../apis/instance';
 import { useQuery } from '@tanstack/react-query';
-import { useQueryClient } from '@tanstack/react-query';
-
 import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
-
 import { fetchMapStoreData } from './../apis/map/fetchMapStoreData';
 import useStore from '../store/useStore';
 
@@ -39,11 +30,7 @@ export const useStoreMapData = (
 
   // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
   // 그 결과를 `storeMapMarkerData`에 저장합니다.
-  const {
-    data: storeMapMarkerData,
-    isLoading: isStoreMapMarkerDataLoading,
-    isError: isStoreMapMarkerDataError,
-  } = useQuery({
+  const { data: storeMapMarkerData } = useQuery({
     queryKey: ['mapStoreMarker', mapApiGet, mapCenterLat, mapCenterLng],
     queryFn: () =>
       fetchMapStoreMarkerData(
@@ -64,11 +51,7 @@ export const useStoreMapData = (
   // `useQuery`를 사용하여 `fetchMapStoreData` 함수를 호출하고,
   // 그 결과를 `selectedStoreData`에 저장합니다.
   // `selectedStoreId`가 변경될 때마다 새로운 데이터를 가져옵니다.
-  const {
-    data: selectedStoreData,
-    isLoading: isSelectedStoreLoading,
-    isError: isSelectedStoreError,
-  } = useQuery({
+  const { data: selectedStoreData } = useQuery({
     queryKey: ['selectedMapStore', selectedStoreId],
     queryFn: () => fetchMapStoreData(userId || '', selectedStoreId || 5),
     enabled: !!selectedStoreId && !!userId,

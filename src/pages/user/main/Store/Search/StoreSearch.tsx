@@ -1,17 +1,9 @@
-// StoreSearch.tsx
 import React, { useState } from 'react';
 import styles from './StoreSearch.module.css';
 import { useQuery } from '@tanstack/react-query';
-import instance from '../../../../../apis/instance';
-
-import {
-  storeSearchResponse,
-  storeSearchData,
-} from '../../../../../store/Type/StoreSearch/storeSearch';
 
 import StoreSearchHeader from '../../../../../components/StoreSearch/atoms/StoreSearchHeader/StoreSearchHeader';
 import StoreSearchKeyword from '../../../../../components/StoreSearch/atoms/StoreSearchKeyword/StoreSearchKeyword';
-import StoreSearchRecent from '../../../../../components/StoreSearch/atoms/StoreSearchRecent/StoreSearchRecent';
 import StoreSearchImminentCoupon from '../../../../../components/StoreSearch/atoms/StoreSearchImminentCoupon/StoreSearchImminentCoupon';
 import StoreSearchRecommend from '../../../../../components/StoreSearch/atoms/StoreSearchRecommend/StoreSearchRecommend';
 import { useRecentSearchWord } from '../../../../../hooks/useRecentSearchWord';
@@ -22,17 +14,11 @@ import useStore from '../../../../../store/useStore';
 
 const StoreSearch = () => {
   const userId = useStore((state) => state.userId);
-  const {
-    data: storeSearchData,
-    isLoading: isStoreSearchDataLoading,
-    isError: isStoreSearchDataError,
-  } = useQuery({
+  const { data: storeSearchData } = useQuery({
     queryKey: ['storeSearchData'],
     queryFn: () => fetchStoreSearchData(userId || '', 1, 1),
     enabled: !!userId,
   });
-
-  console.log(storeSearchData);
 
   const {
     searchKeywordDataArr,

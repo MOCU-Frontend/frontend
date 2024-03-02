@@ -1,10 +1,8 @@
 import React from 'react';
 import ModalBasic from '../../../../../../Modal/atoms/Basic/ModalBasic';
-import InputWithCharCounter from '../../../../../../TextField/atoms/InputWithCharCounter/InputWithCharCounter';
 import TextFieldTopBar from '../../../../../../TextField/atoms/TopBar/TextFieldTopBar';
 import OwnerInformEditMenuMoreImgBtn from '../../Btns/MenuMoreImg/OwnerInformEditMenuMoreImgBtn';
 import OwnerInformEditMenuImgWithXBadge from '../../Img/MenuWithXBadge/OwnerInformEditMenuImgWithXBadge';
-import OwnerInformEditBasicInput from '../../Input/Basic/OwnerInformEditBasicInput';
 import styles from './OwnerInformEditMenuTextField.module.css';
 // TODO: 나중에 클릭했을때 모달창으로 textfield 뜨는거 구현하고 x버튼이랑 체크 버튼 누를때 어떻게 되는지
 // 물어보고 적용하기

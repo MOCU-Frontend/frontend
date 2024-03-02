@@ -21,7 +21,7 @@ import useStore from '../../../../store/useStore';
 import { useUserLocation } from '../../../../hooks/useUserLocation';
 
 const Home = () => {
-  const {} = useUserLocation();
+  useUserLocation();
   const navigate = useNavigate();
 
   const [adItemArr, setAdItemArr] = useState([

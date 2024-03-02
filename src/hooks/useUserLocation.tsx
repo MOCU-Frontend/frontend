@@ -8,11 +8,7 @@ export const useUserLocation = () => {
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const setNowUserLocation = useStore((state) => state.setNowUserLocation);
   const userId = useStore((state) => state.userId);
-  const {
-    data: AddressData,
-    isLoading: isAddressDataLoading,
-    isError: isAddressDataError,
-  } = useQuery({
+  const { data: AddressData } = useQuery({
     queryKey: ['AddressData'],
     queryFn: () => fetchAddressData(userId || ''),
     enabled: !!userId,
@@ -28,7 +24,7 @@ export const useUserLocation = () => {
     if (!nowUserLocation && userLocationArr.length > 0) {
       setNowUserLocation(userLocationArr[0]);
     }
-  }, [nowUserLocation, AddressData]);
+  }, [nowUserLocation, AddressData, setNowUserLocation, userLocationArr]);
 
   const [locationArr, setLocationArr] =
     useState<UserLocation[]>(userLocationArr);

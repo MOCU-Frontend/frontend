@@ -1,5 +1,4 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import instance from '../apis/instance';
 import { fetchOwnerStoreData } from '../apis/owner/inform';
 

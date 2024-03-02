@@ -1,5 +1,4 @@
 import React from 'react';
-import UseCouponBtnInStamp from '../../../../../Stamp/atoms/StoreInfoInStamp/UseCouponBtnInStamp/UseCouponBtnInStamp';
 import styles from './StoreDangolAddItem.module.css';
 import { ReactComponent as StarImage } from '../../../../../../assets/icon/star.svg';
 import { ReactComponent as MapImage } from '../../../../../../assets/icon/mapMarkerRegularSolid.svg';

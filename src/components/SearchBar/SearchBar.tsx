@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchInputBar from './atoms/Input/SearchInputBar';
 import SearchIconBtn from './atoms/IconBtn/SearchIconBtn';
 import styles from './SearchBar.module.css';

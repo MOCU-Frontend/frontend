@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import styles from './StoreSearchResult.module.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 
 import CheckFilterSelect from '../../../../../../components/CheckFilter/Select/CheckFilterSelect';
 import SearchBarHeader from '../../../../../../components/SearchBar/SearchBarHeader/SearchBarHeader';
 import StoreInfo from '../../../../../../components/SearchResult/atoms/StoreInfo/StoreInfo';
 import BottomSheet from '../../../../../../components/BottomSheet/BottomSheet';
 import {
-  searchResultData,
   initialMenuItemDataArr,
   MenuItemData,
   initialOptionDataArr,
@@ -19,10 +17,7 @@ import SlideTabViewFilter from '../../../../../../components/SlideMenu/SlideTabV
 import CheckFilter from '../../../../../../components/CheckFilter/CheckFilter';
 import { useRecentSearchWord } from '../../../../../../hooks/useRecentSearchWord';
 
-import {
-  StoreSearchResultResponse,
-  Result,
-} from '../../../../../../store/Type/StoreSearchResult/storeSearchResult';
+import { Result } from '../../../../../../store/Type/StoreSearchResult/storeSearchResult';
 
 import { fetchStoreSearchResultData } from '../../../../../../apis/storeSearchResult/fetchStoreSearchResultData';
 import useStore from '../../../../../../store/useStore';
@@ -142,11 +137,7 @@ const StoreSearchResult = () => {
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
 
-  const {
-    data: storeSearchResultData,
-    isLoading: isStoreSearchResultDataLoading,
-    isError: isStoreSearchResultError,
-  } = useQuery({
+  const { data: storeSearchResultData } = useQuery({
     queryKey: [
       'StoreSearchResultData',
       searchWord,

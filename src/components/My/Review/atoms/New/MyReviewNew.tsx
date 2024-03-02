@@ -1,6 +1,5 @@
 import React from 'react';
 import Button from '../../../../Button/Button';
-import FullBtn from '../../../../Button/FullBtn/FullBtn';
 import MyReviewNewInfoSubText from '../Text/NewInfoSub/MyReviewNewInfoSubText';
 import MyReviewNewInfoTitleText from '../Text/NewInfoTitle/MyReviewNewInfoTitleText';
 import MyReviewNewSubText from '../Text/NewSub/MyReviewNewSubText';

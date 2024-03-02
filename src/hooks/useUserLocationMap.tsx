@@ -31,7 +31,7 @@ export const useUserLocationMap = (
         );
       }
     }
-  }, [userLocation, map, userLocMarker]);
+  }, [userLocation, map, userLocMarker, isSetCenter]);
 
   return { userLocMarker };
 };

@@ -22,7 +22,6 @@ import MapSearchBtn from '../../../../components/Map/atoms/Button/Search/MapSear
 import {
   initialMenuItemDataArr,
   MenuItemData,
-  initialSectorFilterDataArr,
 } from '../../../../store/data/mapFilter';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
@@ -41,12 +40,12 @@ const Map: React.FC = () => {
   const mapWrapperRef = useRef<HTMLDivElement>(null);
   const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(false);
 
-  const { userLocation, error: userLocationError } = useLocation();
+  const { userLocation } = useLocation();
   const { loading: scriptLoading, error: scriptError } = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
   const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
-  const { userLocMarker } = useUserLocationMap(map, userLocation);
+  useUserLocationMap(map, userLocation);
 
   const [stampModalLevel, setStampModalLevel] = useState<ModalLevel | null>(
     null
@@ -213,7 +212,7 @@ const Map: React.FC = () => {
     }
   };
 
-  const { storeMarkerArr, selectedStoreData } = useStoreMapData(
+  const { selectedStoreData } = useStoreMapData(
     map,
     handleShowBottomSheet,
     mapApiGet,

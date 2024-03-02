@@ -1,6 +1,5 @@
 import React from 'react';
 import styles from './StoreInfo.module.css';
-import { ReactComponent as StarImage } from '../../../../assets/icon/star.svg';
 import { ReactComponent as MapImage } from '../../../../assets/icon/mapMarkerRegularSolid.svg';
 import { colors } from '../../../../styles/colors';
 import UseCouponBtn from '../UseCouponBtn/UseCouponBtn';
@@ -54,7 +53,7 @@ const StoreInfo: React.FC<Props> = ({
 }: Props) => {
   return (
     <div className={styles.wrapStoreInfo}>
-      <img src={storeImg} alt="" className={styles.storeImage} />
+      <img src={storeImg} alt='' className={styles.storeImage} />
       <div className={styles.storeWrapText}>
         <div className={styles.storeTitle} onClick={onClickStoreDetailBtn}>
           {title}

@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './MyRewardStamp.module.css';
 import { ReactComponent as StampStarIcon } from '../../../../../assets/icon/stampSmall.svg';
 import { colors } from '../../../../../styles/colors';
-import MyStampeDateText from '../../Text/StampDate/MyStampeDateText';
 import MyStampMenuText from '../../Text/StampMenu/MyStampMenuText';
-import MyStampMenuNumText from '../../Text/StampNum/MyStampMenuNumText';
 interface Props {
   // dateText: string;
   menuText: string;

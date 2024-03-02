@@ -30,11 +30,7 @@ const OwnerHome: React.FC = () => {
 
   const ownerId = useStore((state) => state.userId);
   const setStoreId = useStore((state) => state.setStoreId);
-  const {
-    data: ownerStoreChangeData,
-    isLoading: isOwnerStoreChangeDataLoading,
-    isError: isOwnerStoreChangeDataError,
-  } = useQuery({
+  const { data: ownerStoreChangeData } = useQuery({
     queryKey: ['OwnerStoreChangeData'],
     queryFn: () => fetchOwnerStoreChangeData(ownerId || ''),
     enabled: !!ownerId,
@@ -43,7 +39,7 @@ const OwnerHome: React.FC = () => {
     if (ownerStoreChangeData) {
       setStoreId(ownerStoreChangeData.storeId);
     }
-  }, [ownerStoreChangeData]);
+  }, [ownerStoreChangeData, setStoreId]);
 
   const [isShowAccumModal, setIsShowAccumModal] = useState(false);
   const [isShowCouponModal, setIsShowCouponModal] = useState(false);

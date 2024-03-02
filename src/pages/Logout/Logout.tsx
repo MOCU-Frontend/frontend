@@ -1,8 +1,6 @@
 import React from 'react';
 
-interface Props {}
-
-const Logout: React.FC<Props> = ({}: Props) => {
+const Logout = () => {
   return <div>logout..</div>;
 };
 

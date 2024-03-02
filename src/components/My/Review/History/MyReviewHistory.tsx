@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styles from './MyReviewHistory.module.css';
 import { ReactComponent as ProfileIcon } from '../../../../assets/icon/profile.svg';
-import { ReactComponent as StarGageBarIcon } from '../../../../assets/icon/starGageBarRegular.svg';
 import { ReactComponent as ArrowRightIcon } from '../../../../assets/icon/arrowRight.svg';
 import { colors } from '../../../../styles/colors';
 import StoreReviewNameText from '../../../Store/atoms/Text/ReviewName/StoreReviewNameText';

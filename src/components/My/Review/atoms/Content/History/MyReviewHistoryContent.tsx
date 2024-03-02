@@ -5,10 +5,7 @@ import MyReivewHistoryTitleText from '../../Text/HistoryTitle/MyReivewHistoryTit
 import styles from './MyReviewHistoryContent.module.css';
 import { ReactComponent as InformIcon } from '../../../../../../assets/icon/information.svg';
 import { colors } from '../../../../../../styles/colors';
-import StoreReview from '../../../../../Store/atoms/Review/StoreReview';
 import MyReviewHistory from '../../../History/MyReviewHistory';
-import axios from 'axios';
-import { MyReviewwHistoryDataResponse } from '../../../../../../store/Type/My/ReviewHistory/MyReviewHistory';
 import { useQuery } from '@tanstack/react-query';
 import { fetchMyReviewHistoryData } from '../../../../../../apis/my/review/history';
 import useStore from '../../../../../../store/useStore';
@@ -16,16 +13,11 @@ import BottomSheet from '../../../../../BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../../../SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import { MenuItemData } from '../../../../../../store/data/stamp';
 import { initialReviewHistoryMenuItemDataArr } from '../../../../../../store/data/searchResult';
-interface Props {}
 
-const MyReviewHistoryContent: React.FC<Props> = ({}: Props) => {
+const MyReviewHistoryContent = () => {
   const userId = useStore((state) => state.userId);
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
-  const {
-    data: myReviewwHistoryData,
-    isLoading: isMyReviewwHistoryDataLoading,
-    isError: isMyReviewwHistoryDataError,
-  } = useQuery({
+  const { data: myReviewwHistoryData } = useQuery({
     queryKey: ['MyReviewwHistory'],
     queryFn: () =>
       fetchMyReviewHistoryData(

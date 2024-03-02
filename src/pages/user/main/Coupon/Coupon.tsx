@@ -68,10 +68,6 @@ const Coupon = () => {
     useState<CouponModalLevel | null>(null);
   const [isRegularCustomer, setIsRegularCustomer] = useState(false);
 
-  const handleShowBottomSheet = () => {
-    setIsShowBottomSheet(true);
-  };
-
   const [selectedStoreInform, setSelectedStoreInform] = useState<
     StoreData | undefined
   >();
@@ -82,11 +78,7 @@ const Coupon = () => {
 
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const {
-    data: myCouponData,
-    isLoading: isMyCouponDataLoading,
-    isError: isMyCouponDataError,
-  } = useQuery({
+  const { data: myCouponData } = useQuery({
     queryKey: ['MyCoupon'],
     queryFn: () =>
       fetchMyCouponData(

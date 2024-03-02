@@ -9,19 +9,17 @@ import {
 import {
   OwnerTokenLoginResponseData,
   TokenLoginRequestData,
-  TokenLoginResponseData,
 } from '../../../../store/Type/Login/login';
 import useStore from '../../../../store/useStore';
 import styles from './LoginOauth.module.css';
 
-interface Props {}
 declare global {
   interface Window {
     deviceId: string | undefined;
     deviceToken: string | undefined;
   }
 }
-const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
+const OwnerLoginOauth = () => {
   const [searchParams] = useSearchParams();
   const code = searchParams.get('code');
   const error = searchParams.get('error');
@@ -74,7 +72,7 @@ const OwnerLoginOauth: React.FC<Props> = ({}: Props) => {
         }
       );
     }
-  }, [code]);
+  }, [code, loginMutation, saveTokenMutation, setUserId]);
 
   return <div className={styles.wholeWrapper}>redirect..</div>;
 };

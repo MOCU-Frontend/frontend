@@ -17,9 +17,8 @@ type MenuData = {
   title: string;
   isChecked: boolean;
 };
-interface Props {}
 
-const OwnerCoupon: React.FC<Props> = ({}: Props) => {
+const OwnerCoupon = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
   const [menu, setMenu] = useState<MenuData[]>([
@@ -37,11 +36,7 @@ const OwnerCoupon: React.FC<Props> = ({}: Props) => {
     });
   };
 
-  const {
-    data: ownerCouponData,
-    isLoading: isOwnerCouponDataLoading,
-    isError: isOwnerCouponDataError,
-  } = useQuery({
+  const { data: ownerCouponData } = useQuery({
     queryKey: ['OwnerCoupon'],
     queryFn: () =>
       fetchOwnerCouponData(

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import styles from './ReviewScoreContent.module.css';
-import { ReactComponent as StarGageBarIcon } from '../../../../../assets/icon/starGageBarRegular.svg';
-import { colors } from '../../../../../styles/colors';
 import ReviewScoreText from '../../Text/Score/ReviewScoreText';
 import StarGageBarBtn from '../../../../StarGageBar/StarGageBarBtn';
-interface Props {}
 
-const ReviewScoreContent: React.FC<Props> = ({}: Props) => {
+const ReviewScoreContent = () => {
   const [score, setScore] = useState(0);
   let scoreText = '';
   switch (score) {

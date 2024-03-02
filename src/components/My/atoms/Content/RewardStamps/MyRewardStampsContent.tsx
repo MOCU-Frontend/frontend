@@ -2,12 +2,7 @@ import React from 'react';
 import MyRewardStampContent from '../RewardStamp/MyRewardStampContent';
 import styles from './MyRewardStampsContent.module.css';
 import { RecentCouponUsage } from '../../../../../store/Type/My/myPageResponse';
-type RewardData = {
-  date: string;
-  storeName: string;
-  menu: string;
-  menuNum: number;
-};
+
 interface Props {
   rewardDataArr: RecentCouponUsage[];
 }

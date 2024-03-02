@@ -3,9 +3,8 @@ import MyReviewDoneTitleText from '../../Text/DoneTitle/MyReviewDoneTitleText';
 import styles from './MyReviewDoneContent.module.css';
 import { ReactComponent as EmptyIcon } from '../../../../../../assets/icon/emptySheetLarge.svg';
 import { colors } from '../../../../../../styles/colors';
-interface Props {}
 
-const MyReviewDoneContent: React.FC<Props> = ({}: Props) => {
+const MyReviewDoneContent = () => {
   return (
     <div className={styles.wholeWrapper}>
       <EmptyIcon width={40} height={40} fill={colors.navy} />

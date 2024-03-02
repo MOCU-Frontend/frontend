@@ -3,9 +3,8 @@ import ReviewNoticeText from '../../Text/Notice/ReviewNoticeText';
 import styles from './ReviewNoticeContent.module.css';
 import { ReactComponent as InformIcon } from '../../../../../assets/icon/information.svg';
 import { colors } from '../../../../../styles/colors';
-interface Props {}
 
-const ReviewNoticeContent: React.FC<Props> = ({}: Props) => {
+const ReviewNoticeContent = () => {
   return (
     <div className={styles.wholeWrapper}>
       <InformIcon width={14} height={14} fill={colors.grey} />

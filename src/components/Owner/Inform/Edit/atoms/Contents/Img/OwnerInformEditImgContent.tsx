@@ -4,9 +4,7 @@ import OwnerInformEditMoreImgBtn from '../../Btns/MoreImg/OwnerInformEditMoreImg
 import OwnerInformEditImgWithXBadge from '../../Img/ImgWithXBadge/OwnerInformEditImgWithXBadge';
 import styles from './OwnerInformEditImgContent.module.css';
 
-interface Props {}
-
-const OwnerInformEditImgContent: React.FC<Props> = ({}: Props) => {
+const OwnerInformEditImgContent = () => {
   return (
     <div className={styles.wholeWrapper}>
       <OwnerInformSecTitleText text='사진 등록' />

@@ -1,0 +1,25 @@
+@import '../../../../styles/colorVars.css';
+
+.titleTextWrapper {
+  padding: 86px 20px 0 20px;
+  width: 100%;
+}
+.searchBarWrapper {
+  width: 100%;
+  padding: 28px 20px 0 20px;
+}
+.mapWrapper {
+  padding: 44px 20px 0 20px;
+  width: 100%;
+}
+.mapSmall {
+  border-radius: 20px;
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.1);
+  width: 320px;
+  height: 150px;
+  background-color: var(--color-grey-dark-01);
+}
+.seeMapBtnWrapper {
+  width: 100%;
+  padding: 15px 20px 0 20px;
+}

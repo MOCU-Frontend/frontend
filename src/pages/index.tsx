@@ -9,36 +9,35 @@ const Router = () => {
     {
       index: true,
       path: '/',
-      lazy: () => import('./Home/Home'),
+      lazy: () => import('./user/main/Home/Home'),
     },
-    { path: 'test', lazy: () => import('./Test/Test') },
     {
       path: '/map',
-      lazy: () => import('./Map/Map'),
+      lazy: () => import('./user/main/Map/Map'),
     },
     {
       path: '/ad',
       children: [
         {
           path: ':adId',
-          lazy: () => import('./Advertisement/Advertisement'),
+          lazy: () => import('./user/etc/Advertisement/Advertisement'),
         },
       ],
     },
     {
       path: '/alarm',
-      lazy: () => import('./Alarm/Alarm'),
+      lazy: () => import('./user/etc/Alarm/Alarm'),
     },
     {
       path: '/setting',
-      lazy: () => import('./Setting/Setting'),
+      lazy: () => import('./user/etc/Setting/Setting'),
     },
     {
       path: '/reward',
       children: [
         {
           path: 'history',
-          lazy: () => import('./Reward/History/RewardHistory'),
+          lazy: () => import('./user/etc/Reward/History/RewardHistory'),
         },
       ],
     },
@@ -47,7 +46,7 @@ const Router = () => {
       children: [
         {
           path: ':storeId',
-          lazy: () => import('./Store/Store'),
+          lazy: () => import('./user/main/Store/Store'),
         },
         {
           path: 'search',
@@ -55,11 +54,12 @@ const Router = () => {
             {
               index: true,
               path: '',
-              lazy: () => import('./Store/Search/StoreSearch'),
+              lazy: () => import('./user/main/Store/Search/StoreSearch'),
             },
             {
               path: ':searchWord',
-              lazy: () => import('./Store/Search/Result/StoreSearchResult'),
+              lazy: () =>
+                import('./user/main/Store/Search/Result/StoreSearchResult'),
             },
           ],
         },
@@ -68,12 +68,14 @@ const Router = () => {
           children: [
             {
               path: '',
-              lazy: () => import('./Store/Dangol/StoreDangol'),
+              lazy: () => import('./user/main/Store/Dangol/StoreDangol'),
             },
             {
               path: 'add',
               lazy: () =>
-                import('./Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd'),
+                import(
+                  './user/main/Store/Dangol/Add/StoreDangolAdd/StoreDangolAdd'
+                ),
             },
           ],
         },
@@ -81,7 +83,7 @@ const Router = () => {
     },
     {
       path: '/stamp',
-      lazy: () => import('./Stamp/Stamp'),
+      lazy: () => import('./user/main/Stamp/Stamp'),
     },
     {
       path: '/logout',
@@ -120,7 +122,7 @@ const Router = () => {
     },
     {
       path: '/review/:storeId',
-      lazy: () => import('./Review/Review'),
+      lazy: () => import('./user/etc/Review/Review'),
     },
     {
       path: '/gift',
@@ -128,21 +130,21 @@ const Router = () => {
         {
           index: true,
           path: '',
-          lazy: () => import('./Gift/Gift'),
+          lazy: () => import('./user/main/Gift/Gift'),
         },
         {
           path: ':cafeTitle/:foodTitle/:foodPrice',
-          lazy: () => import('./Gift/GiftDetail/GiftDetail'),
+          lazy: () => import('./user/main/Gift/GiftDetail/GiftDetail'),
         },
         {
           path: 'box',
-          lazy: () => import('./Gift/Box/GiftBox'),
+          lazy: () => import('./user/main/Gift/Box/GiftBox'),
         },
       ],
     },
     {
       path: '/coupon',
-      lazy: () => import('./Coupon/Coupon'),
+      lazy: () => import('./user/main/Coupon/Coupon'),
     },
     {
       path: '/mission',
@@ -150,11 +152,11 @@ const Router = () => {
         {
           index: true,
           path: 'today',
-          lazy: () => import('./Mission/Today/MissionToday'),
+          lazy: () => import('./user/main/Mission/Today/MissionToday'),
         },
         {
           path: 'map',
-          lazy: () => import('./Mission/Map/MissionMap'),
+          lazy: () => import('./user/main/Mission/Map/MissionMap'),
         },
       ],
     },
@@ -164,20 +166,20 @@ const Router = () => {
         {
           index: true,
           path: '',
-          lazy: () => import('./My/My'),
+          lazy: () => import('./user/main/My/My'),
         },
         {
           path: 'profile',
           children: [
             {
               path: 'edit',
-              lazy: () => import('./My/Profile/Edit/MyProfileEdit'),
+              lazy: () => import('./user/main/My/Profile/Edit/MyProfileEdit'),
             },
           ],
         },
         {
           path: 'review',
-          lazy: () => import('./My/Review/MyReview'),
+          lazy: () => import('./user/main/My/Review/MyReview'),
         },
         {
           path: 'location',
@@ -185,20 +187,22 @@ const Router = () => {
             {
               index: true,
               path: '',
-              lazy: () => import('./My/Location/MyLocation'),
+              lazy: () => import('./user/main/My/Location/MyLocation'),
             },
             {
               path: 'now',
-              lazy: () => import('./My/Location/Now/MyNowLocation'),
+              lazy: () => import('./user/main/My/Location/Now/MyNowLocation'),
             },
             {
               path: ':locationId',
-              lazy: () => import('./My/Location/Edit/MyLocationEdit'),
+              lazy: () => import('./user/main/My/Location/Edit/MyLocationEdit'),
             },
             {
               path: 'enrollment',
               lazy: () =>
-                import('./My/Location/Enrollment/MyLocationEnrollment'),
+                import(
+                  './user/main/My/Location/Enrollment/MyLocationEnrollment'
+                ),
             },
           ],
         },
@@ -207,26 +211,29 @@ const Router = () => {
 
     {
       path: '/mylocation',
-      lazy: () => import('./MyLocation/MyLocation'),
+      lazy: () => import('./user/etc/MyLocation/MyLocation'),
     },
     {
       path: '/locationsetting',
       children: [
         {
           path: '',
-          lazy: () => import('./LocationSetting/LocationSetting'),
+          lazy: () => import('./user/etc/LocationSetting/LocationSetting'),
         },
         {
           path: 'now',
-          lazy: () => import('./LocationSetting/now/LocationSettingNow'),
+          lazy: () =>
+            import('./user/etc/LocationSetting/Now/LocationSettingNow'),
         },
         {
           path: 'search',
-          lazy: () => import('./LocationSetting/search/LocationSettingSearch'),
+          lazy: () =>
+            import('./user/etc/LocationSetting/Search/LocationSettingSearch'),
         },
         {
           path: 'name',
-          lazy: () => import('./LocationSetting/Name/LocationSettingName'),
+          lazy: () =>
+            import('./user/etc/LocationSetting/Name/LocationSettingName'),
         },
       ],
     },

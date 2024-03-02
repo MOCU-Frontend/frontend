@@ -1,7 +1,5 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchAddressData } from '../../../../../apis/address/address';
 import FullBtn from '../../../../../components/Button/FullBtn/FullBtn';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyLocationSettingBtn from '../../../../../components/My/Location/atoms/Button/Setting/MyLocationSettingBtn';
@@ -12,13 +10,11 @@ import useStore from '../../../../../store/useStore';
 import { colors } from '../../../../../styles/colors';
 import styles from './MyLocation.module.css';
 
-interface Props {}
-
-const MyLocation: React.FC<Props> = ({}: Props) => {
+const MyLocation = () => {
   const navigate = useNavigate();
   const nowAddress = useStore((state) => state.nowAddress);
 
-  const { locationArr, setLocationArr } = useUserLocation();
+  const { locationArr } = useUserLocation();
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn

@@ -1,13 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../../../components/HeaderBackBtn/HeaderBackBtn';
-import MapBottomSheet from '../../../../../../components/Map/atoms/BottomSheet/MapBottomSheet';
 import MapTargetBtn from '../../../../../../components/Map/atoms/TargetBtn/MapTargetBtn';
 import MyNowLocationBottomSheet from '../../../../../../components/My/Location/Now/atoms/BottomSheet/MyNowLocationBottomSheet';
 import { useAddressByCoord } from '../../../../../../hooks/useAddressByCoord';
 import { useCenterMarker } from '../../../../../../hooks/useCenterMarker';
 import { useLocation } from '../../../../../../hooks/useLocation';
-import { useMap } from '../../../../../../hooks/useMap';
 import { useMapWithGeocoder } from '../../../../../../hooks/useMapWithGeocoder';
 import { useScript } from '../../../../../../hooks/useScript';
 import { useUserLocationMap } from '../../../../../../hooks/useUserLocationMap';
@@ -21,7 +19,7 @@ const MyNowLocation: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
   const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(true);
-  const { userLocation, error: userLocationError } = useLocation();
+  const { userLocation } = useLocation();
   const { loading: scriptLoading, error: scriptError } = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
@@ -36,7 +34,8 @@ const MyNowLocation: React.FC = () => {
     geoCoderScriptLoading,
     mapContainerRef
   );
-  const { userLocMarker } = useUserLocationMap(map, userLocation);
+
+  useUserLocationMap(map, userLocation);
 
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet((prev) => {
@@ -57,10 +56,7 @@ const MyNowLocation: React.FC = () => {
       } else return true;
     });
   };
-  const { centerMarker, centerCoord } = useCenterMarker(
-    map,
-    handleShowBottomSheet
-  );
+  const { centerCoord } = useCenterMarker(map, handleShowBottomSheet);
 
   const { address: centerAddress, buildingName } = useAddressByCoord(
     scriptError,

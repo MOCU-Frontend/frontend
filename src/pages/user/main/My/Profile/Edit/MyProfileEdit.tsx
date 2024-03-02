@@ -3,9 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import styles from './MyProfileEdit.module.css';
 
-interface Props {}
-
-const MyProfileEdit: React.FC<Props> = ({}: Props) => {
+const MyProfileEdit = () => {
   const navigate = useNavigate();
   return (
     <div className={styles.wholeWrapper}>

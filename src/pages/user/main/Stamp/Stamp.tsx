@@ -9,10 +9,7 @@ import StampHeaderFilter from '../../../../components/Stamp/atoms/StampHeaderFil
 
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  initialMenuItemDataArr,
-  MenuItemData,
-} from '../../../../store/data/stamp';
+import { MenuItemData } from '../../../../store/data/stamp';
 import {
   FilterListWithId,
   initialOptionDataArr,
@@ -23,18 +20,13 @@ import useStore from '../../../../store/useStore';
 import { userCouponRequestData } from '../../../../store/Type/My/Coupon/couponRequest';
 import instance from '../../../../apis/instance';
 
-type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
 const Stamp = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
   // useQuery에서 사용
-  const {
-    data: StampData,
-    isLoading: isStoreStampDataLoading,
-    isError: isStoreStampError,
-  } = useQuery({
+  const { data: StampData } = useQuery({
     queryKey: ['StampData'],
     queryFn: () =>
       fetchStampData(

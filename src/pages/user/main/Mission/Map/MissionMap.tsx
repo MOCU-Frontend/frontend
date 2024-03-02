@@ -36,9 +36,7 @@ const MissionMap = () => {
 
   const [rewardGet, setRewardGet] = useState<boolean>(false);
 
-  const [status, setStatus] = useState<string | undefined>(
-    MissionMapGetData?.status
-  );
+  const [status] = useState<string | undefined>(MissionMapGetData?.status);
 
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
@@ -56,7 +54,7 @@ const MissionMap = () => {
     },
     onSuccess: (res) => {
       const data: MissionMapCompleteResponse = res.data;
-      setReward(res.data.result.reward);
+      setReward(data.result.reward);
     },
   });
 

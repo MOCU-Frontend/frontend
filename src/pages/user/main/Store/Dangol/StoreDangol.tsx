@@ -21,16 +21,10 @@ import { StoreList } from '../../../../../store/Type/User/userDangolResponse';
 import { fetchDangolData } from '../../../../../apis/dangol/dangol';
 import useStore from '../../../../../store/useStore';
 
-interface Props {}
-
-const StoreDangol: React.FC<Props> = ({}: Props) => {
+const StoreDangol = () => {
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const {
-    data: userDangolData,
-    isLoading: isuserDangolDataLoading,
-    isError: isuserDangolDataError,
-  } = useQuery({
+  const { data: userDangolData } = useQuery({
     queryKey: ['Dangol'],
     queryFn: () =>
       fetchDangolData(

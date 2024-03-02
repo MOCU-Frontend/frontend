@@ -24,11 +24,7 @@ import { useQuery } from '@tanstack/react-query';
 const My: React.FC = () => {
   // fetchMyPageData
   const userId = useStore((state) => state.userId);
-  const {
-    data: MyPageData,
-    isLoading: isMyPageDataLoading,
-    isError: isMyPageDataError,
-  } = useQuery({
+  const { data: MyPageData } = useQuery({
     queryKey: ['MyPage'],
 
     // userId 임시

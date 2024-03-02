@@ -3,21 +3,17 @@ import styles from './MissionToday.module.css';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import TodayMission from '../../../../../components/Mission1/atoms/TodayMission';
 import { fetchMissionPageData } from '../../../../../apis/mission/fetchMissionPageData';
-
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../../styles/colors';
 import { ReactComponent as ProfileImage } from '../../../../../assets/icon/profileGradation.svg';
 import { ReactComponent as ArrowRightSmallImage } from '../../../../../assets/icon/arrowRightSmall.svg';
 import { ReactComponent as InformationImage } from '../../../../../assets/icon/information.svg';
-
 import { useQuery } from '@tanstack/react-query';
 import { useMutation } from '@tanstack/react-query';
 import { fetchMissionMapGetData } from '../../../../../apis/mission/fetchMissionMapGetData';
 import { missionBtnResponse } from '../../../../../store/Type/Mission/missionBtnResponse';
 import ModalMissionClear from '../../../../../components/Modal/ModalMissionClear/ModalMissionClear';
-
 import MapGageBar from '../../../../../components/Map/atoms/GageBar/MapGageBar';
-
 import useStore from '../../../../../store/useStore';
 import instance from '../../../../../apis/instance';
 
@@ -26,11 +22,7 @@ const MissionToday = () => {
   const userId = useStore((state) => state.userId);
 
   // fetchMissionMapGetData
-  const {
-    data: MissionMapGetData,
-    isLoading: isMissionMapGetDataLoading,
-    isError: isMissionMapGetDataError,
-  } = useQuery({
+  const { data: MissionMapGetData } = useQuery({
     queryKey: ['missionMapGetData'],
     queryFn: () => fetchMissionMapGetData(userId || ''),
     enabled: !!userId,
@@ -74,11 +66,7 @@ const MissionToday = () => {
   const stampCnt = MissionMapGetData?.numOfStamp;
 
   // fetchMissionPageData
-  const {
-    data: storeMissionData,
-    isLoading: isMissionDataLoading,
-    isError: isMissionDataError,
-  } = useQuery({
+  const { data: storeMissionData } = useQuery({
     queryKey: ['missionData', missionCompleted],
     queryFn: () => fetchMissionPageData(userId || ''),
     enabled: !!userId,

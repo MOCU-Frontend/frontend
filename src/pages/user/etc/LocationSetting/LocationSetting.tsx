@@ -4,9 +4,7 @@ import MyLocationEditSeeMapBtn from '../../../../components/My/Location/Edit/ato
 import MyNowLocationBottomSheet from '../../../../components/My/Location/Now/atoms/BottomSheet/MyNowLocationBottomSheet';
 import SearchBar from '../../../../components/SearchBar/SearchBar';
 import BodyTitleText from '../../../../components/Text/BodyTitleText/BodyTitleText';
-import { useAddressByCoord } from '../../../../hooks/useAddressByCoord';
 import { useAddressByLocation } from '../../../../hooks/useAddressByLocation';
-import { useCenterMarker } from '../../../../hooks/useCenterMarker';
 import { useLocation } from '../../../../hooks/useLocation';
 import { useMapWithGeocoder } from '../../../../hooks/useMapWithGeocoder';
 import { useScript } from '../../../../hooks/useScript';
@@ -14,12 +12,10 @@ import { useSetUserLocation } from '../../../../hooks/useSetUserLocation';
 import { colors } from '../../../../styles/colors';
 import styles from './LocationSetting.module.css';
 
-interface Props {}
-
-const LocationSetting: React.FC<Props> = ({}: Props) => {
+const LocationSetting = () => {
   const navigate = useNavigate();
   const mapContainerRef = useRef<HTMLDivElement>(null);
-  const { userLocation, error: userLocationError } = useLocation();
+  const { userLocation } = useLocation();
   const { loading: scriptLoading, error: scriptError } = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );

@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import MyReviewHistoryContent from '../../../../../components/My/Review/atoms/Content/History/MyReviewHistoryContent';
 import MyReviewNewContent from '../../../../../components/My/Review/atoms/Content/New/MyReviewNewContent';
-import MyReviewNew from '../../../../../components/My/Review/atoms/New/MyReviewNew';
 import SlideMenuTab from '../../../../../components/SlideMenu/atoms/MenuTab/SlideMenuTab';
 import styles from './MyReview.module.css';
 

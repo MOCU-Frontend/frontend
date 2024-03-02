@@ -9,8 +9,6 @@ import ReviewInputContent from '../../../../components/Review/atoms/Contents/Inp
 import ReviewNoticeContent from '../../../../components/Review/atoms/Contents/Notice/ReviewNoticeContent';
 import ReviewScoreContent from '../../../../components/Review/atoms/Contents/Score/ReviewScoreContent';
 import {
-  ReviewPatchRequestData,
-  ReviewPatchResponse,
   ReviewPostRequestData,
   ReviewPostResponse,
 } from '../../../../store/Type/Review/review';
@@ -27,16 +25,6 @@ const Review: React.FC = () => {
     },
     onSuccess: (res) => {
       const data: ReviewPostResponse = res.data;
-      console.log(data);
-    },
-  });
-
-  const reviewPatchMutation = useMutation({
-    mutationFn: (newData: ReviewPatchRequestData) => {
-      return instance.patch('/review/correct-my-review', newData);
-    },
-    onSuccess: (res) => {
-      const data: ReviewPatchResponse = res.data;
       console.log(data);
     },
   });

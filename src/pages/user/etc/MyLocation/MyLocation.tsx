@@ -10,23 +10,15 @@ import styles from './MyLocation.module.css';
 
 const MyLocation: React.FC = () => {
   const navigate = useNavigate();
-
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const { locationArr, setLocationArr } = useUserLocation();
+  const { locationArr, handleCheckedDataIndex } = useUserLocation();
   const setNowUserLocation = useStore((state) => state.setNowUserLocation);
   const handleClickListFilter = (index: number) => {
-    if (!locationArr[index]) throw new Error('invalid index!!');
-    if (locationArr.findIndex((x) => x.isChecked) === -1)
-      throw new Error('invalid index!!');
-    setLocationArr((prevArr) => {
-      const arrCopied = [...prevArr];
-      const prevIndex = arrCopied.findIndex((x) => x.isChecked);
-      arrCopied[prevIndex].isChecked = false;
-      arrCopied[index].isChecked = true;
-      return arrCopied;
-    });
+    const checkedLocationIdx = locationArr.findIndex((x) => x.isChecked);
+    handleCheckedDataIndex(checkedLocationIdx, index);
     setNowUserLocation(locationArr[index]);
   };
+
   return (
     <section className={styles.wholeWrapper}>
       <HeaderBackBtn

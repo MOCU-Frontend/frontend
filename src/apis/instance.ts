@@ -3,10 +3,10 @@ import axios from 'axios';
 // Axios 인스턴스 생성
 const instance = axios.create({
   // 더미 데이터
-  // baseURL: 'http://localhost:3000',
+  baseURL: 'http://localhost:3000',
 
   // 실제 연결
-  baseURL: 'http://192.168.105.112:9000',
+  // baseURL: 'http://192.168.105.112:9000',
 });
 
 // 요청 인터셉터

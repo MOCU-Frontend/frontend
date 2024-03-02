@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import { fetchAddressData } from '../apis/address/address';
 import { UserLocation } from '../store/data/nowUserLocation';
 import useStore from '../store/useStore';
+import { useCarouselData } from './useCarouselData';
 
 export const useUserLocation = () => {
   const nowUserLocation = useStore((state) => state.nowUserLocation);
@@ -14,11 +15,15 @@ export const useUserLocation = () => {
     enabled: !!userId,
   });
 
-  const userLocationArr = AddressData
-    ? AddressData.map((data, index) => {
-        return { ...data, isChecked: index === 0 };
-      })
-    : [];
+  const userLocationArr = useMemo(
+    () =>
+      AddressData
+        ? AddressData.map((data, index) => {
+            return { ...data, isChecked: index === 0 };
+          })
+        : [],
+    [AddressData]
+  );
 
   useEffect(() => {
     if (!nowUserLocation && userLocationArr.length > 0) {
@@ -26,26 +31,17 @@ export const useUserLocation = () => {
     }
   }, [nowUserLocation, AddressData, setNowUserLocation, userLocationArr]);
 
-  const [locationArr, setLocationArr] =
-    useState<UserLocation[]>(userLocationArr);
+  const { carouselItemArr: locationArr, handleCheckedDataIndex } =
+    useCarouselData<UserLocation>(userLocationArr);
+
   useEffect(() => {
-    if (AddressData && nowUserLocation) {
-      const userLocationArr = AddressData
-        ? AddressData.map((data, index) => {
-            return { ...data, isChecked: index === 0 };
-          })
-        : [];
-      const checkedLocationIdx = userLocationArr.findIndex((x) => x.isChecked);
-      const nowLocationIdx = userLocationArr.findIndex(
+    if (nowUserLocation && locationArr.length > 0) {
+      const checkedLocationIdx = locationArr.findIndex((x) => x.isChecked);
+      const nowLocationIdx = locationArr.findIndex(
         (x) => x.addressId === nowUserLocation.addressId
       );
-      if (checkedLocationIdx === -1) throw new Error('invalid userLocaionArr');
-      if (nowLocationIdx === -1) throw new Error('invalid nowUserLocation');
-      const copiedArr = [...userLocationArr];
-      copiedArr[checkedLocationIdx].isChecked = false;
-      copiedArr[nowLocationIdx].isChecked = true;
-      setLocationArr(copiedArr);
+      handleCheckedDataIndex(checkedLocationIdx, nowLocationIdx);
     }
-  }, [AddressData, nowUserLocation]);
-  return { locationArr, setLocationArr };
+  }, [nowUserLocation]);
+  return { locationArr, handleCheckedDataIndex };
 };

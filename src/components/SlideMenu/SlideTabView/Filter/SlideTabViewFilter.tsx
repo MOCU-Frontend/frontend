@@ -21,7 +21,7 @@ interface Props {
   handleClickMenuBodyItem: (
     menuIndex: number,
     newIndex: number,
-    prevIndex?: number
+    prevIndex: number
   ) => void;
   onClickCompleteBtn: () => void;
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './StoreSearch.module.css';
 import { useQuery } from '@tanstack/react-query';
 
@@ -11,6 +11,11 @@ import HomeAdSlideStatus from '../../../../../components/Home/atoms/SlideStatus/
 import SlideMenuEventBodyTab from '../../../../../components/SlideMenu/atoms/BodyTab/Event/SlideMenuEventBodyTab';
 import { fetchStoreSearchData } from '../../../../../apis/storeSearch/fetchStoreSearchData';
 import useStore from '../../../../../store/useStore';
+import {
+  EventItemData,
+  eventItemDataArr,
+} from '../../../../../store/data/advertisement';
+import { useCarouselData } from '../../../../../hooks/useCarouselData';
 
 const StoreSearch = () => {
   const userId = useStore((state) => state.userId);
@@ -26,25 +31,8 @@ const StoreSearch = () => {
     handleAddSearchKeyword,
   } = useRecentSearchWord();
 
-  const [eventItemArr, setEventItemArr] = useState([
-    { id: 1, isChecked: true },
-    { id: 2, isChecked: false },
-    { id: 3, isChecked: false },
-    { id: 4, isChecked: false },
-  ]);
-
-  const handleCheckedDataIndex = (prevIndex: number, newIndex: number) => {
-    if (!eventItemArr) throw new Error('no reviewArr!!');
-    if (!eventItemArr[prevIndex]) throw new Error('invalid prevIndex!!');
-    if (!eventItemArr[newIndex]) throw new Error('invalid newIndex!!');
-    setEventItemArr((prevArr) => {
-      if (!prevArr) throw new Error('no prevArr!!');
-      const copiedArr = [...prevArr];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[newIndex].isChecked = true;
-      return copiedArr;
-    });
-  };
+  const { carouselItemArr: eventItemArr, handleCheckedDataIndex } =
+    useCarouselData<EventItemData>(eventItemDataArr);
 
   return (
     <div className={styles.wrapper}>
@@ -54,7 +42,6 @@ const StoreSearch = () => {
           searchKeywordDataArr={searchKeywordDataArr}
           handleDeleteSearchKeyword={handleDeleteSearchKeyword}
         />
-        {/* <div className={styles.searchCarousel} /> */}
         <div className={styles.bodyTabWrapper}>
           <SlideMenuEventBodyTab
             menuItemDataArr={eventItemArr}

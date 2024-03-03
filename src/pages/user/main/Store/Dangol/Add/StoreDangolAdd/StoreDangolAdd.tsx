@@ -18,15 +18,11 @@ import useStore from '../../../../../../../store/useStore';
 import instance from '../../../../../../../apis/instance';
 
 const StoreDangolAdd = () => {
-  // 아무것도 선택하지 않으면 -1,
-  // 선택하면 selectedStoreIndex는 index가 된다.
   const [selectedStoreIndex, setSelectedStoreIndex] = useState<number>(-1);
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const { data: userDangolData } = useQuery({
     queryKey: ['userDangolData'],
-
-    // 임시로
     queryFn: () =>
       fetchUserDangolPossibleData(
         userId || '',

@@ -7,36 +7,26 @@ import { fetchMapStoreMarkerData } from '../apis/map/fetchMapStoreMarkerData';
 import { fetchMapStoreData } from './../apis/map/fetchMapStoreData';
 import useStore from '../store/useStore';
 
-// `useStoreMapData`는 지도와 마커 클릭 이벤트 핸들러를 인자로 받는 커스텀 훅입니다.
 export const useStoreMapData = (
   map: naver.maps.Map | undefined,
   handleClickMarker: () => void,
-  mapApiGet: boolean,
   eventOption: boolean,
   dueDateOption: boolean,
   categoryOption: string,
-  isVisitedOption: boolean,
-  mapCenterLat: number,
-  mapCenterLng: number
+  isVisitedOption: boolean
 ) => {
-  // `storeMarkerArr`는 지도에 표시될 마커들의 상태를 관리하는 state입니다.
   const [storeMarkerArr, setStoreMarkerArr] = useState<naver.maps.Marker[]>([]);
 
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
 
-  // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
-  // 그 결과를 `storeMapMarkerData`에 저장합니다.
-
-  // `useQuery`를 사용하여 `fetchMapStoreMarkerData` 함수를 호출하고,
-  // 그 결과를 `storeMapMarkerData`에 저장합니다.
   const { data: storeMapMarkerData } = useQuery({
-    queryKey: ['mapStoreMarker', mapApiGet, mapCenterLat, mapCenterLng],
+    queryKey: ['mapStoreMarker'],
     queryFn: () =>
       fetchMapStoreMarkerData(
         userId || '',
-        mapCenterLat || nowUserLocation?.latitude || 37.5404257,
-        mapCenterLng || nowUserLocation?.longitude || 127.07209,
+        nowUserLocation?.latitude || 37.5404257,
+        nowUserLocation?.longitude || 127.07209,
         eventOption,
         dueDateOption,
         categoryOption,
@@ -45,12 +35,8 @@ export const useStoreMapData = (
     enabled: !!userId && !!nowUserLocation,
   });
 
-  // `selectedStoreId`는 현재 선택된 상점의 ID를 관리하는 state입니다.
   const [selectedStoreId, setSelectedStoreId] = useState<number | undefined>();
 
-  // `useQuery`를 사용하여 `fetchMapStoreData` 함수를 호출하고,
-  // 그 결과를 `selectedStoreData`에 저장합니다.
-  // `selectedStoreId`가 변경될 때마다 새로운 데이터를 가져옵니다.
   const { data: selectedStoreData } = useQuery({
     queryKey: ['selectedMapStore', selectedStoreId],
     queryFn: () => fetchMapStoreData(userId || '', selectedStoreId || 5),
@@ -58,14 +44,11 @@ export const useStoreMapData = (
   });
 
   useEffect(() => {
-    // 기존의 마커를 모두 제거합니다.
     storeMarkerArr.forEach((marker) => marker.setMap(null));
     setStoreMarkerArr([]);
 
     if (map && storeMapMarkerData) {
       storeMapMarkerData.forEach((storeData) => {
-        console.log(storeData.latitude);
-        console.log(storeData.longitude);
         const imgUrl = storeData.hasEvent
           ? pinMapFireImg
           : storeData.dueDate
@@ -76,20 +59,17 @@ export const useStoreMapData = (
             storeData.latitude,
             storeData.longitude
           ),
-
           map: map,
           icon: imgUrl,
         });
         setStoreMarkerArr((prev) => [...prev, newMarker]);
         naver.maps.Event.addListener(newMarker, 'click', function (e) {
-          // console.log(storeData.title);
-          // setSelectedStoreInform(storeMapData[index]);
           setSelectedStoreId(storeData.storeId);
           handleClickMarker();
         });
       });
     }
-  }, [map, mapApiGet, storeMapMarkerData, mapCenterLat, mapCenterLng]);
+  }, [map, storeMapMarkerData]);
 
   return { storeMarkerArr, selectedStoreData, storeMapMarkerData };
 };

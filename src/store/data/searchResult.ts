@@ -225,6 +225,37 @@ export const initialOptionDataArr = [
   },
 ];
 
+export const mapInitialOptionDataArr = [
+  {
+    title: '이벤트 중',
+    isChecked: false,
+    id: 1,
+  },
+  {
+    title: '쿠폰 사용 임박',
+    isChecked: false,
+    id: 2,
+  },
+  {
+    title: '가본 곳만',
+    isChecked: false,
+    id: 3,
+  },
+];
+
+export const storeDangolinitialOptionDataArr = [
+  {
+    title: '이벤트',
+    isChecked: false,
+    id: 1,
+  },
+  {
+    title: '사용 가능 쿠폰만',
+    isChecked: false,
+    id: 2,
+  },
+];
+
 export type MenuItemData = {
   title: string;
   isChecked: boolean;

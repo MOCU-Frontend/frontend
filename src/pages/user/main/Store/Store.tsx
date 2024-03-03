@@ -11,9 +11,7 @@ import StoreReviewContent from '../../../../components/Store/atoms/Contents/Revi
 import { useNavigate, useParams } from 'react-router-dom';
 import FullBtn from '../../../../components/Button/FullBtn/FullBtn';
 import storeImg from '../../../../assets/imgs/storeExample.png';
-
 import { useMutation, useQuery } from '@tanstack/react-query';
-
 import { fetchStoreDetailData } from '../../../../apis/store/store';
 import { ReviewReportRequestData } from '../../../../store/Type/Review/review';
 import useStore from '../../../../store/useStore';
@@ -22,6 +20,7 @@ import { initialReviewHistoryMenuItemDataArr } from '../../../../store/data/sear
 import { MenuItemData } from '../../../../store/data/stamp';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
+import { useFilterMenu } from '../../../../hooks/useFilterMenu';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
@@ -62,45 +61,8 @@ const Store: React.FC = () => {
     setIsBottomSheetVisible(false);
   };
 
-  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialReviewHistoryMenuItemDataArr
-  );
-
-  const handleClickMenuBodyItem = (
-    menuIndex: number,
-    newIndex: number,
-    prevIndex?: number
-  ) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
-      throw new Error('invalid newIndex!!');
-    if (
-      prevIndex !== undefined &&
-      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
-    )
-      throw new Error('invalid prevIndex!!');
-    setMenuItemDataArr((prev) => {
-      const copiedMenuItemDataArr = [...prev];
-      if (prevIndex !== undefined) {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
-          false;
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
-      } else {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
-          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
-      }
-      return copiedMenuItemDataArr;
-    });
-  };
-
-  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
-    setMenuItemDataArr((prev) => {
-      const copiedArr = [...prev];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[newIndex].isChecked = true;
-      return copiedArr;
-    });
-  };
+  const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
+    useFilterMenu(initialReviewHistoryMenuItemDataArr);
 
   const handleFilterSelectClick = (newIndex: number) => {
     const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
@@ -113,7 +75,7 @@ const Store: React.FC = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
-  const [isExistReview] = useState(true);
+  const [isExistReview] = useState(false);
   return (
     <div className={styles.wholeWrapper}>
       <div className={styles.headerWrapper}>
@@ -175,7 +137,6 @@ const Store: React.FC = () => {
               menuItemDataArr={menuItemDataArr}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
-              // handleClickResetOptionBtn={handleClickResetOptionBtn}
               onClickCompleteBtn={handleDragBottom}
             />
           }

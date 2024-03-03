@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import CheckFilter from '../../../../components/CheckFilter/CheckFilter';
 import CheckFilterSelect from '../../../../components/CheckFilter/Select/CheckFilterSelect';
 import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
@@ -16,19 +16,16 @@ import MapStampModal from '../../../../components/Map/atoms/Modal/StampModal/Map
 import MapCouponModal from '../../../../components/Map/atoms/Modal/Coupon/MapCouponModal';
 import { colors } from '../../../../styles/colors';
 import useStore from '../../../../store/useStore';
-import MapSearchBtn from '../../../../components/Map/atoms/Button/Search/MapSearchBtn';
-
-// 필터 관련
-import {
-  initialMenuItemDataArr,
-  MenuItemData,
-} from '../../../../store/data/mapFilter';
+import { initialMenuItemDataArr } from '../../../../store/data/mapFilter';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
 import { useMutation } from '@tanstack/react-query';
 import { userStampRequestData } from '../../../../store/Type/Stamp/stampRequest';
 import instance from '../../../../apis/instance';
 import { userCouponRequestData } from '../../../../store/Type/My/Coupon/couponRequest';
+import { useFilterMenu } from '../../../../hooks/useFilterMenu';
+import { useOptionMenu } from '../../../../hooks/useOptionMenu';
+import { mapInitialOptionDataArr } from '../../../../store/data/searchResult';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -54,125 +51,31 @@ const Map: React.FC = () => {
     useState<CouponModalLevel | null>(null);
   const [isRegularCustomer, setIsRegularCustomer] = useState(false);
 
-  // 필터 관련 코드
-
-  // mapApiGet 상태 관련 코드
-  const [mapApiGet, setMapApiGet] = useState<boolean>(false);
-
-  // event가 켜져있는지 안켜져 있는지
-  const [eventOption, setEventOption] = useState<boolean>(false);
-
-  // 쿠폰 사용 임박인지 아닌지
-  const [dueDateOption, setDueDateOption] = useState<boolean>(false);
-
-  // 카테고리 옵션
-  const [categoryOption, setCategoryOption] = useState<string>('업종 전체');
-
-  // 가본 곳만 옵션
-  const [isVisitedOption, setIsVisitedOption] = useState<boolean>(false);
-
-  // FilterBottomSheet를 보이게 하는지 상태관리
   const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
     useState(false);
 
-  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialMenuItemDataArr
-  );
+  const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
+    useFilterMenu(initialMenuItemDataArr);
+  const handleFilterSelectClick = (newIndex: number) => {
+    const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
+    if (prevIndex === -1) throw new Error('no checked menu item!!');
+    handleClickMenuItem(prevIndex, newIndex);
+    setIsFilterBottomSheetVisible(true);
+  };
+
+  const { optionDataArr, sortedOptionDataArr, handleOptionClick } =
+    useOptionMenu(mapInitialOptionDataArr);
 
   const handleDragFilterBottomSheet = () => {
     setIsFilterBottomSheetVisible(false);
   };
 
-  const handleClickMenuBodyItem = (
-    menuIndex: number,
-    newIndex: number,
-    prevIndex?: number
-  ) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
-      throw new Error('invalid newIndex!!');
-    if (
-      prevIndex !== undefined &&
-      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
-    )
-      throw new Error('invalid prevIndex!!');
-    setMenuItemDataArr((prev) => {
-      const copiedMenuItemDataArr = [...prev];
-      if (prevIndex !== undefined) {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
-          false;
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
-      } else {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
-          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
-      }
-
-      // 업종 전체가 선택되어 있으면 mapApiGet이 0이다.
-      if (copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 0) {
-        setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-        setCategoryOption('업종 전체');
-      }
-
-      // 카페가 선택되어 있을 때
-      else if (
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].id === 1
-      ) {
-        setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-        setCategoryOption('카페');
-      }
-
-      return copiedMenuItemDataArr;
-    });
-  };
-
-  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
-    setMenuItemDataArr((prev) => {
-      const copiedArr = [...prev];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[newIndex].isChecked = true;
-      return copiedArr;
-    });
-  };
-
-  // 필터를 클릭했을 때
-  const handleFilterSelectClick = (newIndex: number) => {
-    const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
-    if (prevIndex === -1) throw new Error('no checked menu item!!');
-
-    handleClickMenuItem(prevIndex, newIndex);
-    setIsFilterBottomSheetVisible(true);
-  };
-
-  // event 필터를 클릭했을 때
-  const handleClickEvent = () => {
-    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-    setEventOption((prevEventOption) => !prevEventOption);
-  };
-
-  const handleClickDueDate = () => {
-    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-    setDueDateOption((prevEventOption) => !prevEventOption);
-  };
-
-  const handleClickIsVisited = () => {
-    setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-    setIsVisitedOption((prevEventOption) => !prevEventOption);
-  };
-
-  // useEffect를 사용하여 상태가 업데이트될 때 로그 출력
-  useEffect(() => {
-    console.log(mapApiGet);
-  }, [mapApiGet]);
-
   const selectedSectorFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   );
 
-  // FilterBottomSheet 코드 끝
-
   const handleShowBottomSheet = () => {
     setIsShowBottomSheet(true);
-    setIsShowSearchBtn(false);
     mapWrapperRef.current &&
       (mapWrapperRef.current.style.height = `${
         window.innerHeight - BOTTOM_SHEET_HEIGHT
@@ -197,44 +100,23 @@ const Map: React.FC = () => {
     }
   };
 
-  const [mapCenterLat, setMapCenterLat] = useState<number>(0);
-  const [mapCenterLng, setMapCenterLng] = useState<number>(0);
-
-  const handleClickSearchBtn = () => {
-    if (map) {
-      // 지도의 중앙 위도와 경도 가져오기
-      setMapApiGet((prevMapApiGet) => !prevMapApiGet);
-      let mapCenter = map.getCenter() as naver.maps.LatLng;
-      console.log(mapCenter.lat());
-      console.log(mapCenter.lng());
-      setMapCenterLat(mapCenter.lat);
-      setMapCenterLng(mapCenter.lng);
-    }
-  };
-
   const { selectedStoreData } = useStoreMapData(
     map,
     handleShowBottomSheet,
-    mapApiGet,
-    eventOption,
-    dueDateOption,
-    categoryOption,
-    isVisitedOption,
-    mapCenterLat,
-    mapCenterLng
+    optionDataArr[0].isChecked,
+    optionDataArr[1].isChecked,
+    selectedSectorFilterItem ? selectedSectorFilterItem.title : '업종 전체',
+    optionDataArr[2].isChecked
   );
 
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
-    setIsShowSearchBtn(true);
     if (map) {
       mapWrapperRef.current &&
         (mapWrapperRef.current.style.height = `${window.innerHeight}px`);
       map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
     }
   };
-
-  const [isShowSearchBtn, setIsShowSearchBtn] = useState(true);
 
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const userId = useStore((state) => state.userId);
@@ -307,27 +189,18 @@ const Map: React.FC = () => {
                 borderColor='sub-purple-light'
                 onClick={() => handleFilterSelectClick(0)}
               />
-              <CheckFilter
-                border={1}
-                borderColor='sub-purple-light'
-                label='이벤트 중'
-                isChecked={eventOption}
-                onClick={handleClickEvent}
-              />
-              <CheckFilter
-                border={1}
-                borderColor='sub-purple-light'
-                label='쿠폰 사용 임박'
-                isChecked={dueDateOption}
-                onClick={handleClickDueDate}
-              />
-              <CheckFilter
-                border={1}
-                borderColor='sub-purple-light'
-                label='가본 곳만'
-                isChecked={isVisitedOption}
-                onClick={handleClickDueDate}
-              />
+              {sortedOptionDataArr.map((data, index) => (
+                <CheckFilter
+                  key={data.title + index}
+                  isChecked={data.isChecked}
+                  label={data.title}
+                  border={1}
+                  borderColor='sub-purple-light'
+                  onClick={() => {
+                    handleOptionClick(data.id);
+                  }}
+                />
+              ))}
             </div>
           )}
         </HeaderBackBtn>
@@ -344,32 +217,18 @@ const Map: React.FC = () => {
               borderColor='sub-purple-light'
               onClick={() => handleFilterSelectClick(0)}
             />
-            <CheckFilter
-              border={1}
-              borderColor='sub-purple-light'
-              label='이벤트 중'
-              isChecked={eventOption}
-              onClick={handleClickEvent}
-            />
-            <CheckFilter
-              border={1}
-              borderColor='sub-purple-light'
-              label='쿠폰 사용 임박'
-              isChecked={dueDateOption}
-              onClick={handleClickDueDate}
-            />
-            <CheckFilter
-              border={1}
-              borderColor='sub-purple-light'
-              label='가본 곳만'
-              isChecked={isVisitedOption}
-              onClick={handleClickIsVisited}
-            />
-          </div>
-        )}
-        {isShowSearchBtn && (
-          <div className={styles.mapSearchBtnWrapper}>
-            <MapSearchBtn onClick={handleClickSearchBtn} />
+            {sortedOptionDataArr.map((data, index) => (
+              <CheckFilter
+                key={data.title + index}
+                isChecked={data.isChecked}
+                label={data.title}
+                border={1}
+                borderColor='sub-purple-light'
+                onClick={() => {
+                  handleOptionClick(data.id);
+                }}
+              />
+            ))}
           </div>
         )}
       </div>
@@ -401,14 +260,12 @@ const Map: React.FC = () => {
           onClickNotBottomSheet={handleDragFilterBottomSheet}
         >
           <SlideTabViewFilter
-            // 옵션은 슬라이드탭뷰에 출력되지 않게 필터링
             menuItemDataArr={menuItemDataArr.filter(
               (item, index) => index === 0 || index === 1
             )}
             handleCheckedDataIndex={handleClickMenuItem}
             handleClickMenuBodyItem={handleClickMenuBodyItem}
             onClickCompleteBtn={handleDragFilterBottomSheet}
-            // handleClickResetOptionBtn={handleClickResetOptionBtn}
           />
         </BottomSheet>
       )}

@@ -3,13 +3,14 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorAlert from '../components/ErrorAlert/ErrorAlert';
 import Loading from '../components/Loading/Loading';
+import Home from './user/main/Home/Home';
 
 const Router = () => {
   const router = createBrowserRouter([
     {
       index: true,
       path: '/',
-      lazy: () => import('./user/main/Home/Home'),
+      element: <Home />,
     },
     {
       path: '/map',

@@ -13,13 +13,12 @@ export const fetchDangolData = async (
 ) => {
   const response = await instance.get<DangolDataResponse>(
     // 더미데이터
-    // '/data/dangol/dangol-dummy-data.json'
+    '/data/dangol/dangol-dummy-data.json'
 
     // 실제 연결
-    `/users/${userId}/my-storelist?${
-      category !== '전체' ? 'category=' + category + '&' : ''
-    }sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=${page}`
+    // `/users/${userId}/my-storelist?${
+    // category !== '전체' ? 'category=' + category + '&' : ''
+    // }sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=${page}`
   );
-  console.log(response);
   return response.data.result;
 };

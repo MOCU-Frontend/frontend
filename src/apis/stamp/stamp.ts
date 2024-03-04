@@ -12,11 +12,11 @@ export const fetchStampData = async (
 ) => {
   const response = await instance.get<StampResponse>(
     // 더미데이터
-    // '/data/stamp/stampPageData.json'
+    '/data/stamp/stampPageData.json'
     // 실제 연결
-    `/coupon/my-coupon/${userId}?${
-      category !== '전체' ? 'category=' + category + '&' : ''
-    }&sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&isStoreRegular=${isStoreRegular}&isCouponCloseToCompletion=${isCouponCloseToCompletion}`
+    // `/coupon/my-coupon/${userId}?${
+    // category !== '전체' ? 'category=' + category + '&' : ''
+    // }&sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&isStoreRegular=${isStoreRegular}&isCouponCloseToCompletion=${isCouponCloseToCompletion}`
   );
   console.log(response);
   return response.data.result;

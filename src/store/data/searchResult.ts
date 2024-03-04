@@ -225,6 +225,29 @@ export const initialOptionDataArr = [
   },
 ];
 
+export const stampInitialOptionDataArr = [
+  {
+    title: '이벤트',
+    isChecked: false,
+    id: 1,
+  },
+  {
+    title: '사용 가능 쿠폰만',
+    isChecked: false,
+    id: 2,
+  },
+  {
+    title: '단골만',
+    isChecked: false,
+    id: 3,
+  },
+  {
+    title: '쿠폰 사용 임박',
+    isChecked: false,
+    id: 4,
+  },
+];
+
 export const mapInitialOptionDataArr = [
   {
     title: '이벤트 중',

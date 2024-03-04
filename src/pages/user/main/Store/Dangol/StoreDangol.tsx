@@ -59,7 +59,7 @@ const StoreDangol = () => {
         nowUserLocation?.longitude || 127.07209,
         0
       ),
-    enabled: !!userId && !!nowUserLocation,
+    enabled: !!userId && !!nowUserLocation && optionDataArr.length > 0,
   });
   return (
     <div className={styles.wholeWrapper}>

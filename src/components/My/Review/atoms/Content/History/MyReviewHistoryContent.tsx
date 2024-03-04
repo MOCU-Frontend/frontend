@@ -13,6 +13,7 @@ import BottomSheet from '../../../../../BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../../../SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import { MenuItemData } from '../../../../../../store/data/stamp';
 import { initialReviewHistoryMenuItemDataArr } from '../../../../../../store/data/searchResult';
+import { useFilterMenu } from '../../../../../../hooks/useFilterMenu';
 
 const MyReviewHistoryContent = () => {
   const userId = useStore((state) => state.userId);
@@ -30,46 +31,8 @@ const MyReviewHistoryContent = () => {
     setIsBottomSheetVisible(false);
   };
 
-  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialReviewHistoryMenuItemDataArr
-  );
-
-  const handleClickMenuBodyItem = (
-    menuIndex: number,
-    newIndex: number,
-    prevIndex?: number
-  ) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
-      throw new Error('invalid newIndex!!');
-    if (
-      prevIndex !== undefined &&
-      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
-    )
-      throw new Error('invalid prevIndex!!');
-    setMenuItemDataArr((prev) => {
-      const copiedMenuItemDataArr = [...prev];
-      if (prevIndex !== undefined) {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
-          false;
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
-      } else {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
-          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
-      }
-      return copiedMenuItemDataArr;
-    });
-  };
-
-  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
-    setMenuItemDataArr((prev) => {
-      const copiedArr = [...prev];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[newIndex].isChecked = true;
-      return copiedArr;
-    });
-  };
-
+  const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
+    useFilterMenu(initialReviewHistoryMenuItemDataArr);
   const handleFilterSelectClick = (newIndex: number) => {
     const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
     if (prevIndex === -1) throw new Error('no checked menu item!!');

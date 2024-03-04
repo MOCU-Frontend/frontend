@@ -7,9 +7,9 @@ export const fetchMyReviewHistoryData = async (
 ) => {
   const response = await instance.get<MyReviewwHistoryDataResponse>(
     // 더미데이터
-    // '/data/my/review/history/my-review-history-data-dummy.json'
+    '/data/my/review/history/my-review-history-data-dummy.json'
     // 실제 연결
-    `/review/${userId}/my-review?sort=${sort}`
+    // `/review/${userId}/my-review?sort=${sort}`
   );
   console.log(response);
   return response.data.result;

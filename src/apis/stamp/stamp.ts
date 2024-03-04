@@ -18,6 +18,5 @@ export const fetchStampData = async (
     // category !== '전체' ? 'category=' + category + '&' : ''
     // }&sort=${sort}&isEventTrue=${isEventTrue}&isCouponUsable=${isCouponUsable}&isStoreRegular=${isStoreRegular}&isCouponCloseToCompletion=${isCouponCloseToCompletion}`
   );
-  console.log(response);
   return response.data.result;
 };

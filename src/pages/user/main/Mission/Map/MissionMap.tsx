@@ -21,16 +21,13 @@ const MissionMap = () => {
   const navigate = useNavigate();
 
   const userId = useStore((state) => state.userId);
-  // fetchMissionMapGetData
   const { data: MissionMapGetData } = useQuery({
     queryKey: ['missionMapGetData'],
     queryFn: () => fetchMissionMapGetData(userId || ''),
     enabled: !!userId,
   });
 
-  // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
-  // const stampCnt = 30;
 
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
 
@@ -40,14 +37,11 @@ const MissionMap = () => {
 
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
-      // 임시 userId
       userId: userId || '',
     });
     setRewardGet(true);
   };
 
-  // fetchMissionMapCompleteData
-  // const missionMapComplete = useMutation(fetchMissionMapCompleteData);
   const missionMapCompleteMutation = useMutation({
     mutationFn: (newData: { userId: string }) => {
       return instance.patch('/mission/mission-map/complete', newData);

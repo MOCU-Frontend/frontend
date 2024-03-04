@@ -24,6 +24,8 @@ instance.interceptors.request.use(
 // 응답 인터셉터
 instance.interceptors.response.use(
   (response) => {
+    console.log(response);
+
     return response;
   },
   (error) => {

@@ -10,6 +10,5 @@ export const fetchAddressData = async (userId: string) => {
     // 실제 연결
     // `/users/${userId}/address`
   );
-  console.log(response);
   return response.data.result;
 };

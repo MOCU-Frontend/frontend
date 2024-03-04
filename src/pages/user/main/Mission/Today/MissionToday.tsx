@@ -21,15 +21,11 @@ const MissionToday = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
 
-  // fetchMissionMapGetData
   const { data: MissionMapGetData } = useQuery({
     queryKey: ['missionMapGetData'],
     queryFn: () => fetchMissionMapGetData(userId || ''),
     enabled: !!userId,
   });
-
-  // fetchMissionBtnPatchData
-  // '미션 완료하기' 버튼 요청 처리
 
   const [patchData, setPatchData] = useState<missionBtnResponse | undefined>();
 
@@ -62,10 +58,8 @@ const MissionToday = () => {
     });
   };
 
-  // 스탬프 개수
   const stampCnt = MissionMapGetData?.numOfStamp;
 
-  // fetchMissionPageData
   const { data: storeMissionData } = useQuery({
     queryKey: ['missionData', missionCompleted],
     queryFn: () => fetchMissionPageData(userId || ''),

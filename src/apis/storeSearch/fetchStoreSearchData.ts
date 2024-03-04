@@ -8,11 +8,10 @@ export const fetchStoreSearchData = async (
 ) => {
   const response = await instance.get<storeSearchResponse>(
     // 더미 데이터
-    // '/data/storeSearch/storeSearchData-exist.json'
+    '/data/storeSearch/storeSearchData-exist.json'
 
     // 실제 데이터
-    `/store/store-search/userId=${userId}?latitude=${latitude}&longitude=${longitude}`
+    // `/store/store-search/userId=${userId}?latitude=${latitude}&longitude=${longitude}`
   );
-  console.log(response);
   return response.data;
 };

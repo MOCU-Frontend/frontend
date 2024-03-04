@@ -16,18 +16,12 @@ export const fetchStoreSearchResultData = async (
 ) => {
   const response = await instance.get<StoreSearchResultResponse>(
     // 더미 데이터
-    // '/data/storeSearchResult/storeSearchResultData-rate.json'
+    '/data/storeSearchResult/storeSearchResultData-rate.json'
 
     // 실제 연결
-    `/store/search-result?userId=${userId}&query=${query}&sort=${sort}${
-      category !== '전체' ? '&category=' + category : ''
-    }&savingOption=${savingOption}&notVisitiedOption=${notVisitedOption}&couponImminentOption=${couponImminentOption}&eventOption=${eventOption}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
-  );
-  console.log(response);
-  console.log(
-    `/store/search-result?userId=${userId}&query=${query}&sort=${sort}${
-      category !== '전체' ? '&category=' + category : ''
-    }&savingOption=${savingOption}&notVisitiedOption=${notVisitedOption}&couponImminentOption=${couponImminentOption}&eventOption=${eventOption}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
+    // `/store/search-result?userId=${userId}&query=${query}&sort=${sort}${
+    // category !== '전체' ? '&category=' + category : ''
+    // }&savingOption=${savingOption}&notVisitiedOption=${notVisitedOption}&couponImminentOption=${couponImminentOption}&eventOption=${eventOption}&userLatitude=${userLatitude}&userLongitude=${userLongitude}&page=0`
   );
 
   return response.data.result;

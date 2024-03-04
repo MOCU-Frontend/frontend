@@ -5,11 +5,10 @@ import { MissionResponse } from '../../store/Type/Mission/mission';
 export const fetchMissionPageData = async (userId: string) => {
   const response = await instance.get<MissionResponse>(
     // 더미데이터
-    // '/data/mission/missionDummyData-01.json'
+    '/data/mission/missionDummyData-01.json'
 
     // 실제 연결
-    `/mission/today-mission/userId=${userId}`
+    // `/mission/today-mission/userId=${userId}`
   );
-  console.log(response);
   return response.data.result;
 };

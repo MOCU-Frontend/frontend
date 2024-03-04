@@ -18,7 +18,6 @@ export const fetchMapStoreMarkerData = async (
     // 실제 연결
     // `/map/userId=${userId}?latitude=${latitude}&longitude=${longitude}&eventOption=${eventOption}&dueDateOption=${dueDateOption}&categoryOption=${categoryOption}&visitOption=${isVisitedOption}`
   );
-  console.log(response);
   return response.data.result;
 };
 

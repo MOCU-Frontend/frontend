@@ -224,6 +224,20 @@ export const initialOptionDataArr = [
     id: 5,
   },
 ];
+export const ownerCouponInitialOptionDataArr = [
+  {
+    title: '단골만',
+    isChecked: false,
+    id: 1,
+  },
+];
+export const ownerRequestInitialOptionDataArr = [
+  {
+    title: '수락 안 한 요청만',
+    isChecked: false,
+    id: 1,
+  },
+];
 
 export const stampInitialOptionDataArr = [
   {

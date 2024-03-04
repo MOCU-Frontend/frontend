@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../../../components/Button/FullBtn/FullBtn';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
@@ -9,74 +9,39 @@ import MyLocationEditLocContent from '../../../../../components/My/Location/Edit
 import MyLocationEditLocSetContent from '../../../../../components/My/Location/Edit/atoms/Contents/LocSet/MyLocationEditLocSetContent';
 import MyLocationEnrollmentAddressList from '../../../../../components/My/Location/Enrollment/Content/AddressList/MyLocationEnrollmentAddressList';
 import FullSearchBar from '../../../../../components/SearchBar/FullSearchBar/FullSearchBar';
-import {
-  AddressSearchData,
-  AddressSearchWholeData,
-} from '../../../../../store/Type/AddressSearch/AddressSearch';
+import { AddressSearchData } from '../../../../../store/Type/AddressSearch/AddressSearch';
 import { colors } from '../../../../../styles/colors';
 import styles from './LocationSettingSearch.module.css';
 import { ReactComponent as HomeIcon } from '../../../../../assets/icon/home.svg';
 import { ReactComponent as CompanyIcon } from '../../../../../assets/icon/company.svg';
 import { ReactComponent as SchoolIcon } from '../../../../../assets/icon/school.svg';
 import { ReactComponent as MarkerIcon } from '../../../../../assets/icon/mapMarkerRegularSolid.svg';
-type LocSetData = {
-  name: '집' | '회사' | '학교' | '기타';
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  isChecked: boolean;
-  etcName?: string;
-};
+import { useLocSetSelect } from '../../../../../hooks/useLocSetSelect';
+import { useMyLocationEnrollmentQuery } from '../../../../../apis/my/Location/Enrollment/useMyLocationEnrollmentQuery';
+
 const LocationSettingSearch: React.FC = () => {
   const navigate = useNavigate();
-  const [addressSearchWholeData, setAddressSearchData] = useState<
-    AddressSearchWholeData | undefined
-  >();
   const [selectedAddressData, setSelectedAddressData] = useState<
     AddressSearchData | undefined
   >();
-  useEffect(() => {
-    fetch('http://localhost:3000/data/address-dummy-01.json')
-      .then((response) => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        throw new Error('에러 발생!');
-      })
-      .then((data) => {
-        setAddressSearchData(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
-
+  const [locSearchWord, setLocSearchWord] = useState('');
+  const {
+    myLocationEnrollmentLocQuery: { data: searchedLocData },
+  } = useMyLocationEnrollmentQuery(locSearchWord);
+  const handleSearchLocation = (locText: string) => {
+    setLocSearchWord(locText);
+  };
   const [detailLocation, setDetailLocation] = useState('');
-  const [locSetDataArr, setLocSetDataArr] = useState<LocSetData[]>([
+  const {
+    locSetDataArr,
+    handleClickLocSetBtn,
+    handleChangeCheckedDataEtcName,
+  } = useLocSetSelect([
     { name: '집', Icon: HomeIcon, isChecked: true },
     { name: '회사', Icon: CompanyIcon, isChecked: false },
     { name: '학교', Icon: SchoolIcon, isChecked: false },
     { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
-  const handleClickLocSetBtn = (index: number) => {
-    if (!locSetDataArr[index]) throw new Error('invalid index!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      const checkedIndex = copiedArr.findIndex((x) => x.isChecked);
-      if (checkedIndex === -1) throw new Error('there is no checked data!!');
-      copiedArr[checkedIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
-  };
-  const handleChangeCheckedDataEtcName = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const checkedData = locSetDataArr.find((x) => x.isChecked);
-    if (!checkedData) throw new Error('no checked loc set data!');
-    if (checkedData.name !== '기타') throw new Error('no etc name data!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[3].etcName = e.target.value;
-      return copiedArr;
-    });
-  };
 
   return (
     <div className={styles.wholeWrapper}>
@@ -94,7 +59,7 @@ const LocationSettingSearch: React.FC = () => {
         <>
           <div className={styles.searchBarWrapper}>
             <FullSearchBar
-              onClickSearchBtn={(text: string) => {}}
+              onClickSearchBtn={(text: string) => handleSearchLocation(text)}
               placeholder={'지번, 도로명, 건물명으로 검색'}
             />
           </div>
@@ -107,10 +72,10 @@ const LocationSettingSearch: React.FC = () => {
               color={colors.subPurplelight}
             />
           </div>
-          {addressSearchWholeData && (
+          {searchedLocData && (
             <MyLocationEnrollmentAddressList
               addressSearchDataArr={
-                addressSearchWholeData ? addressSearchWholeData.documents : []
+                searchedLocData ? searchedLocData.documents : []
               }
               handleClickSearchAddress={(data: AddressSearchData) =>
                 setSelectedAddressData(data)

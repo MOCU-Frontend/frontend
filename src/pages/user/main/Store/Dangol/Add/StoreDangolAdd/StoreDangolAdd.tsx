@@ -16,31 +16,19 @@ import { userDangolDeleteResponse } from '../../../../../../../store/Type/User/u
 import { UserDangolAddResponse } from '../../../../../../../store/Type/User/userDangolAddResponse';
 import useStore from '../../../../../../../store/useStore';
 import instance from '../../../../../../../apis/instance';
+import { useStoreDangolAddQuery } from '../../../../../../../apis/store/Dangol/Add/useStoreDangolAddQuery';
+import { useStoreDangolAddMutation } from '../../../../../../../apis/store/Dangol/Add/useStoreDangolAddMutation';
 
 const StoreDangolAdd = () => {
   const [selectedStoreIndex, setSelectedStoreIndex] = useState<number>(-1);
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const { data: userDangolData } = useQuery({
-    queryKey: ['userDangolData'],
-    queryFn: () =>
-      fetchUserDangolPossibleData(
-        userId || '',
-        nowUserLocation?.latitude || 37.5404257,
-        nowUserLocation?.longitude || 127.07209
-      ),
-    enabled: !!userId && !!nowUserLocation,
-  });
+  const {
+    storeDangolAddDataQuery: { data: userDangolData },
+  } = useStoreDangolAddQuery(userId, nowUserLocation);
 
-  const DangolDeleteMutation = useMutation({
-    mutationFn: (newData: { userId: string; storeId: number }) => {
-      return instance.patch('/users/my-storelist/add-new/delete', newData);
-    },
-    onSuccess: (res) => {
-      const data: userDangolDeleteResponse = res.data;
-      console.log(data);
-    },
-  });
+  const { DangolAddMutation, DangolDeleteMutation } =
+    useStoreDangolAddMutation();
 
   const handleDangolDeleteClick = (userId: string, storeId: number) => {
     DangolDeleteMutation.mutate({
@@ -49,20 +37,6 @@ const StoreDangolAdd = () => {
     });
     setIsShowModalDelete(false);
   };
-
-  const DangolAddMutation = useMutation({
-    mutationFn: (newData: {
-      userId: string;
-      storeId: number;
-      request: boolean;
-    }) => {
-      return instance.patch('/users/regular-request', newData);
-    },
-    onSuccess: (res) => {
-      const data: UserDangolAddResponse = res.data;
-      console.log(data);
-    },
-  });
 
   const handleDangolAddClick = (
     userId: string,

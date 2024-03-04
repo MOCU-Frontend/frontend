@@ -1,13 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './Home.module.css';
 import { ReactComponent as MapIcon } from '../../../../assets/icon/map.svg';
 import { ReactComponent as ProfileIcon } from '../../../../assets/icon/profile.svg';
-
 import { ReactComponent as ShoppingIcon } from '../../../../assets/icon/shopping.svg';
 import { ReactComponent as StampIcon } from '../../../../assets/icon/emptyStamp.svg';
 import { ReactComponent as GiftIcon } from '../../../../assets/icon/present.svg';
 import { ReactComponent as RocketIcon } from '../../../../assets/icon/rocket.svg';
-
 import BottomNavigation from '../../../../components/Home/atoms/BottomNavigation/HomeBottomNavigation';
 import { useNavigate } from 'react-router-dom';
 import HomeLocationSec from '../../../../components/Home/atoms/Location/HomeLocationSec';

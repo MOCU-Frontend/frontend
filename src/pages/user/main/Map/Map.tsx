@@ -26,6 +26,7 @@ import { userCouponRequestData } from '../../../../store/Type/My/Coupon/couponRe
 import { useFilterMenu } from '../../../../hooks/useFilterMenu';
 import { useOptionMenu } from '../../../../hooks/useOptionMenu';
 import { mapInitialOptionDataArr } from '../../../../store/data/searchResult';
+import { useMapMutation } from '../../../../apis/map/useMapMutation';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -36,24 +37,20 @@ const Map: React.FC = () => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapWrapperRef = useRef<HTMLDivElement>(null);
   const [isShowBottomSheet, setIsShowBottomSheet] = useState<boolean>(false);
-
   const { userLocation } = useLocation();
   const { loading: scriptLoading, error: scriptError } = useScript(
     `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.REACT_APP_NAVER_MAP_CLIENT_ID}`
   );
   const { map } = useMap(scriptError, scriptLoading, mapContainerRef);
   useUserLocationMap(map, userLocation);
-
   const [stampModalLevel, setStampModalLevel] = useState<ModalLevel | null>(
     null
   );
   const [couponModalLevel, setCouponModalLevel] =
     useState<CouponModalLevel | null>(null);
   const [isRegularCustomer, setIsRegularCustomer] = useState(false);
-
   const [isFilterBottomSheetVisible, setIsFilterBottomSheetVisible] =
     useState(false);
-
   const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
     useFilterMenu(initialMenuItemDataArr);
   const handleFilterSelectClick = (newIndex: number) => {
@@ -117,35 +114,16 @@ const Map: React.FC = () => {
       map.setSize(new naver.maps.Size(window.innerWidth, window.innerHeight));
     }
   };
-
   const nowUserLocation = useStore((state) => state.nowUserLocation);
   const userId = useStore((state) => state.userId);
 
-  const userStampMutation = useMutation({
-    mutationFn: (newData: userStampRequestData) => {
-      return instance.patch('/stamp/request', newData);
-    },
-    onSuccess: () => {
-      console.log('userStampMutation success!');
-    },
-  });
-
+  const { userStampMutation, userCouponMutation } = useMapMutation();
   const handleRequestStamp = (onSuccess: () => void) => {
     userStampMutation.mutate(
       { userId: userId ? parseInt(userId) : 1, storeId: 1 },
       { onSuccess }
     );
   };
-
-  const userCouponMutation = useMutation({
-    mutationFn: (newData: userCouponRequestData) => {
-      return instance.patch('/coupon/request', newData);
-    },
-    onSuccess: () => {
-      console.log('userCouponMutation success!');
-    },
-  });
-
   const handleRequestCoupon = (onSuccess: () => void) => {
     userCouponMutation.mutate(
       { userId: userId ? parseInt(userId) : 1, storeId: 1 },

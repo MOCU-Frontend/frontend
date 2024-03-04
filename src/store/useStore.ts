@@ -27,7 +27,7 @@ const useStore = create<State>((set) => ({
   setNowUserLocation: (newUserLocation) =>
     set({ nowUserLocation: newUserLocation }),
   userId: '1',
-  storeId: undefined,
+  storeId: 1,
   setStoreId: (newStoreId) => set({ storeId: newStoreId }),
   setUserId: (newUserId) => set({ userId: newUserId }),
 }));

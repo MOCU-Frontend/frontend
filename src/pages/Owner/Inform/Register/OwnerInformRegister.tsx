@@ -10,39 +10,33 @@ import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/
 import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
+import { useCarouselData } from '../../../../hooks/useCarouselData';
 import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
 import { OwnerStoreMenuData } from '../../../../store/Type/Owner/owner';
 import useStore from '../../../../store/useStore';
 import styles from './OwnerInformRegister.module.css';
-
+const dataArr = [
+  { name: '베이커리', isChecked: true },
+  { name: '카페', isChecked: false },
+  { name: '음식점', isChecked: false },
+  { name: '주류', isChecked: false },
+  { name: '기타', isChecked: false },
+];
 const OwnerInformRegister: React.FC = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
   const { ownerStoreDataPostMutation } = useOwnerStoreData();
   const [sangho, setSangho] = useState('');
-  const [filterArr, setFilterArr] = useState([
-    { name: '베이커리', isChecked: true },
-    { name: '카페', isChecked: false },
-    { name: '음식점', isChecked: false },
-    { name: '주류', isChecked: false },
-    { name: '기타', isChecked: false },
-  ]);
-
+  const { carouselItemArr: filterArr, handleCheckedDataIndex } =
+    useCarouselData(dataArr);
   const [couponGift, setCouponGift] = useState('');
   const [isEventChecked, setIsEventChecked] = useState(false);
   const [eventText, setEventText] = useState('');
   const [isCouponChecked, setIsCouponChecked] = useState(false);
   const [maxStamp, setMaxStamp] = useState(10);
   const handleClickFilter = (index: number) => {
-    if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
-    if (prevIndex === -1) throw new Error('no checked data!!');
-    setFilterArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
+    handleCheckedDataIndex(prevIndex, index);
   };
   const [menuArr, setMenuArr] = useState<OwnerStoreMenuData[]>([]);
   const checkedCategoryFilter = filterArr.find((x) => x.isChecked);

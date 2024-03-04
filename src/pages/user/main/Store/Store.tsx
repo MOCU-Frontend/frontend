@@ -11,50 +11,22 @@ import StoreReviewContent from '../../../../components/Store/atoms/Contents/Revi
 import { useNavigate, useParams } from 'react-router-dom';
 import FullBtn from '../../../../components/Button/FullBtn/FullBtn';
 import storeImg from '../../../../assets/imgs/storeExample.png';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { fetchStoreDetailData } from '../../../../apis/store/store';
-import { ReviewReportRequestData } from '../../../../store/Type/Review/review';
 import useStore from '../../../../store/useStore';
-import instance from '../../../../apis/instance';
 import { initialReviewHistoryMenuItemDataArr } from '../../../../store/data/searchResult';
 import { MenuItemData } from '../../../../store/data/stamp';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
 import { useFilterMenu } from '../../../../hooks/useFilterMenu';
+import { useStoreMutation } from '../../../../apis/store/mutations/useStoreMutation';
+import { useStoreQuery } from '../../../../apis/store/useStoreQuery';
 
 const Store: React.FC = () => {
   const navigate = useNavigate();
   const { storeId } = useParams();
   const userId = useStore((state) => state.userId);
-  const { data: storeDetailData } = useQuery({
-    queryKey: ['StoreDetailData'],
-    queryFn: () =>
-      fetchStoreDetailData(
-        storeId ? parseInt(storeId) : 1,
-        userId || '',
-        selectedArrangeFilterItem
-          ? selectedArrangeFilterItem.title === '최신순'
-          : true,
-        selectedArrangeFilterItem
-          ? selectedArrangeFilterItem.title === '별점 높은 순'
-          : false,
-        0
-      ),
-    enabled: !!storeId && !!userId,
-  });
 
-  const reviewReportMutation = useMutation({
-    mutationFn: (newData: ReviewReportRequestData) => {
-      return instance.post('/review/correct-my-review', newData);
-    },
-    onSuccess: () => {
-      console.log('신고 완료');
-    },
-  });
-
-  const handleReportReview = (reviewId: number, onSuccess: () => void) => {
-    reviewReportMutation.mutate({ reviewId }, { onSuccess });
-  };
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
 
   const handleDragBottom = () => {
@@ -75,6 +47,13 @@ const Store: React.FC = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
+  const {
+    storeDetailDataQuery: { data: storeDetailData },
+  } = useStoreQuery(userId, storeId, selectedArrangeFilterItem);
+  const { reviewReportMutation } = useStoreMutation();
+  const handleReportReview = (reviewId: number, onSuccess: () => void) => {
+    reviewReportMutation.mutate({ reviewId }, { onSuccess });
+  };
   const [isExistReview] = useState(false);
   return (
     <div className={styles.wholeWrapper}>

@@ -14,23 +14,14 @@ import SlideTabViewFilter from '../../../../../SlideMenu/SlideTabView/Filter/Sli
 import { MenuItemData } from '../../../../../../store/data/stamp';
 import { initialReviewHistoryMenuItemDataArr } from '../../../../../../store/data/searchResult';
 import { useFilterMenu } from '../../../../../../hooks/useFilterMenu';
+import { useMyReviewHistoryQuery } from '../../../../../../apis/my/review/History/useMyReviewHistoryQuery';
 
 const MyReviewHistoryContent = () => {
   const userId = useStore((state) => state.userId);
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
-  const { data: myReviewwHistoryData } = useQuery({
-    queryKey: ['MyReviewwHistory'],
-    queryFn: () =>
-      fetchMyReviewHistoryData(
-        userId || '',
-        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '최신순'
-      ),
-    enabled: !!userId,
-  });
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
-
   const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
     useFilterMenu(initialReviewHistoryMenuItemDataArr);
   const handleFilterSelectClick = (newIndex: number) => {
@@ -39,10 +30,12 @@ const MyReviewHistoryContent = () => {
     handleClickMenuItem(prevIndex, newIndex);
     setIsBottomSheetVisible(true);
   };
-
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   ) as MenuItemData | undefined;
+  const {
+    myReviewHistoryQuery: { data: myReviewwHistoryData },
+  } = useMyReviewHistoryQuery(userId, selectedArrangeFilterItem);
 
   return (
     <div className={styles.wholeWrapper}>

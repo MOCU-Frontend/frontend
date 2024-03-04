@@ -6,18 +6,16 @@ import MapCouponModal from '../../../../components/Map/atoms/Modal/Coupon/MapCou
 import BottomSheet from '../../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StampHeaderFilter from '../../../../components/Stamp/atoms/StampHeaderFilter/StampHeaderFilter';
-import { useMutation, useQuery } from '@tanstack/react-query';
 import { MenuItemData } from '../../../../store/data/stamp';
 import {
   initialStampMenuItemDataArr,
   stampInitialOptionDataArr,
 } from '../../../../store/data/searchResult';
-import { fetchStampData } from '../../../../apis/stamp/stamp';
 import useStore from '../../../../store/useStore';
-import { userCouponRequestData } from '../../../../store/Type/My/Coupon/couponRequest';
-import instance from '../../../../apis/instance';
 import { useFilterMenu } from '../../../../hooks/useFilterMenu';
 import { useOptionMenu } from '../../../../hooks/useOptionMenu';
+import { useStampQuery } from '../../../../apis/stamp/useStampQuery';
+import { useStampMutation } from '../../../../apis/stamp/useStampMutation';
 
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
 
@@ -69,29 +67,16 @@ const Stamp = () => {
     (x) => x.isChecked
   ) as MenuItemData | undefined;
 
-  const { data: StampData } = useQuery({
-    queryKey: ['StampData'],
-    queryFn: () =>
-      fetchStampData(
-        userId || '',
-        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체',
-        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
-        optionDataArr[0].isChecked,
-        optionDataArr[1].isChecked,
-        optionDataArr[2].isChecked,
-        optionDataArr[3].isChecked
-      ),
-    enabled: !!userId,
-  });
+  const {
+    storeStampDataQuery: { data: StampData },
+  } = useStampQuery(
+    userId,
+    selectedArrangeFilterItem,
+    selectedSectorFilterItem,
+    optionDataArr
+  );
 
-  const userCouponMutation = useMutation({
-    mutationFn: (newData: userCouponRequestData) => {
-      return instance.patch('/coupon/request', newData);
-    },
-    onSuccess: () => {
-      console.log('userCouponMutation success!');
-    },
-  });
+  const { userCouponMutation } = useStampMutation();
 
   const handleRequestCoupon = (onSuccess: () => void) => {
     userCouponMutation.mutate(

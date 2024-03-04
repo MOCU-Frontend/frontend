@@ -2,45 +2,33 @@ import React, { useState } from 'react';
 import styles from './MissionToday.module.css';
 import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn';
 import TodayMission from '../../../../../components/Mission1/atoms/TodayMission';
-import { fetchMissionPageData } from '../../../../../apis/mission/fetchMissionPageData';
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../../styles/colors';
 import { ReactComponent as ProfileImage } from '../../../../../assets/icon/profileGradation.svg';
 import { ReactComponent as ArrowRightSmallImage } from '../../../../../assets/icon/arrowRightSmall.svg';
 import { ReactComponent as InformationImage } from '../../../../../assets/icon/information.svg';
-import { useQuery } from '@tanstack/react-query';
-import { useMutation } from '@tanstack/react-query';
-import { fetchMissionMapGetData } from '../../../../../apis/mission/fetchMissionMapGetData';
 import { missionBtnResponse } from '../../../../../store/Type/Mission/missionBtnResponse';
 import ModalMissionClear from '../../../../../components/Modal/ModalMissionClear/ModalMissionClear';
 import MapGageBar from '../../../../../components/Map/atoms/GageBar/MapGageBar';
 import useStore from '../../../../../store/useStore';
-import instance from '../../../../../apis/instance';
+import { useMissionTodayQuery } from '../../../../../apis/mission/Today/useMissionTodayQuery';
+import { useMissionTodayMutation } from '../../../../../apis/mission/Today/useMissionTodayMutation';
 
 const MissionToday = () => {
   const navigate = useNavigate();
   const userId = useStore((state) => state.userId);
+  const [missionCompleted, setMissionCompleted] = useState<boolean>(false);
 
-  const { data: MissionMapGetData } = useQuery({
-    queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(userId || ''),
-    enabled: !!userId,
-  });
+  const {
+    missionTodayQuery: { data: storeMissionData },
+    missionTodayMapGetQuery: { data: MissionMapGetData },
+  } = useMissionTodayQuery(missionCompleted, userId);
 
   const [patchData, setPatchData] = useState<missionBtnResponse | undefined>();
 
-  const missionBtnMutation = useMutation({
-    mutationFn: (newData: { todayMissionId: number; userId: string }) => {
-      return instance.patch('/mission/today-mission/done', newData);
-    },
-    onSuccess: (res) => {
-      const data: missionBtnResponse = res.data;
-      console.log(data);
-      setPatchData(data);
-    },
-  });
-
-  const [missionCompleted, setMissionCompleted] = useState<boolean>(false);
+  const { missionBtnMutation } = useMissionTodayMutation((data) =>
+    setPatchData(data)
+  );
 
   const handleCompleteMissionClick = (
     todayMissionId: number,
@@ -51,7 +39,6 @@ const MissionToday = () => {
     ) {
       setMissionCompleted(true);
     }
-
     missionBtnMutation.mutate({
       todayMissionId: todayMissionId,
       userId,
@@ -59,12 +46,6 @@ const MissionToday = () => {
   };
 
   const stampCnt = MissionMapGetData?.numOfStamp;
-
-  const { data: storeMissionData } = useQuery({
-    queryKey: ['missionData', missionCompleted],
-    queryFn: () => fetchMissionPageData(userId || ''),
-    enabled: !!userId,
-  });
 
   return (
     <div className={styles.wrapper}>

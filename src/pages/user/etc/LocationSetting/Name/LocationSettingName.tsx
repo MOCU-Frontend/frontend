@@ -11,43 +11,20 @@ import { ReactComponent as SchoolIcon } from '../../../../../assets/icon/school.
 import { ReactComponent as MarkerIcon } from '../../../../../assets/icon/mapMarkerRegularSolid.svg';
 import MyNowLocationBottomSheet from '../../../../../components/My/Location/Now/atoms/BottomSheet/MyNowLocationBottomSheet';
 import { useNavigate } from 'react-router-dom';
-type LocSetData = {
-  name: '집' | '회사' | '학교' | '기타';
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  isChecked: boolean;
-  etcName?: string;
-};
+import { useLocSetSelect } from '../../../../../hooks/useLocSetSelect';
+
 const LocationSettingName: React.FC = () => {
   const [detailLocation, setDetailLocation] = useState('');
-  const [locSetDataArr, setLocSetDataArr] = useState<LocSetData[]>([
+  const {
+    locSetDataArr,
+    handleClickLocSetBtn,
+    handleChangeCheckedDataEtcName,
+  } = useLocSetSelect([
     { name: '집', Icon: HomeIcon, isChecked: true },
     { name: '회사', Icon: CompanyIcon, isChecked: false },
     { name: '학교', Icon: SchoolIcon, isChecked: false },
     { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
-  const handleClickLocSetBtn = (index: number) => {
-    if (!locSetDataArr[index]) throw new Error('invalid index!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      const checkedIndex = copiedArr.findIndex((x) => x.isChecked);
-      if (checkedIndex === -1) throw new Error('there is no checked data!!');
-      copiedArr[checkedIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
-  };
-  const handleChangeCheckedDataEtcName = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const checkedData = locSetDataArr.find((x) => x.isChecked);
-    if (!checkedData) throw new Error('no checked loc set data!');
-    if (checkedData.name !== '기타') throw new Error('no etc name data!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[3].etcName = e.target.value;
-      return copiedArr;
-    });
-  };
   const navigate = useNavigate();
   return (
     <>

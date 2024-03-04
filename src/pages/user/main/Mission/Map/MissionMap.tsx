@@ -4,53 +4,32 @@ import HeaderBackBtn from '../../../../../components/HeaderBackBtn/HeaderBackBtn
 import MissionMapContent from '../../../../../components/Mission2/atoms/MissionMapContent';
 import { ReactComponent as InformationImage } from '../../../../../assets/icon/information.svg';
 import { ReactComponent as HourglassImage } from '../../../../../assets/icon/hourGlassSmall.svg';
-
 import { useNavigate } from 'react-router-dom';
 import { colors } from '../../../../../styles/colors';
-
-import instance from '../../../../../apis/instance';
-import { useMutation, useQuery } from '@tanstack/react-query';
-
-import { fetchMissionMapGetData } from '../../../../../apis/mission/fetchMissionMapGetData';
-import { MissionMapCompleteResponse } from '../../../../../store/Type/Mission/missionMapCompleteResponse';
-
 import ModalMissionClear from '../../../../../components/Modal/ModalMissionClear/ModalMissionClear';
 import useStore from '../../../../../store/useStore';
+import { useMissionMapQuery } from '../../../../../apis/mission/Map/useMissionMapQuery';
+import { useMissionMapMutation } from '../../../../../apis/mission/Map/useMissionMapMutation';
 
 const MissionMap = () => {
   const navigate = useNavigate();
-
   const userId = useStore((state) => state.userId);
-  const { data: MissionMapGetData } = useQuery({
-    queryKey: ['missionMapGetData'],
-    queryFn: () => fetchMissionMapGetData(userId || ''),
-    enabled: !!userId,
-  });
-
+  const {
+    missionMapQuery: { data: MissionMapGetData },
+  } = useMissionMapQuery(userId);
   const stampCnt = MissionMapGetData?.numOfStamp;
-
   const [reward, setReward] = useState<string>('스타벅스 2만원권');
-
   const [rewardGet, setRewardGet] = useState<boolean>(false);
-
   const [status] = useState<string | undefined>(MissionMapGetData?.status);
-
+  const { missionMapCompleteMutation } = useMissionMapMutation((data) =>
+    setReward(data)
+  );
   const handleRewardClick = () => {
     missionMapCompleteMutation.mutate({
       userId: userId || '',
     });
     setRewardGet(true);
   };
-
-  const missionMapCompleteMutation = useMutation({
-    mutationFn: (newData: { userId: string }) => {
-      return instance.patch('/mission/mission-map/complete', newData);
-    },
-    onSuccess: (res) => {
-      const data: MissionMapCompleteResponse = res.data;
-      setReward(data.result.reward);
-    },
-  });
 
   return (
     <div className={styles.wrapper}>

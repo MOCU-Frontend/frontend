@@ -25,14 +25,13 @@ import {
   AdItemData,
   adItemDataArr,
 } from '../../../../store/data/advertisement';
+import { useMyQuery } from '../../../../apis/my/useMyQuery';
 
 const My: React.FC = () => {
   const userId = useStore((state) => state.userId);
-  const { data: MyPageData } = useQuery({
-    queryKey: ['MyPage'],
-    queryFn: () => fetchMyPageData(userId || ''),
-    enabled: !!userId,
-  });
+  const {
+    myDataQuery: { data: MyPageData },
+  } = useMyQuery(userId);
 
   const navigate = useNavigate();
 

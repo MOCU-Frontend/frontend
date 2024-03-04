@@ -1,4 +1,3 @@
-import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CheckFilter from '../../../components/CheckFilter/CheckFilter';
@@ -6,93 +5,41 @@ import CheckFilterSelect from '../../../components/CheckFilter/Select/CheckFilte
 import HeaderBackBtn from '../../../components/HeaderBackBtn/HeaderBackBtn';
 import OwnerRequestItem from '../../../components/Owner/Request/atoms/Item/OwnerRequestItem';
 import styles from './OwnerRequest.module.css';
-import { fetchOwnerRequestData } from '../../../apis/owner/request';
 import useStore from '../../../store/useStore';
-import { initialOwnerRequestMenuItemDataArr } from '../../../store/data/searchResult';
+import {
+  initialOwnerRequestMenuItemDataArr,
+  ownerRequestInitialOptionDataArr,
+} from '../../../store/data/searchResult';
 import { MenuItemData } from '../../../store/data/stamp';
 import BottomSheet from '../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
+import { useFilterMenu } from '../../../hooks/useFilterMenu';
+import { useOptionMenu } from '../../../hooks/useOptionMenu';
+import { useOwnerRequestQuery } from '../../../apis/owner/Request/useOwnerRequestQuery';
 
 const OwnerRequest = () => {
   const storeId = useStore((state) => state.storeId);
-  const { data: ownerRequestData } = useQuery({
-    queryKey: ['OwnerRequest'],
-    queryFn: () =>
-      fetchOwnerRequestData(
-        storeId || 0,
-        isCheckedAcceptOption,
-        selectedArrangeFilterItem
-          ? selectedArrangeFilterItem.title === '보상 적립 전체'
-          : true,
-        selectedArrangeFilterItem
-          ? selectedArrangeFilterItem.title === '보상 요청만'
-          : false,
-        selectedArrangeFilterItem
-          ? selectedArrangeFilterItem.title === '적립 요청만'
-          : false,
-        0
-      ),
-    enabled: !!storeId,
-  });
-
   const [isBottomSheetVisible, setIsBottomSheetVisible] = useState(false);
-
   const handleDragBottom = () => {
     setIsBottomSheetVisible(false);
   };
-
-  const [menuItemDataArr, setMenuItemDataArr] = useState<MenuItemData[]>(
-    initialOwnerRequestMenuItemDataArr
-  );
-
-  const [isCheckedAcceptOption, setIsCheckedAcceptOption] = useState(false);
-
-  const handleClickMenuBodyItem = (
-    menuIndex: number,
-    newIndex: number,
-    prevIndex?: number
-  ) => {
-    if (!menuItemDataArr[menuIndex]) throw new Error('invalid menuIndex!!');
-    if (!menuItemDataArr[menuIndex].bodyDataArr[newIndex])
-      throw new Error('invalid newIndex!!');
-    if (
-      prevIndex !== undefined &&
-      !menuItemDataArr[menuIndex].bodyDataArr[prevIndex]
-    )
-      throw new Error('invalid prevIndex!!');
-    setMenuItemDataArr((prev) => {
-      const copiedMenuItemDataArr = [...prev];
-      if (prevIndex !== undefined) {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[prevIndex].isChecked =
-          false;
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked = true;
-      } else {
-        copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked =
-          !copiedMenuItemDataArr[menuIndex].bodyDataArr[newIndex].isChecked;
-      }
-      return copiedMenuItemDataArr;
-    });
-  };
-
-  const handleClickMenuItem = (prevIndex: number, newIndex: number) => {
-    setMenuItemDataArr((prev) => {
-      const copiedArr = [...prev];
-      copiedArr[prevIndex].isChecked = false;
-      copiedArr[newIndex].isChecked = true;
-      return copiedArr;
-    });
-  };
-
+  const { menuItemDataArr, handleClickMenuBodyItem, handleClickMenuItem } =
+    useFilterMenu(initialOwnerRequestMenuItemDataArr);
   const handleFilterSelectClick = (newIndex: number) => {
     const prevIndex = menuItemDataArr.findIndex((x) => x.isChecked);
     if (prevIndex === -1) throw new Error('no checked menu item!!');
     handleClickMenuItem(prevIndex, newIndex);
     setIsBottomSheetVisible(true);
   };
+  const { optionDataArr, sortedOptionDataArr, handleOptionClick } =
+    useOptionMenu(ownerRequestInitialOptionDataArr);
 
   const selectedArrangeFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   ) as MenuItemData | undefined;
+  const {
+    ownerRequestQuery: { data: ownerRequestData },
+  } = useOwnerRequestQuery(storeId, optionDataArr, selectedArrangeFilterItem);
 
   const navigate = useNavigate();
   return (
@@ -102,15 +49,21 @@ const OwnerRequest = () => {
         onClickBackBtn={() => navigate(-1)}
       />
       <div className={styles.filtersWrapper}>
-        <CheckFilter
-          label='수락 안 한 요청만'
-          backgroundColor='grey-light-00'
-          textColor='grey-dark-01'
-          isChecked={isCheckedAcceptOption}
-          border={1}
-          borderColor='grey-light-02'
-          onClick={() => setIsCheckedAcceptOption((prev) => !prev)}
-        />
+        {sortedOptionDataArr.map((data, index) => (
+          <CheckFilter
+            key={data.title + index}
+            isChecked={data.isChecked}
+            backgroundColor='grey-light-00'
+            textColor='grey-dark-01'
+            label={data.title}
+            border={1}
+            borderColor='grey-light-02'
+            onClick={() => {
+              handleOptionClick(data.id);
+            }}
+          />
+        ))}
+
         <CheckFilterSelect
           label={selectedArrangeFilterItem?.title || '보상 • 적립 전체'}
           backgroundColor='grey-light-00'
@@ -148,7 +101,6 @@ const OwnerRequest = () => {
               menuItemDataArr={menuItemDataArr}
               handleCheckedDataIndex={handleClickMenuItem}
               handleClickMenuBodyItem={handleClickMenuBodyItem}
-              // handleClickResetOptionBtn={handleClickResetOptionBtn}
               onClickCompleteBtn={handleDragBottom}
             />
           }

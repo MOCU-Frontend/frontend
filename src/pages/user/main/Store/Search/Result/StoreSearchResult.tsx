@@ -18,6 +18,7 @@ import { fetchStoreSearchResultData } from '../../../../../../apis/storeSearchRe
 import useStore from '../../../../../../store/useStore';
 import { useFilterMenu } from '../../../../../../hooks/useFilterMenu';
 import { useOptionMenu } from '../../../../../../hooks/useOptionMenu';
+import { useStoreSearchResultQuery } from '../../../../../../apis/store/Search/Result/useStoreSearchResultQuery';
 
 const StoreSearchResult = () => {
   const navigate = useNavigate();
@@ -51,33 +52,16 @@ const StoreSearchResult = () => {
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
 
-  const { data: storeSearchResultData } = useQuery({
-    queryKey: [
-      'StoreSearchResultData',
-      searchWord,
-      selectedArrangeFilterItem,
-      optionDataArr[2].isChecked,
-      optionDataArr[3].isChecked,
-      optionDataArr[1].isChecked,
-      optionDataArr[0].isChecked,
-      selectedSectorFilterItem,
-    ],
-    queryFn: () =>
-      fetchStoreSearchResultData(
-        userId || '',
-        nowUserLocation?.latitude || 37.5404257,
-        nowUserLocation?.longitude || 127.07209,
-        searchWord,
-        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '거리순',
-        optionDataArr[2].isChecked,
-        optionDataArr[3].isChecked,
-        optionDataArr[1].isChecked,
-        optionDataArr[0].isChecked,
-        0,
-        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체'
-      ),
-    enabled: !!userId && !!nowUserLocation,
-  });
+  const {
+    storeSearchResultDataQuery: { data: storeSearchResultData },
+  } = useStoreSearchResultQuery(
+    userId,
+    nowUserLocation,
+    searchWord,
+    selectedArrangeFilterItem,
+    selectedSectorFilterItem,
+    optionDataArr
+  );
 
   return (
     <div className={styles.wrapper}>

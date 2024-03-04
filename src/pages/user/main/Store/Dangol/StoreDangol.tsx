@@ -14,12 +14,11 @@ import BottomSheet from '../../../../../components/BottomSheet/BottomSheet';
 import SlideTabViewFilter from '../../../../../components/SlideMenu/SlideTabView/Filter/SlideTabViewFilter';
 import StoreInfoInStamp from '../../../../../components/Stamp/atoms/StoreInfoInStamp/StoreInfoInStamp';
 import StoreDangolSeeMoreBtn from '../../../../../components/Store/Dangol/atoms/Btn/SeeMore/StoreDangolSeeMoreBtn';
-import { useQuery } from '@tanstack/react-query';
 import { StoreList } from '../../../../../store/Type/User/userDangolResponse';
-import { fetchDangolData } from '../../../../../apis/dangol/dangol';
 import useStore from '../../../../../store/useStore';
 import { useFilterMenu } from '../../../../../hooks/useFilterMenu';
 import { useOptionMenu } from '../../../../../hooks/useOptionMenu';
+import { useStoreDangolQuery } from '../../../../../apis/store/Dangol/useStoreDangolQuery';
 
 const StoreDangol = () => {
   const userId = useStore((state) => state.userId);
@@ -46,21 +45,16 @@ const StoreDangol = () => {
   const { optionDataArr, sortedOptionDataArr, handleOptionClick } =
     useOptionMenu(storeDangolinitialOptionDataArr);
 
-  const { data: userDangolData } = useQuery({
-    queryKey: ['Dangol'],
-    queryFn: () =>
-      fetchDangolData(
-        userId || '',
-        selectedArrangeFilterItem ? selectedArrangeFilterItem.title : '최신순',
-        selectedSectorFilterItem ? selectedSectorFilterItem.title : '전체',
-        optionDataArr[0].isChecked,
-        optionDataArr[1].isChecked,
-        nowUserLocation?.latitude || 37.5404257,
-        nowUserLocation?.longitude || 127.07209,
-        0
-      ),
-    enabled: !!userId && !!nowUserLocation && optionDataArr.length > 0,
-  });
+  const {
+    storeDangolDataQuery: { data: userDangolData },
+  } = useStoreDangolQuery(
+    userId,
+    nowUserLocation,
+    selectedArrangeFilterItem,
+    selectedSectorFilterItem,
+    optionDataArr
+  );
+
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn

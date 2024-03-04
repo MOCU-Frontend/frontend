@@ -16,9 +16,7 @@ import FullBtn from '../../../../../components/Button/FullBtn/FullBtn';
 const GiftDetail = () => {
   const navigate = useNavigate();
   const { cafeTitle, foodTitle, foodPrice } = useParams();
-
   const [activeTab, setActiveTab] = useState(1); // 초기값은 첫 번째 항목
-
   const handleTabClick = (tabNumber: number) => {
     setActiveTab(tabNumber);
   };

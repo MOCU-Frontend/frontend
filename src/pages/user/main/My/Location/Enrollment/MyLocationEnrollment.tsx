@@ -9,10 +9,7 @@ import MyLocationEditLocContent from '../../../../../../components/My/Location/E
 import MyLocationEditLocSetContent from '../../../../../../components/My/Location/Edit/atoms/Contents/LocSet/MyLocationEditLocSetContent';
 import MyLocationEnrollmentAddressList from '../../../../../../components/My/Location/Enrollment/Content/AddressList/MyLocationEnrollmentAddressList';
 import FullSearchBar from '../../../../../../components/SearchBar/FullSearchBar/FullSearchBar';
-import {
-  AddressSearchData,
-  AddressSearchWholeData,
-} from '../../../../../../store/Type/AddressSearch/AddressSearch';
+import { AddressSearchData } from '../../../../../../store/Type/AddressSearch/AddressSearch';
 import { colors } from '../../../../../../styles/colors';
 import styles from './MyLocationEnrollment.module.css';
 import { ReactComponent as HomeIcon } from '../../../../../../assets/icon/home.svg';
@@ -20,18 +17,10 @@ import { ReactComponent as CompanyIcon } from '../../../../../../assets/icon/com
 import { ReactComponent as SchoolIcon } from '../../../../../../assets/icon/school.svg';
 import { ReactComponent as MarkerIcon } from '../../../../../../assets/icon/mapMarkerRegularSolid.svg';
 import useStore from '../../../../../../store/useStore';
-import { useMutation } from '@tanstack/react-query';
-import {
-  AddressPostRequest,
-  AddressPostResponse,
-} from '../../../../../../store/Type/Address/address';
-import instance from '../../../../../../apis/instance';
-type LocSetData = {
-  name: '집' | '회사' | '학교' | '기타';
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
-  isChecked: boolean;
-  etcName?: string;
-};
+import { useMyLocationEnrollmentQuery } from '../../../../../../apis/my/Location/Enrollment/useMyLocationEnrollmentQuery';
+import { useLocSetSelect } from '../../../../../../hooks/useLocSetSelect';
+import { useMyLocationEnrollmentMutation } from '../../../../../../apis/my/Location/Enrollment/useMyLocationEnrollmentMutation';
+
 type Address = {
   jibun: string;
   road: string;
@@ -39,93 +28,39 @@ type Address = {
 };
 const MyLocationEnrollment: React.FC = () => {
   const navigate = useNavigate();
-  const [addressSearchWholeData, setAddressSearchWholeData] = useState<
-    AddressSearchWholeData | undefined
-  >();
+
   const [selectedAddressData, setSelectedAddressData] = useState<
     Address | undefined
   >();
 
+  const [locSearchWord, setLocSearchWord] = useState('');
+  const {
+    myLocationEnrollmentLocQuery: { data: searchedLocData },
+  } = useMyLocationEnrollmentQuery(locSearchWord);
+
   const handleSearchLocation = (locText: string) => {
-    fetch(
-      `https://dapi.kakao.com/v2/local/search/address.json?analyze_type=similar&page=1&size=10&query=${locText}`,
-      {
-        method: 'GET',
-        headers: { Authorization: process.env.REACT_APP_KAKAO_AK || '' },
-      }
-    )
-      .then((response) => {
-        if (response.ok === true) {
-          return response.json();
-        }
-        throw new Error('에러 발생!');
-      })
-      .then((data) => {
-        setAddressSearchWholeData(data);
-      })
-      .catch((error) => console.error(error));
+    setLocSearchWord(locText);
   };
 
-  // const handleSearchLocation = (locText: string) => {
-  //   fetch('http://localhost:3000/data/address-dummy-02.json')
-  //     .then((response) => {
-  //       if (response.ok === true) {
-  //         return response.json();
-  //       }
-  //       throw new Error('에러 발생!');
-  //     })
-  //     .then((data) => {
-  //       setAddressSearchWholeData(data);
-  //     })
-  //     .catch((error) => console.error(error));
-  // };
-
   const [detailLocation, setDetailLocation] = useState('');
-  const [locSetDataArr, setLocSetDataArr] = useState<LocSetData[]>([
+  const {
+    locSetDataArr,
+    checkedLocSetData,
+    handleClickLocSetBtn,
+    handleChangeCheckedDataEtcName,
+  } = useLocSetSelect([
     { name: '집', Icon: HomeIcon, isChecked: true },
     { name: '회사', Icon: CompanyIcon, isChecked: false },
     { name: '학교', Icon: SchoolIcon, isChecked: false },
     { name: '기타', Icon: MarkerIcon, isChecked: false, etcName: '' },
   ]);
-  const checkedLocSetData = locSetDataArr.find((x) => x.isChecked);
-  const handleClickLocSetBtn = (index: number) => {
-    if (!locSetDataArr[index]) throw new Error('invalid index!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      const checkedIndex = copiedArr.findIndex((x) => x.isChecked);
-      if (checkedIndex === -1) throw new Error('there is no checked data!!');
-      copiedArr[checkedIndex].isChecked = false;
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
-  };
-  const handleChangeCheckedDataEtcName = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const checkedData = locSetDataArr.find((x) => x.isChecked);
-    if (!checkedData) throw new Error('no checked loc set data!');
-    if (checkedData.name !== '기타') throw new Error('no etc name data!');
-    setLocSetDataArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      copiedArr[3].etcName = e.target.value;
-      return copiedArr;
-    });
-  };
+
   const nowAddress = useStore((state) => state.nowAddress);
   const userId = useStore((state) => state.userId);
-  const addressPostMutation = useMutation({
-    mutationFn: (newData: AddressPostRequest) => {
-      return instance.post(`/users/${userId}/address/register`, newData);
-    },
-    onSuccess: (res) => {
-      const data: AddressPostResponse = res.data;
-      console.log(data);
-      navigate('/');
-    },
-    onError: (err) => {
-      // alert(err);
-    },
-  });
+
+  const { addressPostMutation } = useMyLocationEnrollmentMutation(userId, () =>
+    navigate('/')
+  );
   return (
     <div className={styles.wholeWrapper}>
       <HeaderBackBtn
@@ -157,10 +92,10 @@ const MyLocationEnrollment: React.FC = () => {
               color={colors.subPurplelight}
             />
           </div>
-          {addressSearchWholeData && (
+          {searchedLocData && (
             <MyLocationEnrollmentAddressList
               addressSearchDataArr={
-                addressSearchWholeData ? addressSearchWholeData.documents : []
+                searchedLocData ? searchedLocData.documents : []
               }
               handleClickSearchAddress={(data: AddressSearchData) =>
                 setSelectedAddressData({

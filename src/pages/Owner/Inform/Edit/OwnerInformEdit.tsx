@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import FullBtn from '../../../../components/Button/FullBtn/FullBtn';
 import HeaderXBtn from '../../../../components/HeaderBackBtn/HeaderXBtn/HeaderXBtn';
@@ -9,11 +9,12 @@ import OwnerInformEditImgContent from '../../../../components/Owner/Inform/Edit/
 import OwnerInformEditInputContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Input/OwnerInformEditInputContent';
 import OwnerInformEditMenuContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Menu/OwnerInformEditMenuContent';
 import OwnerInformEdiStampContent from '../../../../components/Owner/Inform/Edit/atoms/Contents/Stamp/OwnerInformEdiStampContent';
+import { useCarouselData } from '../../../../hooks/useCarouselData';
 import { useOwnerStoreData } from '../../../../hooks/useOwnerStoreData';
 import { OwnerStoreMenuData } from '../../../../store/Type/Owner/owner';
 import useStore from '../../../../store/useStore';
 import styles from './OwnerInformEdit.module.css';
-const basicFilterArr = [
+const dataArr = [
   { name: '베이커리', isChecked: true },
   { name: '카페', isChecked: false },
   { name: '음식점', isChecked: false },
@@ -25,46 +26,39 @@ const OwnerInformEdit: React.FC = () => {
   const storeId = useStore((state) => state.storeId);
   const { ownerStoreData, ownerStoreDataPatchMutation } =
     useOwnerStoreData(storeId);
-  const [sangho, setSangho] = useState(
-    ownerStoreData ? ownerStoreData.storeName : ''
-  );
-  const [filterArr, setFilterArr] = useState(
-    ownerStoreData
-      ? basicFilterArr.map((item) =>
+  const [sangho, setSangho] = useState('');
+  const [basicFilterArr, setBasicFilterArr] = useState(dataArr);
+  const { carouselItemArr: filterArr, handleCheckedDataIndex } =
+    useCarouselData(basicFilterArr);
+  const [couponGift, setCouponGift] = useState('');
+  const [isEventChecked, setIsEventChecked] = useState(false);
+  const [eventText, setEventText] = useState('');
+  const [maxStamp, setMaxStamp] = useState(0);
+  const [menuArr, setMenuArr] = useState<OwnerStoreMenuData[]>([]);
+  useEffect(() => {
+    if (ownerStoreData) {
+      setSangho(ownerStoreData.storeName);
+      setBasicFilterArr(
+        dataArr.map((item) =>
           item.name === ownerStoreData.category
             ? { ...item, isChecked: true }
             : { ...item, isChecked: false }
         )
-      : basicFilterArr
-  );
-  const [couponGift, setCouponGift] = useState(
-    ownerStoreData ? ownerStoreData.reward : ''
-  );
-  const [isEventChecked, setIsEventChecked] = useState(
-    ownerStoreData ? !!ownerStoreData.event : false
-  );
-  const [eventText, setEventText] = useState(
-    ownerStoreData ? ownerStoreData.event || '' : ''
-  );
-
-  const [maxStamp, setMaxStamp] = useState(
-    ownerStoreData ? ownerStoreData.maxStamp : 0
-  );
+      );
+      setCouponGift(ownerStoreData.reward);
+      setIsEventChecked(!!ownerStoreData.event);
+      setEventText(ownerStoreData.event || '');
+      setMaxStamp(ownerStoreData.maxStamp);
+      setMenuArr(ownerStoreData.menus);
+    }
+  }, [ownerStoreData]);
 
   const handleClickFilter = (index: number) => {
-    if (!filterArr[index]) throw new Error('invalid index!!');
     const prevIndex = filterArr.findIndex((x) => x.isChecked);
-    setFilterArr((prevArr) => {
-      const copiedArr = [...prevArr];
-      prevIndex !== -1 && (copiedArr[prevIndex].isChecked = false);
-      copiedArr[index].isChecked = true;
-      return copiedArr;
-    });
+    handleCheckedDataIndex(prevIndex, index);
   };
   const checkedCategoryFilter = filterArr.find((x) => x.isChecked);
-  const [menuArr, setMenuArr] = useState<OwnerStoreMenuData[]>(
-    ownerStoreData ? ownerStoreData.menus : []
-  );
+
   return (
     <div>
       <HeaderXBtn headerTitle='가게 정보 수정' onClickXBtn={() => navigate(-1)}>

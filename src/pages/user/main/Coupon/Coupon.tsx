@@ -14,6 +14,8 @@ import useStore from '../../../../store/useStore';
 import instance from '../../../../apis/instance';
 import { userStampRequestData } from '../../../../store/Type/Stamp/stampRequest';
 import { userCouponRequestData } from '../../../../store/Type/My/Coupon/couponRequest';
+import { useCouponQuery } from '../../../../apis/coupon/useCouponQuery';
+import { useCouponMutation } from '../../../../apis/coupon/useCouponMutation';
 
 type ModalLevel = 'confirm' | 'waiting' | 'done';
 type CouponModalLevel = 'confirm' | 'waiting' | 'done' | 'regularCustomer';
@@ -71,49 +73,21 @@ const Coupon = () => {
   const [selectedStoreInform, setSelectedStoreInform] = useState<
     StoreData | undefined
   >();
-
   const handleDragDownBottomSheet = () => {
     setIsShowBottomSheet(false);
   };
-
   const userId = useStore((state) => state.userId);
   const nowUserLocation = useStore((state) => state.nowUserLocation);
-  const { data: myCouponData } = useQuery({
-    queryKey: ['MyCoupon'],
-    queryFn: () =>
-      fetchMyCouponData(
-        userId || '',
-        nowUserLocation?.latitude || 0,
-        nowUserLocation?.longitude || 0
-      ),
-    enabled: !!userId && !!nowUserLocation,
-  });
-
-  const userStampMutation = useMutation({
-    mutationFn: (newData: userStampRequestData) => {
-      return instance.patch('/stamp/request', newData);
-    },
-    onSuccess: () => {
-      console.log('userStampMutation success!');
-    },
-  });
-
+  const {
+    couponDataQuery: { data: myCouponData },
+  } = useCouponQuery(userId, nowUserLocation);
+  const { userCouponMutation, userStampMutation } = useCouponMutation();
   const handleRequestStamp = (onSuccess: () => void) => {
     userStampMutation.mutate(
       { userId: userId ? parseInt(userId) : 1, storeId: 1 },
       { onSuccess }
     );
   };
-
-  const userCouponMutation = useMutation({
-    mutationFn: (newData: userCouponRequestData) => {
-      return instance.patch('/coupon/request', newData);
-    },
-    onSuccess: () => {
-      console.log('userCouponMutation success!');
-    },
-  });
-
   const handleRequestCoupon = (onSuccess: () => void) => {
     userCouponMutation.mutate(
       { userId: userId ? parseInt(userId) : 1, storeId: 1 },

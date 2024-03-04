@@ -1,17 +1,12 @@
-import { useMutation } from '@tanstack/react-query';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import instance from '../../../../apis/instance';
+import { useReviewMutation } from '../../../../apis/review/useReviewMutation';
 import HeaderBackBtn from '../../../../components/HeaderBackBtn/HeaderBackBtn';
 import ReviewBtnContent from '../../../../components/Review/atoms/Contents/Btn/ReviewBtnContent';
 import ReviewInformContent from '../../../../components/Review/atoms/Contents/Inform/ReviewInformContent';
 import ReviewInputContent from '../../../../components/Review/atoms/Contents/Input/ReviewInputContent';
 import ReviewNoticeContent from '../../../../components/Review/atoms/Contents/Notice/ReviewNoticeContent';
 import ReviewScoreContent from '../../../../components/Review/atoms/Contents/Score/ReviewScoreContent';
-import {
-  ReviewPostRequestData,
-  ReviewPostResponse,
-} from '../../../../store/Type/Review/review';
 import useStore from '../../../../store/useStore';
 import styles from './Review.module.css';
 
@@ -19,15 +14,7 @@ const Review: React.FC = () => {
   const navigate = useNavigate();
   const [reviewText, setReviewText] = useState('');
   const userId = useStore((state) => state.userId);
-  const reviewPostMutation = useMutation({
-    mutationFn: (newData: ReviewPostRequestData) => {
-      return instance.post('/review', newData);
-    },
-    onSuccess: (res) => {
-      const data: ReviewPostResponse = res.data;
-      console.log(data);
-    },
-  });
+  const { reviewPostMutation } = useReviewMutation();
 
   return (
     <>

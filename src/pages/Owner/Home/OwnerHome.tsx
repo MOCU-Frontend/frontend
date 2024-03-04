@@ -12,11 +12,8 @@ import ModalRequest from '../../../components/Modal/ModalRequest/ModalRequest';
 import ModalConfirm from '../../../components/Modal/ModalConfirm/ModalConfirm';
 import ModalAccum from '../../../components/Modal/ModalAccum/ModalAccum';
 import useStore from '../../../store/useStore';
-import { fetchOwnerStoreChangeData } from '../../../apis/owner/ownerStoreChange';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import instance from '../../../apis/instance';
-import { ownerStampRequestData } from '../../../store/Type/Stamp/stampRequest';
-import { ownerCouponRequestData } from '../../../store/Type/My/Coupon/couponRequest';
+import { useOwnerHomeQuery } from '../../../apis/owner/Home/useOwnerHomeQuery';
+import { useOwnerHomeMutation } from '../../../apis/owner/Home/useOwnerHomeMutation';
 declare global {
   interface Window {
     showCouponModal: () => void;
@@ -27,14 +24,11 @@ declare global {
 }
 const OwnerHome: React.FC = () => {
   const navigate = useNavigate();
-
   const ownerId = useStore((state) => state.userId);
   const setStoreId = useStore((state) => state.setStoreId);
-  const { data: ownerStoreChangeData } = useQuery({
-    queryKey: ['OwnerStoreChangeData'],
-    queryFn: () => fetchOwnerStoreChangeData(ownerId || ''),
-    enabled: !!ownerId,
-  });
+  const {
+    ownerHomeQuery: { data: ownerStoreChangeData },
+  } = useOwnerHomeQuery(ownerId);
   useEffect(() => {
     if (ownerStoreChangeData) {
       setStoreId(ownerStoreChangeData.storeId);
@@ -48,16 +42,7 @@ const OwnerHome: React.FC = () => {
   const [accumCounterNum, setAccumCounterNum] = useState(1);
   window.showAccumModal = () => setIsShowAccumModal(true);
   window.showCouponModal = () => setIsShowCouponModal(true);
-
-  const ownerStampMutation = useMutation({
-    mutationFn: (newData: ownerStampRequestData) => {
-      return instance.patch('/stamp/owner-accept', newData);
-    },
-    onSuccess: () => {
-      console.log('ownerStampMutation success!');
-    },
-  });
-
+  const { ownerCouponMutation, ownerStampMutation } = useOwnerHomeMutation();
   const handleRequestStamp = (
     numOfStamp: number,
     stampRequestId: number,
@@ -73,15 +58,6 @@ const OwnerHome: React.FC = () => {
       { onSuccess }
     );
   };
-
-  const ownerCouponMutation = useMutation({
-    mutationFn: (newData: ownerCouponRequestData) => {
-      return instance.patch('/coupon/owner-accept', newData);
-    },
-    onSuccess: () => {
-      console.log('ownerCouponMutation success!');
-    },
-  });
 
   const handleRequestCoupon = (
     couponRequestId: number,

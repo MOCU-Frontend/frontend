@@ -29,11 +29,9 @@ const Gift = () => {
     handleClickMenuItem(prevIndex, newIndex);
     setIsBottomSheetVisible(true);
   };
-
   const handleCompleteClick = () => {
     setIsBottomSheetVisible(false);
   };
-
   const selectedDistanceFilterItem = menuItemDataArr[0].bodyDataArr.find(
     (x) => x.isChecked
   ) as MenuItemData | undefined;
